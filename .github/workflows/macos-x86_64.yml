@@ -1,4 +1,4 @@
-name: build-php-cli-macos-x86_64
+name: build-macos-x86_64
 
 on:
   push:
@@ -9,14 +9,8 @@ env:
 
 jobs:
   macos-x86_64:
-    if: 0
+    if: 1
     runs-on: macos-latest
-    strategy:
-      matrix:
-        php-version:
-          - "8.2.13"
-    #          - "8.1.27"
-    #          - "8.3.1"
     steps:
       - uses: actions/checkout@v3
       - name: Prepare build environment
@@ -53,7 +47,6 @@ jobs:
           echo "X_IPV6=${IPV6}" >> $GITHUB_ENV
           echo "X_IPV4=${IPV4}" >> $GITHUB_ENV
 
-          echo "BUILD_PHP_VERSION=${{ matrix.php-version }}" >> $GITHUB_ENV
 
           export PATH=/usr/local/opt/bison/bin:/usr/local/opt/llvm/bin:$PATH
           # brew bison --debug
@@ -72,8 +65,6 @@ jobs:
           sudo mkdir -p /usr/local/swoole-cli
 
           CURRENT_USER=$(whoami) && sudo chown -R ${CURRENT_USER}:staff /usr/local/swoole-cli
-
-          # git submodule update --init
 
       - name: Cache PHP Runtime
         uses: actions/cache@v3
@@ -140,17 +131,17 @@ jobs:
 
       - name: Show Build Result
         run: |
-          export PATH="/usr/local/opt/binutils/bin:$PATH"
+          ls ./bin/nginx
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: php-cli-v${{ env.BUILD_PHP_VERSION }}-macos-x64
+          name: nginx-vlatest-static-macos-x64
           retention-days: 7
-          path: ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
+          path: ./bin/nginx
 
       - name: gh release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: php-cli-v${{ env.BUILD_PHP_VERSION }}-macos-x64.tar.xz
+          files: nginx-vlatest-static-macos-x64.tar.xz

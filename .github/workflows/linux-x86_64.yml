@@ -1,4 +1,4 @@
-name: build-php-cli-linux-x86_64
+name: build-linux-x86_64
 
 on:
   push:
@@ -154,19 +154,17 @@ jobs:
 
       - name: Show Build Result
         run: |
-          ./thirdparty/php-src/sapi/cli/php -v
-          ./thirdparty/php-src/sapi/cli/php -m
+          ls ./bin/nginx
 
       - name: production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: php-cli-v${{ env.BUILD_PHP_VERSION }}-linux-x64
+          name: nginx-vlatest-static-linux-x64
           retention-days: 7
-          path: ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
+          path: ./bin/nginx
 
       - name: gh release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: |
-            php-cli-v${{ env.BUILD_PHP_VERSION }}-linux-x64.tar.xz
+          files: nginx-vlatest-static-linux-x64.tar.xz
