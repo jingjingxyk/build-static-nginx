@@ -155,11 +155,14 @@ jobs:
       - name: Show Build Result
         run: |
           ls ./bin/nginx
+          ./bin/nginx/sbin/nginx -V
+          NGINX_VERSION=$(echo $(./bin/nginx/sbin/nginx -v 2>&1) | awk -F '/' '{print $2}')
+          echo "NGINX_VERSION=${NGINX_VERSION}" >> $GITHUB_ENV
 
       - name: production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: nginx-vlatest-static-linux-x64
+          name: nginx-${{ env.NGINX_VERSION }}-linux-x64
           retention-days: 7
           path: ./bin/nginx
 
@@ -167,4 +170,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: nginx-vlatest-static-linux-x64.tar.xz
+          files: nginx-${{ env.NGINX_VERSION }}-linux-x64.tar.xz
