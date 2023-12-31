@@ -115,7 +115,7 @@ jobs:
 
           composer update   --optimize-autoloader
 
-          php prepare.php  +nginx # -with-c-compiler=gcc
+          php prepare.php  +nginx -with-c-compiler=gcc
 
       - name: Build
         run: |
