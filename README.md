@@ -28,8 +28,6 @@
 
 git clone -b main https://github.com/jingjingxyk/build-static-nginx.git
 
-# 或者
-
 git clone --recursive -b nginx  https://github.com/jingjingxyk/swoole-cli.git
 
 ```
@@ -38,15 +36,14 @@ git clone --recursive -b nginx  https://github.com/jingjingxyk/swoole-cli.git
 
 ```bash
 
-    git clone -b new_dev https://github.com/jingjingxyk/swoole-cli/
-    cd swoole-cli
-    bash setup-php-runtime.sh
-    php prepare.php +nginx --with-c-compiler=gcc
-    bash make-install-deps.sh
-    bash make.sh all-library
-    bash make.sh config
-    bash make.sh build
-    bash make.sh archive
+cd swoole-cli
+bash setup-php-runtime.sh
+php prepare.php +nginx --with-c-compiler=gcc
+bash make-install-deps.sh
+bash make.sh all-library
+bash make.sh config
+bash make.sh build
+bash make.sh archive
 
 ```
 
@@ -65,6 +62,18 @@ bash build-release.sh
 
 ```
 
-## nginx 源码构建参考
+## 授权协议
 
-    http://nginx.org/en/docs/configure.html
+* `build-static-nginx` 使用了多个其他开源项目，请认真阅读自动生成的 `bin/LICENSE`
+  文件中版权协议，遵守对应开源项目的 `LICENSE`
+* `build-static-nginx`
+  本身的软件源代码、文档等内容以 `Apache 2.0 LICENSE`+`SWOOLE-CLI LICENSE`
+  作为双重授权协议，用户需要同时遵守 `Apache 2.0 LICENSE`和`SWOOLE-CLI LICENSE`
+  所规定的条款
+
+## SWOOLE-CLI LICENSE
+
+* 对 `swoole-cli` 代码进行使用、修改、发布的新项目必须含有 `SWOOLE-CLI LICENSE`
+  的全部内容
+* 使用 `swoole-cli`
+  代码重新发布为新项目或者产品时，项目或产品名称不得包含 `swoole` 单词
