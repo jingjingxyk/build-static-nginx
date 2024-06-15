@@ -26,7 +26,9 @@
 
 ```shell
 
-git clone -b main https://github.com/jingjingxyk/build-static-nginx.git
+git clone --recursive -b  https://github.com/jingjingxyk/build-static-nginx.git
+
+# or
 
 git clone --recursive -b nginx  https://github.com/jingjingxyk/swoole-cli.git
 
@@ -67,9 +69,8 @@ bash build-release.sh
 * `build-static-nginx` 使用了多个其他开源项目，请认真阅读自动生成的 `bin/LICENSE`
   文件中版权协议，遵守对应开源项目的 `LICENSE`
 * `build-static-nginx`
-  本身的软件源代码、文档等内容以 `Apache 2.0 LICENSE`+`SWOOLE-CLI LICENSE`
-  作为双重授权协议，用户需要同时遵守 `Apache 2.0 LICENSE`和`SWOOLE-CLI LICENSE`
-  所规定的条款
+* 本身的软件源代码、文档等内容以 `Apache 2.0 LICENSE`+`SWOOLE-CLI LICENSE`
+* 作为双重授权协议，用户需要同时遵守 `Apache 2.0 LICENSE`和`SWOOLE-CLI LICENSE`所规定的条款
 
 ## SWOOLE-CLI LICENSE
 
