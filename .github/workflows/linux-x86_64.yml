@@ -12,6 +12,7 @@ jobs:
   linux-x86_64:
     if: 1
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - name: Prepare Source Code
@@ -143,7 +144,7 @@ jobs:
             composer install  --no-interaction --no-autoloader --no-scripts --profile --no-dev
             composer dump-autoload --optimize --profile --no-dev
 
-            php prepare.php  +nginx --with-c-compiler=gcc
+            php prepare.php  +nginx --with-c-compiler=gcc --with-build-type=release
 
             bash make-install-deps.sh
 
