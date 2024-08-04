@@ -14,6 +14,17 @@
 
 - [https://github.com/jingjingxyk/build-static-nginx/releases](https://github.com/jingjingxyk/build-static-nginx/releases)
 
+
+## 立即使用 nginx
+
+```shell
+
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/build_native_php/setup-php-cli-runtime.sh?raw=true | bash
+
+curl -fSL https://github.com/swoole/build-static-php/blob/main/setup-php-cli-runtime.sh?raw=true | bash
+
+```
+
 ## 构建文档
 
 - [linux 版构建文档](docs/linux.md)
