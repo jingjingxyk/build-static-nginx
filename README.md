@@ -14,14 +14,13 @@
 
 - [https://github.com/jingjingxyk/build-static-nginx/releases](https://github.com/jingjingxyk/build-static-nginx/releases)
 
-
 ## 立即使用 nginx
 
 ```shell
 
-curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/build_native_php/setup-php-cli-runtime.sh?raw=true | bash
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-nginx-runtime.sh?raw=true | bash
 
-curl -fSL https://github.com/swoole/build-static-php/blob/main/setup-php-cli-runtime.sh?raw=true | bash
+curl -fSL https://gitee.com/jingjingxyk/quickstart-nginx-php-fpm/raw/main/setup-nginx-runtime.sh | bash
 
 ```
 
@@ -41,7 +40,7 @@ git clone --recursive -b  https://github.com/jingjingxyk/build-static-nginx.git
 
 # or
 
-git clone --recursive -b nginx  https://github.com/jingjingxyk/swoole-cli.git
+git clone --recursive -b build-static-nginx  https://github.com/jingjingxyk/swoole-cli.git
 
 ```
 
