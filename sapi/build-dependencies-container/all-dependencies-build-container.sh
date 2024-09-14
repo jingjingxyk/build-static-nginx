@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -exu
 __DIR__=$(
@@ -17,7 +17,6 @@ fi
 
 
 cd ${__PROJECT__}
-
 
 mkdir -p ${__PROJECT__}/var
 
@@ -71,12 +70,13 @@ cd ${__PROJECT__}/
 
 if [ ! -f make.sh ] ;then
   echo 'please run script:'
-  echo 'php prepare.php'
+  echo 'bash build-release.sh --mirror china  --build-contianer'
   exit 0
 fi
 
 cp -f ${__DIR__}/Dockerfile-all-dependencies-alpine .
 cp -f ${__DIR__}/php.ini .
+
 
 docker buildx build -t ${IMAGE} -f ./Dockerfile-all-dependencies-alpine . \
 --progress=plain \
@@ -85,7 +85,9 @@ docker buildx build -t ${IMAGE} -f ./Dockerfile-all-dependencies-alpine . \
 --platform "${PLATFORM}"
 
 
+mkdir -p ${__PROJECT__}/var
 cd ${__PROJECT__}/
+
 
 echo ${IMAGE} > ${__PROJECT__}/var/all-dependencies-container.txt
 
@@ -94,8 +96,10 @@ echo ${IMAGE} > ${__PROJECT__}/var/all-dependencies-container.txt
 
 
 # 例子：
-# php prepare.php
-# bash sapi/build-dependencies-container/all-dependencies-build-container.sh --composer_mirror tencent --mirror ustc --platform 'linux/amd64'
+
+# bash build-release.sh --mirror china  --build-contianer
+
+# bash sapi/multistage-build-dependencies-container/all-dependencies-build-container.sh --composer_mirror tencent --mirror ustc --platform 'linux/amd64'
 # 验证构建结果
-# bash sapi/build-dependencies-container/all-dependencies-run-container-test.sh
+# bash sapi/multistage-build-dependencies-container/all-dependencies-run-container-test.sh
 
