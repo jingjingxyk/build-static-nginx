@@ -18,30 +18,10 @@ return function (Preprocessor $p) {
 EOF
             )
             ->withPrefix($dav1d_prefix)
-            ->withPreInstallCommand(
-                'alpine',
-                <<<EOF
-apk add ninja python3 py3-pip  nasm yasm meson
-EOF
-            )
-            ->withPreInstallCommand(
-                'macos',
-                <<<EOF
-export HOMEBREW_INSTALL_FROM_API=1
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-brew install  ninja python3  nasm yasm meson
-# python3 -m pip install --upgrade pip
-brew install meson
-
-# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-
-EOF
-            )
             ->withBuildScript(
                 <<<EOF
-            meson setup  build \
+            mkdir build
+            meson setup  build  \
             -Dprefix={$dav1d_prefix} \
             -Dlibdir={$dav1d_prefix}/lib \
             -Dincludedir={$dav1d_prefix}/include \
@@ -71,6 +51,5 @@ EOF
             )
             ->withPkgName('dav1d')
             ->withBinPath($dav1d_prefix . '/bin/')
-            //->withDependentLibraries('sdl2')
     );
 };

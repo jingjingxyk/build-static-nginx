@@ -22,8 +22,6 @@ return function (Preprocessor $p) {
 EOF
         )
         ->withPrefix($vtk_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($vtk_prefix)
         ->withBuildScript(
             <<<EOF
 

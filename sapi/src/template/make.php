@@ -64,25 +64,17 @@ make_<?=$item->name?>() {
     <?php endif ;?>
 
     <?php if ($item->enableInstallCached) : ?>
-    if [ -f <?= $this->getGlobalPrefix() . '/'.  $item->name ?>/.completed ] ;then
-        echo "[<?=$item->name?>]  library cached , skip.."
+    if [ -f <?= $this->getGlobalPrefix() . '/' . $item->name ?>/.completed ] ;then
+        echo "[<?= $item->name ?>]  library cached , skip.."
         return 0
     fi
     <?php endif; ?>
 
-    # 默认不需要，当需要构建中间库时需要
-    <?php if ($item->enableCompiledCached) : ?>
-    if [ -f <?=$this->getBuildDir()?>/<?=$item->name?>/.completed  ]; then
-        echo "[<?=$item->name?>] compiled, skip.."
-        cd <?= $this->workDir ?>/
-        return 0
-    fi
-    <?php endif; ?>
+    # If the install directory exist, clean the install directory
+    test -d  <?= $this->getGlobalPrefix() . '/' . $item->name ?>/ && rm -rf  <?= $this->getGlobalPrefix() . '/' . $item->name ?>/ ;
 
-    <?php if ($item->cleanBuildDirectory || !$item->enableBuildCached) : ?>
-    if [ -d <?=$this->getBuildDir()?>/<?=$item->name?>/ ]; then
-        rm -rf <?=$this->getBuildDir()?>/<?=$item->name?>/
-    fi
+    <?php if (!$item->enableBuildCached) : ?>
+        test -d <?= $this->getBuildDir() ?>/<?= $item->name ?>/ && rm -rf <?= $this->getBuildDir() ?>/<?= $item->name ?>/ ;
     <?php endif; ?>
 
     # If the source code directory does not exist, create a directory and decompress the source code archive
@@ -119,7 +111,8 @@ make_<?=$item->name?>() {
     test -d <?=$item->preInstallDirectory?>/ && rm -rf <?=$item->preInstallDirectory?>/ ;
     <?php endif; ?>
 
-    cd <?=$this->getBuildDir()?>/<?=$item->name . PHP_EOL?>
+    cd <?=$this->getBuildDir()?>/<?=$item->name?>/
+
 
     <?php if ($item->enableEnv) : ?>
     if [  -f <?= $this->getWorkDir() ?>/.env ] ; then
@@ -558,6 +551,7 @@ make_build_old() {
     file <?= $this->phpSrcDir  ?>/sapi/cli/php
     readelf -h <?= $this->phpSrcDir  ?>/sapi/cli/php
 <?php endif; ?>
+
     # make install
     mkdir -p <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/
     cp -f <?= $this->phpSrcDir  ?>/sapi/cli/php <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/
@@ -584,6 +578,10 @@ make_archive() {
     PHP_CLI_FILE_DEBUG=php-cli-v${PHP_VERSION}-<?=$this->getOsType()?>-<?=$this->getSystemArch()?>-debug.tar.xz
     tar -cJvf ${PHP_CLI_FILE_DEBUG} php LICENSE
 
+    HASH=$(sha256sum ${PHP_CLI_FILE_DEBUG} | awk '{print $1}')
+    echo " ${PHP_CLI_FILE_DEBUG} sha256sum: ${HASH} "
+    echo -n ${HASH} > ${PHP_CLI_FILE_DEBUG}.sha256sum
+
 
     mkdir -p <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/dist
     cp -f php           dist/
@@ -594,8 +592,15 @@ make_archive() {
     PHP_CLI_FILE=php-cli-v${PHP_VERSION}-<?=$this->getOsType()?>-<?=$this->getSystemArch()?>.tar.xz
     tar -cJvf ${PHP_CLI_FILE} php LICENSE
 
+    HASH=$(sha256sum ${PHP_CLI_FILE} | awk '{print $1}')
+    echo " ${PHP_CLI_FILE} sha256sum: ${HASH} "
+    echo -n ${HASH} > ${PHP_CLI_FILE}.sha256sum
+
+
     mv <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/dist/${PHP_CLI_FILE}  ${__PROJECT_DIR__}/
+    mv <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/dist/${PHP_CLI_FILE}.sha256sum  ${__PROJECT_DIR__}/
     mv <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/${PHP_CLI_FILE_DEBUG} ${__PROJECT_DIR__}/
+    mv <?= BUILD_PHP_INSTALL_PREFIX ?>/bin/${PHP_CLI_FILE_DEBUG}.sha256sum ${__PROJECT_DIR__}/
 
     cd ${__PROJECT_DIR__}/
 }
@@ -643,7 +648,7 @@ lib_dep_pkg() {
     if test -n  "$1"  ;then
       echo -e "[$1] dependent pkgs :\n\n${array_name[$1]} \n"
     else
-      for i in ${!array_name[@]}
+      for i in "${!array_name[@]}"
       do
             echo -e "[${i}] dependent pkgs :\n\n${array_name[$i]} \n"
             echo "=================================================="
@@ -684,7 +689,6 @@ lib_dep() {
 
 
 help() {
-    set +x
     echo "./make.sh docker-build [ china | ustc | tuna ]"
     echo "./make.sh docker-bash"
     echo "./make.sh docker-commit"
@@ -719,15 +723,25 @@ if [ "$1" = "docker-build" ] ;then
     if [ -n "$2" ]; then
         MIRROR=$2
         case "$MIRROR" in
-        china | openatom | ustc | tuna)
+        china | openatom )
             CONTAINER_BASE_IMAGE="hub.atomgit.com/library/alpine:3.18"
         ;;
         esac
     fi
+    PLATFORM=''
+    ARCH=$(uname -m)
+    case $ARCH in
+    'x86_64')
+      PLATFORM='linux/amd64'
+      ;;
+    'aarch64')
+      PLATFORM='linux/arm64'
+      ;;
+    esac
     cd ${__PROJECT_DIR__}/sapi/docker
     echo "MIRROR=${MIRROR}"
     echo "BASE_IMAGE=${CONTAINER_BASE_IMAGE}"
-    docker build --no-cache -t <?= Preprocessor::IMAGE_NAME ?>:<?= $this->getBaseImageTag() ?> -f Dockerfile  . --build-arg="MIRROR=${MIRROR}" --build-arg="BASE_IMAGE=${CONTAINER_BASE_IMAGE}"
+    docker build --no-cache -t <?= Preprocessor::IMAGE_NAME ?>:<?= $this->getBaseImageTag() ?> -f Dockerfile  . --build-arg="MIRROR=${MIRROR}" --progress=plain  --platform=${PLATFORM} --build-arg="BASE_IMAGE=${CONTAINER_BASE_IMAGE}"
     exit 0
 elif [ "$1" = "docker-bash" ] ;then
     container=$(docker ps -a -f name=<?= Preprocessor::CONTAINER_NAME ?> | tail -n +2 2> /dev/null)

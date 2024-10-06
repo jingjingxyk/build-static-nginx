@@ -78,8 +78,7 @@ function install_graphviz(Preprocessor $p)
 EOF
         )
         ->withPrefix($graphviz_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($graphviz_prefix)
+
         ->withConfigure(
             <<<EOF
         ./autogen.sh
@@ -120,8 +119,7 @@ function install_TeX(Preprocessor $p)
         ->withManual('https://www.graphviz.org/documentation/')
         ->withUntarArchiveCommand('unzip')
         ->withPrefix($TeX_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($TeX_prefix)
+
         ->withBuildScript(
             <<<EOF
         cd install-tl-*

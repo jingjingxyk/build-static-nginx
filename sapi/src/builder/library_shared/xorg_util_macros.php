@@ -17,8 +17,6 @@ return function (Preprocessor $p) {
 EOF
         )
         ->withPrefix($xorg_util_macros_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($xorg_util_macros_prefix)
         ->withConfigure(
             <<<EOF
               ls -lha .

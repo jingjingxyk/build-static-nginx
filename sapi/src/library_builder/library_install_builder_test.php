@@ -36,8 +36,6 @@ function install_libgcrypt_error(Preprocessor $p)
             ->withLicense('https://www.gnu.org/licenses/gpl-3.0.html', Library::LICENSE_GPL)
             ->withManual('https://www.gnupg.org/documentation/manuals.html')
             ->withPrefix($libgcrypt_error_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($libgcrypt_error_prefix)
             ->withConfigure(
                 <<<EOF
             ./configure --help
@@ -67,8 +65,6 @@ function install_libgcrypt(Preprocessor $p)
             ->withLicense('https://www.gnu.org/licenses/gpl-3.0.html', Library::LICENSE_GPL)
             ->withManual('https://www.gnupg.org/documentation/manuals.html')
             ->withPrefix($libgcrypt_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($libgcrypt_prefix)
             ->withConfigure(
                 <<<EOF
             ./configure --help
@@ -99,8 +95,6 @@ function install_gnupg(Preprocessor $p)
             ->withLicense('https://www.gnu.org/licenses/gpl-3.0.html', Library::LICENSE_GPL)
             ->withManual('https://www.gnupg.org/documentation/manuals.html')
             ->withPrefix($gnupg_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($gnupg_prefix)
             ->withBuildScript(
                 <<<EOF
             ./configure --help
@@ -143,8 +137,6 @@ function install_nasm(Preprocessor $p)
             ->withMd5sum('42c4948349d01662811c8641fad4494c')
             ->withDownloadWithOriginURL()
             ->withPrefix($nasm_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($nasm_prefix)
             ->withConfigure(
                 <<<EOF
                 sh autogen.sh
@@ -187,7 +179,7 @@ function install_graphite2(Preprocessor $p)
             ->withFile('graphite-1.3.14.tar.gz')
             ->withLabel('library')
             ->withPrefix($graphite2_prefix)
-            ->withCleanBuildDirectory()
+
             ->withConfigure(
                 "
             mkdir -p build
@@ -231,8 +223,6 @@ function install_librsvg($p)
 EOF
         )
         ->withPrefix($librsvg_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($librsvg_prefix)
         ->withConfigure(
             <<<EOF
             ./configure \
@@ -257,8 +247,6 @@ function install_GraphicsMagick($p)
         ->withManual('http://www.graphicsmagick.org/README.html')
         ->withManual('http://www.graphicsmagick.org/INSTALL-unix.html')
         ->withPrefix($GraphicsMagick_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($GraphicsMagick_prefix)
         ->withConfigure(
             <<<'EOF'
         # 下载依赖
@@ -297,8 +285,6 @@ function install_libXpm(Preprocessor $p)
         ->withUrl('https://github.com/freedesktop/libXpm/archive/refs/tags/libXpm-3.5.11.tar.gz')
         ->withFile('libXpm-3.5.11.tar.gz')
         ->withPrefix($libXpm_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($libXpm_prefix)
         ->withConfigure(
             <<<EOF
 
@@ -339,8 +325,6 @@ function install_highway(Preprocessor $p)
         ->withFile('highway-1.0.3.tar.gz')
         ->withManual('https://github.com/google/highway.git')
         ->withPrefix($highway_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($highway_prefix)
         ->withConfigure(
             <<<EOF
 # -DHWY_CMAKE_ARM7:BOOL=ON
@@ -383,7 +367,7 @@ function install_bzip2_dev_latest(Preprocessor $p)
     $p->addLibrary(
         (new Library('bzip2', '/usr/bzip2'))
             ->withUrl('https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.tar.gz')
-            ->withCleanBuildDirectory()
+
             ->withConfigure(
                 '
                     cmake .. -DCMAKE_BUILD_TYPE="Release" \
@@ -461,8 +445,6 @@ EOF
             ->withMirrorUrl('https://boringssl.googlesource.com/boringssl')
             ->withManual('https://boringssl.googlesource.com/boringssl/+/refs/heads/master/BUILDING.md')
             ->withPrefix($boringssl_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($boringssl_prefix)
             ->withBuildScript(
                 <<<EOF
 
@@ -496,8 +478,6 @@ function install_wolfssl($p)
             ->withFile('wolfssl-v5.5.4-stable.tar.gz')
             ->withManual('https://wolfssl.com/wolfSSL/Docs.html')
             ->withPrefix($wolfssl_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($wolfssl_prefix)
             ->withBuildScript(
                 <<<EOF
                 ./autogen.sh
@@ -525,9 +505,7 @@ function install_libressl($p)
             ->withUrl('https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.5.4.tar.gz')
             ->withFile('libressl-3.5.4.tar.gz')
             ->withManual('https://github.com/libressl/portable.git')
-            ->withCleanBuildDirectory()
             ->withPrefix($libressl_prefix)
-            ->withCleanPreInstallDirectory($libressl_prefix)
             ->withConfigure(
                 <<<EOF
             ./configure  --help
@@ -560,7 +538,7 @@ function install_quiche(Preprocessor $p)
             ->withManual('https://curl.se/docs/http3.html')
             ->withUrl('https://github.com/cloudflare/quiche/archive/refs/heads/master.zip')
             ->withFile('latest-quiche.zip')
-            ->withCleanBuildDirectory()
+
             ->withUntarArchiveCommand('unzip')
             ->withPrefix('/usr/quiche')
             ->withBuildScript(
@@ -605,7 +583,7 @@ function install_msh3(Preprocessor $p)
             ->withFile('latest-msh3.zip')
             ->withFile('msh3')
             ->withSkipDownload()
-            //->withCleanBuildDirectory()
+            //
             ->withUntarArchiveCommand('')
             ->withPrefix('/usr/msh3')
             ->withBuildScript(
@@ -710,8 +688,6 @@ function install_capstone(Preprocessor $p)
             ->withUrl('https://github.com/capstone-engine/capstone/archive/refs/tags/4.0.2.tar.gz')
             ->withManual('http://www.capstone-engine.org/documentation.html')
             ->withPrefix($capstone_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($capstone_prefix)
             ->withConfigure(
                 <<<EOF
              set -uex
@@ -746,8 +722,7 @@ function install_dynasm(Preprocessor $p)
             ->withManual('https://luajit.org/download.html')
             ->withTutorial('https://corsix.github.io/dynasm-doc/tutorial.html')
             ->withPrefix($dynasm_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($dynasm_prefix)
+
             ->withMakeOptions('PREFIX=' . $dynasm_prefix)
             ->withMakeInstallOptions('PREFIX=' . $dynasm_prefix) //DESTDIR=/tmp/buildroot
 
@@ -766,8 +741,7 @@ function install_valgrind(Preprocessor $p)
             ->withUrl('https://sourceware.org/pub/valgrind/valgrind-3.20.0.tar.bz2')
             ->withManual('https://valgrind.org/docs/man')
             ->withPrefix($valgrind_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($valgrind_prefix)
+
             ->withConfigure(
                 <<<EOF
                 export PATH=\$SYSTEM_ORIGIN_PATH
@@ -805,7 +779,7 @@ function install_kerberos(Preprocessor $p)
             ->withManual('https://web.mit.edu/kerberos/krb5-1.20/README-1.20.1.txt')
             //源码包： doc/html/admin/install.html
             ->withPrefix('/usr/kerberos')
-            ->withCleanBuildDirectory()
+
             ->withConfigure(
                 <<<EOF
 pwd
@@ -830,7 +804,7 @@ function install_fontconfig(Preprocessor $p)
             ->withFile('fontconfig-2.14.2.tar.gz')
             ->withManual('https://gitlab.freedesktop.org/fontconfig/fontconfig')
             ->withPrefix('/usr/fontconfig')
-            ->withCleanBuildDirectory()
+
             ->withConfigure(
                 <<<EOF
 pwd
@@ -855,9 +829,8 @@ function install_p11_kit(Preprocessor $p)
             ->withUrl('https://github.com/p11-glue/p11-kit/archive/refs/tags/0.24.1.tar.gz')
             //构建选项参参考文档： https://mesonbuild.com/Builtin-options.html
             ->withFile('p11-kit-0.24.1.tar.gz')
-            ->withCleanBuildDirectory()
+
             ->withPrefix('/usr/p11_kit/')
-            ->withCleanPreInstallDirectory('/usr/p11_kit/')
             ->withBuildScript(
                 '
 
@@ -970,7 +943,7 @@ function install_libfastcommon($p)
             ->withUrl('https://github.com/happyfish100/libfastcommon/archive/refs/tags/V1.0.66.tar.gz')
             ->withFile('libfastcommon-V1.0.66.tar.gz')
             ->withPrefix('/usr/libfastcommon/')
-            ->withCleanBuildDirectory()
+
             ->withConfigure(
                 '
              export DESTDIR=/usr/libfastcommon
@@ -1011,8 +984,6 @@ function install_libzip_ng(Preprocessor $p)
         ->withUrl('https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.0.6.tar.gz')
         ->withManual('https://github.com/zlib-ng/zlib-ng.git')
         ->withPrefix($zlib_ng_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($zlib_ng_prefix)
         ->withConfigure(
             <<<EOF
 ./configure --help
@@ -1054,8 +1025,6 @@ function install_xorgproto(Preprocessor $p)
 EOF
         )
         ->withPrefix($xorgproto_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($xorgproto_prefix)
         ->withBuildScript(
             <<<EOF
             ls -lha .
@@ -1098,8 +1067,7 @@ function install_libX11(Preprocessor $p)
         ->withUrl('https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.4.tar.gz')
         ->withFile('libX11-1.8.4.tar.gz')
         ->withPrefix($libX11_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($libX11_prefix)
+
         ->withConfigure(
             <<<EOF
         ./autogen.sh

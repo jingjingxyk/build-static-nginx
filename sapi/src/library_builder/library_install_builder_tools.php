@@ -38,7 +38,7 @@ function install_ninja(Preprocessor $p)
             ->withManual('https://github.com/ninja-build/ninja/wiki')
             ->withPrefix($ninja_prefix)
             ->withLabel('build_env_bin')
-            ->withCleanBuildDirectory()
+
             //->withUntarArchiveCommand('unzip')
             ->withBuildScript(
                 "
@@ -82,8 +82,7 @@ function install_musl(Preprocessor $p): void
             ->withUrl('https://musl.libc.org/releases/musl-1.2.3.tar.gz')
             ->withDownloadWithOriginURL()
             ->withPrefix($musl_libc_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($musl_libc_prefix)
+
             ->withBuildScript(
                 <<<EOF
              // sudo apt install git build-essential
@@ -117,8 +116,7 @@ EOF
             )
             ->withDownloadWithOriginURL()
             ->withPrefix($musl_cross_make_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($musl_cross_make_prefix)
+
             ->withBuildScript(
                 <<<EOF
              cp config.mak.dist config.mak
@@ -152,7 +150,7 @@ function install_rust(Preprocessor $p): void
             ->withFile('rustup.sh')
             ->withDownloadWithOriginURL()
             ->withUntarArchiveCommand('mv')
-            ->withCleanBuildDirectory()
+
             ->withBuildScript(
                 <<<EOF
 
@@ -200,8 +198,6 @@ function install_nodejs(Preprocessor $p): void
             ->withManual('https://nodejs.org/en/docs')
             ->withDownloadWithOriginURL()
             ->withUntarArchiveCommand('xz')
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($nodejs_prefix)
             ->withBuildScript(
                 <<<EOF
 
@@ -231,8 +227,7 @@ function install_golang(Preprocessor $p): void
             ->withManual('https://golang.google.cn/doc/')
             ->withFile('go1.20.2.linux-amd64.tar.gz')
             ->withDownloadWithOriginURL()
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($golang_prefix)
+
             ->withBuildScript(
                 <<<EOF
 
@@ -273,8 +268,7 @@ function install_gn_test(Preprocessor $p): void
             ->withFile('gn-latest.zip')
             ->withManual('https://gn.googlesource.com/gn/')
             ->withUntarArchiveCommand('unzip')
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($gn_prefix)
+
             ->withBuildScript(
                 "
                chmod a+x gn
@@ -318,8 +312,7 @@ function install_bazel(Preprocessor $p)
             ->withManual('https://bazel.build/install')
             ->withManual('https://bazel.build/install/compile-source')
             ->withPrefix($bazel_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($bazel_prefix)
+
             ->withBuildScript(
                 '
                 # apk add openjdk13-jdk bash zip

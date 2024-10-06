@@ -14,7 +14,7 @@ function install_php_parser($p)
             ->withFile('php-8.1.12.tar.gz')
             ->withManual('https://www.php.net/docs.php')
             ->withLabel('php_internal_extension')
-            ->withCleanBuildDirectory()
+
             ->withBuildScript('return 0')
             ->disableDefaultPkgConfig()
             ->disableDefaultLdflags()
@@ -46,7 +46,7 @@ function install_php_extension_wasm(Preprocessor $p)
             ->withLicense('https://github.com/wasmerio/wasmer-php/blob/master/LICENSE', Library::LICENSE_MIT)
             ->withManual('https://github.com/wasmerio/wasmer-php.git')
             ->withLabel('php_extension')
-            ->withCleanBuildDirectory()
+
             ->withBuildScript(
                 "
               ls -lh ./ext

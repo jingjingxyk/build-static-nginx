@@ -58,8 +58,6 @@ function install_libxslt(Preprocessor $p)
             //https://download.gnome.org/sources/libxslt/1.1/
             ->withLicense('http://www.opensource.org/licenses/mit-license.html', Library::LICENSE_MIT)
             ->withPrefix($libxslt_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($libxslt_prefix)
             ->withConfigure(
                 <<<EOF
             ./autogen.sh
@@ -228,8 +226,6 @@ function install_mimalloc(Preprocessor $p)
             ->withUrl('https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.7.tar.gz')
             ->withFile('mimalloc-2.0.7.tar.gz')
             ->withPrefix($mimalloc_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($mimalloc_prefix)
             ->withConfigure(
                 'cmake . -DMI_BUILD_SHARED=OFF -DCMAKE_INSTALL_PREFIX=' . $mimalloc_prefix . ' -DMI_INSTALL_TOPLEVEL=ON -DMI_PADDING=OFF -DMI_SKIP_COLLECT_ON_EXIT=ON -DMI_BUILD_TESTS=OFF'
             )
@@ -310,8 +306,6 @@ function install_curl(Preprocessor $p)
             ->withManual('https://curl.se/docs/install.html')
             ->withLicense('https://github.com/curl/curl/blob/master/COPYING', Library::LICENSE_SPEC)
             ->withPrefix($curl_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($curl_prefix)
             ->withConfigure(
                 <<<EOF
             ./configure --help
@@ -421,7 +415,7 @@ function install_re2c(Preprocessor $p)
             ->withLicense('https://github.com/skvadrik/re2c/blob/master/LICENSE', Library::LICENSE_GPL)
             ->withManual('https://re2c.org/build/build.html')
             ->withLabel('build_env_bin')
-            ->withCleanBuildDirectory()
+
             ->withConfigure(
                 "
               autoreconf -i -W all
@@ -445,8 +439,6 @@ function install_libmcrypt(Preprocessor $p)
         ->withUrl('https://github.com/winlibs/libmcrypt/archive/refs/tags/libmcrypt-2.5.8-3.4.tar.gz')
         ->withManual('https://github.com/winlibs/libmcrypt/blob/master/INSTALL')
         ->withPrefix($libmcrypt_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($libmcrypt_prefix)
         ->withConfigure(
             <<<EOF
 sh ./configure --help
@@ -475,8 +467,6 @@ function install_libxlsxwriter(Preprocessor $p)
         ->withFile('libxlsxwriter-1.1.5.tar.gz')
         ->withManual('http://libxlsxwriter.github.io/getting_started.html')
         ->withPrefix($libxlsxwriter_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($libxlsxwriter_prefix)
         ->withBuildScript(
             <<<EOF
 
@@ -518,8 +508,6 @@ function install_minizip(Preprocessor $p)
         ->withFile('minizip-ng-3.0.9.tar.gz')
         ->withManual('https://github.com/zlib-ng/minizip-ng')
         ->withPrefix($libminzip_prefix)
-        ->withCleanBuildDirectory()
-        ->withCleanPreInstallDirectory($libminzip_prefix)
         ->withBuildScript(
             <<<EOF
             # -Wno-dev
@@ -571,8 +559,6 @@ function install_libxlsxio(Preprocessor $p)
             ->withFile('libxlsxio-0.2.34.tar.gz')
             ->withManual('https://brechtsanders.github.io/xlsxio/')
             ->withPrefix($libxlsxio_prefix)
-            ->withCleanBuildDirectory()
-            ->withCleanPreInstallDirectory($libxlsxio_prefix)
             ->withConfigure(
                 <<<EOF
             # apk add graphviz  doxygen  // 能看到常见安装的依赖库

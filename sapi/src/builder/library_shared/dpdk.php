@@ -74,7 +74,7 @@ EOF
             apt install -y doxygen
 EOF
             )
-            ->withCleanBuildDirectory()
+
             ->withBuildCached(false)
             ->withBuildScript(
                 <<<EOF
