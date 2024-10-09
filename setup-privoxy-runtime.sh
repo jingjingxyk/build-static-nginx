@@ -149,7 +149,8 @@ echo " "
 echo " change file ./bin/runtime/privoxy/etc/config  "
 echo ''
 echo ' listen-address  0.0.0.0:8118'
-echo ' forward-socks5   /'
+echo ' #forward-socks5   /               user:pass@socks-gw.example.com:1080  .  '
+echo '  forward-socks5   /               127.0.0.1:2000  .  '
 echo " confdir ${__PROJECT__}/bin/runtime/privoxy/etc"
 echo " logdir ${__PROJECT__}/bin/runtime/privoxy/var/log/privoxy"
 echo '#        debug  1'
