@@ -143,7 +143,13 @@ node -v
 npm -v
 npx -v
 
+# shellcheck disable=SC2217
+echo <<'EOF'
+
 # 换源
 # npm install -g yarn --registry=https://registry.npmmirror.com
 
 # yarn install --registry=https://registry.npmmirror.com
+
+EOF
+
