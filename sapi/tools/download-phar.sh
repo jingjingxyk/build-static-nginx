@@ -60,6 +60,9 @@ chmod +x composer.phar
 test -f pie.phar || curl -Lo pie.phar https://github.com/php/pie/releases/latest/download/pie.phar
 chmod +x pie.phar
 
+test -f captainhook.phar || curl -Lo  https://github.com/captainhookphp/captainhook/releases/download/5.23.5/captainhook.phar
+chmod +x captainhook.phar
+
 export PATH="${__PROJECT__}/bin/runtime:$PATH"
 # shellcheck disable=SC2139
 #alias php="'php -d curl.cainfo=${__PROJECT__}/bin/runtime/cacert.pem -d openssl.cafile=${__PROJECT__}/bin/runtime/cacert.pem'"
