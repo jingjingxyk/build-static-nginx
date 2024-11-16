@@ -84,20 +84,18 @@ make_<?=$item->name?>() {
     # If the source code directory does not exist, create a directory and decompress the source code archive
     if [ ! -d <?= $this->getBuildDir() ?>/<?= $item->name ?> ]; then
         mkdir -p <?= $this->getBuildDir() ?>/<?= $item->name . PHP_EOL ?>
-        <?php if ($item->untarArchiveCommand == 'tar') : ?>
+        <?php if ($item->untarArchiveCommand == 'tar') :?>
         tar --strip-components=1 -C <?= $this->getBuildDir() ?>/<?= $item->name ?> -xf <?= $this->workDir ?>/pool/lib/<?= $item->file ?>;
         <?php elseif($item->untarArchiveCommand == 'unzip') :?>
         unzip -d  <?=$this->getBuildDir()?>/<?=$item->name?>   <?=$this->workDir?>/pool/lib/<?=$item->file ?>;
         <?php elseif ($item->untarArchiveCommand == 'tar-default') :?>
         tar  -C <?= $this->getBuildDir() ?>/<?= $item->name ?> -xf <?= $this->workDir ?>/pool/lib/<?= $item->file ?>;
-        <?php endif ; ?>
-        <?php if ($item->untarArchiveCommand == 'xz') :?>
+        <?php elseif ($item->untarArchiveCommand == 'xz') :?>
             xz -f -d -k   <?=$this->workDir?>/pool/lib/<?= $item->file ?>;
             tar --strip-components=1 -C <?=$this->getBuildDir()?>/<?=$item->name?> -xf <?= rtrim($this->workDir . '/pool/lib/' . $item->file, '.xz') ?>;
-        <?php endif ; ?>
-        <?php if ($item->untarArchiveCommand == 'cp') :  ?>
+        <?php elseif ($item->untarArchiveCommand == 'cp') :  ?>
             cp -rfa  <?=$this->workDir?>/pool/lib/<?=$item->file?>/* <?=$this->getBuildDir()?>/<?=$item->name?>/;
-        <?php if ($item->untarArchiveCommand == 'mv') :  ?>
+        <?php elseif ($item->untarArchiveCommand == 'mv') :  ?>
             cp -rfa  <?=$this->workDir?>/pool/lib/<?=$item->file?> <?=$this->getBuildDir()?>/<?=$item->name?>/;
         <?php endif ; ?>
         result_code=$?
