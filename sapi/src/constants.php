@@ -47,8 +47,6 @@ define("LIBZSTD_PREFIX", $p->getGlobalPrefix() . '/libzstd');
 define("BISON_PREFIX", $p->getGlobalPrefix() . '/bison');
 define("NGHTTP2_PREFIX", $p->getGlobalPrefix() . '/nghttp2');
 
-define("LIBFFI_PREFIX", $p->getGlobalPrefix() . '/libffi');
-
 define("LIBEV_PREFIX", $p->getGlobalPrefix() . '/libev');
 define("LIBUV_PREFIX", $p->getGlobalPrefix() . '/libuv');
 
@@ -135,6 +133,7 @@ define("GETTEXT_PREFIX", $p->getGlobalPrefix() . '/gettext');
 define("LIBUNISTRING_PREFIX", $p->getGlobalPrefix() . '/libunistring');
 define("LIBURING_PREFIX", $p->getGlobalPrefix() . '/liburing');
 
+
 define("ZOOKEEPER_PREFIX", $p->getGlobalPrefix() . '/zookeeper');
 
 define("LIBEVENT_PREFIX", $p->getGlobalPrefix() . '/libevent');
@@ -196,7 +195,6 @@ define("LIBLDNS_PREFIX", $p->getGlobalPrefix() . '/libldns');
 define("LIBPCAP_PREFIX", $p->getGlobalPrefix() . '/libpcap');
 define("PORTAUDIO_PREFIX", $p->getGlobalPrefix() . '/portaudio');
 define("LIBKS_PREFIX", $p->getGlobalPrefix() . '/libks');
-define("UTIL_LINUX_PREFIX", $p->getGlobalPrefix() . '/util_linux');
 define("LIBATOMIC_PREFIX", $p->getGlobalPrefix() . '/libatomic');
 define("UPNP_PREFIX", $p->getGlobalPrefix() . '/upnp');
 
@@ -218,6 +216,10 @@ define("LIBPRI_PREFIX", $p->getGlobalPrefix() . '/libpri');
 
 define("APR_PREFIX", $p->getGlobalPrefix() . '/apr');
 define("APR_UTIL_PREFIX", $p->getGlobalPrefix() . '/apr-util');
+
+define("PYTHON3_PREFIX", $p->getGlobalPrefix() . '/python3');
+define("LIBMPDECIMAL_PREFIX", $p->getGlobalPrefix() . '/libmpdecimal');
+define("LIBB2_PREFIX", $p->getGlobalPrefix() . '/libb2');
 define("LIBEXPAT_PREFIX", $p->getGlobalPrefix() . '/libexpat');
 
 
@@ -226,6 +228,7 @@ define("DAV1D_PREFIX", $p->getGlobalPrefix() . '/dav1d');
 define("LIBGAV1_PREFIX", $p->getGlobalPrefix() . '/libgav1');
 define("AOM_PREFIX", $p->getGlobalPrefix() . '/aom');
 define("SVT_AV1_PREFIX", $p->getGlobalPrefix() . '/svt_av1');
+define("LIBYUV_PREFIX", $p->getGlobalPrefix() . '/libyuv');
 
 define("LIBTIFF_PREFIX", $p->getGlobalPrefix() . '/libtiff');
 define("LIBRAW_PREFIX", $p->getGlobalPrefix() . '/libraw');
@@ -265,9 +268,6 @@ define("LIBUNWIND_PREFIX", $p->getGlobalPrefix() . '/libunwind');
 define("GFLAGS_PREFIX", $p->getGlobalPrefix() . '/gflags');
 define("LEVELDB_PREFIX", $p->getGlobalPrefix() . '/leveldb');
 
-define("PYTHON3_PREFIX", $p->getGlobalPrefix() . '/python3');
-define("MPDECIMAL_PREFIX", $p->getGlobalPrefix() . '/mpdecimal');
-define("LIBB2_PREFIX", $p->getGlobalPrefix() . '/libb2');
 
 define("LIBOPENCC_PREFIX", $p->getGlobalPrefix() . '/libopencc');
 define("LIBYAML_CPP_PREFIX", $p->getGlobalPrefix() . '/libyaml_cpp');
@@ -323,31 +323,27 @@ define("ASTERISK_PREFIX", $p->getGlobalPrefix() . '/asterisk');
 define("PJPROJECT_PREFIX", $p->getGlobalPrefix() . '/pjproject');
 define("QEMU_PREFIX", $p->getGlobalPrefix() . '/qemu');
 
+
+define("LIBFFI_PREFIX", $p->getGlobalPrefix() . '/libffi');
+
+
 define("STRONGSWAN_PREFIX", $p->getGlobalPrefix() . '/strongswan');
 
 define("MUSL_CROSS_MAKE_PREFIX", $p->getGlobalPrefix() . '/musl_cross_make');
 define("MUSL_LIBC_PREFIX", $p->getGlobalPrefix() . '/musl_libc');
 
-
 define("ABSL_PREFIX", $p->getGlobalPrefix() . '/absl');
 
-
 define("GPAC_PREFIX", $p->getGlobalPrefix() . '/gpac');
-
 
 define("SNDIO_AUDIO_PREFIX", $p->getGlobalPrefix() . '/sndio_audio');
 define("JACK_AUDIO_PREFIX", $p->getGlobalPrefix() . '/jack_audio');
 define("OPEN_SOUND_AUDIO_PREFIX", $p->getGlobalPrefix() . '/opensound_audio');
 define("PULSE_AUDIO_PREFIX", $p->getGlobalPrefix() . '/pulse_audio');
 
-
 define("V4L_UTILS_PREFIX", $p->getGlobalPrefix() . '/v4l_utils');
 define("LIBOAUTH2_PREFIX", $p->getGlobalPrefix() . '/liboauth2');
 define("CJOSE_PREFIX", $p->getGlobalPrefix() . '/cjose');
-define("LIBYUV_PREFIX", $p->getGlobalPrefix() . '/libyuv');
 
 define("EXAMPLE_PREFIX", $p->getGlobalPrefix() . '/example');
-
-
-
 

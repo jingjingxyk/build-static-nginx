@@ -38,13 +38,13 @@ class Library extends Project
 
     public bool $skipBuildInstall = false;
 
-    public string $untarArchiveCommand = 'tar';
-
     public string $label = '';
 
     public string $enablePkgNames = 'yes';
 
     public bool $enableBuildLibraryCached = true;
+
+    public string $untarArchiveCommand = 'tar';
 
     public array $preInstallCommands = [];
 
@@ -158,12 +158,6 @@ class Library extends Project
         return $this;
     }
 
-    public function withUntarArchiveCommand(string $command): static
-    {
-        $this->untarArchiveCommand = $command;
-        return $this;
-    }
-
 
     public function withSkipBuildLicense(): static
     {
@@ -273,6 +267,16 @@ class Library extends Project
     public function withEnv(): static
     {
         $this->enableEnv = true;
+        return $this;
+    }
+
+    /**
+     * @param string $command [ tar | tar-default | unzip ]
+     * @return $this
+     */
+    public function withUntarArchiveCommand(string $command): static
+    {
+        $this->untarArchiveCommand = $command;
         return $this;
     }
 }

@@ -42,6 +42,8 @@ OPTIONS="--disable-all \
     --disable-cgi  \
     --enable-cli  \
     --disable-phpdbg \
+    --with-config-file-path=<?= $this->getGlobalPrefix() ?>/etc/ \
+    --with-config-file-scan-dir=<?= $this->getGlobalPrefix() ?>/etc/conf.d/ \
 <?php foreach ($this->extensionList as $item) : ?>
     <?=$item->options?> \
 <?php endforeach; ?>
@@ -74,37 +76,38 @@ make_<?=$item->name?>() {
     test -d  <?= $this->getGlobalPrefix() . '/' . $item->name ?>/ && rm -rf  <?= $this->getGlobalPrefix() . '/' . $item->name ?>/ ;
 
     <?php if (!$item->enableBuildCached) : ?>
-        test -d <?= $this->getBuildDir() ?>/<?= $item->name ?>/ && rm -rf <?= $this->getBuildDir() ?>/<?= $item->name ?>/ ;
+    if [ -d <?=$this->getBuildDir()?>/<?=$item->name?>/ ]; then
+        rm -rf <?=$this->getBuildDir()?>/<?=$item->name?>/
+    fi
     <?php endif; ?>
 
     # If the source code directory does not exist, create a directory and decompress the source code archive
-    if [ ! -d <?=$this->getBuildDir()?>/<?=$item->name?> ]; then
-        mkdir -p <?=$this->getBuildDir()?>/<?=$item->name . PHP_EOL?>
+    if [ ! -d <?= $this->getBuildDir() ?>/<?= $item->name ?> ]; then
+        mkdir -p <?= $this->getBuildDir() ?>/<?= $item->name . PHP_EOL ?>
+        <?php if ($item->untarArchiveCommand == 'tar') : ?>
+        tar --strip-components=1 -C <?= $this->getBuildDir() ?>/<?= $item->name ?> -xf <?= $this->workDir ?>/pool/lib/<?= $item->file ?>;
+        <?php elseif($item->untarArchiveCommand == 'unzip') :?>
+        unzip -d  <?=$this->getBuildDir()?>/<?=$item->name?>   <?=$this->workDir?>/pool/lib/<?=$item->file ?>;
+        <?php elseif ($item->untarArchiveCommand == 'tar-default') :?>
+        tar  -C <?= $this->getBuildDir() ?>/<?= $item->name ?> -xf <?= $this->workDir ?>/pool/lib/<?= $item->file ?>;
+        <?php endif ; ?>
+        <?php if ($item->untarArchiveCommand == 'xz') :?>
+            xz -f -d -k   <?=$this->workDir?>/pool/lib/<?= $item->file ?>;
+            tar --strip-components=1 -C <?=$this->getBuildDir()?>/<?=$item->name?> -xf <?= rtrim($this->workDir . '/pool/lib/' . $item->file, '.xz') ?>;
+        <?php endif ; ?>
+        <?php if ($item->untarArchiveCommand == 'cp') :  ?>
+            cp -rfa  <?=$this->workDir?>/pool/lib/<?=$item->file?>/* <?=$this->getBuildDir()?>/<?=$item->name?>/;
+        <?php if ($item->untarArchiveCommand == 'mv') :  ?>
+            cp -rfa  <?=$this->workDir?>/pool/lib/<?=$item->file?> <?=$this->getBuildDir()?>/<?=$item->name?>/;
+        <?php endif ; ?>
+        result_code=$?
+        if [ $result_code -ne 0 ]; then
+            echo "[<?=$item->name?>] [configure FAILURE]"
+            rm -rf <?=$this->getBuildDir()?>/<?=$item->name?>/
+            exit  $result_code
+        fi
     fi
 
-    <?php if ($item->untarArchiveCommand == 'tar') : ?>
-    tar --strip-components=1 -C <?=$this->getBuildDir()?>/<?=$item->name?> -xf <?=$this->workDir?>/pool/lib/<?=$item->file . PHP_EOL?>
-    result_code=$?
-    if [ $result_code -ne 0 ]; then
-        echo "[<?=$item->name?>] [configure FAILURE]"
-        rm -rf <?=$this->getBuildDir()?>/<?=$item->name?>/
-        exit  $result_code
-    fi
-    <?php endif ; ?>
-
-    <?php if ($item->untarArchiveCommand == 'unzip') : ?>
-    unzip -d  <?=$this->getBuildDir()?>/<?=$item->name?>   <?=$this->workDir?>/pool/lib/<?=$item->file?> <?= PHP_EOL; ?>
-    <?php endif ; ?>
-    <?php if ($item->untarArchiveCommand == 'xz') :?>
-    xz -f -d -k   <?=$this->workDir?>/pool/lib/<?=$item->file?>    <?= PHP_EOL; ?>
-    tar --strip-components=1 -C <?=$this->getBuildDir()?>/<?=$item->name?> -xf <?= rtrim($this->workDir . '/pool/lib/' . $item->file, '.xz') . PHP_EOL?>
-    <?php endif ; ?>
-    <?php if ($item->untarArchiveCommand == 'cp') :  ?>
-    cp -rfa  <?=$this->workDir?>/pool/lib/<?=$item->file?>/* <?=$this->getBuildDir()?>/<?=$item->name?>/   <?= PHP_EOL; ?>
-    <?php endif ; ?>
-    <?php if ($item->untarArchiveCommand == 'mv') :  ?>
-    cp -rfa  <?=$this->workDir?>/pool/lib/<?=$item->file?> <?=$this->getBuildDir()?>/<?=$item->name?>/    <?= PHP_EOL; ?>
-    <?php endif ; ?>
 
     <?php if ($item->cleanPreInstallDirectory) : ?>
     # If the install directory exist, clean the install directory
@@ -768,7 +771,7 @@ if [ "$1" = "docker-build" ] ;then
     cd ${__PROJECT_DIR__}/sapi/docker
     echo "MIRROR=${MIRROR}"
     echo "BASE_IMAGE=${CONTAINER_BASE_IMAGE}"
-    docker build --no-cache -t <?= Preprocessor::IMAGE_NAME ?>:<?= $this->getBaseImageTag() ?> -f Dockerfile  . --build-arg="MIRROR=${MIRROR}" --progress=plain  --platform=${PLATFORM} --build-arg="BASE_IMAGE=${CONTAINER_BASE_IMAGE}"
+    docker build --no-cache -t <?= Preprocessor::IMAGE_NAME ?>:<?= $this->getBaseImageTag() ?> -f Dockerfile  . --build-arg="MIRROR=${MIRROR}" --platform=${PLATFORM} --build-arg="BASE_IMAGE=${CONTAINER_BASE_IMAGE}"
     exit 0
 elif [ "$1" = "docker-bash" ] ;then
     container=$(docker ps -a -f name=<?= Preprocessor::CONTAINER_NAME ?> | tail -n +2 2> /dev/null)
