@@ -181,6 +181,20 @@ bash make-install-deps.sh
 > 打包成功后会生成 `php-cli-{version}-{os}-{arch}.tar.xz`
 > 压缩包，包含 `php` 可执行文件、`LICENSE` 授权协议文件。
 
+
+## Test
+
+```
+$ ./vendor/bin/phpunit sapi/src/tests/
+```
+
+## Code formatting
+
+```
+$ ./vendor/bin/php-cs-fixer fix sapi/src/
+$ ./vendor/bin/php-cs-fixer fix sapi/src/tests/
+```
+
 ## 授权协议
 
 * `php-cli` 使用了多个其他开源项目，请认真阅读自动生成的 `bin/LICENSE`
