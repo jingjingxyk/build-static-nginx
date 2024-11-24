@@ -15,3 +15,6 @@ chromium 截图
 ## ungoogled-chromium
 
     https://github.com/ungoogled-software/ungoogled-chromium
+
+## remote-debug
+    --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222

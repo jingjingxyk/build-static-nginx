@@ -23,6 +23,7 @@ jobs:
           - "8.2.25"
           - "8.1.30"
           - "8.3.13"
+          - "8.4.1"
 
     steps:
       - uses: actions/checkout@v4
@@ -38,8 +39,8 @@ jobs:
           sw_vers
           xcodebuild -version
           brew config
-
           xcrun --show-sdk-path
+          clang --version
 
           ls -lh $(xcrun --show-sdk-path)
 
