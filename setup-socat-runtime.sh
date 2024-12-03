@@ -21,7 +21,7 @@ case $OS in
   ;;
 *)
   case $OS in
-  'MSYS_NT'* | 'CYGWIN_NT'* )
+  'MSYS_NT'* | 'CYGWIN_NT'*)
     OS="windows"
     ;;
   'MINGW64_NT'*)
@@ -39,7 +39,7 @@ case $ARCH in
 'x86_64')
   ARCH="x64"
   ;;
-'aarch64' | 'arm64' )
+'aarch64' | 'arm64')
   ARCH="arm64"
   ;;
 *)
@@ -51,18 +51,6 @@ esac
 APP_VERSION='1.8.0.0'
 APP_NAME='socat'
 VERSION='v2.1.0'
-
-mkdir -p bin/runtime
-mkdir -p var/runtime
-
-cd ${__PROJECT__}/var/runtime
-
-APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}.tar.xz"
-CACERT_DOWNLOAD_URL="https://curl.se/ca/cacert.pem"
-
-if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-vs2022-${ARCH}.zip"
-fi
 
 MIRROR=''
 while [ $# -gt 0 ]; do
@@ -80,12 +68,42 @@ while [ $# -gt 0 ]; do
     NO_PROXY="${NO_PROXY},.myqcloud.com,.swoole.com"
     export NO_PROXY="${NO_PROXY},.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com"
     ;;
+  --version)
+    # 指定发布 TAG
+    X_VERSION=$(echo "$2" | grep -Eo '^v\d\.\d{1,2}\.\d{1,2}$')
+    if [[ -n $X_VERSION ]]; then
+      {
+        VERSION=$X_VERSION
+      }
+    fi
+    ;;
+  --socat-version)
+    # 指定发布 TAG
+    X_APP_VERSION=$(echo "$2" | grep -Eo '^v\d\.\d{1,2}\.\d{1,2}.\d{1,2}$')
+    if [[ -n $X_APP_VERSION ]]; then
+      {
+        APP_VERSION=$X_APP_VERSION
+      }
+    fi
+    ;;
   --*)
     echo "Illegal option $1"
     ;;
   esac
   shift $(($# > 0 ? 1 : 0))
 done
+
+mkdir -p bin/runtime
+mkdir -p var/runtime
+
+cd ${__PROJECT__}/var/runtime
+
+APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}.tar.xz"
+CACERT_DOWNLOAD_URL="https://curl.se/ca/cacert.pem"
+
+if [ $OS = 'windows' ]; then
+  APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-vs2022-${ARCH}.zip"
+fi
 
 case "$MIRROR" in
 china)
@@ -120,7 +138,6 @@ fi
 cd ${__PROJECT__}/var/runtime
 
 cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
-
 
 cd ${__PROJECT__}/
 
