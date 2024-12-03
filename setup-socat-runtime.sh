@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='1.8.0.0'
+APP_VERSION='v1.8.0.1'
 APP_NAME='socat'
-VERSION='v2.1.0'
+VERSION='v2.2.1'
 
 MIRROR=''
 while [ $# -gt 0 ]; do
@@ -102,14 +102,14 @@ APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/dow
 CACERT_DOWNLOAD_URL="https://curl.se/ca/cacert.pem"
 
 if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-vs2022-${ARCH}.zip"
+  APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-socat/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-cygwin-${ARCH}.zip"
 fi
 
 case "$MIRROR" in
 china)
   APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}.tar.xz"
   if [ $OS = 'windows' ]; then
-    APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}-${APP_VERSION}-vs2022-${ARCH}.zip"
+    APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}-${APP_VERSION}-cygwin-${ARCH}.zip"
   fi
   ;;
 
