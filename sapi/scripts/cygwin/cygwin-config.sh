@@ -20,6 +20,8 @@ while [ $# -gt 0 ]; do
     X_PHP_VERSION=$(echo ${PHP_VERSION:0:3})
     if [ "$X_PHP_VERSION" = "8.4" ]; then
       OPTIONS+=' --enable-swoole-thread '
+      OPTIONS+=' --enable-brotli '
+      OPTIONS+=' --enable-zstd '
       OPTIONS+=' --enable-zts '
       OPTIONS+=' --disable-opcache-jit '
     fi
@@ -49,7 +51,7 @@ fi
 ./buildconf --force
 test -f Makefile && make clean
 ./configure --prefix=/usr --disable-all \
-  --enable-opcache \
+  \
   --disable-fiber-asm \
   --without-pcre-jit \
   --with-openssl --enable-openssl \
@@ -85,6 +87,8 @@ test -f Makefile && make clean
   --enable-swoole-pgsql \
   --enable-swoole-sqlite \
   --enable-redis \
+  --enable-opcache \
+  --disable-opcache-jit \
   --with-imagick \
   --with-yaml \
   --with-readline \
@@ -94,3 +98,5 @@ test -f Makefile && make clean
 #  --with-pgsql
 #  --with-pdo-sqlite \
 #  --with-zip   #  cygwin libzip-devel 版本库暂不支持函数 zip_encryption_method_supported （2020年新增函数)
+# --enable-zts
+# --disable-opcache-jit
