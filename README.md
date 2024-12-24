@@ -50,12 +50,51 @@ git clone --recursive -b build-static-nginx  https://github.com/jingjingxyk/swoo
 
 cd swoole-cli
 bash setup-php-runtime.sh
+
 php prepare.php +nginx --with-c-compiler=gcc
 bash make-install-deps.sh
 bash make.sh all-library
 bash make.sh config
 bash make.sh build
 bash make.sh archive
+
+# 或者使用镜像
+# 来自 https://www.swoole.com/download
+bash setup-php-runtime.sh --mirror china
+
+```
+
+## 快速准备运行环境
+
+### linux
+
+如容器已经安装，可跳过执行安装 docker 命令
+
+```bash
+
+sh sapi/quickstart/linux/install-docker.sh
+sh sapi/quickstart/linux/run-alpine-container.sh
+sh sapi/quickstart/linux/connection-swoole-cli-alpine.sh
+sh sapi/quickstart/linux/alpine-init.sh
+
+# 使用镜像源安装
+sh sapi/quickstart/linux/install-docker.sh --mirror china
+sh sapi/quickstart/linux/alpine-init.sh --mirror china
+
+```
+
+### macos
+
+如 homebrew 已安装，可跳过执行安装 homebrew 命令
+
+```bash
+
+bash sapi/quickstart/macos/install-homebrew.sh
+bash sapi/quickstart/macos/macos-init.sh
+
+# 使用镜像源安装
+bash sapi/quickstart/macos/install-homebrew.sh --mirror china
+bash sapi/quickstart/macos/macos-init.sh --mirror china
 
 ```
 
@@ -72,6 +111,13 @@ vi build-release.sh
 bash build-release.sh
 
 
+```
+
+## Code formatting
+
+```
+$ ./vendor/bin/php-cs-fixer fix sapi/src/
+$ ./vendor/bin/php-cs-fixer fix sapi/src/tests/
 ```
 
 ## 授权协议
