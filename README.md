@@ -1,6 +1,6 @@
 # build static nginx
 
-构建静态 nginx
+构建静态 [nginx](https://github.com/nginx/nginx)
 
 ## 构建命令
 
