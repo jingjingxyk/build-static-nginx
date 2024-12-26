@@ -212,3 +212,32 @@ git log --pretty=%ad-%h --date=format:'%Y%m%d%H%M' -n 1 | cat
 TZ=UTC git show --quiet --date='format-local:%Y%m%dT%H%M%SZ' --format="%cd"
 
 ```
+
+## windows git 使用代理
+
+```shell
+
+# download socat
+curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip https://github.com/jingjingxyk/build-static-socat/releases/download/v2.2.1/socat-v1.8.0.1-cygwin-x64.zip
+
+curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip  https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip
+
+
+
+```
+
+```text
+vi  ~\.ssh\config
+
+
+Host github.com
+  Hostname github.com
+  Port 22
+  PreferredAuthentications publickey
+  StrictHostKeyChecking no
+  IdentityFile  /c/Users/admin/.ssh/github-ssh-key-id-rsa
+  # ProxyCommand nc -X 5 -x localhost:2000 %h %p
+  # ProxyCommand socat - socks4a:localhost:%h:%p,socksport=2000
+  ProxyCommand  "C:\Users\admin\socat-v1.8.0.1-cygwin-x64\socat-v1.8.0.1-cygwin-x64\socat" - proxy:localhost:%h:%p,proxyport=8016
+
+````
