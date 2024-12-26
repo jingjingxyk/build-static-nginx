@@ -1,7 +1,5 @@
 
-### cygwin mirror
 
-    https://cygwin.com/mirrors.html
 
 ### msys2 mirror and  environment
 

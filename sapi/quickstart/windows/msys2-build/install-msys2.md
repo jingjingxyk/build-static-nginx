@@ -34,7 +34,14 @@ pacman -Syy --noconfirm
 pacman -Syy --noconfirm git
 
 # msys2 环境下 拉取 swoole-cli 源码
-git clone --recursive https://github.com/jingjingxyk/swoole-cli.git
+git clone --recursive https://github.com/swoole/swoole-cli.git
 
+```
+
+```shell
+
+
+bin/runtime/php bin/runtime/composer.phar install  --no-interaction --no-autoloader --no-scripts --profile --ignore-platform-req=ext-posix --ignore-platform-req=ext-yaml
+bin/runtime/php bin/runtime/composer.phar dump-autoload --optimize --profile --ignore-platform-req=ext-posix --ignore-platform-req=ext-yaml
 
 ```
