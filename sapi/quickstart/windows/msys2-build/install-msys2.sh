@@ -18,3 +18,7 @@ pacman -Syu
 pacman -Sy git curl wget
 # 无须确认安装包
 pacman -Sy --noconfirm git curl wget openssl
+
+pacman -Syy --noconfirm git curl wget openssl zip unzip xz gcc gcc-g++  cmake make
+
+pacman -Syy --noconfirm openssl-devel libreadline
