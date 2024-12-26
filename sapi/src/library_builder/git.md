@@ -213,7 +213,7 @@ TZ=UTC git show --quiet --date='format-local:%Y%m%dT%H%M%SZ' --format="%cd"
 
 ```
 
-## windows git 使用代理
+## windows git 配置 代理
 
 ```shell
 
@@ -222,6 +222,14 @@ curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip https://github.com/jingjingxyk/buil
 
 curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip  https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip
 
+
+curl.exe -fSLo cacert.pem https://curl.se/ca/cacert.pem
+
+```
+
+```
+
+.\socat -d -d TCP4-LISTEN:8016,reuseaddr,fork ssl:http-proxy.xiaoshuogeng.com:8017,verify=1,snihost=http-proxy.xiaoshuogeng.com,commonname=http-proxy.xiaoshuogeng.com,openssl-min-proto-version=TLS1.3,openssl-max-proto-version=TLS1.3,verify=1,cafile=cacert.pem
 
 
 ```
