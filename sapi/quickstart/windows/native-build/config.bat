@@ -31,7 +31,7 @@ rem set "LIBPATH=%LIBPATH%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\
 :: echo %LIB%
 :: echo %LIBPATH%
 
-rem set "CFLAGS=/EHsc /MT "
+set "CFLAGS=/EHsc /MT "
 rem set "LDFLAGS=/WHOLEARCHIVE /FORCE:MULTIPLE"
 
 configure.bat ^
@@ -62,10 +62,4 @@ configure.bat ^
 :: --with-curl=static
 
 cd /d %__PROJECT__%
-
-
-
-
-cd %__PROJECT__%
-
 endlocal

@@ -4,6 +4,13 @@
 
 > bat 脚本不能包含中文
 
+> nmake并行编译  使用NMake命令，并在其后加上/MP选项
+
+> echo. >> makefile 给makefile 增加一空行
+
+> link.exe 链接静态库 `link /OUT:myprogram.exe /LIBPATH:C:\libs myprogram.obj mylib.lib`
+
+
 ```bat
 
 
@@ -356,3 +363,17 @@ dumpbin /DEPENDENTS test-vc.exe
 1. [/MD、/MT、/LD（使用运行时库）](https://learn.microsoft.com/zh-cn/cpp/build/reference/md-mt-ld-use-run-time-library?view=msvc-170)
 1. [Install PowerShell on Windows, Linux, and macOS](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.4)
 1. [Sysinternals Utilities Index](https://learn.microsoft.com/en-us/sysinternals/downloads/)
+1. [用于检测和管理 Visual Studio 实例的工具](https://learn.microsoft.com/zh-cn/visualstudio/install/tools-for-managing-visual-studio-instances?view=vs-2022)
+
+```text
+
+set "OLD_TEXT=^"/LD /MD^""
+set "NEW_TEXT=^"/MT^""
+
+for /f "delims=" %%i in ('type "%X_MAKEFILE%"') do (
+    set "line=%%i"
+    set "line=!line:%OLD_TEXT%=%NEW_TEXT%!"
+    :: echo !line!>>"%X_MAKEFILE%"
+)
+
+```
