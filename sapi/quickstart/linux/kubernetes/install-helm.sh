@@ -7,6 +7,14 @@ __DIR__=$(
 )
 cd ${__DIR__}
 
+__PROJECT__=$(
+  cd ${__DIR__}/../../../../../
+  pwd
+)
+cd ${__PROJECT__}
+mkdir -p ${__PROJECT__}/var/kubernetes/
+cd ${__PROJECT__}/var/kubernetes/
+
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)

@@ -7,6 +7,14 @@ __DIR__=$(
 )
 cd ${__DIR__}
 
+__PROJECT__=$(
+  cd ${__DIR__}/../../../../../
+  pwd
+)
+cd ${__PROJECT__}
+mkdir -p ${__PROJECT__}/var/kubernetes/
+cd ${__PROJECT__}/var/kubernetes/
+
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)
@@ -43,12 +51,10 @@ cd cri-dockerd
 VERSION="0.3.15"
 curl -L -O https://github.com/Mirantis/cri-dockerd/releases/download/v${VERSION}/cri-dockerd-${VERSION}.amd64.tgz
 
-tar --strip-components=1 -C . -xf  cri-dockerd-${VERSION}.amd64.tgz
-
+tar --strip-components=1 -C . -xf cri-dockerd-${VERSION}.amd64.tgz
 
 curl -L -o packaging/systemd/cri-docker.service https://github.com/Mirantis/cri-dockerd/blob/master/packaging/systemd/cri-docker.service?raw=true
 curl -L -o packaging/systemd/cri-docker.socket https://github.com/Mirantis/cri-dockerd/blob/master/packaging/systemd/cri-docker.socket?raw=true
-
 
 mkdir -p /usr/local/bin
 install -o root -g root -m 0755 cri-dockerd /usr/local/bin/cri-dockerd
@@ -64,16 +70,13 @@ systemctl status cri-docker.service | cat
 # https://github.com/kubernetes-sigs/cri-tools/tags
 
 VERSION="1.30.0"
-curl  -L -O https://github.com/kubernetes-sigs/cri-tools/releases/download/v${VERSION}/crictl-v${VERSION}-linux-amd64.tar.gz
+curl -L -O https://github.com/kubernetes-sigs/cri-tools/releases/download/v${VERSION}/crictl-v${VERSION}-linux-amd64.tar.gz
 tar zxvf crictl-v${VERSION}-linux-amd64.tar.gz -C /usr/local/bin
 rm -f crictl-v${VERSION}-linux-amd64.tar.gz
 
-cat > /etc/crictl.yaml <<EOF
+cat >/etc/crictl.yaml <<EOF
 runtime-endpoint: unix:///var/run/cri-dockerd.sock
 image-endpoint: unix:///var/run/cri-dockerd.sock
 timeout: 10
 # debug: true
 EOF
-
-
-

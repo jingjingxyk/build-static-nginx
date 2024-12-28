@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 
-set -exu
+set -x
 __DIR__=$(
   cd "$(dirname "$0")"
   pwd
 )
+cd ${__DIR__}
+
 __PROJECT__=$(
   cd ${__DIR__}/../../../../
   pwd
 )
+cd ${__PROJECT__}
+
+
 cd ${__PROJECT__}/sapi/quickstart/linux/
 
 bash debian-init-minimal.sh "$@"
