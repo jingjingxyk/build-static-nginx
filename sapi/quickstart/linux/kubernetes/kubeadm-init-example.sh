@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export PATH=$PATH:/usr/sbin/
+
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -57,8 +59,18 @@ kubeadm config images list --v=5 --kubernetes-version=$(kubelet --version | awk 
 kubeadm config images pull --v=5 --kubernetes-version=$(kubelet --version | awk -F ' ' '{print $2}') --cri-socket ${CRI_SOCKET}
 
 ip route show | grep -E '^default'
-IP=$(ip address show | grep eth0 | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1}')
-# IP=$(ip address show | grep enp0s3 | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1}')
+
+NIC=$(ip link | grep eth0)
+if [ $? -ne 0 ]; then
+  NIC=$(ip link | grep enp0s3)
+fi
+
+if [ -z "${NIC}" ]; then
+  echo 'no found NIC'
+  exit 0
+fi
+
+IP=$(ip address show | grep ${NIC} | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1}')
 
 echo $IP
 

@@ -28,6 +28,7 @@ kubectl create -f calico-v${VERSION}.yaml
 
 curl -fSL https://github.com/projectcalico/calico/releases/download/v${VERSION}/calicoctl-linux-amd64 -o calicoctl
 chmod +x ./calicoctl
+mv ./calicoctl /usr/local/bin/
 
 # more info
 # https://docs.tigera.io/calico/latest/operations/calicoctl/configure/overview

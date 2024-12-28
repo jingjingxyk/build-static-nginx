@@ -21,10 +21,14 @@ apt install -y ipvsadm conntrack iptables ebtables ethtool socat
 apt install -y python3 python3-pip
 apt install -y xz-utils  lzip zip unzip p7zip
 apt install -y nftables
+apt install -y grub2-common procps
+apt install -y util-linux
+apt install -y iptables
+
 
 
 ip link
-ifconfig -a
+ip -a
 cat /sys/class/dmi/id/product_uuid
 # nc 127.0.0.1 6443
 stat -fc %T /sys/fs/cgroup/
