@@ -40,10 +40,6 @@ jobs:
         run: |
           echo "BUILD_PHP_VERSION=${{ matrix.php-version }}" >> $GITHUB_ENV
 
-      - name: Prepare submodule
-        run: |
-          ipconfig /all
-          # git submodule update --init
 
       - uses: msys2/setup-msys2@v2
       #      - uses: cygwin/cygwin-install-action@master
@@ -51,55 +47,6 @@ jobs:
       #          platform: x86_64
       #          packages: git curl wget zip unzip tar xz
       #        shell: C:\cygwin\bin\bash.exe  --norc -eo pipefail -o igncr '{0}'
-
-      - name: download source code
-        shell: msys2 {0}
-        run: |
-            bash sapi/quickstart/windows/native-build/msys2-install-soft.sh
-            bash sapi/quickstart/windows/native-build/msys2-download-vs.sh
-            bash sapi/quickstart/windows/native-build/msys2-download-source-code.sh
-
-      - name: build
-        if: 0
-      #  shell: cmd
-        shell: C:\Windows\system32\cmd.EXE /D /E:ON /V:OFF /S /C "CALL "{0}""
-      #  shell: C:\Windows\system32\cmd.EXE /D /E:ON /V:ON /F:ON /S /C "CALL "{0}""
-      #   shell: C:\Windows\system32\cmd.EXE /E:ON /V:ON /F:ON /k "%1" %*
-        run: |
-          sapi\quickstart\windows\native-build\native-build-step-1.bat
-          sapi\quickstart\windows\native-build\native-build-step-2.bat
-          sapi\quickstart\windows\native-build\native-build-step-3.bat
-          sapi\quickstart\windows\native-build\native-build-step-4.bat
-
-      - name: Configure build for amd64
-        uses: ilammy/msvc-dev-cmd@v1.9.0
-        with:
-            arch: amd64
-        run: set
-
-      - name: Display the path
-        shell: cmd
-        run: echo %PATH%
-
-      - name: phpsdk init
-        shell: cmd
-        run: |
-          sapi\quickstart\windows\native-build\native-build-step-1.bat
-
-      - name: php prepare
-        shell: cmd
-        run: |
-          sapi\quickstart\windows\native-build\native-build-step-2.bat
-
-      - name: php config
-        shell: cmd
-        run: |
-          sapi\quickstart\windows\native-build\native-build-step-3.bat
-
-      - name: php build
-        shell: cmd
-        run: |
-          sapi\quickstart\windows\native-build\native-build-step-4.bat
 
       - name: Compile Visual Studio project with MSBuild
         shell: cmd
@@ -116,15 +63,6 @@ jobs:
           echo %errorlevel%
           start /wait VisualStudioSetup.exe --locale en-US --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.Component.MSBuild --add Microsoft.VisualStudio.Component.Roslyn.Compiler --add Microsoft.Component.MSBuild --add Microsoft.VisualStudio.Component.CoreBuildTools --add Microsoft.VisualStudio.Workload.MSBuildTools  --path install="D:\VS" --path cache="D:\VS\cache" --path shared="D:\VS\shared"  --norestart --force --passive --wait  > nul
           echo %errorlevel%
-      - name: Configure
-        if: 0
-        run: |
-          bash ./sapi/scripts/cygwin/cygwin-config.sh
-
-      - name: Build
-        if: 0
-        run: |
-          bash ./sapi/scripts/cygwin/cygwin-build.sh
 
       - name: Show Build Result
         if: 0
@@ -132,7 +70,6 @@ jobs:
           ./bin/php.exe -v
           ./bin/php.exe -m
           ./bin/php.exe --ri pdo_pgsql
-          ./bin/php.exe --ri swoole
           ./bin/php.exe  -r "echo PHP_VERSION;"
 
       - name: get app version with bash
@@ -163,24 +100,3 @@ jobs:
           # echo "APP_VERSION=$APP_VERSION" | Out-File -FilePath $env:GITHUB_ENV -Append
           # Add-Content -Path $env:GITHUB_ENV -Value "name=$value"
           # Add-Content -Path $env:GITHUB_ENV -Value "APP_VERSION=$APP_VERSION"
-
-      - name: Archive
-        if: 0
-        run: |
-          bash ./sapi/scripts/cygwin/cygwin-archive.sh
-
-      - name: production artifacts
-        if: 0
-        uses: actions/upload-artifact@v4
-        with:
-          name: php-cli-v${{ env.APP_VERSION }}-cygwin-x64
-          retention-days: 90
-          path: php-cli-v${{ env.APP_VERSION }}-cygwin-x64.zip
-
-      - name: gh release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: php-cli-v${{ env.APP_VERSION }}-cygwin-x64.zip
