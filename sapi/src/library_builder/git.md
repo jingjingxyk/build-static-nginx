@@ -249,3 +249,13 @@ Host github.com
   ProxyCommand  "C:\Users\admin\socat-v1.8.0.1-cygwin-x64\socat-v1.8.0.1-cygwin-x64\socat" - proxy:localhost:%h:%p,proxyport=8016
 
 ````
+
+
+```shell
+
+
+git config --global core.autocrlf false
+git config --global core.eol lf
+git config --global core.ignorecase false
+
+```
