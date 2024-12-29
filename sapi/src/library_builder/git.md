@@ -258,4 +258,8 @@ git config --global core.autocrlf false
 git config --global core.eol lf
 git config --global core.ignorecase false
 
+# 不再关心文件的权限
+git config --global core.filemode false
+# 让 Git 显示颜色，会让命令输出看起来更醒目
+git config --global color.ui true
 ```
