@@ -19,7 +19,7 @@ VBoxManage modifyhd --resize 8096 ~/Downloads/openwrt/openwrt-23.05.4-x86-64-gen
 
 ```
 
-把系统 dd 成 openwrt ，当云路由器用
+把云服务器系统 dd 成 openwrt ，当云路由器用
 
 VirtualBox 上的 OpenWrt 操作指南
 https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm#troubleshooting
