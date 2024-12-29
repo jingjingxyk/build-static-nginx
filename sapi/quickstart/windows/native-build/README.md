@@ -313,6 +313,9 @@ VisualStudioSetup.exe
 
 vs_buildtools.exe --quiet --force --norestart
 
+
+dir "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+
 ```
 
 Microsoft Visual C++ 运行时库

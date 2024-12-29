@@ -1,6 +1,6 @@
 @echo off
 
-setlocal enabledelayedexpansion
+setlocal enableextensions enabledelayedexpansion
 rem show current file location
 echo %~dp0
 cd /d %~dp0
@@ -14,6 +14,11 @@ cd /d %__PROJECT__%\var\windows-build-deps\php-src\
 set X_MAKEFILE=%__PROJECT__%\var\windows-build-deps\php-src\Makefile
 
 :: set "PATH=%ProgramFiles%\7-Zip;%ProgramFiles%\Git\bin;%__PROJECT__%\bin\runtime\;%__PROJECT__%\bin\runtime\nasm\;%__PROJECT__%\bin\runtime\php;%__PROJECT__%\bin\runtime\libarchive\bin;%PATH%"
+
+rem https://learn.microsoft.com/zh-cn/cpp/error-messages/tool-errors/linker-tools-warning-lnk4098?view=msvc-170&redirectedfrom=MSDN
+rem https://learn.microsoft.com/zh-cn/cpp/build/reference/md-mt-ld-use-run-time-library?view=msvc-170
+rem /VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
+
 
 sed.exe -i 's/\/LD \/MD/\/MT/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
@@ -102,11 +107,12 @@ rem echo 	^-@$(_VC_MANIFEST_EMBED_DLL) >> %X_MAKEFILE%
 
 rem echo x-release-php^: $(DEPS_CLI)  $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest >> %X_MAKEFILE%
 rem echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest >> %X_MAKEFILE%
-echo x-release-php^: $(PHP_GLOBAL_OBJS)  >> %X_MAKEFILE%
-rem echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
+echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(PHP_GLOBAL_OBJS)  $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest  >> %X_MAKEFILE%
+echo    ^@$(CC) /VERBOSE:LIB $(PHP_GLOBAL_OBJS)
+rem echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
-
+rem /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
 
 
 rem https://www.cnblogs.com/sherry-best/archive/2013/04/15/3022705.html
