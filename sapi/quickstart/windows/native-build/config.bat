@@ -32,7 +32,7 @@ rem set "LIBPATH=%LIBPATH%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\
 :: echo %LIBPATH%
 
 set "CFLAGS=/EHsc /MT "
-set "LDFLAGS=/VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib "
+set "LDFLAGS=/VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /DEFAULTLIB:libcmt.lib "
 
 
 

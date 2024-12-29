@@ -10,6 +10,15 @@
 
 > link.exe 链接静态库 `link /OUT:myprogram.exe /LIBPATH:C:\libs myprogram.obj mylib.lib`
 
+```
+
+git config --global core.autocrlf false
+git config --global core.eol lf
+git config --global core.ignorecase false
+
+
+```
+
 
 ```bat
 
@@ -31,6 +40,8 @@ cmd /k "d:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Bui
 %comspec% /k "D:\vs\VC\Auxiliary\Build\vcvars64.bat"
 %comspec% /k "D:\vs\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
 %ProgramFiles(x86)%
+%USERPROFILE%
+ %NUMBER_OF_PROCESSORS%
 
 :: phpsdk_deps -u
 :: phpsdk_buildtree phpdev
@@ -107,7 +118,7 @@ sapi\quickstart\windows\native-build\native-build-php-sdk-vs2022.bat
 [visualstudio](https://visualstudio.microsoft.com/zh-hans/downloads/)
 [windows-sdk](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)
 [通过命令行使用 MSVC 工具集](https://learn.microsoft.com/zh-cn/cpp/build/building-on-the-command-line?view=msvc-170)
-[Microsoft Visual C++ 可再发行程序包最新支持的下载]( https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+[Microsoft Visual C++ 可再发行程序包最新支持的下载](https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 [Visual Studio 教程 | C++](https://learn.microsoft.com/zh-cn/cpp/get-started/?view=msvc-170)
 [使用命令行参数安装、更新和管理 Visual Studio](https://learn.microsoft.com/zh-cn/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022)
 [Visual Studio 开发人员命令提示和开发人员 PowerShell](https://learn.microsoft.com/zh-cn/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022&redirectedfrom=MSDN)
