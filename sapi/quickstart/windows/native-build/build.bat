@@ -63,12 +63,19 @@ rem /MANIFEST:php.exe.manifest /MANIFESTUAC:uiAccess /SUBSYSTEM:CONSOLE  /subsys
 
 rem nmake /E x-release-php
 :: nmake /E php.exe
-nmake x-build-php-lib
+
+
+:: nmake /E php.exe
+nmake /E /f Makefile  x-release-php
+
+
 
 
 :: .\x64\Release\php.exe -v
 :: .\x64\Release\php.exe -m
 :: dumpbin /DEPENDENTS ".\x64\Release\php.exe"
+:: dumpbin /DEPENDENTS ".\x64\Release_TS\php.exe"
+
 
 cd %__PROJECT__%
 endlocal
