@@ -82,6 +82,8 @@ export GIT_TRACE=1
 export GIT_CURL_VERBOSE=1
 
 
+git-proxy:  https://www.cnblogs.com/jingjingxyk/p/17669295.html
+
 git config --global core.gitproxy "/work/bin/runtime/git-proxy"
 
 git clone --depth=1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
