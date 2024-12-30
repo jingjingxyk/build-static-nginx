@@ -54,6 +54,15 @@ git rm -rf .
 
 ```
 
+## 创建新分支来自远程仓库
+
+```shell
+
+git fetch -a
+git checkout -b new-branch-name origin/existing-branch-name
+
+```
+
 ## 清理未跟踪的文件 谨慎使用
 
 ```bash
@@ -249,7 +258,6 @@ Host github.com
   ProxyCommand  "C:\Users\admin\socat-v1.8.0.1-cygwin-x64\socat-v1.8.0.1-cygwin-x64\socat" - proxy:localhost:%h:%p,proxyport=8016
 
 ````
-
 
 ```shell
 
