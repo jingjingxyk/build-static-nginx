@@ -30,4 +30,8 @@ https://openwrt.org/docs/guide-user/installation/openwrt_x86
 https://archive.openwrt.org/releases/
 
 
+openwrt Virtualization
+https://openwrt.org/docs/guide-user/virtualization/start
 
+VirtualBox 上的 OpenWrt 网络配置
+https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
