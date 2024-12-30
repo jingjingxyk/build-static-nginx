@@ -1,6 +1,4 @@
-
-
-## 当环境中没有 PHP 解释器时  可以快速安装 PHP 解释器
+# 当环境中没有 PHP 解释器时  可以快速安装 PHP 解释器
 
 ```bash
 
@@ -22,9 +20,9 @@ curl -Lo  /usr/local/bin/composer.phar https://getcomposer.org/download/latest-s
 ln -sf /usr/local/bin/composer.phar /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer
 
-   wget -O /usr/local/bin/composer https://mirrors.tencent.com/composer/composer.phar
+wget -O /usr/local/bin/composer https://mirrors.tencent.com/composer/composer.phar
 
-   chmod a+x /usr/local/bin/composer
+chmod a+x /usr/local/bin/composer
 
 ```
 
