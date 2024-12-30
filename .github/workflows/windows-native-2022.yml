@@ -41,3 +41,16 @@ jobs:
         with:
           arch: amd64
 
+      - name: set swap
+        shell: cmd
+        run: |
+          wmic diskdrive list brief
+          wmic logicaldisk
+          :: 查看分页设置
+          wmic pagefile list /format:list
+          :: wmic computersystem where name="%computername%" set AutomaticManagedPagefile=True
+          :: 禁用自动管理 分页大小
+          wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
+          :: 设置分页大小
+          wmic pagefileset where name="D:\\pagefile.sys" set InitialSize=2048,MaximumSize=4096
+          wmic pagefile list /format:list
