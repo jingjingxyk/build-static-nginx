@@ -32,6 +32,8 @@ test -d build-dependencies-container && rm -rf build-dependencies-container
 cd ${__PROJECT__}/
 test -f sync-source-code.php && rm -f sync-source-code.php
 test -f setup-runtime.md && rm -rf setup-runtime.md
+test -f diff.php && rm -rf diff.php
+test -f run-tests.php && rm -rf run-tests.php
 
 cd ${__PROJECT__}/sapi/
 test -d build-dependencies-container && rm -rf build-dependencies-container
