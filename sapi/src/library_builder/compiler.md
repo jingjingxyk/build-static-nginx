@@ -112,6 +112,8 @@ C++中的volatile 阻止编译器优化变量
 
 ## 生成静态库(lib 开头 , .a 结尾 )
 
+    创建静态库：ar -crs
+
     gcc -c test.c
     ar -crv libtest.a test.o
 
