@@ -21,6 +21,10 @@ while [ $# -gt 0 ]; do
     china)
       OPTIONS=" --mirror china "
       ;;
+    *)
+      echo "$0 parameter error"
+      exit 0
+      ;;
     esac
 
     ;;
@@ -32,6 +36,8 @@ bash setup-php-runtime.sh ${OPTIONS}
 exit 0
 export PATH=${__PROJECT__}/bin/runtime:$PATH
 alias php="php -d curl.cainfo=${__PROJECT__}/bin/runtime/cacert.pem -d openssl.cafile=${__PROJECT__}/bin/runtime/cacert.pem "
+
+export COMPOSER_ALLOW_SUPERUSER=1
 
 if [ "$MIRROR" = 'china' ]; then
   composer config -g repos.packagist composer https://mirrors.tencent.com/composer/
@@ -47,4 +53,11 @@ fi
 php ./prepare.php --skip-download=yes --without-docker=yes
 
 bash make.sh docker-build ${MIRROR}
+
+{
+  docker exec -it swoole-cli-builder which bash
+} || {
+  docker exec -it swoole-cli-builder sh /work/sapi/quickstart/linux/alpine-init.sh ${OPTIONS}
+}
+
 bash make.sh docker-bash
