@@ -117,4 +117,13 @@ C++中的volatile 阻止编译器优化变量
     gcc -c test.c
     ar -crv libtest.a test.o
 
+## 查看.a 静态库中的.o文件
 
+    ar -v -t ./libpq.a
+    ar -t ./libpq.a
+
+## 查看静态库中的函数
+
+    nm -o ./libpq.a | grep ' T '
+    objdump -t ./libpq.a
+    readelf -c ./libpq.a
