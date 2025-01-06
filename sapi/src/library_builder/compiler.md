@@ -100,9 +100,16 @@ autoconf
 export CFLAGS="-O2 -Wall -W -Wunused-const-variable=0 -pipe -g"
 
 预处理 gcc -E 、clang -E
+gcc -E test.c -o test.i
+
 编译 gcc -S 、clang -S
+gcc -S test.i -o test.s
+
 汇编 gcc -c 、clang -c
+gcc -c test.s -o test.o
+
 链接 gcc -o 、clang -o
+gcc test.o -o test
 
 C++中的volatile 阻止编译器优化变量
 
