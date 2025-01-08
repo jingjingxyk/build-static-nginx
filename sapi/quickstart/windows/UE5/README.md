@@ -50,7 +50,10 @@ modify ^
 --add Microsoft.VisualStudio.Workload.MSBuildTools ^
 --add Microsoft.VisualStudio.Workload.NativeDesktop ^
 --path install="c:\vs" --path cache="c:\vs-cached" ^
---add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Component.NetFramework.3.5
+--add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Component.NetFramework.3.5  ^
+--add Microsoft.VisualStudio.Workload.VisualStudioExtension --includeRecommended  ^
+--add Microsoft.VisualStudio.Component.VC.Tools.X64 --add Microsoft.VisualStudio.Component.VC.Tools.X86  ^
+--add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.Game --includeRecommended --quiet
 
 
 ```
