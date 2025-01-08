@@ -8,7 +8,7 @@
 
 ```
 
-## install cygwin
+## 自动安装 cygwin 和  cygwin 依赖项
 
 ```bash
 
@@ -19,6 +19,4 @@
 
 ```
 
-### cygwin mirror
 
-    https://cygwin.com/mirrors.html

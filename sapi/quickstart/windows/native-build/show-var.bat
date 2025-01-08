@@ -91,3 +91,23 @@ rem nmake install
 
 cd %__PROJECT__%
 endlocal
+=======
+cd %__PROJECT__%\var\windows-build-deps\php-src\
+
+where sed.exe
+
+dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\msys2\usr\bin\
+
+
+
+:: vswhere.exe -products* -requires
+:: vswhere.exe -legacy -prerelease -format json
+:: vswhere.exe -legacy -prerelease -format json | jq
+
+:: vswhere.exe -legacy -prerelease
+
+nmake /E /f Makefile x-show-var
+
+cd %__PROJECT__%
+endlocal
+

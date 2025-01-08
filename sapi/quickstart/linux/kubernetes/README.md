@@ -124,3 +124,7 @@ kubectl rollout restart statefulset <statefulset-name>
 kubectl delete pod <pod-name>
 
 ```
+
+
+## Kubernetes 使用的端口和协议
+https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/

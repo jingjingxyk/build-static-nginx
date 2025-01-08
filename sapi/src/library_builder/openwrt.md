@@ -18,3 +18,20 @@ VBoxManage convertfromraw  --format VDI ~/Downloads/openwrt/openwrt-23.05.4-x86-
 VBoxManage modifyhd --resize 8096 ~/Downloads/openwrt/openwrt-23.05.4-x86-64-generic-ext4-combined.vdi
 
 ```
+
+把云服务器系统 dd 成 openwrt ，当云路由器用
+
+VirtualBox 上的 OpenWrt 操作指南
+https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm#troubleshooting
+
+https://openwrt.org/docs/guide-user/installation/openwrt_x86
+
+
+https://archive.openwrt.org/releases/
+
+
+openwrt Virtualization
+https://openwrt.org/docs/guide-user/virtualization/start
+
+VirtualBox 上的 OpenWrt 网络配置
+https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm

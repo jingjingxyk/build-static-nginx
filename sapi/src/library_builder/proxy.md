@@ -82,6 +82,8 @@ export GIT_TRACE=1
 export GIT_CURL_VERBOSE=1
 
 
+git-proxy:  https://www.cnblogs.com/jingjingxyk/p/17669295.html
+
 git config --global core.gitproxy "/work/bin/runtime/git-proxy"
 
 git clone --depth=1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -99,3 +101,6 @@ git clone --depth=1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux
 
 ##  与socat 有同样功能 的工具
     https://github.com/esrrhs/spp.git
+
+## 代理自动配置文件（PAC）文件
+    https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file

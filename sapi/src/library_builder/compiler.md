@@ -100,9 +100,16 @@ autoconf
 export CFLAGS="-O2 -Wall -W -Wunused-const-variable=0 -pipe -g"
 
 预处理 gcc -E 、clang -E
+gcc -E test.c -o test.i
+
 编译 gcc -S 、clang -S
+gcc -S test.i -o test.s
+
 汇编 gcc -c 、clang -c
+gcc -c test.s -o test.o
+
 链接 gcc -o 、clang -o
+gcc test.o -o test
 
 C++中的volatile 阻止编译器优化变量
 
@@ -112,7 +119,18 @@ C++中的volatile 阻止编译器优化变量
 
 ## 生成静态库(lib 开头 , .a 结尾 )
 
+    创建静态库：ar -crs
+
     gcc -c test.c
     ar -crv libtest.a test.o
 
+## 查看.a 静态库中的.o文件
 
+    ar -v -t ./libpq.a
+    ar -t ./libpq.a
+
+## 查看静态库中的函数
+
+    nm -o ./libpq.a | grep ' T '
+    objdump -t ./libpq.a
+    readelf -c ./libpq.a

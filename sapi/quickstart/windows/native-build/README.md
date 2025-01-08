@@ -4,6 +4,22 @@
 
 > bat 脚本不能包含中文
 
+> nmake并行编译  使用NMake命令，并在其后加上/MP选项
+
+> echo. >> makefile 给makefile 增加一空行
+
+> link.exe 链接静态库 `link /OUT:myprogram.exe /LIBPATH:C:\libs myprogram.obj mylib.lib`
+
+```
+
+git config --global core.autocrlf false
+git config --global core.eol lf
+git config --global core.ignorecase false
+
+
+```
+
+
 ```bat
 
 
@@ -24,6 +40,9 @@ cmd /k "d:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Bui
 %comspec% /k "D:\vs\VC\Auxiliary\Build\vcvars64.bat"
 %comspec% /k "D:\vs\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
 %ProgramFiles(x86)%
+%USERPROFILE%
+%NUMBER_OF_PROCESSORS%
+
 
 :: phpsdk_deps -u
 :: phpsdk_buildtree phpdev
@@ -100,7 +119,7 @@ sapi\quickstart\windows\native-build\native-build-php-sdk-vs2022.bat
 [visualstudio](https://visualstudio.microsoft.com/zh-hans/downloads/)
 [windows-sdk](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)
 [通过命令行使用 MSVC 工具集](https://learn.microsoft.com/zh-cn/cpp/build/building-on-the-command-line?view=msvc-170)
-[Microsoft Visual C++ 可再发行程序包最新支持的下载]( https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+[Microsoft Visual C++ 可再发行程序包最新支持的下载](https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 [Visual Studio 教程 | C++](https://learn.microsoft.com/zh-cn/cpp/get-started/?view=msvc-170)
 [使用命令行参数安装、更新和管理 Visual Studio](https://learn.microsoft.com/zh-cn/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022)
 [Visual Studio 开发人员命令提示和开发人员 PowerShell](https://learn.microsoft.com/zh-cn/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022&redirectedfrom=MSDN)
@@ -306,6 +325,10 @@ VisualStudioSetup.exe
 
 vs_buildtools.exe --quiet --force --norestart
 
+
+
+dir "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+
 ```
 
 Microsoft Visual C++ 运行时库
@@ -356,3 +379,18 @@ dumpbin /DEPENDENTS test-vc.exe
 1. [/MD、/MT、/LD（使用运行时库）](https://learn.microsoft.com/zh-cn/cpp/build/reference/md-mt-ld-use-run-time-library?view=msvc-170)
 1. [Install PowerShell on Windows, Linux, and macOS](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.4)
 1. [Sysinternals Utilities Index](https://learn.microsoft.com/en-us/sysinternals/downloads/)
+1. [用于检测和管理 Visual Studio 实例的工具](https://learn.microsoft.com/zh-cn/visualstudio/install/tools-for-managing-visual-studio-instances?view=vs-2022)
+
+```text
+
+set "OLD_TEXT=^"/LD /MD^""
+set "NEW_TEXT=^"/MT^""
+
+for /f "delims=" %%i in ('type "%X_MAKEFILE%"') do (
+    set "line=%%i"
+    set "line=!line:%OLD_TEXT%=%NEW_TEXT%!"
+    :: echo !line!>>"%X_MAKEFILE%"
+)
+
+```
+

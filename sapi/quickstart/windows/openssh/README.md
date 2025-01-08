@@ -1,0 +1,20 @@
+```shell
+
+rem openssh
+
+:: https://github.com/PowerShell/Win32-OpenSSH.git
+:: https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.1.0p1-Preview/OpenSSH-Win64.zip
+cd Win32-OpenSSH
+powershell.exe -ExecutionPolicy Bypass -File install-sshd.ps1
+
+
+
+
+
+```
+
+```shell
+
+powershell.exe -ExecutionPolicy Bypass -File enable-openssh.ps1
+
+```
