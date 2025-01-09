@@ -29,20 +29,12 @@
 sed -i "s#https\?://mirror.msys2.org/#https://mirrors.tuna.tsinghua.edu.cn/msys2/#g" /etc/pacman.d/mirrorlist*
 
 # 更新源
-pacman -Syy --noconfirm
+pacman -Sy --noconfirm
 # 无须确认安装包
-pacman -Syy --noconfirm git
+pacman -Sy --noconfirm git
 
 # msys2 环境下 拉取 swoole-cli 源码
 git clone --recursive https://github.com/swoole/swoole-cli.git
 
-
-```
-
-```shell
-
-
-bin/runtime/php bin/runtime/composer.phar install  --no-interaction --no-autoloader --no-scripts --profile --ignore-platform-req=ext-posix --ignore-platform-req=ext-yaml
-bin/runtime/php bin/runtime/composer.phar dump-autoload --optimize --profile --ignore-platform-req=ext-posix --ignore-platform-req=ext-yaml
 
 ```

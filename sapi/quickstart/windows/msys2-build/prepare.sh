@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=$(
-  cd ${__DIR__}/../../../../../
+  cd ${__DIR__}/../../../../
   pwd
 )
 cd ${__PROJECT__}
@@ -14,6 +14,9 @@ cd ${__PROJECT__}
 test -d ext && rm -rf ext
 
 export PATH=$PATH:${__PROJECT__}/php/
+
+bin/runtime/php bin/runtime/composer.phar install  --no-interaction --no-autoloader --no-scripts --profile --ignore-platform-req=ext-posix --ignore-platform-req=ext-yaml
+bin/runtime/php bin/runtime/composer.phar dump-autoload --optimize --profile --ignore-platform-req=ext-posix --ignore-platform-req=ext-yaml
 
 php prepare.php --without-docker=1 --skip-download=1 --with-libavif=0 -swoole +swow -uuid +apcu +ds +xlswriter +ssh2
 
