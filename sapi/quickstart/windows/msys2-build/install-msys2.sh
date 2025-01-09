@@ -65,14 +65,22 @@ pacman -S --noconfirm libbz2-devel liblz4-devel liblzma-devel  libcares-devel
 pacman -S --noconfirm libyaml-devel  libzstd-devel libreadline-devel
 pacman -S --noconfirm libssh2-devel libidn2-devel gettext-devel
 pacman -S --noconfirm libzstd-devel
+pacman -S --noconfirm icu
+pacman -S --noconfirm sqlite
 
 :<<EOF
+# 不存在的包
 pacman -S --noconfirm libpcre2-devel libssl-devel libgmp-devel
 pacman -S --noconfirm ImageMagick libpng-devel libjpeg-devel libfreetype-devel libwebp-devel libsqlite3-devel
 pacman -S --noconfirm libzip-devel libicu-devel libonig-devel libsodium-devel
 pacman -S --noconfirm libMagick-devel  libbrotli-devel libintl-devel libpq-devel
 pacman -S --noconfirm libpq5 libpq-devel
 pacman -S --noconfirm gcc-g++
+
+# msys 环境下 可以安装 re2c
+# 不需要执行 bash ./sapi/scripts/cygwin/install-re2c.sh
+
+
 EOF
 
 # 清理缓存
