@@ -52,6 +52,7 @@ pacman -Sy
 pacman -S --noconfirm git curl wget openssl
 
 pacman -S --noconfirm zip unzip xz gcc  cmake make
+pacman -S --noconfirm re2c
 
 pacman -S --noconfirm openssl-devel libreadline
 

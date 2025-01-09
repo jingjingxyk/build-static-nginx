@@ -43,3 +43,6 @@ C:\cygwin64\bin\mintty.exe -i /Cygwin-Terminal.ico -
 
     https://cygwin.com/mirrors.html
 
+## 搜索包
+
+    https://cygwin.com/cgi-bin2/package-grep.cgi?grep=openssl
