@@ -22,9 +22,22 @@ c:\msys64\msys2.exe
 
 ```
 
+## 进入 环境
+
+```shell
+
+c:\msys64\clang64.exe
+c:\msys64\clangarm64.exe
+c:\msys64\mingw32.exe
+c:\msys64\mingw64.exe
+c:\msys64\msys2.exe
+c:\msys64\ucrt64.exe
+
+```
+
 ## msys2 mirror and  environment
 
     https://www.msys2.org/dev/mirrors/
     https://www.msys2.org/docs/environments/
-    MSYS2 包搜索
+    # MSYS2 包搜索
     https://packages.msys2.org/queue
