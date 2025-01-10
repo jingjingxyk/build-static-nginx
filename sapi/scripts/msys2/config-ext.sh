@@ -38,7 +38,8 @@ IMAGICK_VERSION=3.7.0
 mkdir -p pool/ext
 mkdir -p pool/lib
 mkdir -p pool/php-tar
-mkdir -p var/msys2-build/
+BUILD_DIR=${__PROJECT__}/var/msys2-build/
+mkdir -p ${BUILD_DIR}
 
 test -d ext && rm -rf ext
 mkdir -p ext
@@ -69,9 +70,9 @@ fi
 
 cd ${__PROJECT__}/pool/ext
 if [ ! -f swoole-${SWOOLE_VERSION}.tgz ]; then
-  test -d ${__PROJECT__}/var/msys2-build/swoole && rm -rf ${__PROJECT__}/var/msys2-build/swoole
-  git clone -b ${SWOOLE_VERSION} https://github.com/swoole/swoole-src.git ${__PROJECT__}/var/msys2-build/swoole
-  cd ${__PROJECT__}/var/msys2-build/swoole
+  test -d ${BUILD_DIR}/swoole && rm -rf ${BUILD_DIR}/swoole
+  git clone -b ${SWOOLE_VERSION} https://github.com/swoole/swoole-src.git ${BUILD_DIR}/swoole
+  cd ${BUILD_DIR}/swoole
   tar -czvf ${__PROJECT__}/pool/ext/swoole-${SWOOLE_VERSION}.tgz .
   cd ${__PROJECT__}/pool/ext
 fi
@@ -83,8 +84,8 @@ cd ${__PROJECT__}/pool/php-tar
 if [ ! -f php-${PHP_VERSION}.tar.gz ]; then
   curl -fSLo php-${PHP_VERSION}.tar.gz https://github.com/php/php-src/archive/refs/tags/php-${PHP_VERSION}.tar.gz
 fi
-test -d ${__PROJECT__}/var/msys2-build/php-src && rm -rf ${__PROJECT__}/var/msys2-build/php-src
-mkdir -p ${__PROJECT__}/var/msys2-build/php-src
-tar --strip-components=1 -C ${__PROJECT__}/var/msys2-build/php-src -xf php-${PHP_VERSION}.tar.gz
+test -d ${BUILD_DIR}/php-src && rm -rf ${BUILD_DIR}/php-src
+mkdir -p ${BUILD_DIR}/php-src
+tar --strip-components=1 -C ${BUILD_DIR}/php-src -xf php-${PHP_VERSION}.tar.gz
 
 cd ${__PROJECT__}
