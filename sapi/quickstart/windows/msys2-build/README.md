@@ -17,8 +17,11 @@
 ## 进入msys 环境
 
 ```
-
 c:\msys64\msys2.exe
+
+# 进入项目目录
+cd /c/Users/Administrator/swoole-cli
+cd /c/Users/${USERNAME}/swoole-cli
 
 ```
 
