@@ -19,10 +19,32 @@ git config --global core.ignorecase false
 
 ```
 
+```bash
+
+.\sapi\quickstart\windows\native-build\windows-init-download.bat
+.\sapi\quickstart\windows\native-build\windows-init-install.bat
+.\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
+
+.\sapi\quickstart\windows\native-build\php-sdk.bat
+
+
+.\sapi\quickstart\windows\native-build\run.bat
+
+.\sapi\quickstart\windows\native-build\config.bat
+.\sapi\quickstart\windows\native-build\x_custom_config.bat
+.\sapi\quickstart\windows\native-build\build.bat
+
+```
+
 ```powershell
- cmd /c .\sapi\quickstart\windows\native-build\windows-init.bat
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init-download.bat
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init-install.bat
  cmd /c .\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
- cmd /c .\sapi\quickstart\windows\native-build\run.bat
+
+ cmd /c .\sapi\quickstart\windows\native-build\php-sdk.bat
+ cmd /c .\sapi\quickstart\windows\native-build\config.bat
+ cmd /c .\\sapi\quickstart\windows\native-build\x_custom_config.bat
+ cmd /c .\sapi\quickstart\windows\native-build\build.bat
 
 ```
 

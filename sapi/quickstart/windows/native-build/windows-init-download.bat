@@ -30,7 +30,7 @@ if not exist "VisualStudioSetup.exe" curl.exe -fSLo VisualStudioSetup.exe "https
 
 if not exist "jq-windows-amd64.exe" curl.exe -fSLo jq-windows-amd64.exe https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-windows-amd64.exe
 
-curl.exe https://windows.php.net/downloads/releases/releases.json | jq-windows-amd64.exe ".[\"8.3\"].[\"nts-vs16-x64\"].[\"zip\"].[\"path\"]" -r > TEMP_PHP_RUNTIME_FILE
+if not exist "TEMP_PHP_RUNTIME_FILE" curl.exe https://windows.php.net/downloads/releases/releases.json | jq-windows-amd64.exe ".[\"8.3\"].[\"nts-vs16-x64\"].[\"zip\"].[\"path\"]" -r > TEMP_PHP_RUNTIME_FILE
 
 set /p PHP_RUNIME_FILE=<TEMP_PHP_RUNTIME_FILE
 echo %PHP_RUNIME_FILE%
@@ -39,8 +39,8 @@ if not exist "php-nts-Win32-x64.zip" curl.exe -fSLo php-nts-Win32-x64.zip "https
 if not exist "composer.phar" curl.exe -fSLo composer.phar "https://getcomposer.org/download/latest-stable/composer.phar"
 if not exist "cacert.pem" curl.exe -fSLo cacert.pem "https://curl.se/ca/cacert.pem"
 
-git clone -b master --depth=1 https://github.com/php/php-sdk-binary-tools.git
-git clone -b php-8.4.2 --depth=1 https://github.com/php/php-src.git
+if not exist "php-sdk-binary-tools" git clone -b master --depth=1 https://github.com/php/php-sdk-binary-tools.git
+if not exist "php-src" git clone -b php-8.4.2 --depth=1 https://github.com/php/php-src.git php-src
 
 
 :: with mirror

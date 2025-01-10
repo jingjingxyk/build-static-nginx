@@ -11,17 +11,18 @@ echo %cd%
 cd /d %__PROJECT__%\var\windows-build-deps\php-src\
 echo %cd%
 
-if exist "Makefile" (
+if exist "configure.js" (
     nmake clean
 )
 
-:: buildconf.bat -f
+call buildconf.bat -f
+
+echo "========HELP============"
+
+call configure.bat --help
+
 
 echo "===================="
-
-:: configure.bat --help
-
-
 
 rem set "INCLUDE=%INCLUDE%;%__PROJECT__%\build\openssl\include\;%__PROJECT__%\build\zlib\include"
 rem set "LIB=%LIB%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\zlib\lib"
