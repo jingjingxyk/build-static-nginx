@@ -19,6 +19,12 @@ git config --global core.ignorecase false
 
 ```
 
+```powershell
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init.bat
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
+ cmd /c .\sapi\quickstart\windows\native-build\run.bat
+
+```
 
 ```bat
 
