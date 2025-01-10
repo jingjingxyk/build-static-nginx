@@ -43,7 +43,7 @@ mkdir -p pool/php-tar
 WORK_DIR=${__PROJECT__}/var/cygwin-build/
 EXT_TEMP_CACHE_DIR=${WORK_DIR}/pool/ext/
 mkdir -p ${WORK_DIR}
-mkdir -p ${EXT_CACHE_DIR}
+mkdir -p ${EXT_TEMP_CACHE_DIR}
 
 
 test -d ext && rm -rf ext
