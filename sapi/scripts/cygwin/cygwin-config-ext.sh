@@ -100,6 +100,10 @@ cd ${__PROJECT__}
 
 cp -rf ${WORK_DIR}/ext/* ${WORK_DIR}/php-src/ext/
 
+cd ${WORK_DIR}/php-src/ext/
+
+cd ${WORK_DIR}/php-src/
+
 if [ "$X_PHP_VERSION" = "8.4" ] || [ "$X_PHP_VERSION" = "8.3" ] || [ "$X_PHP_VERSION" = "8.2" ] || [ "$X_PHP_VERSION" = "8.1" ]; then
   sed -i.backup 's/!defined(__HAIKU__)/!defined(__HAIKU__) \&\& !defined(__CYGWIN__)/' TSRM/TSRM.c
 fi
