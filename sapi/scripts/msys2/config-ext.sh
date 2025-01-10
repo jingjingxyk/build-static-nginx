@@ -46,21 +46,24 @@ mkdir -p ext
 
 cd ${__PROJECT__}/pool/ext
 if [ ! -f redis-${REDIS_VERSION}.tgz ]; then
-  curl -fSLo redis-${REDIS_VERSION}.tgz https://pecl.php.net/get/redis-${REDIS_VERSION}.tgz
+  curl -fSLo ${BUILD_DIR}/redis-${REDIS_VERSION}.tgz https://pecl.php.net/get/redis-${REDIS_VERSION}.tgz
+  mv ${BUILD_DIR}/redis-${REDIS_VERSION}.tgz ${__PROJECT__}/pool/ext
 fi
 mkdir -p ${__PROJECT__}/ext/redis/
 tar --strip-components=1 -C ${__PROJECT__}/ext/redis/ -xf redis-${REDIS_VERSION}.tgz
 
 cd ${__PROJECT__}/pool/ext
 if [ ! -f yaml-${YAML_VERSION}.tgz ]; then
-  curl -fSLo yaml-${YAML_VERSION}.tgz https://pecl.php.net/get/yaml-${YAML_VERSION}.tgz
+  curl -fSLo ${BUILD_DIR}/yaml-${YAML_VERSION}.tgz https://pecl.php.net/get/yaml-${YAML_VERSION}.tgz
+  mv ${BUILD_DIR}/yaml-${YAML_VERSION}.tgz ${__PROJECT__}/pool/ext
 fi
 mkdir -p ${__PROJECT__}/ext/yaml/
 tar --strip-components=1 -C ${__PROJECT__}/ext/yaml/ -xf yaml-${YAML_VERSION}.tgz
 
 cd ${__PROJECT__}/pool/ext
 if [ ! -f imagick-${IMAGICK_VERSION}.tgz ]; then
-  curl -fSLo imagick-${IMAGICK_VERSION}.tgz https://pecl.php.net/get/imagick-${IMAGICK_VERSION}.tgz
+  curl -fSLo ${BUILD_DIR}/imagick-${IMAGICK_VERSION}.tgz https://pecl.php.net/get/imagick-${IMAGICK_VERSION}.tgz
+  mv ${BUILD_DIR}/imagick-${IMAGICK_VERSION}.tgz ${__PROJECT__}/pool/ext
 fi
 mkdir -p ${__PROJECT__}/ext/imagick/
 tar --strip-components=1 -C ${__PROJECT__}/ext/imagick/ -xf imagick-${IMAGICK_VERSION}.tgz
@@ -73,8 +76,8 @@ if [ ! -f swoole-${SWOOLE_VERSION}.tgz ]; then
   test -d ${BUILD_DIR}/swoole && rm -rf ${BUILD_DIR}/swoole
   git clone -b ${SWOOLE_VERSION} https://github.com/swoole/swoole-src.git ${BUILD_DIR}/swoole
   cd ${BUILD_DIR}/swoole
-  tar -czvf ${__PROJECT__}/pool/ext/swoole-${SWOOLE_VERSION}.tgz .
-  cd ${__PROJECT__}/pool/ext
+  tar -czvf ${BUILD_DIR}/swoole-${SWOOLE_VERSION}.tgz .
+  mv ${BUILD_DIR}/swoole-${SWOOLE_VERSION}.tgz ${__PROJECT__}/pool/ext
 fi
 mkdir -p ${__PROJECT__}/ext/swoole/
 tar --strip-components=1 -C ${__PROJECT__}/ext/swoole/ -xf swoole-${SWOOLE_VERSION}.tgz
