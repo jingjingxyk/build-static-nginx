@@ -21,6 +21,7 @@ OPTIONS+=' --disable-opcache-jit '
 WORK_DIR=${__PROJECT__}/var/msys2-build/
 mkdir -p ${WORK_DIR}
 mkdir -p ${__PROJECT__}/bin/
+cd ${WORK_DIR}/php-src/
 
 # export CPPFLAGS="-I/usr/include"
 # export CFLAGS="-DZEND_WIN32=1 -DPHP_WIN32=1 -DWIN32 "
