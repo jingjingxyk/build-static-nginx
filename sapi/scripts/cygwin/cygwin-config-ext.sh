@@ -48,21 +48,21 @@ if [ ! -f redis-${REDIS_VERSION}.tgz ]; then
   curl -fSLo redis-${REDIS_VERSION}.tgz https://pecl.php.net/get/redis-${REDIS_VERSION}.tgz
 fi
 mkdir -p ${__PROJECT__}/ext/redis/
-tar --strip-components=1 -C ${__PROJECT__}/ext/redis/ redis-${REDIS_VERSION}.tgz
+tar --strip-components=1 -C ${__PROJECT__}/ext/redis/ -xf redis-${REDIS_VERSION}.tgz
 
 cd ${__PROJECT__}/pool/ext
 if [ ! -f yaml-${YAML_VERSION}.tgz ]; then
   curl -fSLo yaml-${YAML_VERSION}.tgz https://pecl.php.net/get/yaml-${YAML_VERSION}.tgz
 fi
 mkdir -p ${__PROJECT__}/ext/yaml/
-tar --strip-components=1 -C ${__PROJECT__}/ext/yaml/ yaml-${YAML_VERSION}.tgz
+tar --strip-components=1 -C ${__PROJECT__}/ext/yaml/ -xf yaml-${YAML_VERSION}.tgz
 
 cd ${__PROJECT__}/pool/ext
 if [ ! -f imagick-${IMAGICK_VERSION}.tgz ]; then
   curl -fSLo imagick-${IMAGICK_VERSION}.tgz https://pecl.php.net/get/imagick-${IMAGICK_VERSION}.tgz
 fi
 mkdir -p ${__PROJECT__}/ext/imagick/
-tar --strip-components=1 -C ${__PROJECT__}/ext/imagick/ imagick-${IMAGICK_VERSION}.tgz
+tar --strip-components=1 -C ${__PROJECT__}/ext/imagick/ -xf imagick-${IMAGICK_VERSION}.tgz
 if [ "$X_PHP_VERSION" = "8.4" ]; then
   sed -i.backup "s/php_strtolower(/zend_str_tolower(/" ${__PROJECT__}/ext/imagick/imagick.c
 fi
