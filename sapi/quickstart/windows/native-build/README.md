@@ -75,13 +75,6 @@ cmd /k "d:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Bui
 :: phpsdk_buildtree phpdev
 
 
-.\var\windows-build-deps\php-sdk-binary-tools\phpsdk-vs17-x64.bat
-
-.\sapi\quickstart\windows\native-build\config.bat
-.\sapi\quickstart\windows\native-build\build.bat
-.\sapi\quickstart\windows\native-build\clean.bat
-.\sapi\quickstart\windows\native-build\show-var.bat
-
 
 cd .\var\windows-build-deps\php-src\
 buildconf.bat -f
@@ -126,12 +119,9 @@ start C:\msys64\home\Administrator\swoole-cli
 start C:\msys64\home\Administrator\swoole-cli\php-src\
 start C:\msys64\home\Administrator\swoole-cli\php-src\x64\Release
 
-sapi\quickstart\windows\native-build\install-visualstudio-2022.bat
-
 # vs2022
 "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
 
-sapi\quickstart\windows\native-build\native-build-php-sdk-vs2022.bat
 
 ```
 
