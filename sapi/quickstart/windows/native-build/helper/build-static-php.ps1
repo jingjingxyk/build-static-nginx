@@ -8,6 +8,13 @@ Write-Host  $__DIR__
 Write-Host  $__PROJECT__
 Write-Host (Get-Location).Path
 
+# 获得环境变量
+Get-ChildItem env:
+
+# 临时设置环境
+$env:http_proxy = "http://127.0.0.1:8016"
+$env:https_proxy = "http://127.0.0.1:8016"
+
 <#
 
 var\windows-build-deps\php-sdk-binary-tools\phpsdk-vs17-x64.bat
