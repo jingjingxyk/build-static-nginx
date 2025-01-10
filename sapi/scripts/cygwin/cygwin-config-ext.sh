@@ -45,7 +45,6 @@ EXT_TEMP_CACHE_DIR=${WORK_DIR}/pool/ext/
 mkdir -p ${WORK_DIR}
 mkdir -p ${EXT_TEMP_CACHE_DIR}
 
-
 test -d ext && rm -rf ext
 mkdir -p ext
 
@@ -96,5 +95,13 @@ fi
 test -d ${WORK_DIR}/php-src && rm -rf ${WORK_DIR}/php-src
 mkdir -p ${WORK_DIR}/php-src
 tar --strip-components=1 -C ${WORK_DIR}/php-src -xf php-${PHP_VERSION}.tar.gz
+
+cd ${__PROJECT__}
+
+cp -rf ${WORK_DIR}/ext/* ${WORK_DIR}/php-src/ext/
+
+if [ "$X_PHP_VERSION" = "8.4" ] || [ "$X_PHP_VERSION" = "8.3" ] || [ "$X_PHP_VERSION" = "8.2" ] || [ "$X_PHP_VERSION" = "8.1" ]; then
+  sed -i.backup 's/!defined(__HAIKU__)/!defined(__HAIKU__) \&\& !defined(__CYGWIN__)/' TSRM/TSRM.c
+fi
 
 cd ${__PROJECT__}

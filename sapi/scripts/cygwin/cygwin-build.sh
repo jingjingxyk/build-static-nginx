@@ -10,6 +10,8 @@ __PROJECT__=$(
   pwd
 )
 cd ${__PROJECT__}
+mkdir -p bin
+
 WORK_DIR=${__PROJECT__}/var/cygwin-build/
 cd ${WORK_DIR}/php-src/
 
@@ -33,9 +35,9 @@ else
 fi
 set -u
 
-${__PROJECT__}/var/cygwin-build/php-src/sapi/cli/php.exe -v
+${WORK_DIR}/php-src/sapi/cli/php.exe -v
 
-cp -f ${__PROJECT__}/var/cygwin-build/php-src/sapi/cli/php.exe ${__PROJECT__}/bin/
+cp -f ${WORK_DIR}/php-src/sapi/cli/php.exe ${__PROJECT__}/bin/
 
 ${__PROJECT__}/bin/php.exe -v
 ${__PROJECT__}/bin/php.exe -m
