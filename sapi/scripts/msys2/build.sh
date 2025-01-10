@@ -11,7 +11,7 @@ __PROJECT__=$(
 )
 cd ${__PROJECT__}
 WORK_DIR=${__PROJECT__}/var/msys2-build/
-cd ${WORK_DIR}
+cd ${WORK_DIR}/php-src/
 
 mkdir -p bin/.libs
 # export LDFLAGS="-all-static"
