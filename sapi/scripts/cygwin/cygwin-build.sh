@@ -19,9 +19,6 @@ mkdir -p bin/.libs
 # export LDFLAGS="-all-static"
 
 LOGICAL_PROCESSORS=$(nproc)
-if test $LOGICAL_PROCESSORS -ge 4; then
-  LOGICAL_PROCESSORS=$((LOGICAL_PROCESSORS - 2))
-fi
 set +u
 if [ -n "${GITHUB_ACTION}" ]; then
   if test $LOGICAL_PROCESSORS -ge 4; then
@@ -30,8 +27,7 @@ if [ -n "${GITHUB_ACTION}" ]; then
   make cli
   # make -j $LOGICAL_PROCESSORS
 else
-  # make -j $LOGICAL_PROCESSORS cli
-  make cli
+  make -j $LOGICAL_PROCESSORS cli
 fi
 set -u
 
