@@ -28,7 +28,8 @@ if [ -n "${GITHUB_ACTION}" ]; then
   make cli
   # make -j $LOGICAL_PROCESSORS
 else
-  make -j $LOGICAL_PROCESSORS cli
+  # make -j $LOGICAL_PROCESSORS cli
+  make cli
 fi
 set -u
 
