@@ -36,6 +36,7 @@ cp -rL /etc/pki/ /tmp/${NAME}/etc/
 
 cd /tmp/${NAME}/
 
+test -f ${__PROJECT__}/${NAME}.zip && rm -f ${__PROJECT__}/${NAME}.zip
 zip -r ${__PROJECT__}/${NAME}.zip .
 
 cd ${__PROJECT__}
