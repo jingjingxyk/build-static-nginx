@@ -33,7 +33,7 @@ dir
 --add Microsoft.Component.MSBuild ^
 --add Microsoft.VisualStudio.Workload.MSBuildTools ^
 --add Microsoft.VisualStudio.Workload.NativeDesktop ^
---path install="D:\vs" --path cache="D:\vs-cached" ^
+--path install="c:\vs" --path cache="c:\vs-cached" ^
 --passive  --force --norestart
 
 endlocal

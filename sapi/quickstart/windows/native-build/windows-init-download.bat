@@ -43,7 +43,7 @@ curl.exe -fSLo composer.phar "https://getcomposer.org/download/latest-stable/com
 curl.exe -fSLo cacert.pem "https://curl.se/ca/cacert.pem"
 
 git clone -b master --depth=1 https://github.com/php/php-sdk-binary-tools.git
-git clone -b php-8.4.1 --depth=1 https://github.com/php/php-src.git
+git clone -b php-8.4.2 --depth=1 https://github.com/php/php-src.git
 
 
 :: with mirror
