@@ -25,3 +25,7 @@ git config core.ignorecase false # 设置 Git 在 Windows 上也区分大小写
 mklink composer composer.phar
 
 ```
+
+```shell
+netsh wlan show drivers
+```
