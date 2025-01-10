@@ -22,12 +22,13 @@ dir
 
 msiexec /i strawberry-perl-5.38.2.2-64bit.msi  /passive
 
-.\vc_redist.x64.exe /install /passive /norestart
+:: .\vc_redist.x64.exe /install /passive /norestart
 
 .\7z2409-x64.exe /S
 
 
 set "PATH=%ProgramFiles%\7-Zip;%PATH%;"
+set "PATH=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\msys2\bin;%PATH%;"
 echo "%PATH%"
 echo %ProgramFiles%\7-Zip
 
@@ -108,27 +109,7 @@ echo apc.enable_cli=1
 
 ) > %__PROJECT__%\bin\runtime\php.ini
 
-
-
-echo %comspec%
-echo %ProgramFiles%
-set "PATH=%ProgramFiles%\Git\bin;%__PROJECT__%\bin\runtime\;%__PROJECT__%\bin\runtime\nasm\;%__PROJECT__%\bin\runtime\php;%__PROJECT__%\bin\runtime\libarchive\bin;%PATH%"
-echo "%PATH%"
-
-:: git config --global core.autocrlf false
-:: git config --global core.eol lf
-:: git config --global core.ignorecase false
-
-perl -v
-nasm -v
-git version
-curl -V
-dir %__PROJECT__%\bin\runtime\php\ext\
-php -c %__PROJECT__%\bin\runtime\php.ini -v
-php -c %__PROJECT__%\bin\runtime\php.ini -m
-php -c %__PROJECT__%\bin\runtime\php.ini --ri curl
-
-
+call %__PROJECT__%\sapi\quickstart\windows\native-build\windows-init-show-install-result.bat
 
 
 endlocal

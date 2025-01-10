@@ -20,6 +20,10 @@
 
 c:\msys64\msys2.exe
 
+# 进入项目目录
+cd /c/Users/Administrator/swoole-cli
+cd /c/Users/${USERNAME}/swoole-cli
+
 ```
 
 ## 进入 环境
@@ -41,3 +45,4 @@ c:\msys64\ucrt64.exe
     https://www.msys2.org/docs/environments/
     # MSYS2 包搜索
     https://packages.msys2.org/queue
+

@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=$(
-  cd ${__DIR__}/../../
+  cd ${__DIR__}/../../../
   pwd
 )
 cd ${__PROJECT__}
@@ -40,7 +40,7 @@ mkdir -p pool/ext
 mkdir -p pool/lib
 mkdir -p pool/php-tar
 
-WORK_DIR=${__PROJECT__}/var/cygwin-build/
+WORK_DIR=${__PROJECT__}/var/msys2-build/
 EXT_TEMP_CACHE_DIR=${WORK_DIR}/pool/ext/
 mkdir -p ${WORK_DIR}
 mkdir -p ${EXT_TEMP_CACHE_DIR}

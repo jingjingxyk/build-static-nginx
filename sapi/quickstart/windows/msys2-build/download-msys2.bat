@@ -14,9 +14,10 @@ cd /d %__PROJECT__%\
 echo %cd%
 
 
-md %__PROJECT__%\var\windows-msys2-build-deps\
 
-cd /d %__PROJECT__%\var\windows-msys2-build-deps\
+md %__PROJECT__%\var\msys2-build\
+
+cd /d %__PROJECT__%\var\msys2-build\
 
 
 set "SITE=https://mirror.msys2.org"

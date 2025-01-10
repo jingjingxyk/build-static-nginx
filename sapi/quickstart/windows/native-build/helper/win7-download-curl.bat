@@ -5,7 +5,7 @@ setlocal enableextensions enabledelayedexpansion
 
 echo %~dp0
 cd /d %~dp0
-cd /d ..\..\..\..\
+cd /d ..\..\..\..\..\
 
 set "__PROJECT__=%cd%"
 echo %cd%
@@ -44,11 +44,9 @@ curl.exe -V
 
 rem C:\Windows\System32\curl.exe
 
-
 rem 32 bit
 rem https://curl.se/windows/dl-8.11.1_2/curl-8.11.1_2-win32-mingw.zip
 rem https://www.7-zip.org/a/7z2409.exe
-
 
 
 endlocal

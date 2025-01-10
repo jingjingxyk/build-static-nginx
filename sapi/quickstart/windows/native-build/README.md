@@ -19,6 +19,34 @@ git config --global core.ignorecase false
 
 ```
 
+```bash
+
+.\sapi\quickstart\windows\native-build\windows-init-download.bat
+.\sapi\quickstart\windows\native-build\windows-init-install.bat
+.\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
+
+.\sapi\quickstart\windows\native-build\php-sdk.bat
+
+
+.\sapi\quickstart\windows\native-build\run.bat
+
+.\sapi\quickstart\windows\native-build\config.bat
+.\sapi\quickstart\windows\native-build\x_custom_config.bat
+.\sapi\quickstart\windows\native-build\build.bat
+
+```
+
+```powershell
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init-download.bat
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init-install.bat
+ cmd /c .\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
+
+ cmd /c .\sapi\quickstart\windows\native-build\php-sdk.bat
+ cmd /c .\sapi\quickstart\windows\native-build\config.bat
+ cmd /c .\\sapi\quickstart\windows\native-build\x_custom_config.bat
+ cmd /c .\sapi\quickstart\windows\native-build\build.bat
+
+```
 
 ```bat
 
@@ -47,13 +75,6 @@ cmd /k "d:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Bui
 :: phpsdk_deps -u
 :: phpsdk_buildtree phpdev
 
-
-.\var\windows-build-deps\php-sdk-binary-tools\phpsdk-vs17-x64.bat
-
-.\sapi\quickstart\windows\native-build\config.bat
-.\sapi\quickstart\windows\native-build\build.bat
-.\sapi\quickstart\windows\native-build\clean.bat
-.\sapi\quickstart\windows\native-build\show-var.bat
 
 
 cd .\var\windows-build-deps\php-src\
@@ -99,12 +120,9 @@ start C:\msys64\home\Administrator\swoole-cli
 start C:\msys64\home\Administrator\swoole-cli\php-src\
 start C:\msys64\home\Administrator\swoole-cli\php-src\x64\Release
 
-sapi\quickstart\windows\native-build\install-visualstudio-2022.bat
-
 # vs2022
 "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
 
-sapi\quickstart\windows\native-build\native-build-php-sdk-vs2022.bat
 
 ```
 
@@ -158,7 +176,7 @@ VisualStudioSetup.exe
 --add Microsoft.VisualStudio.Component.Windows11SDK.22000
 --add Microsoft.VisualStudio.Component.Windows10SDK.20348
 --add Microsoft.VisualStudio.Component.Windows10SDK
---path install="C:\VS" --path cache="C:\VS\cache" --path shared="C:\VS\shared"
+--path install="C:\VS" --path cache="C:\VS-cache" --path shared="C:\VS-shared"
 --quiet --force --norestart
 --channelId VisualStudio.16.Release ^
 

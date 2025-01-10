@@ -18,7 +18,9 @@ OPTIONS+=' --enable-zstd '
 OPTIONS+=' --enable-zts '
 OPTIONS+=' --disable-opcache-jit '
 
-WORK_DIR=${__PROJECT__}/var/cygwin-build/
+WORK_DIR=${__PROJECT__}/var/msys2-build/
+mkdir -p ${WORK_DIR}
+mkdir -p ${__PROJECT__}/bin/
 cd ${WORK_DIR}/php-src/
 
 # export CPPFLAGS="-I/usr/include"
@@ -41,7 +43,6 @@ test -f Makefile && make clean
   --enable-filter \
   --enable-session \
   --enable-tokenizer \
-  --enable-mbstring \
   --enable-ctype \
   --with-zlib \
   --enable-posix \
@@ -58,20 +59,21 @@ test -f Makefile && make clean
   --with-xsl \
   --with-gmp \
   --enable-exif \
-  --with-sodium \
   --enable-xml --enable-simplexml --enable-xmlreader --enable-xmlwriter --enable-dom --with-libxml \
-  --enable-gd --with-jpeg --with-freetype \
   --enable-swoole --enable-sockets --enable-mysqlnd --enable-swoole-curl --enable-cares \
-  --enable-swoole-pgsql \
   --enable-swoole-sqlite \
   --enable-redis \
   --enable-opcache \
   --disable-opcache-jit \
-  --with-imagick \
   --with-yaml \
   --with-readline \
   ${OPTIONS}
 
+#  --with-sodium \
+#  --enable-swoole-pgsql \
+#  --enable-mbstring \ 需要 oniguruma
+#  --with-imagick \
+#  --enable-gd --with-jpeg --with-freetype \
 #  --with-pdo-pgsql \
 #  --with-pgsql
 #  --with-pdo-sqlite \
