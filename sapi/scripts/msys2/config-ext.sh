@@ -40,6 +40,7 @@ mkdir -p pool/lib
 mkdir -p pool/php-tar
 BUILD_DIR=${__PROJECT__}/var/msys2-build/
 mkdir -p ${BUILD_DIR}
+mkdir -p ${BUILD_DIR}/ext/
 
 test -d ext && rm -rf ext
 mkdir -p ext
