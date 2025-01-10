@@ -61,4 +61,4 @@ cd /d %UE5_SWARM%
 
 7z a "%__PROJECT__%\ue5-swarm.7z" *
 
-endlocl
+endlocal

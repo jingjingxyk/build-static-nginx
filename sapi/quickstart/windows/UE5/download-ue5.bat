@@ -12,4 +12,4 @@ echo %cd%
 curl.exe -fSLo EpicGamesLauncherInstaller.msi https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi?productName=unrealEngine
 
 
-endlocl
+endlocal
