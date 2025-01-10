@@ -84,7 +84,6 @@ test -f Makefile && make clean
   --with-xsl \
   --with-gmp \
   --enable-exif \
-  --with-sodium \
   --enable-xml --enable-simplexml --enable-xmlreader --enable-xmlwriter --enable-dom --with-libxml \
   --enable-swoole --enable-sockets --enable-mysqlnd --enable-swoole-curl --enable-cares \
   --enable-swoole-sqlite \
@@ -95,10 +94,11 @@ test -f Makefile && make clean
   --with-readline \
   ${OPTIONS}
 
-#   --enable-swoole-pgsql \
-#   --enable-mbstring \ 需要 oniguruma
-#   --with-imagick \
-#   --enable-gd --with-jpeg --with-freetype \
+#  --with-sodium \
+#  --enable-swoole-pgsql \
+#  --enable-mbstring \ 需要 oniguruma
+#  --with-imagick \
+#  --enable-gd --with-jpeg --with-freetype \
 #  --with-pdo-pgsql \
 #  --with-pgsql
 #  --with-pdo-sqlite \
