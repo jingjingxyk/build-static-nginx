@@ -10,15 +10,15 @@ __PROJECT__=$(
   pwd
 )
 cd ${__PROJECT__}
-cd ${__PROJECT__}/php-src
+cd ${__PROJECT__}/var/cygwin-build/php-src
 
 mkdir -p bin/.libs
 # export LDFLAGS="-all-static"
 
 LOGICAL_PROCESSORS=$(nproc)
-  if test $LOGICAL_PROCESSORS -ge 4; then
-    LOGICAL_PROCESSORS=$((LOGICAL_PROCESSORS - 2))
-  fi
+if test $LOGICAL_PROCESSORS -ge 4; then
+  LOGICAL_PROCESSORS=$((LOGICAL_PROCESSORS - 2))
+fi
 set +u
 if [ -n "${GITHUB_ACTION}" ]; then
   if test $LOGICAL_PROCESSORS -ge 4; then
@@ -31,9 +31,9 @@ else
 fi
 set -u
 
-${__PROJECT__}/php-src/sapi/cli/php.exe -v
+${__PROJECT__}/var/cygwin-build/php-src/sapi/cli/php.exe -v
 
-cp -f ${__PROJECT__}/php-src/sapi/cli/php.exe ${__PROJECT__}/bin/
+cp -f ${__PROJECT__}/var/cygwin-build/php-src/sapi/cli/php.exe ${__PROJECT__}/bin/
 
 ${__PROJECT__}/bin/php.exe -v
 ${__PROJECT__}/bin/php.exe -m
