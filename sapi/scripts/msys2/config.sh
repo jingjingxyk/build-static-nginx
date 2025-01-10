@@ -68,7 +68,6 @@ test -f Makefile && make clean
   --enable-filter \
   --enable-session \
   --enable-tokenizer \
-  --enable-mbstring \
   --enable-ctype \
   --with-zlib \
   --enable-posix \
@@ -97,6 +96,7 @@ test -f Makefile && make clean
   --with-readline \
   ${OPTIONS}
 
+#   --enable-mbstring \ 需要 oniguruma
 #   --with-imagick \
 #   --enable-gd --with-jpeg --with-freetype \
 #  --with-pdo-pgsql \
