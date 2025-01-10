@@ -15,7 +15,7 @@ cd ${__PROJECT__}/
 ldd ${__PROJECT__}/bin/php.exe
 
 cd ${__PROJECT__}
-APP_VERSION=$(${__PROJECT__}/bin/php.exe | head -n 1 | awk '{ print $2 }')
+APP_VERSION=$(${__PROJECT__}/bin/php.exe -v | head -n 1 | awk '{ print $2 }')
 NAME="php-v${APP_VERSION}-msys-x64"
 
 test -d /tmp/${NAME} && rm -rf /tmp/${NAME}
