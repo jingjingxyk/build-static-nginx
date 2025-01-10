@@ -28,4 +28,11 @@ mklink composer composer.phar
 
 ```shell
 netsh wlan show drivers
+netsh wlan show profiles
+#　查看密码等信息
+netsh wlan show profiles name="XXXXXX" key=clear
+
+
+ipconfig /all
+
 ```
