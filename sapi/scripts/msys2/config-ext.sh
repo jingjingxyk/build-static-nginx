@@ -55,14 +55,6 @@ if [ ! -d $ROOT/ext/redis ]; then
   mv redis-${REDIS_VERSION} $ROOT/ext/redis
 fi
 
-# mongodb no support cygwin
-if [ ! -d $ROOT/ext/mongodb ]; then
-  if [ ! -f mongodb-${MONGODB_VERSION}.tgz ]; then
-    curl -fSLo mongodb-${MONGODB_VERSION}.tgz https://pecl.php.net/get/mongodb-${MONGODB_VERSION}.tgz
-  fi
-  tar xvf mongodb-${MONGODB_VERSION}.tgz
-  mv mongodb-${MONGODB_VERSION} $ROOT/ext/mongodb
-fi
 
 if [ ! -d $ROOT/ext/yaml ]; then
   if [ ! -f yaml-${YAML_VERSION}.tgz ]; then
