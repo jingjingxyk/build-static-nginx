@@ -10,7 +10,8 @@ __PROJECT__=$(
   pwd
 )
 cd ${__PROJECT__}
-cd ${__PROJECT__}/var/cygwin-build/php-src
+WORK_DIR=${__PROJECT__}/var/cygwin-build/
+cd ${WORK_DIR}
 
 mkdir -p bin/.libs
 # export LDFLAGS="-all-static"

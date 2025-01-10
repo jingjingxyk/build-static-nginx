@@ -35,13 +35,15 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
+WORK_DIR=${__PROJECT__}/var/msys2-build/
+mkdir -p ${WORK_DIR}
 mkdir -p ${__PROJECT__}/bin/
-mkdir -p ${__PROJECT__}/var/msys2-build/php-src/ext/
-# cp -f ${__PROJECT__}/php-src/ext/openssl/config0.m4  ${__PROJECT__}/php-src/ext/openssl/config.m4
 
-cp -rf ${__PROJECT__}/ext/* ${__PROJECT__}/var/msys2-build/php-src/ext/
+# cp -f ${WORK_DIR}/php-src/ext/openssl/config0.m4  ${WORK_DIR}/php-src/ext/openssl/config.m4
 
-cd ${__PROJECT__}/var/msys2-build/php-src/
+cp -rf ${WORK_DIR}/ext/* ${WORK_DIR}/php-src/ext/
+
+cd ${WORK_DIR}/php-src/
 if [ "$X_PHP_VERSION" = "8.4" ] || [ "$X_PHP_VERSION" = "8.3" ] || [ "$X_PHP_VERSION" = "8.2" ] || [ "$X_PHP_VERSION" = "8.1" ]; then
   sed -i.backup 's/!defined(__HAIKU__)/!defined(__HAIKU__) \&\& !defined(__CYGWIN__)/' TSRM/TSRM.c
 fi
