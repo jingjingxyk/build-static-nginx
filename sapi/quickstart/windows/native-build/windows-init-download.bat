@@ -13,7 +13,6 @@ md %__PROJECT__%\var\windows-build-deps\
 cd /d %__PROJECT__%\var\windows-build-deps\
 
 
-:: if not exist "Git-2.47.1-64-bit.exe" curl.exe -fSLo Git-2.47.1-64-bit.exe https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-64-bit.exe
 if not exist "strawberry-perl-5.38.2.2-64bit.msi" curl.exe -fSLo strawberry-perl-5.38.2.2-64bit.msi https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases/download/SP_53822_64bit/strawberry-perl-5.38.2.2-64bit.msi
 if not exist "nasm-2.16.03-win64.zip" curl.exe -fSLo nasm-2.16.03-win64.zip https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip
 if not exist "7z2409-x64.exe" curl.exe -fSLo 7z2409-x64.exe https://www.7-zip.org/a/7z2409-x64.exe
