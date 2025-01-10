@@ -79,11 +79,12 @@ if [ ! -f swoole-${SWOOLE_VERSION}.tgz ]; then
   tar -czvf ${BUILD_DIR}/swoole-${SWOOLE_VERSION}.tgz .
   mv ${BUILD_DIR}/swoole-${SWOOLE_VERSION}.tgz ${__PROJECT__}/pool/ext
 fi
+cd ${__PROJECT__}/pool/ext
 mkdir -p ${__PROJECT__}/ext/swoole/
 tar --strip-components=1 -C ${__PROJECT__}/ext/swoole/ -xf swoole-${SWOOLE_VERSION}.tgz
 
-cd ${__PROJECT__}/pool/php-tar
 # download php-src source code
+cd ${__PROJECT__}/pool/php-tar
 if [ ! -f php-${PHP_VERSION}.tar.gz ]; then
   curl -fSLo php-${PHP_VERSION}.tar.gz https://github.com/php/php-src/archive/refs/tags/php-${PHP_VERSION}.tar.gz
 fi
