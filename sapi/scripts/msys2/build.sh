@@ -10,6 +10,7 @@ __PROJECT__=$(
   pwd
 )
 cd ${__PROJECT__}
+mkdir -p bin
 WORK_DIR=${__PROJECT__}/var/msys2-build/
 cd ${WORK_DIR}/php-src/
 
