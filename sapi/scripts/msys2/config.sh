@@ -93,11 +93,11 @@ test -f Makefile && make clean
   --enable-redis \
   --enable-opcache \
   --disable-opcache-jit \
-  --with-imagick \
   --with-yaml \
   --with-readline \
   ${OPTIONS}
 
+#   --with-imagick \
 #   --enable-gd --with-jpeg --with-freetype \
 #  --with-pdo-pgsql \
 #  --with-pgsql
