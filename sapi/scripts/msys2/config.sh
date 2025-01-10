@@ -87,7 +87,6 @@ test -f Makefile && make clean
   --with-sodium \
   --enable-xml --enable-simplexml --enable-xmlreader --enable-xmlwriter --enable-dom --with-libxml \
   --enable-swoole --enable-sockets --enable-mysqlnd --enable-swoole-curl --enable-cares \
-  --enable-swoole-pgsql \
   --enable-swoole-sqlite \
   --enable-redis \
   --enable-opcache \
@@ -96,6 +95,7 @@ test -f Makefile && make clean
   --with-readline \
   ${OPTIONS}
 
+#   --enable-swoole-pgsql \
 #   --enable-mbstring \ 需要 oniguruma
 #   --with-imagick \
 #   --enable-gd --with-jpeg --with-freetype \
