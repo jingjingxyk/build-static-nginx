@@ -16,13 +16,12 @@ sed -i 's|^deb http://security.debian.org|deb https://mirrors.ustc.edu.cn/debian
 
 echo "deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
 
-:<<EOF
+
 if [ -f /etc/apt/sources.list.d/ceph.list ]; then
   CEPH_CODENAME=`ceph -v | grep ceph | awk '{print $(NF-1)}'`
   source /etc/os-release
   echo "deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-$CEPH_CODENAME $VERSION_CODENAME no-subscription" > /etc/apt/sources.list.d/ceph.list
 fi
-EOF
 
 if [ ! -f /etc/apt/sources.list.d/ceph.list.save ]; then
   sed -i.bak 's|http://download.proxmox.com|https://mirrors.ustc.edu.cn/proxmox|g' /etc/apt/sources.list.d/ceph.list
@@ -30,7 +29,7 @@ if [ ! -f /etc/apt/sources.list.d/ceph.list.save ]; then
 fi
 
 
-if [ ! -f /etc/apt/sources.list.d/pve-enterprise.list ] ; then
+if [ -f /etc/apt/sources.list.d/pve-enterprise.list ] ; then
    mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.save
 fi
 
@@ -43,4 +42,4 @@ systemctl restart pvedaemon
 
 apt update
 
-pveceph install
+# pveceph install

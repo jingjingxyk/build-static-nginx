@@ -20,3 +20,18 @@ https://github.com/studnitskiy/phpvirtualbox.git
 
 proxmox vs virtualbox
 https://www.diskinternals.com/vmfs-recovery/proxmox-vs-virtualbox/
+
+
+
+
+## 开启嵌套虚拟化
+    从 VirtualBox 列表中获取的正确名称
+    VBoxManage list vms
+    # VBoxManage modifyvm "VM_NAME" --nested-hw-virt on
+    VBoxManage modifyvm ""pve"" --nested-hw-virt on
+
+
+## 检查CPU是否支持虚拟化。使用命令
+
+    cat /proc/cpuinfo | egrep 'vmx|svm'
+    lsmod | grep kvm
