@@ -19,6 +19,9 @@ https://github.com/studnitskiy/phpvirtualbox.git
 proxmox vs virtualbox
 https://www.diskinternals.com/vmfs-recovery/proxmox-vs-virtualbox/
 
+download virtualbox mirror
+https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
+
 ## 开启嵌套虚拟化
 
     从 VirtualBox 列表中获取的正确名称
@@ -34,3 +37,13 @@ https://www.diskinternals.com/vmfs-recovery/proxmox-vs-virtualbox/
 ## 查看仅主机网络
 
     VBoxManage list hostonlynets
+
+## alpine 初始化
+
+    setup-alpine
+
+    # install VBoxGuestAdditions
+    # https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/VBoxGuestAdditions_7.1.4.iso
+
+    mkdir -p /mnt/cdrom
+    mount /dev/cdrom /mnt/cdrom
