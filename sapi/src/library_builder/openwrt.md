@@ -10,6 +10,8 @@
 
 ## virtualbox img 文件转换为 vdi
 
+> https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm#convert_openwrtimg_to_vbox_drive
+
 ```shell
 
 # img 文件转换为 vdi
@@ -18,6 +20,12 @@ VBoxManage convertfromraw  --format VDI ~/Downloads/openwrt/openwrt-23.05.4-x86-
 
 # 修改磁盘大小
 VBoxManage modifyhd --resize 8096 ~/Downloads/openwrt/openwrt-23.05.4-x86-64-generic-ext4-combined.vdi
+
+```
+
+```shell
+
+qemu-img resize -f raw ./openwrt.img 5G
 
 ```
 
@@ -60,8 +68,32 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
     opkg install wireguard-tools
 
     # 磁盘扩容
-    opkg install fdisk
     opkg install cfdisk fdisk e2fsprogs
+    opkg install lsblk fdisk losetup blkid f2fs-tools tree
+    df -Th
+    lsblk -f
     fdisk -l
 
+    # 分区扩容 (e2fsprogs 包含resize2fs）
+    opkg update
+    opkg install cfdisk fdisk e2fsprogs resize2fs tune2fs
+    cfdisk
+    umount /
 
+    resize2fs /dev/sda2 2G
+    e2fsck -f /dev/sda2
+
+    tune2fs -O^resize_inode /dev/sda2
+    mount -o remount,rw /
+
+    # mount -o remount,ro /    # 命令将根文件系统重新挂载为只读模式。
+
+## openwrt 配置网络
+
+    vi /etc/config/network
+
+## macos 设置路由 ,virtualbox 仅主机网络
+
+    sudo route add -net 192.168.56.0/24 192.168.56.1
+    sudo route delete 192.168.56.0/24
+    netstat -rn

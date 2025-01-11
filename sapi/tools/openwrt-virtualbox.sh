@@ -37,16 +37,33 @@ mkdir -p ${__PROJECT__}/var/openwrt/
 cd ${__PROJECT__}/var/openwrt/
 
 # 参考
-# https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm#troubleshooting
+# https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm#convert_openwrtimg_to_vbox_drive
 
-test -f openwrt-23.05.5-x86-64-generic-ext4-combined.img.gz || curl -fSLo openwrt-23.05.5-x86-64-generic-ext4-combined.img.gz https://archive.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-generic-ext4-combined.img.gz
 
-test -f openwrt-23.05.5-x86-64-generic-ext4-combined.img || gunzip openwrt-*.img.gz
+APP_NAME=openwrt-23.05.5-x86-generic-generic-ext4-combined.img.gz
+APP="${APP_NAME}.gz"
+APP_URL="https://downloads.openwrt.org/releases/23.05.5/targets/x86/generic/openwrt-23.05.5-x86-generic-generic-ext4-combined.img.gz"
+# mirror
+# https://mirrors.ustc.edu.cn/openwrt/
+APP_URL_MIRROR=$(echo $APP_URL | sed  's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g')
+
+# test -f ${APP} || curl -fSLo ${APP} ${APP_URL}https://downloads.openwrt.org/releases/24.10.0-rc5/targets/x86/generic/openwrt-24.10.0-rc5-x86-generic-generic-ext4-combined.img.gz
+# test -f ${APP} || curl -fSLo ${APP} ${APP_UR}
+test -f ${APP} || curl -fSLo ${APP} ${APP_URL_MIRROR}
+
+test -f ${APP_NAME} && rm -f ${APP_NAME}
+{
+  gzip -k -d  ${APP}
+} || {
+  echo $?
+}
+
 test -f openwrt.img && rm -f openwrt.img
 dd if=openwrt-23.05.5-x86-64-generic-ext4-combined.img of=openwrt.img bs=128000 conv=sync
 
 test -f openwrt.vdi && rm -f openwrt.vdi
+
 VBoxManage convertfromraw --format VDI openwrt.img openwrt.vdi
+
+
 # VBoxManage modifymedium openwrt.vdi --resize 128
-
-
