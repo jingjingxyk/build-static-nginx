@@ -12,7 +12,7 @@
 
 ```
 
-## 自动下载 cygwin 和 cygwin 安装依赖库
+## 自动下载cygwin 和 cygwin安装依赖库
 
 ```shell
 
@@ -55,5 +55,6 @@ cd /cygdrive/c/users/${USER}/swoole-cli
 ### 搜索包
 
     https://cygwin.com/cgi-bin2/package-grep.cgi?grep=openssl
+
 
 

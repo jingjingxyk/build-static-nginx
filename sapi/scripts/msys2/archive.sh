@@ -30,7 +30,6 @@ ldd ${__PROJECT__}/bin/php.exe | grep -v '/c/Windows/' | awk '{print $3}' | xarg
 ls -lh /tmp/${NAME}/
 
 cp -f ${__PROJECT__}/bin/php.exe /tmp/${NAME}/bin/
-
 # cp -f ${__PROJECT__}/bin/LICENSE /tmp/${NAME}/
 # cp -f ${__PROJECT__}/bin/credits.html /tmp/${NAME}/
 

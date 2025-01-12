@@ -50,6 +50,7 @@ pacman -Sy
 pacman -S --noconfirm git curl wget openssl
 
 pacman -S --noconfirm zip unzip xz gcc cmake make
+
 pacman -S --noconfirm re2c
 
 pacman -S --noconfirm openssl-devel libreadline
@@ -63,7 +64,6 @@ pacman -S --noconfirm libbz2-devel liblz4-devel liblzma-devel libcares-devel
 pacman -S --noconfirm libyaml-devel libzstd-devel libreadline-devel
 pacman -S --noconfirm libssh2-devel libidn2-devel gettext-devel
 pacman -S --noconfirm libzstd-devel
-
 pacman -S --noconfirm icu-devel
 pacman -S --noconfirm libsqlite-devel libsqlite
 pacman -S --noconfirm gmp-devel
@@ -72,6 +72,7 @@ pacman -S --noconfirm pcre2
 pacman -S --noconfirm brotli-devel
 
 : <<EOF
+
 # 不存在的包
 pacman -S --noconfirm libpcre2-devel libssl-devel libgmp-devel
 pacman -S --noconfirm ImageMagick libpng-devel libjpeg-devel libfreetype-devel libwebp-devel libsqlite3-devel
