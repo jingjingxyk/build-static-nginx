@@ -22,7 +22,7 @@
 .\sapi\quickstart\windows\cygwin-build\install-cygwin.bat
 ```
 
-## 使用镜像 安装　cygwin 环境依赖包
+### 使用镜像 安装　cygwin 环境依赖包
 
 ```
 .\sapi\quickstart\windows\cygwin-build\install-cygwin.bat --mirror china
@@ -37,7 +37,7 @@ cmd /c .\sapi\quickstart\windows\cygwin-build\install-cygwin.bat --mirror china
 
 ```
 
-## 进入 cygwin 环境
+## 进入cygwin 环境
 
 ```
 C:\cygwin64\bin\mintty.exe -i /Cygwin-Terminal.ico -
@@ -48,10 +48,14 @@ cd /cygdrive/c/users/${USER}/swoole-cli
 
 ```
 
+> > > > > > > build-windows-php
+
 ### cygwin mirror
 
     https://cygwin.com/mirrors.html
 
-## 搜索包
+### 搜索包
 
     https://cygwin.com/cgi-bin2/package-grep.cgi?grep=openssl
+
+

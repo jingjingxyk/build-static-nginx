@@ -14,7 +14,6 @@ cd /d %__PROJECT__%\
 echo %cd%
 
 
-
 md %__PROJECT__%\var\msys2-build\
 
 cd /d %__PROJECT__%\var\msys2-build\
