@@ -40,8 +40,8 @@ cd ${__PROJECT__}/var/openwrt/
 # https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm#convert_openwrtimg_to_vbox_drive
 
 
-APP_NAME=openwrt-23.05.5-x86-generic-generic-ext4-combined.img.gz
-APP="${APP_NAME}.gz"
+APP=openwrt-23.05.5-x86-generic-generic-ext4-combined.img.gz
+APP_IMG=$(echo $APP | sed 's/.\{3\}$//')
 APP_URL="https://downloads.openwrt.org/releases/23.05.5/targets/x86/generic/openwrt-23.05.5-x86-generic-generic-ext4-combined.img.gz"
 # mirror
 # https://mirrors.ustc.edu.cn/openwrt/
@@ -51,7 +51,7 @@ APP_URL_MIRROR=$(echo $APP_URL | sed  's/downloads.openwrt.org/mirrors.ustc.edu.
 # test -f ${APP} || curl -fSLo ${APP} ${APP_UR}
 test -f ${APP} || curl -fSLo ${APP} ${APP_URL_MIRROR}
 
-test -f ${APP_NAME} && rm -f ${APP_NAME}
+test -f ${APP_IMG} && rm -f ${APP_IMG}
 {
   gzip -k -d  ${APP}
 } || {
@@ -59,7 +59,7 @@ test -f ${APP_NAME} && rm -f ${APP_NAME}
 }
 
 test -f openwrt.img && rm -f openwrt.img
-dd if=openwrt-23.05.5-x86-64-generic-ext4-combined.img of=openwrt.img bs=128000 conv=sync
+dd if=${APP_IMG} of=openwrt.img bs=128000 conv=sync
 
 test -f openwrt.vdi && rm -f openwrt.vdi
 
