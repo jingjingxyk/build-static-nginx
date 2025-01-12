@@ -39,7 +39,7 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     VBoxManage list hostonlynets
 
 ## alpine 初始化
-
+    https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/alpine_linux/alpine_install.html
     setup-alpine
 
     # install VBoxGuestAdditions
