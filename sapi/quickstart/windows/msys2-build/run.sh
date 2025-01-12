@@ -15,3 +15,4 @@ pwd
 bash sapi/scripts/msys2/config-ext.sh
 bash sapi/scripts/msys2/config.sh
 bash sapi/scripts/msys2/build.sh
+bash sapi/scripts/msys2/archive.sh
