@@ -48,8 +48,6 @@ cd /cygdrive/c/users/${USER}/swoole-cli
 
 ```
 
-> > > > > > > build-windows-php
-
 ### cygwin mirror
 
     https://cygwin.com/mirrors.html
