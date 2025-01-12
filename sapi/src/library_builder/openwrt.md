@@ -67,7 +67,8 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
     opkg remove luci-theme-openwrt
     opkg install wireguard-tools
 
-    # 磁盘扩容
+## openwrt 磁盘扩容
+
     opkg install cfdisk fdisk e2fsprogs
     opkg install lsblk fdisk losetup blkid f2fs-tools tree
     df -Th
