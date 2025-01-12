@@ -18,8 +18,27 @@ OPTIONS+=' --enable-zstd '
 OPTIONS+=' --enable-zts '
 OPTIONS+=' --disable-opcache-jit '
 
-WORK_DIR=${__PROJECT__}/var/cygwin-build/
-cd ${WORK_DIR}/php-src/
+X_PHP_VERSION=''
+while [ $# -gt 0 ]; do
+  case "$1" in
+  --php-version)
+    PHP_VERSION="$2"
+    X_PHP_VERSION=$(echo ${PHP_VERSION:0:3})
+    if [ "$X_PHP_VERSION" = "8.4" ]; then
+      OPTIONS+=''
+    fi
+    ;;
+  --*)
+    echo "Illegal option $1"
+    ;;
+  esac
+  shift $(($# > 0 ? 1 : 0))
+done
+
+mkdir -p ${__PROJECT__}/bin/
+
+WORK_TEMP_DIR=${__PROJECT__}/var/cygwin-build/
+cd ${WORK_TEMP_DIR}/php-src/
 
 # export CPPFLAGS="-I/usr/include"
 # export CFLAGS=""
