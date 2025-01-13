@@ -41,12 +41,12 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     lsmod | grep kvm
 
 ## 查看仅主机网络
+
     VBoxManage natnetwork list
     VBoxManage list hostonlynets
     VBoxManage list hostonlyifs （新版本，此功能已被弃用）
     VBoxManage list dhcpservers
     VBoxManage hostonlynets
-
 
 ## alpine 初始化
 
@@ -76,5 +76,14 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     设置网关
     route add -net 0.0.0.0 192.168.1.1
 
+## ip monitor
 
-
+    - all：监视所有对象的变化。
+    - route：监视路由表的变化。
+    - link：监视网络接口（如 eth0, wlan0 等）状态的变化。
+    - address：监视网络接口地址的变化。
+    - label：监视标签对象的变化。
+    - rule：监视路由规则的变化。
+    - netconf：监视网络配置的变化。
+    - mroute：监视多播路由表的变化。
+    - neigh：监视邻居表（ARP 表）的变化。
