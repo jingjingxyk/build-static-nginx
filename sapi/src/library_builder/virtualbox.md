@@ -41,9 +41,11 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     lsmod | grep kvm
 
 ## 查看仅主机网络
-
+    VBoxManage natnetwork list
     VBoxManage list hostonlynets
     VBoxManage list hostonlyifs （新版本，此功能已被弃用）
+    VBoxManage list dhcpservers
+    VBoxManage hostonlynets
 
 
 ## alpine 初始化
