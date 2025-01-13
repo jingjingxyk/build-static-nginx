@@ -43,6 +43,8 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 ## 查看仅主机网络
 
     VBoxManage list hostonlynets
+    VBoxManage list hostonlyifs （新版本，此功能已被弃用）
+
 
 ## alpine 初始化
 
