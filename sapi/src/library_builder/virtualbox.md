@@ -22,6 +22,12 @@ https://www.diskinternals.com/vmfs-recovery/proxmox-vs-virtualbox/
 download virtualbox mirror
 https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
+## virtualbox 源码
+
+    https://www.virtualbox.org/wiki/Source_code_organization
+
+    https://download.virtualbox.org/virtualbox/7.1.0_BETA2/
+
 ## 开启嵌套虚拟化
 
     从 VirtualBox 列表中获取的正确名称
@@ -39,6 +45,7 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     VBoxManage list hostonlynets
 
 ## alpine 初始化
+
     https://cloud-atlas.readthedocs.io/zh-cn/latest/linux/alpine_linux/alpine_install.html
     setup-alpine   （磁盘选择sys 写入磁盘)
     setup-bootable  (写入引导）
@@ -49,3 +56,21 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
     mkdir -p /mnt/cdrom
     mount /dev/cdrom /mnt/cdrom
+
+## macos
+
+    在macOS中，ifconfig命令已经被推荐使用的netstat和networksetup命令所取代
+
+    查看网络设备
+    networksetup -listallhardwareports
+    networksetup -listallnetworkservices
+    networksetup -getinfo Wi-Fi
+
+    常看路由表
+    netstat -nr
+
+    设置网关
+    route add -net 0.0.0.0 192.168.1.1
+
+
+
