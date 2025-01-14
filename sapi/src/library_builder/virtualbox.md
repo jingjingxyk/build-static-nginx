@@ -76,6 +76,12 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     设置网关
     route add -net 0.0.0.0 192.168.1.1
 
+## host-only-network 模式 (虚拟机和宿主机可以互相访问)
+
+    默认宿主机IP: 192.168.56.1
+    虚拟机IP: 192.168.56.x
+
+
 ## ip monitor
 
     - all：监视所有对象的变化。
