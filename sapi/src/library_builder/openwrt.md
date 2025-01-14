@@ -99,13 +99,14 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
     sudo route delete 192.168.56.0/24
     netstat -rn
 
-## openwrt 指定网络接口 允许远程访问
+## openwrt 能远程访问，需要开启防火墙配置
+
     INTERFACE=eth3
     PORT=22
     iptables -I INPUT -i $INTERFACE -p tcp --dport $PORT -j ACCEPT
     iptables -I INPUT -i eth3 -p tcp --dport 80 -j ACCEPT
 
-
 ## 路由器组网
+
     OSPF （常用路由器之间组网）
     ISIS (运营商使用）
