@@ -33,6 +33,8 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
     搜索关键字： web service 找到启动virtualbox web 接口
 
+
+
 ## 开启嵌套虚拟化
 
     从 VirtualBox 列表中获取的正确名称
@@ -98,3 +100,10 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     - netconf：监视网络配置的变化。
     - mroute：监视多播路由表的变化。
     - neigh：监视邻居表（ARP 表）的变化。
+
+## virtualbox 开启 web 接口
+    macos
+    sudo launchctl bootstrap system ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
+    sudo launchctl bootstrap user/<uid>/ ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
+    sudo launchctl bootstrap user/501/vboxwebsvc ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
+    sudo launchctl bootstrap system ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
