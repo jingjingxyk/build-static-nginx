@@ -31,6 +31,8 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
     https://download.virtualbox.org/virtualbox/7.1.0/UserManual.pdf
 
+    搜索关键字： web service 找到启动virtualbox web 接口
+
 ## 开启嵌套虚拟化
 
     从 VirtualBox 列表中获取的正确名称
