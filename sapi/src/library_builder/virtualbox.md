@@ -26,7 +26,10 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
     https://www.virtualbox.org/wiki/Source_code_organization
 
-    https://download.virtualbox.org/virtualbox/7.1.0_BETA2/
+    https://download.virtualbox.org/virtualbox/7.1.4/
+    https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
+
+    https://download.virtualbox.org/virtualbox/7.1.0/UserManual.pdf
 
 ## 开启嵌套虚拟化
 
