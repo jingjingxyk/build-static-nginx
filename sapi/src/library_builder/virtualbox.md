@@ -103,7 +103,7 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
 ## virtualbox 开启 web 接口
     macos
-    sudo launchctl bootstrap system ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
-    sudo launchctl bootstrap user/<uid>/ ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
-    sudo launchctl bootstrap user/501/vboxwebsvc ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
-    sudo launchctl bootstrap system ~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist
+    https://github.com/phpvirtualbox/phpvirtualbox/wiki
+    /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv --help
+    /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv -H 127.0.0.1 -p 18083
+    /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv -H 127.0.0.1 -b --logfile /dev/null >/dev/null
