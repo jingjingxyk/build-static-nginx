@@ -105,5 +105,8 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     macos
     https://github.com/phpvirtualbox/phpvirtualbox/wiki
     /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv --help
+
+    VBoxManage setproperty websrvauthlibrary null
+
     /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv -H 127.0.0.1 -p 18083
     /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv -H 127.0.0.1 -b --logfile /dev/null >/dev/null
