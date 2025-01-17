@@ -33,8 +33,6 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
 
     搜索关键字： web service 找到启动virtualbox web 接口
 
-
-
 ## 开启嵌套虚拟化
 
     从 VirtualBox 列表中获取的正确名称
@@ -61,6 +59,7 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     setup-alpine   （磁盘选择sys 写入磁盘)
     setup-bootable  (写入引导）
     setup-desktop   （配置桌面) ('gnome', 'plasma', 'xfce', 'mate', 'sway', 'lxqt')
+                                'cinnamon', 'kde', 'lxqt', 'mate'
 
     # install VBoxGuestAdditions
     # https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/VBoxGuestAdditions_7.1.4.iso
@@ -88,7 +87,6 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     默认宿主机IP: 192.168.56.1
     虚拟机IP: 192.168.56.x
 
-
 ## ip monitor
 
     - all：监视所有对象的变化。
@@ -102,11 +100,14 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     - neigh：监视邻居表（ARP 表）的变化。
 
 ## virtualbox 开启 web 接口
+
     macos
-    https://github.com/phpvirtualbox/phpvirtualbox/wiki
+    参考： https://github-com.proxy.ofote.com/phpvirtualbox/phpvirtualbox/wiki
+
     /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv --help
 
     VBoxManage setproperty websrvauthlibrary null
 
     /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv -H 127.0.0.1 -p 18083
     /Applications/VirtualBox.app/Contents/MacOS/vboxwebsrv -H 127.0.0.1 -b --logfile /dev/null >/dev/null
+
