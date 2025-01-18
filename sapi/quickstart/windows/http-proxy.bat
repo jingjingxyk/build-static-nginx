@@ -4,8 +4,9 @@ setlocal enableextensions
 rem show current file location
 echo %~dp0
 cd /d %~dp0
-cd /d ..\..\..\
-
+if exist "..\..\..\prepare.php" (
+   cd /d ..\..\..\
+)
 set "__PROJECT__=%cd%"
 
 md %__PROJECT__%\var\
