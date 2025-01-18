@@ -94,9 +94,9 @@ echo %PHP_INI%
 
 cd %__PROJECT__%
 
-
+set COMPOSER_IGNORE_PLATFORM_REQ=hhvm
 %__PROJECT__%\var\runtime\%APP_RUNTIME%\%APP_RUNTIME%\bin\swoole-cli.exe -c %PHP_INI% %UNIX_PROJECT%/var/runtime/composer.phar config -g repos.packagist composer https://mirrors.tencent.com/composer/
-%__PROJECT__%\var\runtime\%APP_RUNTIME%\%APP_RUNTIME%\bin\swoole-cli.exe -c %PHP_INI% %UNIX_PROJECT%/var/runtime/composer.phar install  -vvv --prefer-install=dist --download-only --ignore-platform-req=hhvm
+%__PROJECT__%\var\runtime\%APP_RUNTIME%\%APP_RUNTIME%\bin\swoole-cli.exe -c %PHP_INI% %UNIX_PROJECT%/var/runtime/composer.phar update  -vvv --prefer-install=dist  --ignore-platform-req=php
 
 :: %__PROJECT__%\var\runtime\%APP_RUNTIME%\%APP_RUNTIME%\bin\swoole-cli.exe -c %PHP_INI% %UNIX_PROJECT%/var/runtime/composer.phar config -g repos.packagist composer https://packagist.org
 

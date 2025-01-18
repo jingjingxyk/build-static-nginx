@@ -34,6 +34,18 @@ set "SNI=http-proxy.xiaoshuogeng.com"
 .\socat -d -d  TCP4-LISTEN:8016,reuseaddr,fork ssl:%DOMAIN%,snihost=%SNI%,commonname=%SNI%,openssl-min-proto-version=TLS1.3,openssl-max-proto-version=TLS1.3,verify=1,cafile=cacert.pem
 
 
+:: with http_proxy
+
+:: command set http_proxy
+rem set http_proxy=http://127.0.0.1:8016
+rem set https_proxy=http://127.0.0.1:8016
+
+:: powershell set http_proxy
+rem $Env:http_proxy="http://127.0.0.1:8016"
+rem $Env:https_proxy="http://127.0.0.1:8016"
+
+
+
 endlocal
 
 
