@@ -26,6 +26,8 @@ if (Test-Path -Path http-proxy.bat)
 $text < http-proxy.bat
 $newText = $text -replace "apple", "orange"
 
+# $newText | Out-File -FilePath "$__PROJECT__\http-proxy.bat" -Encoding UTF8
+$newText | Out-File -FilePath "$__PROJECT__\http-proxy.bat"
 
 Invoke-Expression "cmd /c $__PROJECT__\http-proxy.bat"
 
