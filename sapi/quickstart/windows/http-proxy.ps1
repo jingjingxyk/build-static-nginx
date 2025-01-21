@@ -20,8 +20,7 @@ $text = Get-Content -Path http-proxy.bat;
 $newText = $text -replace "apple", "orange"
 
 Write-Host $newText
-$newText | Out-File -FilePath "$__PROJECT__\http-proxy.bat" -Encoding UTF8
-# $newText | Out-File -FilePath "$__PROJECT__\http-proxy.bat"
+$newText | Out-File -FilePath "$__PROJECT__\http-proxy.bat" -Encoding ASCII
 
 Invoke-Expression -Command "cmd /c $__PROJECT__\http-proxy.bat"
 
