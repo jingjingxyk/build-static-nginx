@@ -10,7 +10,6 @@ __PROJECT__=$(
   pwd
 )
 cd ${__PROJECT__}
-ROOT=${__PROJECT__}
 
 # cp -f /cygdrive/c/setup-x86_64.exe  /cygdrive/c/cygwin/bin/setup-x86_64.exe
 # cp -f /cygdrive/c/setup.exe  /cygdrive/c/cygwin/bin/setup-x86_64.exe
