@@ -19,7 +19,7 @@ irm $url -outfile http-proxy.bat
 $text = Get-Content -Path http-proxy.bat;
 $newText = $text -replace "apple", "orange"
 
-Write-Host $newText
+# Write-Host $newText
 $newText | Out-File -FilePath "$__PROJECT__\http-proxy.bat" -Encoding ASCII
 
 Invoke-Expression -Command "cmd /c $__PROJECT__\http-proxy.bat"
