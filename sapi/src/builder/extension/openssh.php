@@ -23,6 +23,7 @@ return function (Preprocessor $p) {
 
         $cmd = <<<EOF
         cd {$builddir}/openssh/build/
+        test -d release/ && rm -rf release/
         mkdir -p release/
         cp -f sshd_config.out  release/
         cp -f ssh_config.out  release/
