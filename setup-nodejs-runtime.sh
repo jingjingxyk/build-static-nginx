@@ -164,6 +164,12 @@ npm config  set registry https://registry.npmmirror.com
 yarn config set registry https://registry.npmmirror.com
 
 
+# electron 反编译
+npm install asar  --registry=https://registry.npmmirror.com
+
+npx asar extract app.asar app.asar.unpacked
+
+ls -lha app.asar.unpacked
 
 EOF
 
