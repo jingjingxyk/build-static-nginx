@@ -21,3 +21,6 @@
     fdisk -l
     lsblk
     blkid
+
+基础设施平台
+https://github.com/harvester/harvester.git

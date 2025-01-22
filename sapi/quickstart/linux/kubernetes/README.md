@@ -131,3 +131,10 @@ https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/
 
 https://www.kubesphere.io/zh/docs/v4.1/03-installation-and-upgrade/01-preparations/01-supported-k8s/
 https://www.kubesphere.io/zh/docs/v4.1/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/
+
+
+```shell
+
+journalctl -u kubelet
+
+```
