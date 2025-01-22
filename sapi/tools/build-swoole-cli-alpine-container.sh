@@ -17,11 +17,10 @@ test -d var/build-swoole-cli-container/ && rm -rf var/build-swoole-cli-container
 mkdir -p var/build-swoole-cli-container/
 cd ${__PROJECT__}/var/build-swoole-cli-container/
 
-cp ${__PROJECT__}/setup-swoole-cli-runtime.sh .
+cp -f ${__PROJECT__}/setup-swoole-cli-runtime.sh .
 #bash setup-swoole-cli-runtime.sh --proxy socks5h://127.0.0.1:7890
-bash setup-swoole-cli-runtime.sh --proxy http://172.23.24.221:8010 --version v5.1.6.0
+bash setup-swoole-cli-runtime.sh --proxy http://172.23.24.221:8010 --version v6.0.0.0
 
-exit 0
 
 cat >php.ini <<'EOF'
 curl.cainfo="/usr/local/swoole-cli/etc/cacert.pem"
