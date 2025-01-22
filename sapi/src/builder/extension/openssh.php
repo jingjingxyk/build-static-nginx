@@ -19,14 +19,32 @@ return function (Preprocessor $p) {
 
         $workdir = $p->getWorkDir();
         $builddir = $p->getBuildDir();
+        $system_arch = $p->getSystemArch();
 
         $cmd = <<<EOF
-                mkdir -p {$workdir}/bin/
-                cd {$builddir}/openssh/
-                cp -f sshd {$workdir}/bin/
+        cd {$builddir}/openssh/build/
+        mkdir -p release/
+
+        ls -F | grep '*$' | awk -F '*' '{ print $1 }' | xargs -I {} cp {} release/
+        cp -rf release/ {$workdir}/bin/openssh/
+
+        cd {$workdir}/bin/openssh/
+        VERSION=$(./ssh -V 2>&1  | awk -F ',' '{ print $1 }' | sed 's/OpenSSH_//')
 
 EOF;
 
+        if ($p->getOsType() == 'macos') {
+            $cmd .= <<<EOF
+            otool -L {$workdir}/bin/openssh/sshd
+            tar -cJvf {$workdir}/openssh-\${VERSION}-macos-{$system_arch}.tar.xz .
+EOF;
+        } else {
+            $cmd .= <<<EOF
+              file {$workdir}/bin/openssh/sshd
+              readelf -h {$workdir}/bin/openssh/sshd
+              tar -cJvf {$workdir}/privoxy-\${VERSION}-linux-{$system_arch}.tar.xz .
+EOF;
+        }
         return $cmd;
     });
 };
