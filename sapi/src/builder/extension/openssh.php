@@ -26,10 +26,14 @@ return function (Preprocessor $p) {
         mkdir -p release/
         cp -f sshd_config.out  release/
         cp -f ssh_config.out  release/
+        cp -f opensshd.init  release/
+
         ls -F | grep '*$' | awk -F '*' '{ print $1 }' | xargs -I {} cp {} release/
         cp -rf release/ {$workdir}/bin/openssh/
 
         cd {$workdir}/bin/openssh/
+        rm -f config.status
+
         VERSION=$(./ssh -V 2>&1  | awk -F ',' '{ print $1 }' | sed 's/OpenSSH_//')
 
 EOF;
