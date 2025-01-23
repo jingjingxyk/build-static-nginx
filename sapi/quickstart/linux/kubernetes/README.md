@@ -125,16 +125,60 @@ kubectl delete pod <pod-name>
 
 ```
 
-
 ## Kubernetes 使用的端口和协议
-https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/
 
-https://www.kubesphere.io/zh/docs/v4.1/03-installation-and-upgrade/01-preparations/01-supported-k8s/
-https://www.kubesphere.io/zh/docs/v4.1/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/
+    https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/
 
+    https://www.kubesphere.io/zh/docs/v4.1/03-installation-and-upgrade/01-preparations/01-supported-k8s/
+    https://www.kubesphere.io/zh/docs/v4.1/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/
+
+## crictl
+
+    https://kubernetes.io/docs/tasks/debug/debug-cluster/crictl/
 
 ```shell
+kubectl cluster-info
+kubectl top nodes
+kubectl get nodes
+kubectl get componentstatuses
 
 journalctl -u kubelet
+
+systemctl status  kubelet
+systemctl status  containerd
+
+crictl pods | grep NotReady
+
+
+kubectl get pods -n yaokun | awk '{ print $1}' | tail -n +2 | xargs -I{} kubectl delete pod {} -n yaokun
+
+
+systemctl restart kubelet
+
+df -h
+free -h
+top
+
+kubectl get all
+kubectl get namespace
+kubectl get replicaset
+
+kubectl -n kube-system  rollout restart deploy
+
+deploys=`kubectl get deployments -n kube-public | tail -n1 | cut -d ' ' -f 1`
+for deploy in $deploys; do
+  kubectl rollout restart deployments/$deploy -n kube-public
+done
+
+for ns in $(kubectl get namespaces -o name | grep -v kube- | cut -c 11-); do
+  kubectl delete pods --all -n $ns;
+done
+
+# reset
+kubectl delete pods --all --all-namespaces
+kubectl delete pods --all -A
+kubectl delete deployments --all -A
+kubectl delete replicaset --all -A
+
 
 ```
