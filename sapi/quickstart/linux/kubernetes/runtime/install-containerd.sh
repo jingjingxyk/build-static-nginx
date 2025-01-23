@@ -51,7 +51,7 @@ cd ${__PROJECT__}/var/kubernetes/containerd
 # containerd
 # https://github.com/containerd/containerd/tags
 
-VERSION="2.0.1"
+VERSION="2.0.2"
 
 CONTAINERD_RELEASE_URL=https://github.com/containerd/containerd/releases/download/v${VERSION}/containerd-${VERSION}-linux-amd64.tar.gz
 CONTAINERD_RELEASE=containerd-${VERSION}-linux-amd64.tar.gz

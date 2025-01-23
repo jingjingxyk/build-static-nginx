@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='1.27.0'
+APP_VERSION='1.27.3'
 APP_NAME='nginx'
-VERSION='v1.0.2'
+VERSION='v1.1.2'
 
 mkdir -p bin/runtime
 mkdir -p var/runtime

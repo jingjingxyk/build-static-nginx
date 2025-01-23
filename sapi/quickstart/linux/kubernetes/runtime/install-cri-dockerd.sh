@@ -48,7 +48,7 @@ cd cri-dockerd
 # cri-dockerd
 # https://github.com/Mirantis/cri-dockerd/tags
 
-VERSION="0.3.15"
+VERSION="0.3.16"
 curl -L -O https://github.com/Mirantis/cri-dockerd/releases/download/v${VERSION}/cri-dockerd-${VERSION}.amd64.tgz
 
 tar --strip-components=1 -C . -xf cri-dockerd-${VERSION}.amd64.tgz
@@ -69,7 +69,7 @@ systemctl status cri-docker.service | cat
 # check latest version in /releases page
 # https://github.com/kubernetes-sigs/cri-tools/tags
 
-VERSION="1.30.0"
+VERSION="1.32.0"
 curl -L -O https://github.com/kubernetes-sigs/cri-tools/releases/download/v${VERSION}/crictl-v${VERSION}-linux-amd64.tar.gz
 tar zxvf crictl-v${VERSION}-linux-amd64.tar.gz -C /usr/local/bin
 rm -f crictl-v${VERSION}-linux-amd64.tar.gz
