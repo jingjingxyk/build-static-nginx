@@ -19,3 +19,4 @@ services:
 
 # client library
 # https://www.rabbitmq.com/client-libraries/devtools
+# https://hub.docker.com/_/rabbitmq
