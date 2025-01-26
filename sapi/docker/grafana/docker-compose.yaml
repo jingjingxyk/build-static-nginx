@@ -12,5 +12,7 @@ services:
       - ./grafana-data:/var/lib/grafana
 
   # 内置运行用户id： 472
+  # 账号 admin
+  # 密码 root
 
 
