@@ -3,7 +3,7 @@ name: push to gitee
 on:
   push:
 jobs:
-  sync-to-gitee:
+  push-to-gitee:
     if: ${{ (github.repository_owner == 'jingjingxyk') }}
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +19,7 @@ jobs:
           PUSH_TO_GITEE_SECRET_KEY: ${{ secrets.PUSH_TO_GITEE_SECRET_KEY }}
         run: |
           mkdir -p ~/.ssh/
-          echo -E $PUSH_TO_GITEE_SECRET_KEY > ~/.ssh/swoole-cli-github-push-to-gitee-key
+          printf "%s\n" "$PUSH_TO_GITEE_SECRET_KEY" > ~/.ssh/swoole-cli-github-push-to-gitee-key
           chmod 0400 ~/.ssh/swoole-cli-github-push-to-gitee-key
           cat > ~/.ssh/config <<'EOF'
           Host gitee.com
