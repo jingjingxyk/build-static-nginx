@@ -33,5 +33,5 @@ jobs:
           git remote -v
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git remote -v
-          # git push gitee --all
+          git push gitee --all
           # git push gitee <branch name> --force
