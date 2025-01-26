@@ -19,7 +19,7 @@ jobs:
           PUSH_TO_GITEE_SECRET_KEY: ${{ secrets.PUSH_TO_GITEE_SECRET_KEY }}
         run: |
           mkdir -p ~/.ssh/
-          echo $PUSH_TO_GITEE_SECRET_KEY > ~/.ssh/swoole-cli-github-push-to-gitee-key
+          echo -E -n $PUSH_TO_GITEE_SECRET_KEY > ~/.ssh/swoole-cli-github-push-to-gitee-key
           chmod 0400 ~/.ssh/swoole-cli-github-push-to-gitee-key
           cat > ~/.ssh/config <<'EOF'
           Host gitee.com
