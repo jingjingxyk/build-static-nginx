@@ -4,7 +4,7 @@ on:
   push:
 jobs:
   sync-to-gitee:
-    if: 1
+    if: ${{ (github.repository == 'jingjingxyk/swoole-cli') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
