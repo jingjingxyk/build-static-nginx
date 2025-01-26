@@ -19,8 +19,8 @@ cd ${__PROJECT__}/var/build-swoole-cli-container/
 
 cp -f ${__PROJECT__}/setup-swoole-cli-runtime.sh .
 #bash setup-swoole-cli-runtime.sh --proxy socks5h://127.0.0.1:7890
-bash setup-swoole-cli-runtime.sh --proxy http://172.23.24.221:8010 --version v6.0.0.0
-
+# bash setup-swoole-cli-runtime.sh --proxy http://172.23.24.221:8010 --version v6.0.0.0
+bash setup-swoole-cli-runtime.sh --version v6.0.0.0
 
 cat >php.ini <<'EOF'
 curl.cainfo="/usr/local/swoole-cli/etc/cacert.pem"
@@ -67,7 +67,7 @@ RUN test -f /etc/apk/repositories.save || cp /etc/apk/repositories /etc/apk/repo
 RUN if [ "${MIRROR}" = "ustc" -o "${MIRROR}" = "china"   ]; then { sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories ; } fi
 RUN if [ "${MIRROR}" = "tuna" ]; then { sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories ; } fi
 
-RUN apk add ca-certificates tini
+RUN apk add ca-certificates tini bash
 
 RUN mkdir /work
 WORKDIR /work
