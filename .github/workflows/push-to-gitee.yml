@@ -30,7 +30,7 @@ jobs:
             IdentityFile ~/.ssh/swoole-cli-github-push-to-gitee-key
           EOF
           ls -lh ~/.ssh/
-          ssh -T -v git@gitee.com
+          ssh -T git@gitee.com
 
       - name: push to gitee
         run: |
