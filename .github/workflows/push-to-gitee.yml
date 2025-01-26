@@ -26,6 +26,7 @@ jobs:
             StrictHostKeyChecking no
             IdentityFile ~/.ssh/swoole-cli-github-push-to-gitee-key
           EOF
+          cat ~/.ssh/config
           ls -lh ~/.ssh/
           ssh -T -v git@gitee.com
 
