@@ -14,7 +14,7 @@
 ```shell
 
 
-
+# 不同的系统，对应不同的版本 具体对应版本 https://www.diskgenius.cn/help/windows_aik_adk_installnotes.php
 
 curl.exe -fSLo adksetup.exe https://go.microsoft.com/fwlink/?linkid=2289980
 curl.exe -fSLo adkwinpesetup.exe https://go.microsoft.com/fwlink/?linkid=2289981
