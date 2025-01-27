@@ -1,12 +1,8 @@
-#!/usr/bin/env bash
+# vi /etc/ssh/sshd_config
+# GatewayPorts yes
+# 服务配置参考 https://zhuanlan.zhihu.com/p/57630633
 
-set -exu
-
-__DIR__=$(
-  cd "$(dirname "$0")"
-  pwd
-)
-# ssh 实现 socks5
+# ssh 实现反向端口转发
 
 ip='demo.jingjingxyk.com'
 keyfile=/home/jingjingxyk/beijing-2022-05-27.pem
@@ -20,9 +16,21 @@ keyfile=/home/jingjingxyk/beijing-2022-05-27.pem
     -o ServerAliveCountMax=3 \
     -i $keyfile \
     -v -CTgN \
-    -D \
+    -R 172.23.24.221:1935:localhost:8000 \
     root@$ip
 } || {
   echo $?
 
 }
+
+
+# 添加一个循环
+# until ssh -R 23334:localhost:22 -t B-username@B-IPAddress top ; do true ; done
+
+# (while true; do
+#  socat TCP4-LISTEN:5901 TCP4:192.168.1.2:5900
+# done) &
+
+
+# 参考 SSH 命令的三种代理功能（-L/-R/-D）
+# https://zhuanlan.zhihu.com/p/57630633
