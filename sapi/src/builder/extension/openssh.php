@@ -48,7 +48,7 @@ EOF;
             $cmd .= <<<EOF
               file {$workdir}/bin/openssh/sshd
               readelf -h {$workdir}/bin/openssh/sshd
-              tar -cJvf {$workdir}/privoxy-\${VERSION}-linux-{$system_arch}.tar.xz .
+              tar -cJvf {$workdir}/openssh-\${VERSION}-linux-{$system_arch}.tar.xz .
 EOF;
         }
         return $cmd;

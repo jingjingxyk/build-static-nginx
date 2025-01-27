@@ -18,9 +18,9 @@ mkdir -p var/build-swoole-cli-container/
 cd ${__PROJECT__}/var/build-swoole-cli-container/
 
 cp -f ${__PROJECT__}/setup-swoole-cli-runtime.sh .
-#bash setup-swoole-cli-runtime.sh --proxy socks5h://127.0.0.1:7890
-# bash setup-swoole-cli-runtime.sh --proxy http://172.23.24.221:8010 --version v6.0.0.0
-bash setup-swoole-cli-runtime.sh --version v6.0.0.0
+
+VERSION="6.0.0.0"
+bash setup-swoole-cli-runtime.sh --version v${VERSION}
 
 cat >php.ini <<'EOF'
 curl.cainfo="/usr/local/swoole-cli/etc/cacert.pem"
@@ -100,15 +100,25 @@ done
 
 TIME=$(date -u '+%Y%m%dT%H%M%SZ')
 ARCH=$(uname -m)
-VERSION="1.0.0"
-TAG="alpine-3.20-v${VERSION}-${ARCH}-${TIME}"
-IMAGE="docker.io/jingjingxyk/swoole-cli:${TAG}"
 
-MIRROR='china'
+TAG="alpine-3.20-v${VERSION}-${ARCH}-${TIME}"
+TAG=${VERSION}
+IMAGE="docker.io/phpswoole/swoole-cli:${TAG}"
+
+#MIRROR='china'
+MIRROR=''
 docker buildx build -t ${IMAGE} -f ./Dockerfile . --platform ${PLATFORM} --build-arg="MIRROR=${MIRROR}"
 
 echo ${IMAGE}
-docker save -o "swoole-cli-image.tar" ${IMAGE}
+
+# docker save -o "swoole-cli-image.tar" ${IMAGE}
+: <<'EOF'
+{
+  docker push ${IMAGE}
+} || {
+  echo $?
+}
+EOF
 
 docker run --rm --name demo ${IMAGE} swoole-cli -v
 docker run --rm --name demo ${IMAGE} swoole-cli -m

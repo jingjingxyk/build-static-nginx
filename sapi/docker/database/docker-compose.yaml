@@ -1,9 +1,10 @@
 version: "3"
 services:
   postgresql-server:
-    # image: postgres:15-alpine
-    image: postgis/postgis:15-3.3-alpine
+    image: postgres:17-alpine
+    # image: postgis/postgis:16-3.4-alpine
     hostname: "postgresql"
+    container_name: "postgresql"
     ports:
       - "5432:5432"
     environment:
@@ -11,8 +12,13 @@ services:
     # 容器内数据目录 /var/lib/postgresql/data
     # auth_user: postgres
     # auth_password: example
-  mysql-server:
-    # image: mysql:9
+    healthcheck:
+      test: [ "CMD-SHELL", "psql -U postgres -d postgres -c 'SELECT 1' || exit 1" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  mariadb-server:
     image: mariadb:11
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --tls-version=''
     environment:
@@ -26,11 +32,15 @@ services:
     # 容器内数据目录 /var/lib/mysql
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test: 'mysql --user=root --password=example --execute "SHOW DATABASES;"'
+
   redis-server:
     image: redis:7-alpine
     ports:
       - "6379:6379"
     # 容器内数据目录 /data
+
   mongodb-server:
     image: mongo:latest
     environment:

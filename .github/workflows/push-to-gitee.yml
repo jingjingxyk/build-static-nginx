@@ -1,0 +1,40 @@
+name: push to gitee
+
+on:
+  push:
+jobs:
+  push-to-gitee:
+    if: ${{ (github.repository_owner == 'jingjingxyk') && (github.repository == 'jingjingxyk/swoole-cli') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: install deps
+        run: |
+          sudo apt install openssh-client
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Prepare Secret Key
+        env:
+          PUSH_TO_GITEE_SECRET_KEY: ${{ secrets.PUSH_TO_GITEE_SECRET_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          printf "%s\n" "$PUSH_TO_GITEE_SECRET_KEY" > ~/.ssh/swoole-cli-github-push-to-gitee-key
+          chmod 0400 ~/.ssh/swoole-cli-github-push-to-gitee-key
+          cat > ~/.ssh/config <<'EOF'
+          Host gitee.com
+            Hostname gitee.com
+            Port 22
+            PreferredAuthentications publickey
+            StrictHostKeyChecking no
+            IdentityFile ~/.ssh/swoole-cli-github-push-to-gitee-key
+          EOF
+          ls -lh ~/.ssh/
+          ssh -T git@gitee.com
+
+      - name: push to gitee
+        run: |
+          git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
+          git remote -v
+          git push gitee --all
+          # git push gitee <branch name> --force
