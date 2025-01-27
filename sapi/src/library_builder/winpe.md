@@ -1,10 +1,15 @@
+## DiskGenius软件提供了创建Windows PE环境的功能
 
-Windows PE (WinPE) 是一种小型操作系统，用于启动没有操作系统的计算机。 Windows PE 可以启动到 以安装新的操作系统、恢复数据或修复现有操作系统
+    https://www.diskgenius.cn/help/windows_aik_adk_installnotes.php
 
-https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/winpe-intro?view=windows-11
-https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/download-winpe--windows-pe?view=windows-11
+## Windows PE (WinPE)
 
-https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/winpe-create-usb-bootable-drive?view=windows-11
+    Windows PE (WinPE) 是一种小型操作系统，用于启动没有操作系统的计算机。 Windows PE 可以启动到 以安装新的操作系统、恢复数据或修复现有操作系统
+
+    https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/winpe-intro?view=windows-11
+    https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/download-winpe--windows-pe?view=windows-11
+
+    https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/winpe-create-usb-bootable-drive?view=windows-11
 
 ```shell
 
