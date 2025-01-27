@@ -1,7 +1,6 @@
 version: "3"
 services:
   postgresql-server:
-    # image: postgres:15-alpine
     image: postgis/postgis:17-master
     hostname: "postgis"
     ports:
