@@ -1,4 +1,4 @@
-version: "3"
+name: "grafana"
 services:
   grafana-service:
     image: grafana/grafana:latest

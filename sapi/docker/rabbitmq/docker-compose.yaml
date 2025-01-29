@@ -1,4 +1,4 @@
-version: "3"
+name: "rabbitmq"
 services:
   rabbitmq-server:
     image: rabbitmq:4-management-alpine

@@ -1,4 +1,4 @@
-version: "3"
+name: "msyql"
 services:
   mysql-server:
     image: mysql:8-debian
