@@ -38,7 +38,9 @@ https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.1.4/
     从 VirtualBox 列表中获取的正确名称
     VBoxManage list vms
     # VBoxManage modifyvm "VM_NAME" --nested-hw-virt on
-    VBoxManage modifyvm ""pve"" --nested-hw-virt on
+    VBoxManage modifyvm "pve" --nested-hw-virt on
+    VBoxManage showvminfo "pve"
+
 
 ## 检查CPU是否支持虚拟化。使用命令
 
