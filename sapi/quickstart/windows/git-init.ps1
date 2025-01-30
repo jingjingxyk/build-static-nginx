@@ -19,12 +19,11 @@ if (-not (Test-Path -Path $git_install_package))
 
 & cmd /c start /wait .\Git-2.47.1-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEONEXIT=1 /DIR="C:\Program Files\Git"
 
-$env:PATH += ";C:\Program Files\Git;"
-Write-host $env:PATH
-Invoke-Expression -Command "cmd /c echo %PATH%"
-Invoke-Expression -Command "cmd /c git -v"
-Invoke-Expression -Command "cmd /c git config --global core.autocrlf false"
-Invoke-Expression -Command "cmd /c git config --global core.eol lf"
-Invoke-Expression -Command "cmd /c git config --global core.ignorecase false"
+$env:PATH += ";C:\Program Files\Git\bin;"
+
+
+Invoke-Expression -Command "git config --global core.autocrlf false"
+Invoke-Expression -Command "git config --global core.eol lf"
+Invoke-Expression -Command "git config --global core.ignorecase false"
 
 
