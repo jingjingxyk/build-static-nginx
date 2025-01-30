@@ -151,6 +151,20 @@ echo ''
 echo ' listen-address  0.0.0.0:8118'
 echo ' #forward-socks5   /               user:pass@socks-gw.example.com:1080  .  '
 echo '  forward-socks5   /               127.0.0.1:2000  .  '
+echo <<'EOF'
+        forward           192.168.*.*/     .
+        forward           10.*.*.*/     .
+        forward           127.*.*.*/     .
+        forward           .aliyuncs.com   .
+        forward           cdn.unrealengine.com   .
+        forward           .taobao.org   .
+        forward           .tsinghua.edu.cn  .
+        forward           .ustc.edu.cn  ..
+        forward           cdn.unrealengine.com   .
+        forward           .aliyun.com .
+        forward           .npmmirror.com .
+
+EOF
 echo " confdir ${__PROJECT__}/bin/runtime/privoxy/etc"
 echo " logdir ${__PROJECT__}/bin/runtime/privoxy/var/log/privoxy"
 echo '#        debug  1'
