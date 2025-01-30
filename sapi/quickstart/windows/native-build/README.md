@@ -6,7 +6,7 @@
 
 > nmake并行编译  使用NMake命令，并在其后加上/MP选项
 
-> echo. >> makefile 给makefile 增加一空行
+> `echo. >>` makefile 给 makefile 增加一空行
 
 > link.exe 链接静态库 `link /OUT:myprogram.exe /LIBPATH:C:\libs myprogram.obj mylib.lib`
 
