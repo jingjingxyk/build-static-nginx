@@ -20,6 +20,8 @@ if (-not (Test-Path -Path $git_install_package))
 & cmd /c start /wait .\Git-2.47.1-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEONEXIT=1 /DIR="C:\Program Files\Git"
 
 $env:PATH += ";C:\Program Files\Git"
+Write-host $env:PATH
+git.exe -v
 git -v
 git config --global core.autocrlf false
 git config --global core.eol lf
