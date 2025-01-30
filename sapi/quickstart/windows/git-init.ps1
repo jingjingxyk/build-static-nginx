@@ -26,12 +26,11 @@ if (-not (Test-Path -Path "C:\Program Files\Git\bin\git.exe"))
 
 $env:PATH += ";C:\Program Files\Git\bin;"
 
-
-Invoke-Expression -Command "git config --global core.autocrlf false"
-Invoke-Expression -Command "git config --global core.eol lf"
-Invoke-Expression -Command "git config --global core.ignorecase false"
-Invoke-Expression -Command "git config -–global color.ui true"
-Invoke-Expression -Command "git config --list  "
+& cmd /c "git config --global core.autocrlf false"
+& cmd /c "git config --global core.eol lf"
+& cmd /c "git config --global core.ignorecase false"
+& cmd /c "git config -–global color.ui true"
+& cmd /c "git config -–global --list  "
 
 
 
