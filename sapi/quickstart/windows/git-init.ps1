@@ -12,12 +12,17 @@ pwd
 
 $url = "https://php-cli.jingjingxyk.com/Git-2.47.1-64-bit.exe"
 $git_install_package = 'Git-2.47.1-64-bit.exe'
+# 已经下载跳过
 if (-not (Test-Path -Path $git_install_package))
 {
     irm $url -outfile $git_install_package
 }
 
-& cmd /c start /wait .\Git-2.47.1-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEONEXIT=1 /DIR="C:\Program Files\Git"
+# 已经安装 跳过
+if (-not (Test-Path -Path "C:\Program Files\Git\bin\git.exe"))
+{
+    & cmd /c start /wait .\Git-2.47.1-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEONEXIT=1 /DIR="C:\Program Files\Git"
+}
 
 $env:PATH += ";C:\Program Files\Git\bin;"
 
@@ -26,6 +31,7 @@ Invoke-Expression -Command "git config --global core.autocrlf false"
 Invoke-Expression -Command "git config --global core.eol lf"
 Invoke-Expression -Command "git config --global core.ignorecase false"
 Invoke-Expression -Command "git config -–global color.ui true"
-Invoke-Expression -Command "git config --global --list"
+Write-Host (Invoke-Expression -Command "git config --global --list")
+
 
 
