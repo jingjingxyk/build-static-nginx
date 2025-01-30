@@ -29,8 +29,7 @@ $env:PATH += ";C:\Program Files\Git\bin;"
 & cmd /c "git config --global core.autocrlf false"
 & cmd /c "git config --global core.eol lf"
 & cmd /c "git config --global core.ignorecase false"
-& cmd /c "git config -–global color.ui true"
-& cmd /c "git config -–global --list  "
+& cmd /c "git config --list  "
 
 
 
