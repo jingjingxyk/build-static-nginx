@@ -19,8 +19,13 @@ Get-Command curl.exe
 Add-AppxPackage -Path ".\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 
 Invoke-WebRequest -Uri "https://aka.ms/MicrosoftWinget" -UseBasicParsing | Invoke-Expression
+Invoke-WebRequest -Uri "https://aka.ms/getwinget" -UseBasicParsing | Invoke-Expression
 
 Invoke-WebRequest -Uri https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1  -OutFile .\winget-install.ps1
+# curl -fSLo winget-install.ps1 https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1
+# curl.exe -fSLo winget-install.ps1 https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1
+
+# irm https://php-cli.jingjingxyk.com/winget-install.ps1 | iex
 
 irm https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1 | iex
 
