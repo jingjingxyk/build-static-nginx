@@ -21,9 +21,10 @@ if (-not (Test-Path -Path $git_install_package))
 
 $env:PATH += ";C:\Program Files\Git;"
 Write-host $env:PATH
-Invoke-Expression -Command "git -v"
-Invoke-Expression -Command "git config --global core.autocrlf false"
-Invoke-Expression -Command "git config --global core.eol lf"
-Invoke-Expression -Command "git config --global core.ignorecase false"
+Invoke-Expression -Command "cmd /c echo %PATH%"
+Invoke-Expression -Command "cmd /c git -v"
+Invoke-Expression -Command "cmd /c git config --global core.autocrlf false"
+Invoke-Expression -Command "cmd /c git config --global core.eol lf"
+Invoke-Expression -Command "cmd /c git config --global core.ignorecase false"
 
 
