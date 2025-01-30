@@ -31,7 +31,7 @@ Invoke-Expression -Command "git config --global core.autocrlf false"
 Invoke-Expression -Command "git config --global core.eol lf"
 Invoke-Expression -Command "git config --global core.ignorecase false"
 Invoke-Expression -Command "git config -–global color.ui true"
-Write-Host (Invoke-Expression -Command "git config --global --list")
+Invoke-Expression -Command "git config --global --list"
 
 
 
