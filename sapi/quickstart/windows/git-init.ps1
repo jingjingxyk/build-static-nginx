@@ -25,5 +25,7 @@ $env:PATH += ";C:\Program Files\Git\bin;"
 Invoke-Expression -Command "git config --global core.autocrlf false"
 Invoke-Expression -Command "git config --global core.eol lf"
 Invoke-Expression -Command "git config --global core.ignorecase false"
+Invoke-Expression -Command "git config -–global color.ui true"
+Invoke-Expression -Command "git config --global --list"
 
 
