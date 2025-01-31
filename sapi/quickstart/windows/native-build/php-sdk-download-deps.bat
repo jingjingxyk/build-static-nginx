@@ -13,7 +13,7 @@ set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\p
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 
-echo "extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\" >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 
 call phpsdk_buildtree phpdev
 
