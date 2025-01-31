@@ -64,9 +64,9 @@ cmd /k "d:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Bui
 :: powershell vs dev
 ::  C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe -noe -c "&{Import-Module """D:\vs\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"""; Enter-VsDevShell 79dcbe64}"
 
-%comspec% /k "D:\vs\Common7\Tools\VsDevCmd.bat"
-%comspec% /k "D:\vs\VC\Auxiliary\Build\vcvars64.bat"
-%comspec% /k "D:\vs\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
+%comspec% /k "c:\vs\Common7\Tools\VsDevCmd.bat"
+%comspec% /k "c:\vs\VC\Auxiliary\Build\vcvars64.bat"
+%comspec% /k "c:\vs\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
 %ProgramFiles(x86)%
 %USERPROFILE%
  %NUMBER_OF_PROCESSORS%
