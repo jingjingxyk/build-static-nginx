@@ -40,7 +40,9 @@ if not exist ".\phpdev\php-src\" (
 )
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
-xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ .\phpdev\php-src\ /E /I /Q /Y
+if not exist ".\phpdev\php-src\" (
+	xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ .\phpdev\php-src\ /E /I /Q /Y
+)
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\phpdev\php-src\
 set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
