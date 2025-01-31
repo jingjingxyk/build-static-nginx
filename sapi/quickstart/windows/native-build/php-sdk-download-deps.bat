@@ -14,13 +14,25 @@ set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\p
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 
-echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+find /C "extension_dir" %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 
-cd /d %__PROJECT__%\var\windows-build-deps\php-src\
+if %errorlevel%==0 (
+    echo 字符串未找到
+    echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+) else (
+    echo 字符串找到
+)
 
-call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_buildtree.bat phpdev
+cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 
-call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_deps.bat -u
+call .\bin\phpsdk_buildtree.bat phpdev
+if not exist ".\phpdev\php-src\" (
+    rmdir /s /q ".\phpdev\php-src\"
+)
+
+xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I
+
+call .\bin\phpsdk_deps.bat -u
 
 cd /d %__PROJECT__%
 
