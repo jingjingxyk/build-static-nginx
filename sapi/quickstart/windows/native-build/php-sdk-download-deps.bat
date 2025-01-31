@@ -33,6 +33,7 @@ if not exist ".\phpdev\php-src\" (
 xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I /Q /Y
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
+set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
 call .\bin\phpsdk_deps.bat -u
 
 cd /d %__PROJECT__%
