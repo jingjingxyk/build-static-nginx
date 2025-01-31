@@ -36,7 +36,15 @@ if errorlevel 1 (
 
 :x-custom-show-var-start
 echo x-show-var:                                          >> %X_MAKEFILE%
+echo    ^@echo BUILD_DIR: $(BUILD_DIR)                    >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo CFLAGS: $(CFLAGS)                          >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo DEPS_CLI: $(DEPS_CLI)                      >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo CFLAGS_PHP_OBJ: $(CFLAGS_PHP_OBJ)          >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo CFLAGS_BD_ZEND: $(CFLAGS_BD_ZEND)          >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo CLI_GLOBAL_OBJ: $(CLI_GLOBAL_OBJS)         >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
@@ -106,9 +114,8 @@ rem echo 	^-@$(_VC_MANIFEST_EMBED_DLL) >> %X_MAKEFILE%
 :: $(BUILD_DIR)\$(PHPLIB) replace to x-custom-php-lib
 
 rem echo x-release-php^: $(DEPS_CLI)  $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest >> %X_MAKEFILE%
-rem echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest >> %X_MAKEFILE%
-echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(PHP_GLOBAL_OBJS)  $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest  >> %X_MAKEFILE%
-echo   ^@$(CC) /VERBOSE:LIB $(PHP_GLOBAL_OBJS)
+rem echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest  >> %X_MAKEFILE%
+echo x-release-php^: $(PHP_GLOBAL_OBJS) >> %X_MAKEFILE%
 rem echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
