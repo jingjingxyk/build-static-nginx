@@ -11,8 +11,12 @@ New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled Tru
 
 <#
 
-md ~\.ssh\
-echo 'ssh key' > ~\.ssh\authorized_keys
+md  ~\.ssh\
+mkdir  ~\.ssh\
+
+# echo.命令用来输出一个空行
+
+echo. >  ~\.ssh\authorized_keys
 
 ## 配置所在目录
 C:\ProgramData\ssh
