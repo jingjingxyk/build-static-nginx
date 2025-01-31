@@ -1,5 +1,6 @@
 @echo off
 
+setlocal enabledelayedexpansion
 rem show current file location
 echo %~dp0
 cd /d %~dp0
@@ -14,10 +15,12 @@ set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\p
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 
 echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
-
+set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
 call phpsdk_buildtree phpdev
 
 call phpsdk_deps -u
 
 cd /d %__PROJECT__%
+
+endlocal
 
