@@ -25,7 +25,9 @@ if %errorlevel%==0 (
     echo "find str"
 ) else (
 	echo "no found str"
+rem add line break
 	echo. >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+::	type nul  >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 	echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 )
 
