@@ -24,6 +24,7 @@ if not exist "scoop-install.ps1" curl.exe -fSLo scoop-install.ps1 https://get.sc
 
 if not exist "npp.8.6.7.Installer.x64.exe" curl.exe -fSLo npp.8.6.7.Installer.x64.exe https://php-cli.jingjingxyk.com/npp.8.6.7.Installer.x64.exe
 
+:: https://github.com/dail8859/NotepadNext/
 if not exist "vc_redist.x86.exe" curl.exe -fSLo vc_redist.x86.exe https://aka.ms/vs/17/release/vc_redist.x86.exe
 if not exist "vc_redist.x64.exe" curl.exe -fSLo vc_redist.x64.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
 if not exist "NotepadNext-v0.10-Installer.exe" curl.exe -fSLo NotepadNext-v0.10-Installer.exe  https://php-cli.jingjingxyk.com/NotepadNext-v0.10-Installer.exe
