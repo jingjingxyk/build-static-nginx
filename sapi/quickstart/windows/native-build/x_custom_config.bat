@@ -19,9 +19,11 @@ rem https://learn.microsoft.com/zh-cn/cpp/error-messages/tool-errors/linker-tool
 rem https://learn.microsoft.com/zh-cn/cpp/build/reference/md-mt-ld-use-run-time-library?view=msvc-170
 rem /VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
 
+rem -lucrt
 
 sed.exe -i 's/\/LD \/MD/\/MT/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
+sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
 
 findstr /C:"x-show-var: " %X_MAKEFILE%
 findstr /C:"x-show-var: " %X_MAKEFILE% > nul
