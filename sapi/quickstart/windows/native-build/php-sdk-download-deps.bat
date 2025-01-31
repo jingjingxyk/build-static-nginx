@@ -46,6 +46,21 @@ cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\phpdev\php-src\
 set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
 call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_deps.bat -u
 
+cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\phpdev\php-src\
+
+configure.bat ^
+--with-php-build="c:\php-cli" ^
+--with-extra-includes='' ^
+--with-extra-libs='' ^
+--with-toolset=vs ^
+--disable-all         --disable-cgi      --enable-cli   ^
+--enable-sockets      --enable-ctype     --enable-pdo    --enable-phar  ^
+--enable-filter ^
+--enable-xmlreader   --enable-xmlwriter ^
+--enable-tokenizer
+
+nmake
+
 cd /d %__PROJECT__%
 
 endlocal
