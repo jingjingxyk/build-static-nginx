@@ -30,7 +30,7 @@ if not exist ".\phpdev\php-src\" (
     rmdir /s /q ".\phpdev\php-src\"
 )
 
-xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I /Q
+xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I /Q /Y
 
 call .\bin\phpsdk_deps.bat -u
 
