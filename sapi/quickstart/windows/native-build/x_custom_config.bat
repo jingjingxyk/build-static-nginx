@@ -24,6 +24,7 @@ rem -lucrt
 sed.exe -i 's/\/LD \/MD/\/MT/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
 sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
+sed.exe -i 's/: \$\(BUILD_DIR\)\\\$\(PHPDLL\)/: \$\(BUILD_DIR\)\\\$\(PHPDLL\) x-php-lib /' Zend\zend_stream.c
 
 findstr /C:"x-show-var: " %X_MAKEFILE%
 findstr /C:"x-show-var: " %X_MAKEFILE% > nul
@@ -101,8 +102,9 @@ if errorlevel 1 (
 :x-release-php-start
 echo. >> %X_MAKEFILE%
 
+echo. >> %X_MAKEFILE%
 echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) generated_files $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE)   $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest   >> %X_MAKEFILE%
-echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(BUILD_DIR)\$(PHPLIB) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) >> %X_MAKEFILE%
+echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) >> %X_MAKEFILE%
 rem echo 	@"$(LINK)" /nologo   $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
