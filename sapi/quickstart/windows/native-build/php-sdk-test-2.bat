@@ -19,6 +19,7 @@ set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\p
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\phpdev\php-src\
 
+set CL=/MP
 nmake
 
 cd /d %__PROJECT__%
