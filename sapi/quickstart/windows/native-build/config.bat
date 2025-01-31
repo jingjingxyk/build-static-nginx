@@ -50,6 +50,7 @@ configure.bat ^
 --with-extra-includes='' ^
 --with-extra-libs='' ^
 --with-toolset=vs ^
+--with-mp=auto ^
 --disable-all         --disable-cgi      --enable-cli   ^
 --enable-cli-win32 ^
 --enable-sockets      --enable-ctype     --enable-pdo    --enable-phar  ^
