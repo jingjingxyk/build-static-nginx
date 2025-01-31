@@ -1,4 +1,4 @@
-@echo off
+ rem @echo off
 
 setlocal enabledelayedexpansion
 rem show current file location
