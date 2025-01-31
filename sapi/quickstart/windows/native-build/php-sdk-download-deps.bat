@@ -18,9 +18,9 @@ echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-src\
 
-call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_buildtree phpdev
+call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_buildtree.bat phpdev
 
-call phpsdk_deps -u
+call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_deps.bat -u
 
 cd /d %__PROJECT__%
 
