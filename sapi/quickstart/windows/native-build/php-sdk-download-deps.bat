@@ -24,18 +24,19 @@ if %errorlevel%==0 (
 )
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
-
 call .\bin\phpsdk_buildtree.bat phpdev
+
+cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 if not exist ".\phpdev\php-src\" (
     rmdir /s /q ".\phpdev\php-src\"
 )
 
-xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I /Q /Y
+cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
+xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ .\phpdev\php-src\ /E /I /Q /Y
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\phpdev\php-src\
-
 set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
-call .\bin\phpsdk_deps.bat -u
+call %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\phpsdk_deps.bat -u
 
 cd /d %__PROJECT__%
 
