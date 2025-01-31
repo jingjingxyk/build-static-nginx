@@ -25,7 +25,7 @@ git config --global core.ignorecase false
 .\sapi\quickstart\windows\native-build\windows-init-install.bat
 .\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
 
-.\sapi\quickstart\windows\native-build\php-sdk.bat
+.\sapi\quickstart\windows\native-build\php-sdk-setup.bat
 
 
 .\sapi\quickstart\windows\native-build\run.bat
