@@ -17,10 +17,10 @@ cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 find /C "extension_dir" %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 
 if %errorlevel%==0 (
-    echo 字符串未找到
+    echo "no found str"
     echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 ) else (
-    echo 字符串找到
+    echo "find str"
 )
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
