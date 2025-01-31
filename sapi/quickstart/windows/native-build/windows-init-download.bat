@@ -47,6 +47,7 @@ if not exist "php-src" git clone -b php-8.4.2 --depth=1 https://github.com/php/p
 :: curl.exe -fSLo Git-2.47.1-64-bit.exe  https://php-cli.jingjingxyk.com/Git-2.47.1-64-bit.exe
 :: curl.exe -fSLo 7z2409-x64.exe  https://php-cli.jingjingxyk.com/7z2409-x64.exe
 :: curl.exe -fSLo nasm-2.16.03-win64.zip  https://php-cli.jingjingxyk.com/nasm-2.16.03-win64.zip
+:: curl.exe -fSLo NotepadNext-v0.10-Installer.exe  https://github.com/dail8859/NotepadNext/releases/download/v0.10/NotepadNext-v0.10-Installer.exe
 
 
 

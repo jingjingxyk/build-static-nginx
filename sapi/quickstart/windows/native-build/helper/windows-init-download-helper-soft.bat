@@ -23,9 +23,14 @@ if not exist "scoop-install.ps1" curl.exe -fSLo scoop-install.ps1 https://get.sc
 
 
 if not exist "npp.8.6.7.Installer.x64.exe" curl.exe -fSLo npp.8.6.7.Installer.x64.exe https://php-cli.jingjingxyk.com/npp.8.6.7.Installer.x64.exe
+if not exist "NotepadNext-v0.10-Installer.exe" curl.exe -fSLo NotepadNext-v0.10-Installer.exe  https://php-cli.jingjingxyk.com/NotepadNext-v0.10-Installer.exe
+
 :: curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip  https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip
 
 :: curl.exe -fSLo curl-8.11.1_1-win64-mingw.zip https://curl.se/windows/dl-8.11.1_1/curl-8.11.1_1-win64-mingw.zip
 :: curl.exe -fSLo curl-8.11.1_1-win64arm-mingw.zip https://curl.se/windows/dl-8.11.1_1/curl-8.11.1_1-win64a-mingw.zip
+
+:: curl.exe -fSLo NotepadNext-v0.10-Installer.exe  https://github.com/dail8859/NotepadNext/releases/download/v0.10/NotepadNext-v0.10-Installer.exe
+:: curl.exe -fSLo NotepadNext-v0.10-Installer.exe  https://php-cli.jingjingxyk.com/NotepadNext-v0.10-Installer.exe
 
 endlocal
