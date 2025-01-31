@@ -20,8 +20,9 @@ dir
 
 rem https://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up
 :: depot_tools
-git clone -b main --depth=1 --progress https://chromium.googlesource.com/chromium/tools/depot_tools.git
-
+if not exist "depot_tools" (
+	git clone -b main --depth=1 --progress https://chromium.googlesource.com/chromium/tools/depot_tools.git
+)
 SET "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\depot_tools;"
 echo %PATH%
 git config --global user.name "jingjingxyk"
