@@ -24,6 +24,7 @@ rem -lucrt
 sed.exe -i 's/\/LD \/MD/\/MT/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
 sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
+sed.exe -i 's/\#include \"wsyslog\.h\"/ /' win32\wsyslog.c
 
 findstr /C:"x-show-var: " %X_MAKEFILE%
 findstr /C:"x-show-var: " %X_MAKEFILE% > nul
