@@ -59,8 +59,6 @@ configure.bat ^
 --enable-xmlreader   --enable-xmlwriter ^
 --enable-tokenizer
 
-nmake
-
 cd /d %__PROJECT__%
 
 endlocal
