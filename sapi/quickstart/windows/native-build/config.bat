@@ -9,6 +9,7 @@ cd /d ..\..\..\..\
 set "__PROJECT__=%cd%"
 echo %cd%
 cd /d %__PROJECT__%\var\windows-build-deps\php-src\
+set "PHP_SRC=%cd%"
 echo %cd%
 
 if exist "configure.js" (
@@ -32,6 +33,7 @@ rem set "LIBPATH=%LIBPATH%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\
 :: echo %LIB%
 :: echo %LIBPATH%
 
+:: set "INCLUDE=%INCLUDE%;%PHP_SRC%\ext\"
 set "CFLAGS=/EHsc /MT "
 
 rem https://learn.microsoft.com/zh-cn/cpp/c-runtime-library/crt-library-features?view=msvc-170
