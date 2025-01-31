@@ -1,3 +1,7 @@
+# windows 启用 openssh sftp
+
+## win10 以下版本，需要老版本的 openssh
+
 ```shell
 
 rem openssh
