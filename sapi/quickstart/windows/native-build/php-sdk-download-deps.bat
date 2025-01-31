@@ -16,7 +16,7 @@ cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 
 echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
-call phpsdk_buildtree phpdev
+call phpsdk_buildtree phpdev -d %__PROJECT__%\var\windows-build-deps\php-src\
 
 call phpsdk_deps -u
 
