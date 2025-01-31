@@ -9,6 +9,11 @@ cd /d ..\..\..\..\
 set "__PROJECT__=%cd%"
 echo %cd%
 
+
+rem if not exist "php-sdk-binary-tools" git clone -b master --depth=1 https://github.com/php/php-sdk-binary-tools.git
+rem if not exist "php-src" git clone -b php-8.4.2 --depth=1 https://github.com/php/php-src.git php-src
+
+
 set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin;"
 set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php;"
 
@@ -20,7 +25,7 @@ if %errorlevel%==0 (
     echo "find str"
 ) else (
 	echo "no found str"
-	echo   >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+	echo. >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 	echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 )
 
