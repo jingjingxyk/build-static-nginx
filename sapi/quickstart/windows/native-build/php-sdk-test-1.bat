@@ -63,5 +63,6 @@ configure.bat ^
 
 cd /d %__PROJECT__%
 
+
 endlocal
 
