@@ -104,7 +104,9 @@ rem echo x-release-php^:$(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(BUILD_DIR)\$(PHPLIB) $(
 rem echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(BUILD_DIR)\$(PHPLIB) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
-
+rem $(BUILD_DIR)\php.exe: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(BUILD_DIR)\$(PHPLIB) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest
+rem 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(BUILD_DIR)\$(PHPLIB) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI)
+rem 	-@$(_VC_MANIFEST_EMBED_EXE)
 
 rem echo x-custom-php-lib^:generated_files  $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) >> %X_MAKEFILE%
 rem echo 	^@copy win32\build\default.manifest $(BUILD_DIR)\$(PHPDLL).manifest ^>nul >> %X_MAKEFILE%
