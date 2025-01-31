@@ -32,6 +32,7 @@ if not exist ".\phpdev\php-src\" (
 
 xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I /Q /Y
 
+cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 call .\bin\phpsdk_deps.bat -u
 
 cd /d %__PROJECT__%
