@@ -14,7 +14,7 @@ set "PATH=%PATH%;%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\p
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
 
-find /C "extension_dir" %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+find /C "extension_dir=C" %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 
 if %errorlevel%==0 (
     echo "no found str"
@@ -32,7 +32,7 @@ if not exist ".\phpdev\php-src\" (
 
 xcopy  %__PROJECT__%\var\windows-build-deps\php-src\ phpdev\php-src\ /E /I /Q /Y
 
-cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
+cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\phpdev\php-src\
 set "PHP_RMTOOLS_PHP_BUILD_BRANCH=master"
 call .\bin\phpsdk_deps.bat -u
 
