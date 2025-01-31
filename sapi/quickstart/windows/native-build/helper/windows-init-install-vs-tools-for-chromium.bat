@@ -7,7 +7,7 @@ echo %~dp0
 
 
 cd /d %~dp0
-cd /d ..\..\..\..\..\
+cd /d ..\..\..\..\..\..\
 
 
 set "__PROJECT__=%cd%"
