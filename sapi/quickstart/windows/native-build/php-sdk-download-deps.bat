@@ -20,8 +20,8 @@ if %errorlevel%==0 (
     echo "find str"
 ) else (
 	echo "no found str"
-	echo \r\n >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
-	echo nextension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\\r\n >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+	echo ^ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
+	echo extension_dir=%__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\ext\ >> %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php\php.ini
 )
 
 cd /d %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\
