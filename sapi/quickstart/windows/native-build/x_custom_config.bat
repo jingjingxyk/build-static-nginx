@@ -108,7 +108,6 @@ echo 	@"$(LINK)" /nologo $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATI
 rem echo 	@"$(LINK)" /nologo   $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
-rem /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
 
 
 rem https://www.cnblogs.com/sherry-best/archive/2013/04/15/3022705.html
