@@ -8,6 +8,16 @@ Get-Service sshd
 
 New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 
+# New-Item -Path "~\.ssh\" -ItemType Directory -Force
+New-Item -Path "$env:USERPROFILE\.ssh\" -ItemType Directory -Force
+
+Set-Content -Path "$env:USERPROFILE\.ssh\authorized_keys" -Value ""
+
+Add-Content -Path "$env:USERPROFILE\.ssh\authorized_keys" -Value "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICl2QAvQ5YF2b6omciFh98UNsFyHlpfgrtkuom2Gsih+ Windows-SSH-Key"
+
+Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PubkeyAuthentication yes"
+
+Restart-Service sshd
 
 <#
 
