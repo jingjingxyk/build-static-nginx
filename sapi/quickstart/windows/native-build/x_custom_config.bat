@@ -40,6 +40,16 @@ echo    ^@echo BUILD_DIR: $(BUILD_DIR)                    >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo CFLAGS: $(CFLAGS)                          >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo LIBS: $(LIBS)                              >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo LDFLAGS: $(LDFLAGS)                        >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo LDFLAGS_CLI: $(LDFLAGS_CLI)                >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo LIBS_CLI: $(LIBS_CLI)                      >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo PHP_LDFLAGS: $(PHP_LDFLAGS)                >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo DEPS_CLI: $(DEPS_CLI)                      >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo CFLAGS_PHP_OBJ: $(CFLAGS_PHP_OBJ)          >> %X_MAKEFILE%
@@ -61,16 +71,6 @@ echo    ^@echo ==================                             >> %X_MAKEFILE%
 echo    ^@echo BUILD_DIR\PHPDLL: $(BUILD_DIR)\$(PHPDLL)   >> %X_MAKEFILE%
 echo    ^@echo ==================                             >> %X_MAKEFILE%
 echo    ^@echo CLI_GLOBAL_OBJS_RESP: $(CLI_GLOBAL_OBJS_RESP)  >> %X_MAKEFILE%
-echo    ^@echo ==================           >> %X_MAKEFILE%
-echo    ^@echo PHP_LDFLAGS: $(PHP_LDFLAGS)  >> %X_MAKEFILE%
-echo    ^@echo ==================           >> %X_MAKEFILE%
-echo    ^@echo LIBS: $(LIBS)                >> %X_MAKEFILE%
-echo    ^@echo ==================           >> %X_MAKEFILE%
-echo    ^@echo LIBS_CLI: $(LIBS_CLI)        >> %X_MAKEFILE%
-echo    ^@echo ==================           >> %X_MAKEFILE%
-echo    ^@echo LDFLAGS: $(LDFLAGS)          >> %X_MAKEFILE%
-echo    ^@echo ==================           >> %X_MAKEFILE%
-echo    ^@echo LDFLAGS_CLI: $(LDFLAGS_CLI)  >> %X_MAKEFILE%
 echo    ^@echo ==================           >> %X_MAKEFILE%
 echo    ^@echo _VC_MANIFEST_EMBED_EXE: $(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 echo    ^@echo ==================           >> %X_MAKEFILE%
