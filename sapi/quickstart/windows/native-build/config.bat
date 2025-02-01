@@ -9,6 +9,7 @@ cd /d ..\..\..\..\
 set "__PROJECT__=%cd%"
 echo %cd%
 cd /d %__PROJECT__%\var\windows-build-deps\php-src\
+set "PHP_SRC=%cd%"
 echo %cd%
 
 if exist "configure.js" (
@@ -33,12 +34,13 @@ rem set "LIBPATH=%LIBPATH%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\
 :: echo %LIBPATH%
 
 
+:: set "INCLUDE=%INCLUDE%;%PHP_SRC%\ext\"
 set "CFLAGS=/EHsc /MT "
 
 rem https://learn.microsoft.com/zh-cn/cpp/c-runtime-library/crt-library-features?view=msvc-170
 rem https://learn.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
 
-set "LDFLAGS=/VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /DEFAULTLIB:libcmt.lib  /link libucrt.lib libvcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
+set "LDFLAGS=/VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /DEFAULTLIB:libcmt.lib  /DEFAULTLIB:libucrt.lib /DEFAULTLIB:libvcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
 
 
 
@@ -49,12 +51,14 @@ configure.bat ^
 --with-extra-includes='' ^
 --with-extra-libs='' ^
 --with-toolset=vs ^
+--with-mp=auto ^
 --disable-all         --disable-cgi      --enable-cli   ^
 --enable-sockets      --enable-ctype     --enable-pdo    --enable-phar  ^
 --enable-filter ^
 --enable-xmlreader   --enable-xmlwriter ^
 --enable-tokenizer
 
+:: --enable-cli-win32 ^
 :: --disable-zts ^
 :: --enable-apcu ^
 :: --enable-bcmath ^

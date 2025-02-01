@@ -6,7 +6,7 @@
 
 > nmake并行编译  使用NMake命令，并在其后加上/MP选项
 
-> echo. >> makefile 给makefile 增加一空行
+> `echo. >>` makefile 给 makefile 增加一空行
 
 > link.exe 链接静态库 `link /OUT:myprogram.exe /LIBPATH:C:\libs myprogram.obj mylib.lib`
 
@@ -25,7 +25,7 @@ git config --global core.ignorecase false
 .\sapi\quickstart\windows\native-build\windows-init-install.bat
 .\sapi\quickstart\windows\native-build\windows-init-install-vs-tools.bat
 
-.\sapi\quickstart\windows\native-build\php-sdk.bat
+.\sapi\quickstart\windows\native-build\php-sdk-setup.bat
 
 
 .\sapi\quickstart\windows\native-build\run.bat
@@ -64,9 +64,9 @@ cmd /k "d:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Bui
 :: powershell vs dev
 ::  C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe -noe -c "&{Import-Module """D:\vs\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"""; Enter-VsDevShell 79dcbe64}"
 
-%comspec% /k "D:\vs\Common7\Tools\VsDevCmd.bat"
-%comspec% /k "D:\vs\VC\Auxiliary\Build\vcvars64.bat"
-%comspec% /k "D:\vs\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
+%comspec% /k "c:\vs\Common7\Tools\VsDevCmd.bat"
+%comspec% /k "c:\vs\VC\Auxiliary\Build\vcvars64.bat"
+%comspec% /k "c:\vs\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
 %ProgramFiles(x86)%
 %USERPROFILE%
 %NUMBER_OF_PROCESSORS%

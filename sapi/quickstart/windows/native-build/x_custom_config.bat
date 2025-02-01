@@ -19,9 +19,12 @@ rem https://learn.microsoft.com/zh-cn/cpp/error-messages/tool-errors/linker-tool
 rem https://learn.microsoft.com/zh-cn/cpp/build/reference/md-mt-ld-use-run-time-library?view=msvc-170
 rem /VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
 
+rem -lucrt
 
 sed.exe -i 's/\/LD \/MD/\/MT/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
+sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
+sed.exe -i 's/: \$\(BUILD_DIR\)\\\$\(PHPDLL\)/: \$\(BUILD_DIR\)\\\$\(PHPDLL\) x-php-lib /' Zend\zend_stream.c
 
 findstr /C:"x-show-var: " %X_MAKEFILE%
 findstr /C:"x-show-var: " %X_MAKEFILE% > nul
@@ -40,11 +43,11 @@ echo    ^@echo BUILD_DIR: $(BUILD_DIR)                    >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo CFLAGS: $(CFLAGS)                          >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
-echo    ^@echo LIBS: $(LIBS)                              >> %X_MAKEFILE%
-echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo LDFLAGS: $(LDFLAGS)                        >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo LDFLAGS_CLI: $(LDFLAGS_CLI)                >> %X_MAKEFILE%
+echo    ^@echo ==================                         >> %X_MAKEFILE%
+echo    ^@echo LIBS: $(LIBS)                              >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
 echo    ^@echo LIBS_CLI: $(LIBS_CLI)                      >> %X_MAKEFILE%
 echo    ^@echo ==================                         >> %X_MAKEFILE%
@@ -98,12 +101,16 @@ if errorlevel 1 (
 
 :x-release-php-start
 echo. >> %X_MAKEFILE%
-rem echo x-release-php^:$(DEPS_CLI) $(CLI_GLOBAL_OBJS) $(BUILD_DIR)\$(PHPLIB) $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest >> %X_MAKEFILE%
-rem echo 	@"$(LINK)" /nologo  $(CLI_GLOBAL_OBJS_RESP) $(BUILD_DIR)\$(PHPLIB) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
+
+echo. >> %X_MAKEFILE%
+echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) generated_files $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE)   $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest   >> %X_MAKEFILE%
+echo 	@"$(LINK)" /nologo $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
+rem echo 	@"$(LINK)" /nologo   $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
 
 
+<<<<<<< HEAD
 rem echo x-custom-php-lib^:generated_files  $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) >> %X_MAKEFILE%
 rem echo 	^@copy win32\build\default.manifest $(BUILD_DIR)\$(PHPDLL).manifest ^>nul >> %X_MAKEFILE%
 rem echo 	^#	@$(CC) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS) $(PHPDLL_RES) /link /out:$(BUILD_DIR)\$(PHPDLL) $(PHP8_PGD_OPTION) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS)
@@ -122,6 +129,8 @@ rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 rem /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
 
 
+=======
+>>>>>>> build-windows-php
 rem https://www.cnblogs.com/sherry-best/archive/2013/04/15/3022705.html
 rem https://learn.microsoft.com/zh-CN/cpp/c-runtime-library/crt-library-features?view=msvc-170&viewFallbackFrom=vs-2019
 
