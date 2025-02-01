@@ -18,7 +18,7 @@ Add-Content -Path "$env:USERPROFILE\.ssh\authorized_keys" -Value "ssh-ed25519 AA
 Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PubkeyAuthentication yes"
 Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PasswordAuthentication no"
 Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PermitRootLogin yes"
-Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "AcceptEnv PROMPT"
+# Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "AcceptEnv PROMPT"
 # Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "Shell C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile"
 
 
