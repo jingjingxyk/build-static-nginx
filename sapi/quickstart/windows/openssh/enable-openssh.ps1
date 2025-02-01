@@ -16,6 +16,8 @@ Set-Content -Path "$env:USERPROFILE\.ssh\authorized_keys" -Value ""
 Add-Content -Path "$env:USERPROFILE\.ssh\authorized_keys" -Value "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICl2QAvQ5YF2b6omciFh98UNsFyHlpfgrtkuom2Gsih+ Windows-SSH-Key"
 
 Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PubkeyAuthentication yes"
+Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PasswordAuthentication no"
+Add-Content -Path "$env:ProgramData\ssh\sshd_config" -Value "PermitRootLogin yes"
 
 Restart-Service sshd
 
