@@ -43,6 +43,7 @@ jobs:
         run:
           set -x
           CURRENT_DIR=$(pwd)
+          git remote -v
           # git clone --mirror "$SOURCE_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
           #git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git ~/swoole-cli/
           #cd ~/swoole-cli/
