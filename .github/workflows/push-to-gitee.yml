@@ -44,7 +44,7 @@ jobs:
 
           set -x
           ssh -T git@gitee.com
-          git fetch origin --all
+          git fetch --all
           git branch -r | cat
 
           # 拉取所有分支
