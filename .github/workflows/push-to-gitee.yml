@@ -53,9 +53,14 @@ jobs:
           git remote set-url --push origin git@gitee.com:jingjingxyk/swoole-cli.git
           git remote -v
 
-          # git push --mirror origin
-          git remote update
+          git fetch -p origin
+          # Exclude refs created by GitHub for pull request.
+          git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+
+          git push --mirror
+
           cd ${CURRENT_DIR}
+
 
           # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
           # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
