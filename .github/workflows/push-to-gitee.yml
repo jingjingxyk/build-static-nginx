@@ -30,15 +30,17 @@ jobs:
             IdentityFile ~/.ssh/swoole-cli-github-push-to-gitee-key
           EOF
           ls -lh ~/.ssh/
-          ssh -T git@gitee.com
 
       - name: push to gitee
         run: |
+          ssh -T git@gitee.com
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git fetch gitee -a
-          git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {}
-          git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {}
-          git push gitee --mirror
+          GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
+          GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
+          # 求差集 (gitee 存在，github 不存在）
+          comm -1 <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS)
+          # git push --mirror gitee -f
           # git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
           # git push gitee --all
           # git push gitee <branch name> --force
