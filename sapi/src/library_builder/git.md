@@ -19,6 +19,7 @@ git branch -r
 
 
 git branch -r --list
+# grep -v 反向查找
 git branch -r --list | grep -v -- '->' | sed 's/origin\///' | xargs -I {} echo {}
 git branch -r --list | grep vE "^origin/"
 git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}

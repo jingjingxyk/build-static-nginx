@@ -36,7 +36,9 @@ jobs:
         run: |
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git fetch gitee -a
-          git branch -r --list | grep -v -- '->' | sed 's/origin\///' | xargs -I {} echo {}
+          git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {}
+          git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {}
+          git push gitee --mirror
           # git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
           # git push gitee --all
           # git push gitee <branch name> --force
