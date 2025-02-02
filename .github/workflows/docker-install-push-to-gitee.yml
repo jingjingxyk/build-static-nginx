@@ -50,7 +50,7 @@ jobs:
 
           # 参考 https://github.com/wearerequired/git-mirror-action/blob/master/git-mirror.sh
           git remote -v
-          git clone --mirror https://github.com/jingjingxyk/docker-install.git docker-install
+          git clone --mirror https://github.com/docker/docker-install.git docker-install
           cd docker-install
           pwd
 
