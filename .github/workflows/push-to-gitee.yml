@@ -39,7 +39,7 @@ jobs:
           GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
           GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
           # 求差集 (gitee 存在，github 不存在）
-          comm -1 <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS)
+          comm <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS)
           # git push --mirror gitee -f
           # git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
           # git push gitee --all
