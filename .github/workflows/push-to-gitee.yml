@@ -35,10 +35,11 @@ jobs:
         run: |
           # ssh -T git@gitee.com
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
+          git fetch gitee -a
           git push gitee --all
 
           # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
-          git fetch gitee -a
+
           GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
           GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
 
