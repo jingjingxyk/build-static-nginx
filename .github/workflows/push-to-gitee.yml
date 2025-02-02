@@ -49,11 +49,11 @@ jobs:
           # git remote set-url --push origin "$DESTINATION_REPO"
           #git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
 
-        # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
-        # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
-        # git remote -v
-        # git push --mirror origin
-        # git remote update
+          # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
+          # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
+          # git remote -v
+          # git push --mirror origin
+          # git remote update
 
 
       - name: push to gitee
