@@ -58,7 +58,7 @@ jobs:
           git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///' | xargs -I {} git push gitee {}
 
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
-          git fetch gitee --all
+          git fetch --all
 
           # 求差集 (gitee 存在的分支 但是 github 不存在的分支，执行删除操作）
           # 默认输出三列，第一列包含文件1独有的行，第二列包含文件2独有的行，第三列包含两个文件共有的行。列之间由制表符分隔‌
