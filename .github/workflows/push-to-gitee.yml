@@ -42,6 +42,7 @@ jobs:
           GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
           GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
 
+          comm <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {}
           comm <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {} | xargs -I {} git push -d gitee {}
 
 
