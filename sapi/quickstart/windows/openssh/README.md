@@ -22,3 +22,10 @@ powershell.exe -ExecutionPolicy Bypass -File install-sshd.ps1
 powershell.exe -ExecutionPolicy Bypass -File enable-openssh.ps1
 
 ```
+
+## 一行命令启动windows openssh
+
+```shell
+irm https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/windows/openssh/enable-openssh.ps1 | iex
+
+```

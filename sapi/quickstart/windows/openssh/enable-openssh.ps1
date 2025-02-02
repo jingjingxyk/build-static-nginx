@@ -140,7 +140,7 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Wi
 
 Restart-Service sshd
 Get-Service sshd
-netstat -na | find ":22"
+netstat -ano | findstr ":22"
 Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName, Description, Enabled
 
 
