@@ -9,6 +9,27 @@ sort | uniq
 
 ```
 
+## 拉取所有远程分支
+```shell
+git fetch -a
+git fetch gitee
+
+# 列出所有分支（包括远程分支）
+git branch -r
+
+
+git branch -r --list
+git branch -r --list | grep -v -- '->' | sed 's/origin\///' | xargs -I {} echo {}
+git branch -r --list | grep vE "^origin/"
+git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
+
+# 查看远程仓库的所有分支
+git ls-remote --heads origin
+
+# 清理本地不再存在的远程跟踪分支
+git remote prune origin
+
+```
 ## 添加子模块
 
 ```shell

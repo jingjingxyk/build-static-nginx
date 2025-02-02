@@ -35,6 +35,14 @@ jobs:
       - name: push to gitee
         run: |
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
-          git remote -v
-          git push gitee --all
+          git fetch gitee -a
+          git branch -r --list | grep -v -- '->' | sed 's/origin\///' | xargs -I {} echo {}
+          # git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
+          # git push gitee --all
           # git push gitee <branch name> --force
+          # git push -u gitee --all
+          # git push -u gitee --tags
+          # 拉去所有分支
+          # for b in`git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done
+
+
