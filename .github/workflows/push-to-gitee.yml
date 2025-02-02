@@ -51,7 +51,7 @@ jobs:
           git ls-remote --tags  origin
 
           # 拉取所有分支
-          for b in `git branch -r | grep -v -- '->'` ; do if [ "${{ env.BRANCH_NAME }} != ${b##origin/} ] ; then  git branch --track ${b##origin/} $b; fi ; done
+          for b in `git branch -r | grep -v -- '->'` ; do if [ "${{ env.BRANCH_NAME }}" != ${b##origin/} ] ; then  git branch --track ${b##origin/} $b; fi ; done
           git branch | cat
 
           # git ls-remote --tags  origin | awk '{ print $2 }' | sed 's/^refs\/tags\///'  | xargs -I {} git push gitee {}:{}
