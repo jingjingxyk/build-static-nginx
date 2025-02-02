@@ -9,7 +9,11 @@ Set-Service -Name sshd -StartupType Automatic
 
 Get-Service sshd
 
-New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+try{
+    New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+} catch {
+    Write-Error "An error occurred: $_"
+}
 
 # New-Item -Path "~\.ssh\" -ItemType Directory -Force
 New-Item -Path "$env:USERPROFILE\.ssh\" -ItemType Directory -Force
@@ -124,7 +128,7 @@ AllowGroups administrators "openssh users"
 
 "@
 
-Set-Ccontent -Path "$env:ProgramData\ssh\sshd_config"  -Value $new_sshd_config
+Set-Content -Path "$env:ProgramData\ssh\sshd_config"  -Value $new_sshd_config
 
 Restart-Service sshd
 
