@@ -75,6 +75,7 @@ test -f auto-cache-pool-tarball.yml && rm -rf auto-cache-pool-tarball.yml
 test -f linux-mips64le.yaml && rm -rf linux-mips64le.yaml
 test -f linux-riscv64.yml && rm -rf linux-riscv64.yml
 test -f runner-images.md && rm -rf runner-images.md
+test -f push-to-gitee.yml.bak && rm -rf push-to-gitee.yml.bak
 
 cd ${__PROJECT__}/sapi/quickstart
 test -d swoole-install && rm -rf swoole-install
