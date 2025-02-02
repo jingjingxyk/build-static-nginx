@@ -1,6 +1,6 @@
 # 设置执行策略以允许脚本运行
 # Set-ExecutionPolicy Bypass -Scope Process -Force
-
+cmd /c ver
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 
 Start-Service sshd
@@ -130,7 +130,11 @@ AllowGroups administrators "openssh users"
 
 Set-Content -Path "$env:ProgramData\ssh\sshd_config"  -Value $new_sshd_config
 
+# 设置默认终端为powershell
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
+
 Restart-Service sshd
+Get-Service sshd
 
 <#
 
