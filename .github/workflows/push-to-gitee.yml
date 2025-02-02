@@ -45,11 +45,17 @@ jobs:
           CURRENT_DIR=$(pwd)
           ls -lha .
           git remote -v
-          # git clone --mirror "$SOURCE_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
-          #git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git ~/swoole-cli/
-          #cd ~/swoole-cli/
+          git clone --mirror https://github.com/jingjingxyk/swoole-cli swoole-cli
+          cd swoole-cli
+          pwd
+
           # git remote set-url --push origin "$DESTINATION_REPO"
-          #git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
+          git remote set-url --push origin git@gitee.com:jingjingxyk/swoole-cli.git
+          git remote -v
+
+          # git push --mirror origin
+          git remote update
+          cd ${CURRENT_DIR}
 
           # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
           # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
