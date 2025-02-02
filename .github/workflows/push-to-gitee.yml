@@ -44,8 +44,7 @@ jobs:
 
           set -x
           ssh -T git@gitee.com
-          git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
-          git fetch --all
+          git fetch origin --all
           git branch -r | cat
 
           # 拉取所有分支
@@ -58,19 +57,28 @@ jobs:
           git ls-remote --tags  origin | awk '{ print $2 }' | sed 's/^refs\/tags\///'  | xargs -I {} git push gitee {}
           git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///' | xargs -I {} git push gitee {}
 
-          # git push gitee --all --force
-          # git push -u -f gitee --all
-          # git push -u -f gitee --tags
+          git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
+          git fetch gitee --all
 
-
-          # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
+          # 求差集 (gitee 存在的分支 但是 github 不存在的分支，执行删除操作）
           # 默认输出三列，第一列包含文件1独有的行，第二列包含文件2独有的行，第三列包含两个文件共有的行。列之间由制表符分隔‌
-          # GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
-          # GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
+
+          GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
+          GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
 
           comm  <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {}
           # comm  <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {} | xargs -I {} git push -d gitee {}:{}
 
+
+          # git push gitee --all --force
+          # git push -u -f gitee --all
+          # git push -u -f gitee --tags
+
+          # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
+          # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
+          # git remote -v
+          # git push --mirror origin
+          # git remote update
 
 
 
