@@ -38,7 +38,7 @@ jobs:
           git fetch origin -a
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git fetch gitee -a
-          git push gitee --all
+          git push gitee --all --force
 
           # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
 
