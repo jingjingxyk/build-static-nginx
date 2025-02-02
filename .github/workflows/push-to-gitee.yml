@@ -38,7 +38,7 @@ jobs:
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git ls-remote --heads origin
           git ls-remote --heads gitee
-
+          # git push gitee --all --force
           git push -u -f gitee --all
           git push -u -f gitee --tags
           git fetch gitee -a
