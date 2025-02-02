@@ -40,6 +40,7 @@ jobs:
           git ls-remote --heads gitee
 
           git push -u -f gitee --all
+          git push -u -f gitee --tags
           git fetch gitee -a
 
           # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
