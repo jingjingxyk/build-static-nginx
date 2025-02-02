@@ -38,7 +38,6 @@ jobs:
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git fetch --all
           git branch -r | cat
-          exit 0
           git ls-remote --heads origin
           git ls-remote --tags origin
 
