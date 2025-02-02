@@ -2,6 +2,10 @@ name: push to gitee
 
 on:
   push:
+
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
 jobs:
   push-to-gitee:
     if: ${{ (github.repository_owner == 'jingjingxyk') && (github.repository == 'jingjingxyk/swoole-cli') }}
