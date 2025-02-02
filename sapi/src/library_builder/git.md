@@ -9,7 +9,8 @@ sort | uniq
 
 ```
 
-## 拉取所有远程分支
+## git 操作
+
 ```shell
 git fetch -a
 git fetch gitee
@@ -24,6 +25,18 @@ git branch -r --list | grep -v -- '->' | sed 's/origin\///' | xargs -I {} echo {
 git branch -r --list | grep vE "^origin/"
 git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
 
+
+
+git push gitee <branch name> --force
+git push -u gitee --all
+git push -u gitee --tags
+git push --mirror gitee -f
+# 拉去所有分支
+for b in`git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done
+# 删除分支
+git push gitee :test-branch
+git push -d gitee test-branch
+
 # 查看远程仓库的所有分支
 git ls-remote --heads origin
 
@@ -31,6 +44,7 @@ git ls-remote --heads origin
 git remote prune origin
 
 ```
+
 ## 添加子模块
 
 ```shell

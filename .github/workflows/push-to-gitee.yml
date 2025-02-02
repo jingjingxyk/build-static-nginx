@@ -35,18 +35,15 @@ jobs:
         run: |
           # ssh -T git@gitee.com
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
+          git push gitee --all
+
+          # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
           git fetch gitee -a
           GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
           GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
-          # 求差集 (gitee 存在，github 不存在）
-          comm <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS)
-          # git push --mirror gitee -f
-          # git branch -r --list 'origin/HEAD -> origin/*' | grep -vE 'github/HEAD' | sed 's/github\///' | xargs -I {} git push gitee :{}
-          # git push gitee --all
-          # git push gitee <branch name> --force
-          # git push -u gitee --all
-          # git push -u gitee --tags
-          # 拉去所有分支
-          # for b in`git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done
+
+          comm <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {} | xargs -I {} git push -d gitee {}
+
+
 
 
