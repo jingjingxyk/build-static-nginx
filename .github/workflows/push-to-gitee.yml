@@ -15,11 +15,13 @@ jobs:
         run: |
           sudo apt install openssh-client
           git branch -r | grep -v -- '->'
-          echo "CURRENT_BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+        run: |
+          echo "CURRENT_BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
       - name: Prepare Secret Key
         env:
           PUSH_TO_GITEE_SECRET_KEY: ${{ secrets.PUSH_TO_GITEE_SECRET_KEY }}
