@@ -14,7 +14,6 @@ jobs:
       - name: install deps
         run: |
           sudo apt install openssh-client
-          git branch -r | grep -v -- '->'
 
       - name: Checkout code
         uses: actions/checkout@v2
