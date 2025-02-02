@@ -126,15 +126,22 @@ AllowGroups administrators "openssh users"
 #Match Group administrators
 #       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys
 
+AcceptEnv PROMPT
+Shell C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile
+
 "@
 
 Set-Content -Path "$env:ProgramData\ssh\sshd_config"  -Value $new_sshd_config
 
-# 设置默认终端为powershell
+# 设置默认终端为 powershell
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
 
 Restart-Service sshd
 Get-Service sshd
+netstat -na | find ":22"
+Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName, Description, Enabled
+
+
 
 <#
 
@@ -177,5 +184,8 @@ ssh-add %USERPROFILE%\.ssh\id_rsa
 cmd /c set "PATH=%PATH%;C:\Program Files\Git\bin\;"
 
 $env:PATH += ";C:\Program Files\Git\bin;"
+
+# 快速编辑 sshd_config
+start-process notepad C:\Programdata\ssh\sshd_config
 
 #>
