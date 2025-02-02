@@ -37,7 +37,11 @@ jobs:
           ssh -T git@gitee.com
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git ls-remote --heads origin
-          git ls-remote --heads gitee
+          git ls-remote --tags origin
+
+          git ls-remote --tags tags   | awk '{ print $2 }' | sed 's/^refs\/tags\///' | xargs -I {} git push gitee {}
+          git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^heads\/tags\///' | xargs -I {} git push gitee {}
+
           # git push gitee --all --force
           git push -u -f gitee --all
           git push -u -f gitee --tags

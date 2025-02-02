@@ -1,6 +1,8 @@
 # 设置执行策略以允许脚本运行
 # Set-ExecutionPolicy Bypass -Scope Process -Force
 cmd /c ver
+write-host $psversiontable.psversion
+
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 
 Start-Service sshd
