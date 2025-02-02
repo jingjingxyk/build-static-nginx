@@ -36,8 +36,11 @@ jobs:
           set -x
           ssh -T git@gitee.com
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
+          git ls-remote --heads origin
+          git ls-remote --heads gitee
+
+          git push -u -f gitee --all
           git fetch gitee -a
-          git push -f gitee --all
 
           # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
           # 默认输出三列，第一列包含文件1独有的行，第二列包含文件2独有的行，第三列包含两个文件共有的行。列之间由制表符分隔‌
