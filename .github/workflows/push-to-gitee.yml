@@ -40,7 +40,7 @@ jobs:
           git ls-remote --tags origin
 
           # git ls-remote --tags  origin | awk '{ print $2 }' | sed 's/^refs\/tags\///'  | xargs -I {} git push gitee {}:{}
-          git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///' | xargs -I {} git push gitee {}
+          # git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///' | xargs -I {} git push gitee {}
 
           # git push gitee --all --force
           git push -u -f gitee --all
@@ -53,7 +53,7 @@ jobs:
           GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
           GITHUB_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'origin/' | sed 's/origin\///' | xargs -I {} echo {} | sort)
 
-          comm  <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {}
+          # comm  <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {}
           # comm  <(echo $GITEE_BRANCHS) <(echo $GITHUB_BRANCHS) | awk -F "\t" '{ print $1 }' | xargs -I {} echo {} | xargs -I {} git push -d gitee {}:{}
 
 
