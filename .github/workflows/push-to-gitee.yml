@@ -44,6 +44,8 @@ jobs:
           set -x
           CURRENT_DIR=$(pwd)
           ls -lha .
+
+          # 参考 https://github.com/wearerequired/git-mirror-action/blob/master/git-mirror.sh
           git remote -v
           git clone --mirror https://github.com/jingjingxyk/swoole-cli swoole-cli
           cd swoole-cli
@@ -62,11 +64,15 @@ jobs:
           cd ${CURRENT_DIR}
 
 
-          # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
+          # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git swoole-cli
+          # cd swoole-cli
           # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
           # git remote -v
-          # git push --mirror origin
-          # git remote update
+          # git fetch -p origin
+          # Exclude refs created by GitHub for pull request.
+          # git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+          # git push --mirror
+
 
 
       - name: push to gitee
