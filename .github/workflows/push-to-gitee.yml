@@ -43,10 +43,10 @@ jobs:
           # git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///' | xargs -I {} git push gitee {}
 
           # git push gitee --all --force
-          git push -u -f gitee --all
-          git push -u -f gitee --tags
-          git branch | cat
+          # git push -u -f gitee --all
+          # git push -u -f gitee --tags
           git fetch gitee -a
+          git branch | cat
 
           # 求差集 (gitee 存在的分支，github 不存在分支，执行删除操作）
           # 默认输出三列，第一列包含文件1独有的行，第二列包含文件2独有的行，第三列包含两个文件共有的行。列之间由制表符分隔‌
