@@ -33,7 +33,7 @@ jobs:
 
       - name: push to gitee
         run: |
-          ssh -T git@gitee.com
+          # ssh -T git@gitee.com
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
           git fetch gitee -a
           GITEE_BRANCHS=$(git branch -r --list | grep -v -- '->' | grep 'gitee/' | sed 's/gitee\///' | xargs -I {} echo {} | sort)
