@@ -41,7 +41,7 @@ jobs:
           git ls-remote --heads origin
           git ls-remote --tags origin
           # 拉取所有分支
-          for b in`git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done
+          for b in `git branch -r | grep -v -- '->'` ; do git branch --track ${b##origin/} $b; done
           git branch -r | cat
 
           # git ls-remote --tags  origin | awk '{ print $2 }' | sed 's/^refs\/tags\///'  | xargs -I {} git push gitee {}:{}
