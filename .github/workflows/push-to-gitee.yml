@@ -39,7 +39,25 @@ jobs:
           EOF
           ls -lh ~/.ssh/
 
+      - name: push to gitee with git mirror
+        run:
+          ssh -T git@gitee.com
+          CURRENT_DIR=$(pwd)
+          # git clone --mirror "$SOURCE_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
+          #git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git ~/swoole-cli/
+          #cd ~/swoole-cli/
+          # git remote set-url --push origin "$DESTINATION_REPO"
+          #git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
+
+        # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
+        # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
+        # git remote -v
+        # git push --mirror origin
+        # git remote update
+
+
       - name: push to gitee
+        if: 0
         run: |
 
           set -x
@@ -68,17 +86,12 @@ jobs:
           # git ls-remote --tags  origin
 
           # git ls-remote --tags  origin | awk '{ print $2 }' | sed 's/^refs\/tags\///'  # | xargs -I {} git push gitee {}
-          git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///' | xargs -I {} git push gitee {}
+          git ls-remote --heads origin | awk '{ print $2 }' | sed 's/^refs\/heads\///'   # | xargs -I {} git push gitee {}
 
           # git push gitee --all --force
           # git push -u -f gitee --all
           # git push -u -f gitee --tags
 
-          # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git
-          # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
-          # git remote -v
-          # git push --mirror origin
-          # git remote update
 
 
 
