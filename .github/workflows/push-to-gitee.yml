@@ -40,7 +40,7 @@ jobs:
           ls -lh ~/.ssh/
 
       - name: push to gitee with git mirror
-        run:
+        run: |
           set -x
           CURRENT_DIR=$(pwd)
           ls -lha .
