@@ -33,6 +33,7 @@ jobs:
 
       - name: push to gitee
         run: |
+          set -x
           # ssh -T git@gitee.com
           git fetch origin -a
           git remote add gitee git@gitee.com:jingjingxyk/swoole-cli.git
