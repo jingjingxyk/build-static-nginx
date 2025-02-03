@@ -128,8 +128,8 @@ AllowGroups administrators "openssh users"
 #Match Group administrators
 #       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys
 
-AcceptEnv PROMPT
-Shell C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile
+# AcceptEnv PROMPT
+# Shell C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile
 
 "@
 
@@ -156,6 +156,8 @@ echo. >  ~\.ssh\authorized_keys
 
 ## 配置所在目录
 C:\ProgramData\ssh
+
+# %programdata%\ssh\sshd_config
 
 notepad $env:ProgramData\ssh\sshd_config
 
