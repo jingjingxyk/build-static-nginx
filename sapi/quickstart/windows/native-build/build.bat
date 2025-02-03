@@ -24,23 +24,6 @@ rem nmake all
 set X_MAKEFILE=%__PROJECT__%\var\windows-build-deps\php-src\Makefile
 
 
-findstr /C:"x-release-php: " %X_MAKEFILE% >nul
-
-if errorlevel 1 (
-echo custom MAKEFILE x-release-php config!
-goto x-release-php-start
-) else (
-echo custom MAKEFILE file exits !
-goto x-release-php-end
-)
-
-:x-release-php-start
-
-
-echo x-build-php-lib^: generated_files  $(PHP_GLOBAL_OBJS) $(CLI_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) >> %X_MAKEFILE%
-echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) x-build-php-lib $(PHP_GLOBAL_OBJS)  $(STATIC_EXT_OBJS) $(ASM_OBJS) $(BUILD_DIR)^\php.exe.res $(BUILD_DIR)^\php.exe.manifest  >> %X_MAKEFILE%
-
-
 
 rem https://www.cnblogs.com/sherry-best/archive/2013/04/15/3022705.html
 rem https://learn.microsoft.com/zh-CN/cpp/c-runtime-library/crt-library-features?view=msvc-170&viewFallbackFrom=vs-2019
@@ -56,13 +39,6 @@ rem  /NODEFAULTLIB:libc.lib /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib /N
 rem libvcruntime.lib libcmt.lib
 
 rem /MANIFEST:php.exe.manifest /MANIFESTUAC:uiAccess /SUBSYSTEM:CONSOLE  /subsystem:windows
-
-:x-release-php-end
-
-
-
-rem nmake /E x-release-php
-:: nmake /E php.exe
 
 
 :: nmake /E php.exe
