@@ -66,6 +66,8 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
     opkg install curl bash git xz unzip
     opkg remove luci-theme-openwrt
     opkg install wireguard-tools
+    # 多wan
+    opkg install mwan3 luci-app-mwan3
 
 ## openwrt 磁盘扩容
 
