@@ -30,7 +30,7 @@ if errorlevel 1 (
 echo custom MAKEFILE x-release-php config!
 goto x-release-php-start
 ) else (
-echo custom MAKEFI file exits !
+echo custom MAKEFILE file exits !
 goto x-release-php-end
 )
 
