@@ -128,8 +128,8 @@ AllowGroups administrators "openssh users"
 #Match Group administrators
 #       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys
 
-AcceptEnv PROMPT
-Shell C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile
+# AcceptEnv PROMPT
+# Shell C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile
 
 "@
 
@@ -140,7 +140,7 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Wi
 
 Restart-Service sshd
 Get-Service sshd
-netstat -na | find ":22"
+netstat -ano | findstr ":22"
 Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName, Description, Enabled
 
 
@@ -156,6 +156,8 @@ echo. >  ~\.ssh\authorized_keys
 
 ## 配置所在目录
 C:\ProgramData\ssh
+
+# %programdata%\ssh\sshd_config
 
 notepad $env:ProgramData\ssh\sshd_config
 
