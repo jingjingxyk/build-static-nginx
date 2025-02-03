@@ -21,7 +21,7 @@ rem /VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLI
 
 rem -lucrt
 
-sed.exe -i 's/\/LD \/MD/\/MT/' %X_MAKEFILE%
+sed.exe -i 's/\/LD \/MD/\/MT \/verbose/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
 sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
 :: sed.exe -i 's/: \$\(BUILD_DIR\)\\\$\(PHPDLL\)/: \$\(BUILD_DIR\)\\\$\(PHPDLL\) x-php-lib /' Zend\zend_stream.c
@@ -105,23 +105,14 @@ echo. >> %X_MAKEFILE%
 echo. >> %X_MAKEFILE%
 echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) generated_files $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE)   $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest   >> %X_MAKEFILE%
 echo 	@"$(LINK)" /nologo $(CLI_GLOBAL_OBJS_RESP) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS) $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
-rem echo 	@"$(LINK)" /nologo   $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS)  $(LIBS_CLI) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
 
-
-rem echo x-custom-php-lib^:generated_files  $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE) >> %X_MAKEFILE%
-rem echo 	^@copy win32\build\default.manifest $(BUILD_DIR)\$(PHPDLL).manifest ^>nul >> %X_MAKEFILE%
-rem echo 	^#	@$(CC) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS) $(PHPDLL_RES) /link /out:$(BUILD_DIR)\$(PHPDLL) $(PHP8_PGD_OPTION) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS)
-rem echo 	^@"$(LINK)" $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(LIBS) $(ASM_OBJS) $(PHPDLL_RES) /out:$(BUILD_DIR)\$(PHPDLL) $(PHP8_PGD_OPTION) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS)
-rem echo 	^-@$(_VC_MANIFEST_EMBED_DLL) >> %X_MAKEFILE%
 
 
 rem https://www.cnblogs.com/sherry-best/archive/2013/04/15/3022705.html
 rem https://learn.microsoft.com/zh-CN/cpp/c-runtime-library/crt-library-features?view=msvc-170&viewFallbackFrom=vs-2019
 
-rem echo 	^@"$(LINK)" ^/nologo  $(PHP_GLOBAL_OBJS) $(PHP_GLOBAL_OBJS_RESP) $(CLI_GLOBAL_OBJS) $(CLI_GLOBAL_OBJS_RESP)  $(STATIC_EXT_OBJS_RESP)  $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(LIBS) $(LIBS_CLI) $(BUILD_DIR)^\php.exe.res /out:$(BUILD_DIR)^\php.exe $(LDFLAGS) $(LDFLAGS_CLI)    >> %x_makefile%
-rem echo 	^@"$(LINK)" ^/nologo $(DEPS_CLI)  $(STATIC_EXT_OBJS_RESP)  $(STATIC_EXT_LIBS)  $(ASM_OBJS) $(LIBS) $(LIBS_CLI)    $(BUILD_DIR)^\php.exe.res  /out:$(BUILD_DIR)^\php.exe $(LDFLAGS) $(LDFLAGS_CLI)  >> %x_makefile%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE)   >> %x_makefile%
 rem echo 	^@echo SAPI sapi\cli build complete  >> %x_makefile%
 rem echo 	@if exist php.exe.manifest $(MT) -nologo -manifest php.exe.manifest -outputresource:php.exe    >> %x_makefile%
