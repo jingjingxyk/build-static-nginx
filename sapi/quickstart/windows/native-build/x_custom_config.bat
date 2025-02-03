@@ -24,7 +24,6 @@ rem -lucrt
 sed.exe -i 's/\/LD \/MD/\/MT /' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
 sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
-:: sed.exe -i 's/: \$\(BUILD_DIR\)\\\$\(PHPDLL\)/: \$\(BUILD_DIR\)\\\$\(PHPDLL\) x-php-lib /' Zend\zend_stream.c
 
 findstr /C:"x-show-var: " %X_MAKEFILE%
 findstr /C:"x-show-var: " %X_MAKEFILE% > nul
@@ -113,14 +112,10 @@ rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 rem https://www.cnblogs.com/sherry-best/archive/2013/04/15/3022705.html
 rem https://learn.microsoft.com/zh-CN/cpp/c-runtime-library/crt-library-features?view=msvc-170&viewFallbackFrom=vs-2019
 
-rem echo 	-@$(_VC_MANIFEST_EMBED_EXE)   >> %x_makefile%
-rem echo 	^@echo SAPI sapi\cli build complete  >> %x_makefile%
 rem echo 	@if exist php.exe.manifest $(MT) -nologo -manifest php.exe.manifest -outputresource:php.exe    >> %x_makefile%
 
 rem  /WHOLEARCHIVE  /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:msvcrtd.lib /FORCE:MULTIPLE
-rem libcpmt.lib  libvcruntime.lib libucrt.lib msvcrt.lib
-rem  /NODEFAULTLIB:libc.lib /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcd.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib
-rem libvcruntime.lib libcmt.lib
+
 
 rem /MANIFEST:php.exe.manifest /MANIFESTUAC:uiAccess /SUBSYSTEM:CONSOLE  /subsystem:windows
 
