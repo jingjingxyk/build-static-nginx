@@ -21,7 +21,7 @@ rem /VERBOSE:LIB	/NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLI
 
 rem -lucrt
 
-sed.exe -i 's/\/LD \/MD/\/MT \/verbose/' %X_MAKEFILE%
+sed.exe -i 's/\/LD \/MD/\/MT \/WHOLEARCHIVE/' %X_MAKEFILE%
 sed.exe -i 's/\/D _USRDLL/ /' %X_MAKEFILE%
 sed.exe -i 's/ZEND_DLIMPORT/ /' Zend\zend_stream.c
 :: sed.exe -i 's/: \$\(BUILD_DIR\)\\\$\(PHPDLL\)/: \$\(BUILD_DIR\)\\\$\(PHPDLL\) x-php-lib /' Zend\zend_stream.c
