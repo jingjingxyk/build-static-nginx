@@ -55,12 +55,13 @@ configure.bat ^
 --disable-zts ^
 --disable-all         --disable-cgi     ^
 --enable-cli   ^
+--enable-cli-win32 ^
 --enable-sockets      --enable-ctype     --enable-pdo    --enable-phar  ^
 --enable-filter ^
 --enable-xmlreader   --enable-xmlwriter ^
 --enable-tokenizer
 
-:: --enable-cli-win32 ^
+
 :: --disable-zts ^
 :: --enable-apcu ^
 :: --enable-bcmath ^
