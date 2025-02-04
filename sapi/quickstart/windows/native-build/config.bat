@@ -53,7 +53,8 @@ configure.bat ^
 --with-toolset=vs ^
 --with-mp=auto ^
 --disable-zts ^
---disable-all         --disable-cgi      --enable-cli   ^
+--disable-all         --disable-cgi     ^
+--enable-cli   ^
 --enable-sockets      --enable-ctype     --enable-pdo    --enable-phar  ^
 --enable-filter ^
 --enable-xmlreader   --enable-xmlwriter ^
