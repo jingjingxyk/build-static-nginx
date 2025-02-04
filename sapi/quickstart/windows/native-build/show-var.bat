@@ -19,6 +19,11 @@ dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php
 dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\msys2\usr\bin\
 where sed.exe
 
+echo %ProgramFiles(x86)%
+echo %USERPROFILE%
+echo %NUMBER_OF_PROCESSORS%
+echo %comspec%
+
 ver
 set
 vswhere.exe
