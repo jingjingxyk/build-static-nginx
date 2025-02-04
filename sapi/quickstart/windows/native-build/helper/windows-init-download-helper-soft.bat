@@ -29,6 +29,8 @@ if not exist "vc_redist.x86.exe" curl.exe -fSLo vc_redist.x86.exe https://aka.ms
 if not exist "vc_redist.x64.exe" curl.exe -fSLo vc_redist.x64.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
 if not exist "NotepadNext-v0.10-Installer.exe" curl.exe -fSLo NotepadNext-v0.10-Installer.exe  https://php-cli.jingjingxyk.com/NotepadNext-v0.10-Installer.exe
 
+if not exist "wireguard-amd64-0.5.3.msi" curl.exe -fSLo wireguard-amd64-0.5.3.msi  https://download.dengxiaci.com/wireguard-amd64-0.5.3.msi
+
 
 :: curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip  https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip
 

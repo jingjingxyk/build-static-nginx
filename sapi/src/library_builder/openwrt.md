@@ -112,3 +112,10 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
 
     OSPF （常用路由器之间组网）
     ISIS (运营商使用）
+
+
+##  wireguard 辅助工具
+
+    udp2raw
+    phantun
+        官方建议将 MTU 的值设为 1428

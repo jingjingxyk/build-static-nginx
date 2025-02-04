@@ -26,6 +26,8 @@ if (-not (Test-Path -Path "C:\Program Files\Git\bin\git.exe"))
 
 $env:PATH += ";C:\Program Files\Git\bin;"
 
+# $env:PATH += ";${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\7-Zip\;"
+
 & cmd /c "git config --global core.autocrlf false"
 & cmd /c "git config --global core.eol lf"
 & cmd /c "git config --global core.ignorecase false"
