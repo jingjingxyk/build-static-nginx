@@ -42,9 +42,8 @@ rem https://learn.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features
 
 set "LDFLAGS=/WHOLEARCHIVE /VERBOSE	/FORCE:MULTIPLE /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /DEFAULTLIB:libcmt.lib  /DEFAULTLIB:libucrt.lib /DEFAULTLIB:libvcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
 
-rem /VERBOSE:LIB
+rem /VERBOSE:LIB /WHOLEARCHIVE:libcmt.lib
 
-rem set "LDFLAGS=/WHOLEARCHIVE /FORCE:MULTIPLE"
 
 configure.bat ^
 --with-php-build="c:\php-cli" ^
