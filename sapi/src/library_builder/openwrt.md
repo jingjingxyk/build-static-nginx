@@ -116,6 +116,7 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
 
 ##  wireguard 辅助工具
 
+    默认端口： 51820
     udp2raw
     phantun
         官方建议将 MTU 的值设为 1428
