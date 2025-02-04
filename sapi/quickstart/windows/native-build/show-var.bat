@@ -18,7 +18,8 @@ set X_MAKEFILE=%__PROJECT__%\var\windows-build-deps\php-src\Makefile
 dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\bin\php
 dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\msys2\usr\bin\
 where sed.exe
-vswhere.exe -products* -requires
+vswhere.exe
+::vswhere.exe -products* -requires
 :: vswhere.exe -legacy -prerelease -format json
 :: vswhere.exe -legacy -prerelease -format json | jq
 :: vswhere.exe -legacy -prerelease
