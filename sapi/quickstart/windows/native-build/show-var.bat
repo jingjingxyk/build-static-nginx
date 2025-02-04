@@ -15,6 +15,7 @@ cd %__PROJECT__%\var\windows-build-deps\php-src\
 
 set X_MAKEFILE=%__PROJECT__%\var\windows-build-deps\php-src\Makefile
 
+dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\msys2\bin\php
 dir  %__PROJECT__%\var\windows-build-deps\php-sdk-binary-tools\msys2\usr\bin\
 where sed.exe
 :: vswhere.exe -products* -requires
