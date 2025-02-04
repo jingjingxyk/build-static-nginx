@@ -27,9 +27,9 @@ vswhere.exe
 :: vswhere.exe -legacy -prerelease -format json | jq
 :: vswhere.exe -legacy -prerelease
 
-echo %INCLUDE%
-echo %LIB%
-echo %LIBPATH%
+echo "INCLUDE=%INCLUDE%"
+echo "LIB=%LIB%"
+echo "LIBPATH=%LIBPATH%"
 
 nmake /f Makefile x-show-var
 
