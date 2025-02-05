@@ -78,5 +78,16 @@ configure.bat ^
 :: --enable-fileinfo
 :: --with-curl=static
 
+:: --with-openssl=static --with-curl=static --with-libxml=static
+:: --with-zlib=static --with-bz2=static --with-iconv=static
+:: --with-mysql=mysqlnd --with-pdo-mysql=mysqlnd
+:: --enable-mbstring --enable-zip --enable-phar --enable-session
+:: --enable-tokenizer --enable-simplexml --enable-dom --enable-xmlreader
+:: --enable-xmlwriter --enable-json --enable-filter --enable-hash
+:: --enable-spl --enable-pcre --enable-calendar --enable-ctype
+:: --enable-fileinfo --enable-ftp --enable-posix --enable-shmop
+:: --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm
+:: --enable-wddx --enable-exif --enable-dba --enable-opcache
+
 cd /d %__PROJECT__%
 endlocal
