@@ -28,7 +28,9 @@ echo "===================="
 rem set "INCLUDE=%INCLUDE%;%__PROJECT__%\build\openssl\include\;%__PROJECT__%\build\zlib\include"
 rem set "LIB=%LIB%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\zlib\lib"
 rem set "LIBPATH=%LIBPATH%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\zlib\lib\"
+
 set "LIB=%LIB% libucrt.lib libcmt.lib vcruntime.lib "
+
 :: echo %INCLUDE%
 :: echo %LIB%
 :: echo %LIBPATH%
@@ -40,7 +42,7 @@ set "CFLAGS=/EHsc /MT  "
 rem https://learn.microsoft.com/zh-cn/cpp/c-runtime-library/crt-library-features?view=msvc-170
 rem https://learn.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
 
-set "LDFLAGS=/GS- /VERBOSE:LIB	 /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /NODEFAULTLIB:libcmt.lib  /DEFAULTLIB:libucrt.lib /DEFAULTLIB:vcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
+set "LDFLAGS=/GS /VERBOSE:LIB	 /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /NODEFAULTLIB:libcmt.lib  /DEFAULTLIB:libucrt.lib /DEFAULTLIB:vcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
 
 rem /VERBOSE /WHOLEARCHIVE /FORCE:MULTIPLE  /WHOLEARCHIVE:libcmt.lib /WHOLEARCHIVE:libucrt.lib
 
