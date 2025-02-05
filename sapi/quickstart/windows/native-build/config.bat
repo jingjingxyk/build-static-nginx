@@ -40,9 +40,9 @@ set "CFLAGS=/EHsc /MT  "
 rem https://learn.microsoft.com/zh-cn/cpp/c-runtime-library/crt-library-features?view=msvc-170
 rem https://learn.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
 
-set "LDFLAGS= /WHOLEARCHIVE:libcmt.lib /WHOLEARCHIVE:libucrt.lib /VERBOSE:LIB	 /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /NODEFAULTLIB:libcmt.lib  /DEFAULTLIB:libucrt.lib /DEFAULTLIB:libvcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
+set "LDFLAGS=/VERBOSE:LIB	 /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib /NODEFAULTLIB:libcmt.lib  /DEFAULTLIB:libucrt.lib /DEFAULTLIB:libvcruntime.lib	/NODEFAULTLIB:libucrtd.lib  /NODEFAULTLIB:ucrt.lib /NODEFAULTLIB:ucrtd.lib	"
 
-rem /VERBOSE /WHOLEARCHIVE /FORCE:MULTIPLE
+rem /VERBOSE /WHOLEARCHIVE /FORCE:MULTIPLE  /WHOLEARCHIVE:libcmt.lib /WHOLEARCHIVE:libucrt.lib
 
 
 configure.bat ^
