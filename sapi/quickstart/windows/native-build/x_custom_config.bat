@@ -102,7 +102,7 @@ echo. >> %X_MAKEFILE%
 
 echo. >> %X_MAKEFILE%
 echo x-release-php^: $(DEPS_CLI) $(CLI_GLOBAL_OBJS) generated_files $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)  $(ASM_OBJS) $(MCFILE)   $(BUILD_DIR)\php.exe.res $(BUILD_DIR)\php.exe.manifest   >> %X_MAKEFILE%
-echo 	@"$(LINK)" /nologo $(CLI_GLOBAL_OBJS_RESP) $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) >> %X_MAKEFILE%
+echo 	@"$(LINK)" /nologo $(CLI_GLOBAL_OBJS_RESP) $(PHP_GLOBAL_OBJS_RESP) $(STATIC_EXT_OBJS_RESP) $(STATIC_EXT_LIBS) $(ASM_OBJS) $(LDFLAGS) $(LDFLAGS_CLI) $(LIBS) $(BUILD_DIR)\php.exe.res /out:$(BUILD_DIR)\php.exe  >> %X_MAKEFILE%
 rem echo 	-@$(_VC_MANIFEST_EMBED_EXE) >> %X_MAKEFILE%
 
 
