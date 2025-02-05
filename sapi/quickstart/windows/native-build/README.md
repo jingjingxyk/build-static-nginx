@@ -50,6 +50,8 @@ git config --global core.ignorecase false
 
 ```bat
 
+rem vcruntime.lib 是较新的 Visual Studio 版本（2015 及之后）中使用的标准 C 运行时库。
+rem libvcruntime.lib 是旧版本中使用的命名方式，现在较少见。
 
 
 :: vs2022
