@@ -28,7 +28,7 @@ echo "===================="
 rem set "INCLUDE=%INCLUDE%;%__PROJECT__%\build\openssl\include\;%__PROJECT__%\build\zlib\include"
 rem set "LIB=%LIB%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\zlib\lib"
 rem set "LIBPATH=%LIBPATH%;%__PROJECT__%\build\openssl\lib\;%__PROJECT__%\build\zlib\lib\"
-
+set "LIB=%LIB% libucrt.lib libcmt.lib vcruntime.lib "
 :: echo %INCLUDE%
 :: echo %LIB%
 :: echo %LIBPATH%
