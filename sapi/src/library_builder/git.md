@@ -307,3 +307,10 @@ git config --global core.filemode false
 # 让 Git 显示颜色，会让命令输出看起来更醒目
 git config --global color.ui true
 ```
+
+```shell
+
+git lfs pull
+git submodule update --init --recursive
+
+```
