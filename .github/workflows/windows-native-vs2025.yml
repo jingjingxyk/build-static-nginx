@@ -43,7 +43,7 @@ jobs:
           echo %NUMBER_OF_PROCESSORS%
           git clone -b master https://github.com/php/php-sdk-binary-tools.git
           set "__PROJECT__=%cd%"
-          set "PATH=%PATH%;%__PROJECT__%\php-sdk-binary-tools\bin\;"
+          set "PATH=%PATH%;%__PROJECT__%\php-sdk-binary-tools\bin\;%__PROJECT__%\php-sdk-binary-tools\msys2\usr\bin\;"
           vswhere.exe
           vswhere.exe -legacy -prerelease -format json
 
