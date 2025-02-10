@@ -158,7 +158,7 @@ then
     cd ${__DIR__}/ovs/
     # git   pull --depth=1 --progress --rebase
 else
-    git clone -b v3.3.1 https://github.com/openvswitch/ovs.git --depth=1 --progress
+    git clone -b v3.4.1 https://github.com/openvswitch/ovs.git --depth=1 --progress
 fi
 
 cd ${__DIR__}
@@ -168,7 +168,7 @@ then
     cd ${__DIR__}/ovn/
     # git   pull --depth=1 --progress --rebase
 else
-    git clone -b v24.03.2 https://github.com/ovn-org/ovn.git  --depth=1 --progress
+    git clone -b v24.09.2 https://github.com/ovn-org/ovn.git  --depth=1 --progress
 fi
 
 cd ${__DIR__}
