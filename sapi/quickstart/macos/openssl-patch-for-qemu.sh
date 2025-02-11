@@ -10,4 +10,4 @@ cd openssl-3.4.0
 perl ./Configure --prefix=/usr/local/Cellar/openssl@3/3.4.0 --openssldir=/usr/local/etc/openssl@3 --libdir=lib no-ssl3 no-ssl3-method no-zlib darwin64-x86_64
 make -j $(LOGICAL_PROCESSORS)
 make install MANDIR=/usr/local/Cellar/openssl@3/3.4.0/share/man MANSUFFIX=ssl
-brew link openssl
+
