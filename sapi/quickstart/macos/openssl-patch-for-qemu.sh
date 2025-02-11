@@ -1,5 +1,5 @@
 
-export LOGICAL_PROCESSORS=$(`nproc 2> /dev/null || sysctl -n hw.ncpu`)
+export LOGICAL_PROCESSORS=$(nproc 2> /dev/null || sysctl -n hw.ncpu)
 export CMAKE_BUILD_PARALLEL_LEVEL=${LOGICAL_PROCESSORS}
 
 test -f openssl-3.4.0.tar.gz || curl -fSLo openssl-3.4.0.tar.gz https://github.com/openssl/openssl/releases/download/openssl-3.4.0/openssl-3.4.0.tar.gz
