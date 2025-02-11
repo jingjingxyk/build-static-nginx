@@ -9,7 +9,7 @@ env:
 
 jobs:
   windows-native:
-    if: 0
+    if: 1
     runs-on: windows-2022
     strategy:
       matrix:
@@ -23,7 +23,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
-          vsversion:
+
       - name: show environment info
         run: |
           git config --global core.autocrlf false
@@ -44,7 +44,12 @@ jobs:
       - name: prepare deps soft
         shell: cmd
         run: |
-          sapi\quickstart\windows\native-build\windows-init.bat
+          .\sapi\quickstart\windows\native-build\windows-init-download.bat
+
+      - name: Install deps soft
+        shell: cmd
+        run: |
+          .\sapi\quickstart\windows\native-build\windows-init-install.bat
 
       - name: Set  Github ENV variables
         run: |
@@ -77,28 +82,10 @@ jobs:
           where bison.exe
           where  re2c.exe
 
-      - name: php prepare
-        shell: cmd
-        run: |
-          cd var\windows-build-deps\php-src\
-          .\buildconf.bat -f
-
-      - name: php config
-        shell: cmd
-        run: |
-          cd var\windows-build-deps\php-src\
-          configure.bat ^
-          --disable-all         --disable-cgi      --enable-cli   ^
-          --enable-sockets      --enable-ctype     --enable-pdo    --enable-phar  ^
-          --enable-filter ^
-          --enable-xmlreader   --enable-xmlwriter ^
-          --enable-tokenizer
-
       - name: php build
         shell: cmd
         run: |
-          cd var\windows-build-deps\php-src\
-          nmake /E
+           .\sapi\quickstart\windows\native-build\run.bat
 
       - name: Show Build Result
         run: |
@@ -109,6 +96,7 @@ jobs:
           dumpbin /DEPENDENTS ".\x64\Release_TS\php.exe"
 
       - name: production artifacts
+        if: 0
         uses: actions/upload-artifact@v4
         with:
           name: php-cli-v${{ env.BUILD_PHP_VERSION }}-vs16-x64

@@ -8,7 +8,7 @@ env:
 
 jobs:
   push-to-gitee:
-    if: ${{ (github.repository_owner == 'jingjingxyk') && (github.repository == 'jingjingxyk/swoole-cli') }}
+    if: ${{ 0 && (github.repository_owner == 'jingjingxyk') && (github.repository == 'jingjingxyk/swoole-cli') }}
     runs-on: ubuntu-latest
     steps:
       - name: install deps
