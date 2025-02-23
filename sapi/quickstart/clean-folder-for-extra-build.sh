@@ -120,8 +120,7 @@ test -d SDN && rm -rf SDN
 test -d pve && rm -rf pve
 
 cd ${__PROJECT__}/sapi/quickstart/macos/
-test -f openssl-patch-for-qemu.sh && rm -rf openssl-patch-for-qemu.sh
-test -f qemu.sh && rm -rf qemu.sh
+
 
 cd ${__PROJECT__}/sapi/quickstart/windows/
 test -d msys2-build && rm -rf msys2-build
