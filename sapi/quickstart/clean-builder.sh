@@ -14,7 +14,7 @@ export PATH="${__PROJECT__}/bin/runtime:$PATH"
 shopt -s expand_aliases
 alias php="php -d curl.cainfo=${__PROJECT__}/bin/runtime/cacert.pem -d openssl.cafile=${__PROJECT__}/bin/runtime/cacert.pem"
 
-EXT_NAME='openssh'
+EXT_NAME=''
 FORECE_CLEAN_ACTION=0
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -36,4 +36,3 @@ if [ ! -z "${EXT_NAME}" ]; then
 else
   echo '请传入参数 --ext-name=ext_name --force 1 '
 fi
-set -exu
