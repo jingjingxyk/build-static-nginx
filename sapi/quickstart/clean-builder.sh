@@ -32,7 +32,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [ ! -z "${EXT_NAME}" ]; then
-  php prepare.php --without-docker --skip-download=1 +openssh --show-ext-deps=${EXT_NAME} --with-clean-deps-file=${FORECE_CLEAN_ACTION}
+  php prepare.php --without-docker --skip-download=1 +${EXT_NAME} --show-ext-deps=${EXT_NAME} --with-clean-deps-file=${FORECE_CLEAN_ACTION}
 else
   echo '请传入参数 --ext-name=ext_name --force 1 '
 fi
