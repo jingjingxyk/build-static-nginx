@@ -10,6 +10,7 @@ use RuntimeException;
 use SwooleCli\PreprocessorTrait\CompilerTrait;
 use SwooleCli\PreprocessorTrait\DownloadBoxTrait;
 use SwooleCli\PreprocessorTrait\WebUITrait;
+use SwooleCli\PreprocessorTrait\CleanBuilderTrait;
 
 #[AllowDynamicProperties]
 class Preprocessor
@@ -19,6 +20,8 @@ class Preprocessor
     use WebUITrait;
 
     use CompilerTrait;
+
+    use CleanBuilderTrait;
 
     public const VERSION = '1.7';
 
@@ -1234,6 +1237,11 @@ EOF;
         }
         if ($this->getInputOption('with-web-ui')) {
             $this->generateWebUIData();
+        }
+        if ($this->getInputOption('show-ext-deps')) {
+            $ext_name = $this->getInputOption('show-ext-deps');
+            $this->show_ext_eps_file($ext_name);
+            exit(0);
         }
         foreach ($this->endCallbacks as $endCallback) {
             $endCallback($this);
