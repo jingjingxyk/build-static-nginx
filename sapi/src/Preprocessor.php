@@ -1240,7 +1240,7 @@ EOF;
         }
         if ($this->getInputOption('show-ext-deps')) {
             $ext_name = $this->getInputOption('show-ext-deps');
-            $this->show_ext_eps_file($ext_name);
+            $this->show_ext_deps($ext_name);
             exit(0);
         }
         foreach ($this->endCallbacks as $endCallback) {

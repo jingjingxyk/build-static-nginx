@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -exu
 __DIR__=$(
   cd "$(dirname "$0")"
   pwd
@@ -15,14 +14,14 @@ export PATH="${__PROJECT__}/bin/runtime:$PATH"
 shopt -s expand_aliases
 alias php="php -d curl.cainfo=${__PROJECT__}/bin/runtime/cacert.pem -d openssl.cafile=${__PROJECT__}/bin/runtime/cacert.pem"
 
-EXT_NAME=''
+EXT_NAME='openssh'
 FORECE_CLEAN_ACTION=0
 while [ $# -gt 0 ]; do
   case "$1" in
   --ext-name)
     EXT_NAME="$2"
     ;;
-  --force-clean-deps-file)
+  --force)
     FORECE_CLEAN_ACTION=1
     ;;
   --*)
@@ -32,9 +31,9 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-if [ ! -z "${EXT_NAME}" ] ; then
-  php prepare.php --without-docker --skip-download=1 +coturn --show-ext-deps=${EXT_NAME} --with-clean-deps-file=${FORECE_CLEAN_ACTION}
+if [ ! -z "${EXT_NAME}" ]; then
+  php prepare.php --without-docker --skip-download=1 +openssh --show-ext-deps=${EXT_NAME} --with-clean-deps-file=${FORECE_CLEAN_ACTION}
 else
-   echo '请传入参数 --ext-name=ext_name --force-clean-deps-file=1 '
+  echo '请传入参数 --ext-name=ext_name --force 1 '
 fi
-
+set -exu
