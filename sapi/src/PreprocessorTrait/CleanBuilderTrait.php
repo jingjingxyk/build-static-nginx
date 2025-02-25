@@ -6,16 +6,16 @@ namespace SwooleCli\PreprocessorTrait;
 
 trait CleanBuilderTrait
 {
-    private $clean_builder_libs=[];
-    private $clean_builder_exts=[];
+    private $clean_builder_libs = [];
+    private $clean_builder_exts = [];
 
     public function show_ext_deps(string $ext_name): void
     {
         $project_dir = realpath(__DIR__ . '/../../../');
         $ext_is_exists = 0;
-        $ext_files = scandir($project_dir . '/sapi/src/builder/extension/');
-        $new_ext_files = [];
-        foreach ($ext_files as $file) {
+        $all_ext_builder = scandir($project_dir . '/sapi/src/builder/extension/');
+        $new_all_ext_builder = [];
+        foreach ($all_ext_builder as $file) {
             if ($file == '.' || $file == '..') {
                 continue;
             }
@@ -23,17 +23,17 @@ trait CleanBuilderTrait
                 if ($file === $ext_name . '.php') {
                     $ext_is_exists = 1;
                 }
-                $new_ext_files [] = $file;
+                $new_all_ext_builder [] = $file;
             }
         }
-        $library_files = scandir($project_dir . '/sapi/src/builder/library/');
-        $new_library_files = [];
-        foreach ($library_files as $file) {
+        $all_library_builder = scandir($project_dir . '/sapi/src/builder/library/');
+        $new_all_library_builder = [];
+        foreach ($all_library_builder as $file) {
             if ($file == '.' || $file == '..') {
                 continue;
             }
             if (preg_match('/\.php$/', $file)) {
-                $new_library_files [] = $file;
+                $new_all_library_builder [] = $file;
             }
         }
         if ($ext_is_exists != 1) {
@@ -41,40 +41,32 @@ trait CleanBuilderTrait
             exit(0);
         }
 
+        # 获得扩展依赖链
+        $this->getDependentExtensionsByExtName($ext_name);
+        # 获得库依赖链
+        $this->getDependentLibraryByExtName($ext_name);
+
+
         echo "=================" . PHP_EOL;
         echo "依赖的扩展:" . PHP_EOL;
-        $this->getDependentExtensions($ext_name);
-        die;
-        $exts = $this->extensionMap[$ext_name]->dependentExtensions;
-        $libs = $this->extensionMap[$ext_name]->deps;
-        foreach ($exts as $key => $ext) {
+        foreach ($this->clean_builder_exts as $key => $ext) {
             echo $ext . PHP_EOL;
-            $exts[$key] = $ext . '.php';
-            $this->clean_builder_libs +=$this->extensionMap[$ext]->deps;
-            $this->clean_builder_exts +=$this->extensionMap[$ext_name]->dependentExtensions;
         }
-        if (empty($exts)) {
-            $exts = [];
-        }
+
         echo "=================" . PHP_EOL;
         echo "依赖的库: " . PHP_EOL;
-
-        $deps = $this->extensionMap[$ext_name]->deps;
-        $libs = $this->extensionDependentLibraryMap[$ext_name];
-        var_dump($deps);
-        foreach ($libs as $key => $lib) {
+        foreach ($this->clean_builder_libs as $key => $lib) {
             echo $lib . PHP_EOL;
-            $libs[$key] = $lib . '.php';
         }
-        if (empty($libs)) {
-            $libs = [];
-        }
-        echo "=================" . PHP_EOL;
-        # 求差集 （删除不依赖的扩展 或者 库）
-        $clean_lib_builder = array_diff($new_library_files, $libs);
-        $clan_ext_builder = array_diff($new_ext_files, $exts);
+        //var_dump($this->clean_builder_exts);
+        //var_dump($this->clean_builder_libs);
 
-        if ($this->getInputOption('with-clean-deps-file')) {
+        echo "=================" . PHP_EOL;
+        # 求差集 获得不需要的 builder
+        $clean_ext_builder = array_diff($new_all_ext_builder, $this->clean_builder_exts);
+        $clan_lib_builder = array_diff($new_all_library_builder, $this->clean_builder_libs);
+
+        if ($this->getInputOption('with-clean-builder')) {
             $cmd = <<<EOF
 cd {$project_dir}
 git branch | grep '* ' | awk '{print $2}'
@@ -95,10 +87,11 @@ EOF;
                 'php-fpm',
                 'php-fpm-7.4'
             ])) {
-                foreach ($clan_ext_builder as $file) {
+                echo "执行清理 无关的 builder";
+                foreach ($clean_ext_builder as $file) {
                     unlink($project_dir . '/sapi/src/builder/extension/' . $file);
                 }
-                foreach ($clean_lib_builder as $file) {
+                foreach ($clan_lib_builder as $file) {
                     unlink($project_dir . '/sapi/src/builder/library/' . $file);
                 }
             }
@@ -107,32 +100,49 @@ EOF;
         }
     }
 
-    private function getDependentExtensions($ext_name){
-        $exts = $this->extensionMap[$ext_name]->dependentExtensions;
-        $this->clean_builder_exts +=$exts;
-
-        foreach ($exts as $name) {
-            if(empty($this->extensionMap[$name]->dependentExtensions)){
-
-            }else{
-                $this->getDependentExtensions($name);
-            }
-
-
-        }
-    }
-    private function getDependentLibrary($lib): void
+    private function getDependentExtensionsByExtName($ext_name): void
     {
-        if (!isset($this->libraryMap[$lib])) {
-            throw new RuntimeException('library ' . $lib. ' no found');
-        }
-        $lib = $this->libraryMap[$lib];
-        if (!empty($lib->deps)) {
-            $libs = array_merge($libs, $lib->deps);
-            foreach ($lib->deps as $name) {
-                $this->getLibraryDependentLibraryByName($name, $libs);
+        $dependentExtensions = $this->extensionMap[$ext_name]->dependentExtensions;
+        if (!empty($dependentExtensions)) {
+            foreach ($dependentExtensions as $ext) {
+                if (in_array($ext, $this->clean_builder_exts)) {
+                    continue;
+                } else {
+                    $this->clean_builder_exts[] = $ext;
+                }
+                $this->getDependentExtensionsByExtName($ext);
             }
         }
     }
+
+    private function getDependentLibraryByExtName($ext_name): void
+    {
+        $deps = $this->extensionMap[$ext_name]->deps;
+        if (!empty($deps)) {
+            foreach ($deps as $lib) {
+                if (in_array($lib, $this->clean_builder_libs)) {
+                    continue;
+                }
+                $this->clean_builder_libs[] = $lib;
+                $this->getDependentLibraryByLibName($lib);
+            }
+        }
+
+    }
+
+    private function getDependentLibraryByLibName($lib_name): void
+    {
+        $deps = $this->libraryMap[$lib_name]->deps;
+        if (!empty($deps)) {
+            foreach ($deps as $lib) {
+                if (in_array($lib, $this->clean_builder_libs)) {
+                    continue;
+                }
+                $this->clean_builder_libs[] = $lib;
+                $this->getDependentLibraryByLibName($lib);
+            }
+        }
+    }
+
 
 }
