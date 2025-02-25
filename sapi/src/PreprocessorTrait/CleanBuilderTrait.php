@@ -94,8 +94,10 @@ EOF;
                 foreach ($clan_lib_builder as $file) {
                     unlink($project_dir . '/sapi/src/builder/library/' . $file);
                 }
+                echo "清理 builder 完毕" . PHP_EOL;
+            } else {
+                echo '不执行清理 builder 操作' . PHP_EOL;
             }
-            echo "清理完毕" . PHP_EOL;
             exit(0);
         }
     }
