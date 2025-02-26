@@ -27,7 +27,7 @@ return function (Preprocessor $p) {
             PACKAGES="\$PACKAGES nettle hogweed"
             CPPFLAGS="-I{$libiconv_prefix}/include  "
             LDFLAGS="-L{$libiconv_prefix}/lib "
-            LIBS="-liconv -lintl {$libs}"
+            LIBS="-liconv {$libs}"
             CPPFLAGS="$(pkg-config  --cflags-only-I  --static \$PACKAGES) \$CPPFLAGS " \
             LDFLAGS="$(pkg-config   --libs-only-L    --static \$PACKAGES) \$LDFLAGS " \
             LIBS="$(pkg-config      --libs-only-l    --static \$PACKAGES) \$LIBS " \
