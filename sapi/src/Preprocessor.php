@@ -7,10 +7,11 @@ use MJS\TopSort\CircularDependencyException;
 use MJS\TopSort\ElementNotFoundException;
 use MJS\TopSort\Implementations\StringSort;
 use RuntimeException;
+use SwooleCli\PreprocessorTrait\CleanBuilderTrait;
 use SwooleCli\PreprocessorTrait\CompilerTrait;
 use SwooleCli\PreprocessorTrait\DownloadBoxTrait;
 use SwooleCli\PreprocessorTrait\WebUITrait;
-use SwooleCli\PreprocessorTrait\CleanBuilderTrait;
+
 
 #[AllowDynamicProperties]
 class Preprocessor
