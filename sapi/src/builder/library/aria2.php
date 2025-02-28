@@ -10,7 +10,8 @@ return function (Preprocessor $p) {
     $cppflags = '';
     $ldflags = '';
     $libs = $p->isMacos() ? '-lc++' : ' -lstdc++ ';
-    $dependentLibraries = ['libuv',
+    $dependentLibraries = [
+        'libuv',
         'zlib',
         'libiconv',
         'openssl',
@@ -26,7 +27,7 @@ return function (Preprocessor $p) {
     ];
     if ($p->isLinux()) {
         $gettext_prefix = GETTEXT_PREFIX;
-        $dependentLibraries[] = 'util_linux';
+        $dependentLibraries[] = 'gettext';
         $cppflags .= " -I{$gettext_prefix}/include ";
         $ldflags .= " -L{$gettext_prefix}/lib ";
         $libs .= '   -lintl ';
