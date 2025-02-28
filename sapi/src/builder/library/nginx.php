@@ -26,13 +26,14 @@ return function (Preprocessor $p) {
             //->withAutoUpdateFile()
             ->withBuildCached(false)
             ->withInstallCached(false)
-            ->withFile('nginx-release-1.27.3.tar.gz')
+            ->withFile('nginx-release-1.27.4.tar.gz')
             ->withDownloadScript(
                 'nginx',
                 <<<EOF
                 # hg clone  http://hg.nginx.org/nginx
                 # hg update -C release-1.25.2
-                git clone -b release-1.27.3 --depth 1 --progress  https://github.com/nginx/nginx.git
+
+                git clone -b release-1.27.4 --depth 1 --progress  https://github.com/nginx/nginx.git
 
                 # hg  clone -r release-1.25.5 --rev=1  http://hg.nginx.org/nginx
                 # hg  clone -r default --rev=1  http://hg.nginx.org/nginx
@@ -112,6 +113,7 @@ EOF
             --with-http_v3_module \
             --with-http_flv_module \
             --with-http_sub_module \
+            --with-http_dav_module \
             --with-stream \
             --with-stream_ssl_preread_module \
             --with-stream_ssl_module \
@@ -132,6 +134,7 @@ EOF
             # --with-cc-opt="-O2 -static -Wl,-pie \$CPPFLAGS"
             # --with-ld-opt=parameters — sets additional parameters that will be used during linking.
             # --with-cc-opt=parameters — sets additional parameters that will be added to the CFLAGS variable.
+
 EOF
             )
             ->withBinPath($nginx_prefix . '/bin/')
