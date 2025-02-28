@@ -6,7 +6,31 @@ use SwooleCli\Preprocessor;
 return function (Preprocessor $p) {
     $aria2_prefix = ARIA2_PREFIX;
     $libiconv_prefix = ICONV_PREFIX;
+
+    $cppflags = '';
+    $ldflags = '';
     $libs = $p->isMacos() ? '-lc++' : ' -lstdc++ ';
+    $dependentLibraries = ['libuv',
+        'zlib',
+        'libiconv',
+        'openssl',
+        'sqlite3',
+        'nettle',
+        'libxml2',
+        'cares',
+        'libssh2',
+        'gmp',
+        'libexpat',
+        'libssh2',
+        'nettle'
+    ];
+    if ($p->isLinux()) {
+        $gettext_prefix = GETTEXT_PREFIX;
+        $dependentLibraries[] = 'util_linux';
+        $cppflags .= " -I{$gettext_prefix}/include ";
+        $ldflags .= " -L{$gettext_prefix}/lib ";
+        $libs .= '   -lintl ';
+    }
     $p->addLibrary(
         (new Library('aria2'))
             ->withHomePage('https://aria2.github.io/')
@@ -25,8 +49,8 @@ return function (Preprocessor $p) {
             PACKAGES="\$PACKAGES expat"
             PACKAGES="\$PACKAGES libssh2"
             PACKAGES="\$PACKAGES nettle hogweed"
-            CPPFLAGS="-I{$libiconv_prefix}/include  "
-            LDFLAGS="-L{$libiconv_prefix}/lib "
+            CPPFLAGS="-I{$libiconv_prefix}/include {$cppflags} "
+            LDFLAGS="-L{$libiconv_prefix}/lib {$ldflags} "
             LIBS="-liconv {$libs}"
             CPPFLAGS="$(pkg-config  --cflags-only-I  --static \$PACKAGES) \$CPPFLAGS " \
             LDFLAGS="$(pkg-config   --libs-only-L    --static \$PACKAGES) \$LDFLAGS " \
@@ -59,19 +83,7 @@ EOF
             )
             ->withBinPath($aria2_prefix . '/bin/')
             ->withDependentLibraries(
-                'libuv',
-                'zlib',
-                'libiconv',
-                'openssl',
-                'sqlite3',
-                'nettle',
-                'libxml2',
-                'cares',
-                'libssh2',
-                'gmp',
-                'libexpat',
-                'libssh2',
-                'nettle'
+                ...$dependentLibraries
             )
     );
 };
