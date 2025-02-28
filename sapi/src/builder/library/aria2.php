@@ -25,9 +25,12 @@ return function (Preprocessor $p) {
         'libssh2',
         'nettle'
     ];
+
+    $dependentLibraries[] = 'gettext';
+
     if ($p->isLinux()) {
         $gettext_prefix = GETTEXT_PREFIX;
-        $dependentLibraries[] = 'gettext';
+
         $cppflags .= " -I{$gettext_prefix}/include ";
         $ldflags .= " -L{$gettext_prefix}/lib ";
         $libs .= '   -lintl ';
