@@ -6,6 +6,7 @@ use SwooleCli\Preprocessor;
 return function (Preprocessor $p) {
     $aria2_prefix = ARIA2_PREFIX;
     $libiconv_prefix = ICONV_PREFIX;
+    $gettext_prefix = GETTEXT_PREFIX;
 
     $cppflags = '';
     $ldflags = '';
@@ -29,8 +30,6 @@ return function (Preprocessor $p) {
     $dependentLibraries[] = 'gettext';
 
     if ($p->isLinux()) {
-        $gettext_prefix = GETTEXT_PREFIX;
-
         $cppflags .= " -I{$gettext_prefix}/include ";
         $ldflags .= " -L{$gettext_prefix}/lib ";
         $libs .= '   -lintl ';
