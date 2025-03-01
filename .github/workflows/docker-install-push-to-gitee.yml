@@ -1,6 +1,8 @@
 name: docker-install-push-to-gitee
 
 on:
+  push:
+  pull_request:
   schedule:
     - cron: '0 0 */7 * *'
 
@@ -18,8 +20,6 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Set Env
         run: |
           echo "CURRENT_BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
@@ -28,15 +28,15 @@ jobs:
           PUSH_TO_GITEE_SECRET_KEY: ${{ secrets.PUSH_TO_GITEE_SECRET_KEY }}
         run: |
           mkdir -p ~/.ssh/
-          printf "%s\n" "$PUSH_TO_GITEE_SECRET_KEY" > ~/.ssh/swoole-cli-github-push-to-gitee-key
-          chmod 0400 ~/.ssh/swoole-cli-github-push-to-gitee-key
+          printf "%s\n" "$PUSH_TO_GITEE_SECRET_KEY" > ~/.ssh/github-push-to-gitee-key
+          chmod 0400 ~/.ssh/github-push-to-gitee-key
           cat > ~/.ssh/config <<'EOF'
           Host gitee.com
             Hostname gitee.com
             Port 22
             PreferredAuthentications publickey
             StrictHostKeyChecking no
-            IdentityFile ~/.ssh/swoole-cli-github-push-to-gitee-key
+            IdentityFile ~/.ssh/github-push-to-gitee-key
           EOF
           ls -lh ~/.ssh/
 
