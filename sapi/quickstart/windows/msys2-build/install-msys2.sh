@@ -71,6 +71,7 @@ pacman -S --noconfirm libintl
 pacman -S --noconfirm pcre2
 pacman -S --noconfirm brotli-devel
 pacman -S --noconfirm pcre-devel
+pacman -S --noconfirm libedit-devel
 
 : <<EOF
 
