@@ -36,12 +36,16 @@ EOF
             CPPFLAGS="$(pkg-config  --cflags-only-I  --static \$PACKAGES)" \
             LDFLAGS="$(pkg-config   --libs-only-L    --static \$PACKAGES) {$cflags}" \
             LIBS="$(pkg-config      --libs-only-l    --static \$PACKAGES)" \
+
             ../configure \
             --prefix={$openssh_prefix} \
             --with-libedit={$libedit_prefix}  \
             --with-zlib={$zlib_prefix} \
             --with-ssl-dir={$openssl_prefix} \
-            --with-pie
+            --with-pie \
+            --with-cppflags="\$CPPFLAGS" \
+            --with-ldflags="\$LDFLAGS" \
+             --with-libs="\$LIBS"
 
 EOF
         )
