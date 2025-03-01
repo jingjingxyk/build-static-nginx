@@ -51,6 +51,8 @@ EOF
 
 EOF
         )
+        ->withBuildCached(false)
+        ->withInstallCached(false)
         ->withConfigure(
             <<<EOF
             ls source/CMakeLists.txt
@@ -59,7 +61,7 @@ EOF
             cd build-dir
 
             cmake \
-            {$extra_command} \
+            -G "Unix Makefiles" ../source \
             -DCMAKE_INSTALL_PREFIX={$libx265_prefix} \
             -DCMAKE_BUILD_TYPE=Release  \
             -DBUILD_SHARED_LIBS=OFF  \
