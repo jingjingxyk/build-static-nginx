@@ -114,6 +114,7 @@ test -f swoole-cli-push-to-gitee.yml && rm -rf swoole-cli-push-to-gitee.yml
 test -f linux-aarch64-qemu.yml && rm -rf linux-aarch64-qemu.yml
 test -f push-to-gitee.yml.bak && rm -rf push-to-gitee.yml.bak
 test -f push-to-gitee.yml && rm -rf push-to-gitee.yml
+test -f openssh-push-to-gitee.yml && rm -rf openssh-push-to-gitee.yml
 test -f windows-native-vs2025.yml && rm -rf windows-native-vs2025.yml
 test -f /windows-native-2022.yml && rm -rf /windows-native-2022.yml
 
