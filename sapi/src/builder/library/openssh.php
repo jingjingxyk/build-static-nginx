@@ -30,7 +30,7 @@ EOF
             ./configure --help
             mkdir build
             cd build
-            PACKAGES='zlib openssl libedit ncursesw'
+            PACKAGES='zlib openssl  ncursesw' # libedit
             PACKAGES="\$PACKAGES  "
 
             CPPFLAGS="$(pkg-config  --cflags-only-I  --static \$PACKAGES)" \
@@ -39,7 +39,6 @@ EOF
 
             ../configure \
             --prefix={$openssh_prefix} \
-            --with-libedit={$libedit_prefix}  \
             --with-zlib={$zlib_prefix} \
             --with-ssl-dir={$openssl_prefix} \
             --with-pie \
@@ -47,11 +46,13 @@ EOF
             --with-ldflags="\$LDFLAGS" \
              --with-libs="\$LIBS"
 
+             #--with-libedit={$libedit_prefix}  \
+
 EOF
         )
         ->withBuildCached(false)
         ->withInstallCached(false)
-        ->withDependentLibraries('openssl', 'zlib', 'libedit', 'ncurses')
+        ->withDependentLibraries('openssl', 'zlib', 'libedit') # 'ncurses'
         ->disableDefaultLdflags()
         ->disablePkgName()
         ->disableDefaultPkgConfig()
