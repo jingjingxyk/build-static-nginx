@@ -11,7 +11,7 @@ env:
 
 jobs:
   push-to-gitee:
-    if: ${{ 0 && (github.repository_owner == 'jingjingxyk') && (github.repository == 'jingjingxyk/swoole-cli') }}
+    if: ${{ (github.repository_owner == 'jingjingxyk') && (github.repository == 'jingjingxyk/swoole-cli') }}
     runs-on: ubuntu-latest
     steps:
       - name: install deps
@@ -65,13 +65,4 @@ jobs:
           git push --mirror
 
           cd ${CURRENT_DIR}
-
-          # git clone --mirror git@gitee.com:jingjingxyk/swoole-cli.git swoole-cli
-          # cd swoole-cli
-          # git remote set-url --push git@gitee.com:jingjingxyk/swoole-cli.git
-          # git remote -v
-          # git fetch -p origin
-          # Exclude refs created by GitHub for pull request.
-          # git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
-          # git push --mirror
 
