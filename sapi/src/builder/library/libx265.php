@@ -53,7 +53,7 @@ EOF
             -DENABLE_SHARED=OFF \
             -DENABLE_LIBNUMA=OFF \
             -DENABLE_PIC=ON \
-            -DENABLE_CLI=OFF
+            -DENABLE_CLI=ON
 
             #  {$options} \
             # -DCMAKE_CXX_IMPLICIT_LINK_LIBRARIES=' -lm -lstdc++ '
