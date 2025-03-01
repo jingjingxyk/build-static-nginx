@@ -25,7 +25,7 @@ return function (Preprocessor $p) {
                 cd {$installdir}/iperf3/bin/
                 cp -f iperf3 {$workdir}/bin/iperf3
                 APP_VERSION=\$({$workdir}/bin/iperf3 -v | head -n 1 | awk '{ print $2 }')
-                echo \${APP_VERSION} > {$workdir}/RLEASE_VERSION
+                echo \${APP_VERSION} > {$workdir}/APP_VERSION
 EOF;
 
         if ($p->getOsType() == 'macos') {

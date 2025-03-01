@@ -37,7 +37,7 @@ return function (Preprocessor $p) {
         rm -f config.status
 
         VERSION=$(./ssh -V 2>&1  | awk -F ',' '{ print $1 }' | sed 's/OpenSSH_//')
-        echo \${VERSION} > {$workdir}/RLEASE_VERSION
+        echo \${VERSION} > {$workdir}/APP_VERSION
 
 EOF;
 

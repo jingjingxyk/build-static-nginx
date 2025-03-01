@@ -25,7 +25,7 @@ return function (Preprocessor $p) {
                 cp -rf doc {$workdir}/bin/socat-docs
                 cd {$workdir}/bin/
                 SOCAT_VERSION=$({$workdir}/bin/socat -V | grep 'socat version' | awk '{ print $3 }')
-                echo \${SOCAT_VERSION} > {$workdir}/RLEASE_VERSION
+                echo \${SOCAT_VERSION} > {$workdir}/APP_VERSION
                 strip {$workdir}/bin/socat
 
 EOF;
