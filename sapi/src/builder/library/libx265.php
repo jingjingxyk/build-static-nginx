@@ -7,25 +7,6 @@ return function (Preprocessor $p) {
     $libx265_prefix = LIBX265_PREFIX;
     $options = $p->getOsType() == 'macos' ? "" : ' -DSTATIC_LINK_CRT=ON ';
 
-    $extra_command = '';
-    if ($p->isLinux()) {
-        $extra_command .= <<<EOF
-        -G "Unix Makefiles" ../source  \
-EOF;
-
-    }
-    if ($p->isMacos()) {
-        $extra_command .= <<<EOF
-        -G "Xcode" ../source  \
-EOF;
-    }
-    if ($p->getSystemArch() == 'arm64') {
-        $extra_command .= <<<EOF
-        -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
-EOF;
-    }
-
-
     $lib = new Library('libx265');
     $lib->withHomePage('https://www.videolan.org/developers/x265.html')
         ->withLicense('https://bitbucket.org/multicoreware/x265_git/src/master/COPYING', Library::LICENSE_LGPL)
@@ -72,8 +53,7 @@ EOF
             -DENABLE_SHARED=OFF \
             -DENABLE_LIBNUMA=OFF \
             -DENABLE_PIC=ON \
-            -DENABLE_CLI=OFF \
-            -DEXPORT_C_API=OFF
+            -DENABLE_CLI=OFF
 
             #  {$options} \
             # -DCMAKE_CXX_IMPLICIT_LINK_LIBRARIES=' -lm -lstdc++ '
