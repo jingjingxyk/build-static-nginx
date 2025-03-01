@@ -32,8 +32,8 @@ EOF
 
 EOF
         )
-        ->withBuildCached(false)
-        ->withInstallCached(false)
+        //->withBuildCached(false)
+        //->withInstallCached(false)
         ->withConfigure(
             <<<EOF
             ls source/CMakeLists.txt
