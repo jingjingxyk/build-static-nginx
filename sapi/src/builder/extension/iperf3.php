@@ -18,7 +18,7 @@ return function (Preprocessor $p) {
         $workdir = $p->getWorkDir();
         $builddir = $p->getBuildDir();
         $installdir = $p->getGlobalPrefix();
-        $system_arch=$p->getSystemArch();
+        $system_arch = $p->getSystemArch();
 
         $cmd = <<<EOF
                 mkdir -p {$workdir}/bin/
@@ -43,8 +43,6 @@ EOF;
 
 EOF;
         }
-        return $cmd;
-
         return $cmd;
     });
 };
