@@ -233,17 +233,24 @@ jobs:
           ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
           # ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
 
+      - name: get app version
+        run: |
+          APP_VERSION=$(cat ./APP_VERSION)
+          echo $APP_VERSION
+          echo "APP_VERSION=${APP_VERSION}" >> $GITHUB_ENV
+          echo "APP_NAME=ne_dev" >> $GITHUB_ENV
+
       - name: production artifacts debug
         uses: actions/upload-artifact@v4
         with:
-          name: php-cli-v${{ env.APP_VERSION }}-linux-x64-debug
+          name: ${{ env.APP_NAME }}-${{ env.APP_VERSION }}-linux-x64-debug
           retention-days: 90
           path: ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
 
       - name: production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: php-cli-v${{ env.APP_VERSION }}-linux-x64
+          name: ${{ env.APP_NAME }}-${{ env.APP_VERSION }}-linux-x64
           retention-days: 90
           path: ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/dist/php
 
@@ -252,8 +259,8 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            php-cli-v${{ env.APP_VERSION }}-linux-x64.tar.xz
-            php-cli-v${{ env.APP_VERSION }}-linux-x64-debug.tar.xz
+            ${{ env.APP_NAME }}-${{ env.APP_VERSION }}-linux-x64.tar.xz
+            ${{ env.APP_NAME }}-${{ env.APP_VERSION }}-linux-x64-debug.tar.xz
 
       - name: upload artifacts to cloud object storage
         if: ${{ 0 && (github.repository == 'swoole/swoole-cli') && (startsWith(github.ref, 'refs/tags/'))  }}
