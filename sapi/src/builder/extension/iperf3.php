@@ -26,20 +26,22 @@ return function (Preprocessor $p) {
                 cp -f iperf3 {$workdir}/bin/iperf3
                 APP_VERSION=\$({$workdir}/bin/iperf3 -v | head -n 1 | awk '{ print $2 }')
                 echo \${APP_VERSION} > {$workdir}/APP_VERSION
+
+                cd {$workdir}/bin/
 EOF;
 
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
             xattr -cr {$workdir}/bin/iperf3
             otool -L {$workdir}/bin/iperf3
-            tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-macos-{$system_arch}.tar.xz aria2c
+            tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-macos-{$system_arch}.tar.xz iperf3
 
 EOF;
         } else {
             $cmd .= <<<EOF
               file {$workdir}/bin/iperf3
               readelf -h {$workdir}/bin/iperf3
-              tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-linux-{$system_arch}.tar.xz aria2c
+              tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-linux-{$system_arch}.tar.xz iperf3
 
 EOF;
         }
