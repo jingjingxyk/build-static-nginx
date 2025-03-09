@@ -25,7 +25,7 @@ fi
 
 cd ${__DIR__}
 
-
+hopt -s expand_aliases
 export PATH="${__PROJECT__}/bin/runtime:$PATH"
 
 alias php="'php -c ${__PROJECT__}/bin/runtime/php.ini'"

@@ -3,6 +3,11 @@
     普通的Linux-PC快速转变成一台功能强大的企业级路由器
     https://frrouting.org/
 
+## 路由器组网协议
+
+    OSPF （常用路由器之间组网）
+    ISIS  (运营商使用）
+
 FRR + EVPN + GENEVE
 
 ## build FRR
