@@ -8,6 +8,8 @@
     OSPF （常用路由器之间组网）
     ISIS  (运营商使用）
 
+    主动路由协议包括RIP协议、IGRP协议、OSPF协议等
+
 FRR + EVPN + GENEVE
 
 ## build FRR
