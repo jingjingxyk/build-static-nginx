@@ -120,3 +120,16 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
     udp2raw
     phantun
         官方建议将 MTU 的值设为 1428
+
+## 透明网关的使用 例子
+
+    方法一：
+    路由器 192.168.20.1 加 MASQUERADE：
+    iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -d 7.0.0.0/8 -j MASQUERADE
+
+    方法二：
+    每个客户端机器都加静态路由：
+    ip route add 7.0.0.0/8 via 192.168.20.5 (linux)
+    route add 7.0.0.0 mask 255.0.0.0 192.168.20.5 (windows)
+
+    方式三：将客户端机器的网关配置成透明网关 ip
