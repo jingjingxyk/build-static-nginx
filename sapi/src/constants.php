@@ -209,12 +209,6 @@ define("LIBPRI_PREFIX", $p->getGlobalPrefix() . '/libpri');
 define("APR_PREFIX", $p->getGlobalPrefix() . '/apr');
 define("APR_UTIL_PREFIX", $p->getGlobalPrefix() . '/apr-util');
 
-define("PYTHON3_PREFIX", $p->getGlobalPrefix() . '/python3');
-define("LIBMPDECIMAL_PREFIX", $p->getGlobalPrefix() . '/libmpdecimal');
-define("LIBB2_PREFIX", $p->getGlobalPrefix() . '/libb2');
-define("LIBEXPAT_PREFIX", $p->getGlobalPrefix() . '/libexpat');
-
-
 define("LIBAVIF_PREFIX", $p->getGlobalPrefix() . '/libavif');
 define("DAV1D_PREFIX", $p->getGlobalPrefix() . '/dav1d');
 define("LIBGAV1_PREFIX", $p->getGlobalPrefix() . '/libgav1');
@@ -222,6 +216,10 @@ define("AOM_PREFIX", $p->getGlobalPrefix() . '/aom');
 define("SVT_AV1_PREFIX", $p->getGlobalPrefix() . '/svt_av1');
 define("LIBYUV_PREFIX", $p->getGlobalPrefix() . '/libyuv');
 
+define("PYTHON3_PREFIX", $p->getGlobalPrefix() . '/python3');
+define("LIBMPDECIMAL_PREFIX", $p->getGlobalPrefix() . '/libmpdecimal');
+define("LIBB2_PREFIX", $p->getGlobalPrefix() . '/libb2');
+define("LIBEXPAT_PREFIX", $p->getGlobalPrefix() . '/libexpat');
 
 define("ZOOKEEPER_PREFIX", $p->getGlobalPrefix() . '/zookeeper');
 define("LIBEVENT_PREFIX", $p->getGlobalPrefix() . '/libevent');
@@ -344,4 +342,5 @@ define("LIBOAUTH2_PREFIX", $p->getGlobalPrefix() . '/liboauth2');
 define("CJOSE_PREFIX", $p->getGlobalPrefix() . '/cjose');
 
 define("EXAMPLE_PREFIX", $p->getGlobalPrefix() . '/example');
+
 
