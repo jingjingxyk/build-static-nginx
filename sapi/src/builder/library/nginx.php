@@ -116,6 +116,7 @@ EOF
             --with-stream \
             --with-stream_ssl_preread_module \
             --with-stream_ssl_module \
+            --with-stream_realip_module \
             --with-threads \
             --with-cc-opt="{$ldflags}  -O2   \$CPPFLAGS " \
             --with-ld-opt="{$ldflags}  \$LDFLAGS " \

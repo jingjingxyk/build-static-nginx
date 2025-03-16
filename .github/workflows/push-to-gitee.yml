@@ -52,6 +52,8 @@ jobs:
           cd swoole-cli
           pwd
 
+          # git show-ref | cut -d' ' -f2 | grep 'pull-request' | xargs -r -L1 git update-ref -d
+
           # git remote set-url --push origin "$DESTINATION_REPO"
           git remote set-url --push origin git@gitee.com:jingjingxyk/swoole-cli.git
           git remote -v
