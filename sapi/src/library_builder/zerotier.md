@@ -3,7 +3,7 @@ docker run -it --rm \
   --cap-add=SYS_ADMIN \
   --device=/dev/net/tun debian:12 /bin/bash
 
-apt install -y curl iproute2 procps iputils-ping
+apt install -y curl iproute2 procps iputils-ping openssh-client
 
 
 curl https://install.zerotier.com/ | bash
