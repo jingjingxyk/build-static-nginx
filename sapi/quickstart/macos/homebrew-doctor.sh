@@ -11,6 +11,7 @@ exit 0
 brew list --formula --built-from-source
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
+export HOMEBREW_NO_INSTALL_FROM_API=1
 
 # macOS 12 unsupported?
 # https://github.com/orgs/Homebrew/discussions/5603
