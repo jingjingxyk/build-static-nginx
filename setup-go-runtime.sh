@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='1.22.5'
+APP_VERSION='1.24.1'
 APP_NAME='go'
-VERSION='1.22.5'
+VERSION='1.24.1'
 
 mkdir -p bin/runtime
 mkdir -p var/runtime
