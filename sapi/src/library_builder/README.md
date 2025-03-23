@@ -31,14 +31,17 @@ PYTHON3
     pyenv
     pipenv
     venv
-    rye + uv https://docs.astral.sh/uv/guides/scripts/
+    rye + uv
+        https://docs.astral.sh/uv/guides/scripts/
+        https://docs.astral.sh/uv/
+
 
 PHP
     composer
     phpbrew
 nodejs
     nvm
-    pnpm
+    pnpm  https://pnpm.io/
     npm-check-updates
 
 ```
