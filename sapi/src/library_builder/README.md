@@ -36,6 +36,9 @@ PYTHON3
         https://docs.astral.sh/uv/
         https://docs.astral.sh/uv/getting-started/installation/
         curl -LsSf https://astral.sh/uv/install.sh | sh
+        uv python install 3.13
+        uv venv
+        source .venv/bin/activate
 
 
 PHP

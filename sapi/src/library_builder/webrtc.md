@@ -5,3 +5,8 @@
 ## WebTorrent
 
     https://github.com/webtorrent/webtorrent
+
+## 查看nat 网络类型
+
+    pip install pystun3
+    pystun3
