@@ -131,7 +131,7 @@ make_<?=$item->name?>() {
     cat > /etc/apt/apt.conf.d/proxy.conf <<'--OS-PROXY-<?=$item->name?>-EOF--'
     Acquire::http::Proxy  "<?= $this->getHttpProxy() ?>";
     Acquire::https::Proxy "<?= $this->getHttpProxy() ?>";
-
+    Acquire::NoProxy "127.0.0.0/8,10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16,::1/128,fe80::/10,fd00::/8,ff00::/8,.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com,localhost";
 --OS-PROXY-<?=$item->name?>-EOF--
     <?php endif;?>
 
