@@ -87,6 +87,9 @@ if [[ $ACTION = "delete" ]]; then
   test -f make-export-variables.sh && rm -f make-export-variables.sh
   test -f make-install-deps.sh && rm -f make-install-deps.sh
   test -f libs.log && rm -f libs.log
+  test -d CMakeFiles && rm -rf  CMakeFiles
+  test -d cmake-build-debug && rm -rf  cmake-build-debug
+  test -d .venv && rm -rf .venv
   echo $?
 fi
 
