@@ -133,8 +133,11 @@ EOF
         )
         ->withScriptAfterInstall(
             <<<EOF
-            sed -i.backup "s/-ldl/  /g" {$python3_prefix}/lib/pkgconfig/python3.pc
-            sed -i.backup "s/-ldl/  /g" {$python3_prefix}/lib/pkgconfig/python3-embed.pc
+        # 直接使用 sed 替换文件内容报错信息：  in-place editing only works for regular files
+        cp -f {$python3_prefix}/lib/pkgconfig/python3.pc {$python3_prefix}/lib/pkgconfig/python3.backup.pc
+        cp -f {$python3_prefix}/lib/pkgconfig/python3-embed.pc {$python3_prefix}/lib/pkgconfig/python3-embed.backup.pc
+        cat {$python3_prefix}/lib/pkgconfig/python3.backup.pc       | sed 's/-ldl/  /g' > {$python3_prefix}/lib/pkgconfig/python3.pc
+        cat {$python3_prefix}/lib/pkgconfig/python3-embed.backup.pc | sed 's/-ldl/  /g' > {$python3_prefix}/lib/pkgconfig/python3-embed.pc
 EOF
         )
         ->withPkgName('python3-embed')
@@ -157,8 +160,8 @@ EOF
     $p->addLibrary($lib);
 
     if ($p->isMacos()) {
-        $p->withFramework('LDFLAGS', '-framework CoreFoundation');
-        $p->withFramework('LDFLAGS', '-framework SystemConfiguration');
+        $p->withFramework('CoreFoundation');
+        $p->withFramework('SystemConfiguration');
         // module  _scproxy needs SystemConfiguration and CoreFoundation framework
     }
     $p->withVariable('LIBS', '$LIBS -lHacl_Hash_SHA2');

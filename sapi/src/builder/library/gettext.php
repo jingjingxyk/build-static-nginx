@@ -26,7 +26,6 @@ return function (Preprocessor $p) {
             ->withUrl('https://ftpmirror.gnu.org/gettext/gettext-0.22.5.tar.gz')
             ->withFileHash('sha256', "ec1705b1e969b83a9f073144ec806151db88127f5e40fe5a94cb6c8fa48996a0")
             ->withPrefix($gettext_prefix)
-            //->withInstallCached(false)
             ->withConfigure(
                 <<<EOF
 
@@ -73,6 +72,6 @@ EOF
     $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $gettext_prefix . '/lib');
     $p->withVariable('LIBS', '$LIBS -lintl ');
     if ($p->isMacos()) {
-        $p->withFramework('LDFLAGS', '-framework CoreFoundation');
+        $p->withFramework('CoreFoundation');
     }
 };
