@@ -1,4 +1,5 @@
 ## SDN
+
 SDN网络有3大特征, 分别是[6]:
 
 1) 集中式控制.
@@ -11,15 +12,17 @@ SDN网络有3大特征, 分别是[6]:
 「逻辑上的集中控制」。
 「控制平面与转发平面之间提供可编程接口」。
 
-管理平面  控制平面  数据平面
+管理平面 控制平面 数据平面
 
 ## IPSEC over geneve
+
 1. GENEVE 代表“通用网络虚拟化封装”
 2. MAC-in-IP 封装 mac in udp
 3. IPSec over GENEVE 只是因为私网流量从隧道转发，将策略应用在了Tunnel接口下
 
 - L2TP over IPsec: looks like a big overhead to me, ie 128 bytes of headers
-- OpenVPN tap: well OpenVPN is very slow compared to IPSec / Wireguard, and I would like to achieve as much bandwidth and low latency as I may get. So OpenVPN is the fallback if I don't get anything to work
+- OpenVPN tap: well OpenVPN is very slow compared to IPSec / Wireguard, and I would like to achieve as much bandwidth
+  and low latency as I may get. So OpenVPN is the fallback if I don't get anything to work
 - VxLAN (or GENEVE, or GRETAP) over Wireguard: looks promising ?
 - Tinc ?
 - Zerotier ?
@@ -30,15 +33,13 @@ SDN 关注于网络控制面和转发面的分离
 NFV 关注网络转发功能的虚拟化和通用化.
 
 Geneve：通用网络虚拟化封装草案
-    https://datatracker.ietf.org/doc/draft-ietf-nvo3-geneve/16/
+https://datatracker.ietf.org/doc/draft-ietf-nvo3-geneve/16/
 
 BFD（Bidirectional Forwarding Detection，双向转发检测）
 
 ECMP（Equal-Cost Multipath Routing，等价多路径路由）
 
 ## Centralized vs. Distributed
-
-
 
 ## IPv6 Address Auto Configuration
 
@@ -52,11 +53,12 @@ https://en.m.wikipedia.org/wiki/Routing#Delivery_schemes
 
 https://www.cnblogs.com/jingjingxyk/category/2201785.html
 
-
 ## ovn-architecture cn
+
     https://github.com/oilbeater/ovn-doc-cn/blob/master/ovn-architecture.md
 
 ## install ovn
+
     https://github.com/ovn-org/ovn/blob/main/Documentation/intro/install/general.rst
 
 ## ovn conf dir
@@ -67,8 +69,6 @@ https://www.cnblogs.com/jingjingxyk/category/2201785.html
 #/usr/local/etc/ovn
 
 ```
-
-
 
 ## debian 环境下 安装 OVN
 
@@ -159,19 +159,17 @@ ovn-sbctl set connection . inactivity_probe=180000
 
 ```
 
-
-
 # 使用UDP协议交互数据
+
 nc -v -u -l 0.0.0.0 6081
 nc -u -v 8.137.54.132 6081
 
-
 # SD-WAN 系列（5）SD-WAN = SDN + Internet线路 +专线 + WAN加速 + IPsec + DPI + ？
+
     https://blog.csdn.net/zhengmx100/article/details/103565072
 
-
-
 ## 期待
+
 1. DPDK支持
 1. eBPF集成
 1. BGP支持
@@ -180,15 +178,13 @@ nc -u -v 8.137.54.132 6081
 1. QoS 选项
 1. IPSec, wireguard 等加密方式支持
 
-
 OVN有三种NAT：
-    DNAT：改变了数据包的目的地址
-    SNAT：改变了一个包的源地址
-    SNAT-DNAT：外部IP映射到内部IP，反之亦然。
+DNAT：改变了数据包的目的地址
+SNAT：改变了一个包的源地址
+SNAT-DNAT：外部IP映射到内部IP，反之亦然。
 
 Linux中的conntrack模块被整合到OVS中以提供有状态匹配
 OVN实现了DHCPv4支持
-
 
 snapshot + cloudinit
 安装系统过程，是直接启动一个预配置镜像
