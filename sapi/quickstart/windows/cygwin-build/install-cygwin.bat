@@ -45,6 +45,7 @@ set "PACKAGES=%PACKAGES%,icu,libicu-devel"
 set "PACKAGES=%PACKAGES%,libwrap-devel"
 set "PACKAGES=%PACKAGES%,libedit-devel"
 
+
 set "OPTIONS=%OPTIONS% --packages %PACKAGES%"
 echo %OPTIONS%
 
