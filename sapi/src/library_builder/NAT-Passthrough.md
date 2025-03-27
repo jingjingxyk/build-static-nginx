@@ -35,6 +35,8 @@
 1. [NowTunnel](https://www.nowtunnel.com/)
 1. [青云SD-WAN](https://www.qingcloud.com/products/sdwan/)
 1. [tmate](https://github.com/tmate-io/tmate.git)
+1. [freesiwtch NAT-Traversal](https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Networking/NAT-Traversal_3375417/)
+1. [pingtunnel](https://github.com/esrrhs/pingtunnel.git)
 
 有预算没技术：蒲公英组网
 SRv6 分段路由
