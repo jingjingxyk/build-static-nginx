@@ -113,8 +113,10 @@ prepare(){
 
   apt update -y
   apt install -y locales
-  locale-gen en_US.UTF-8
-
+  echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+  locale-gen
+  localedef -i en_US -f UTF-8 en_US.UTF-8
+  locale -a | grep en_US.utf8
   export LANGUAGE="en_US.UTF-8"
   export LC_ALL="en_US.UTF-8"
   export LC_CTYPE="en_US.UTF-8"

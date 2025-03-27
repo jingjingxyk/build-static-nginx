@@ -20,7 +20,6 @@
 1. [libp2p](https://github.com/libp2p)
 1. [libp2p](https://libp2p.io/)
 1. [openp2p](https://github.com/openp2p-cn/openp2p)
-1. [](https://github.com/libp2p)
 1. [stunner](https://github.com/firefart/stunner)
 1. [udp2raw](https://github.com/wangyu-/udp2raw.git)
 1. [n22](https://github.com/ntop/n2n.git)
@@ -34,6 +33,26 @@
 1. [星空组网](https://starvpn.cn/)
 2. [cpp20-socks5demo](https://github.com/cnbatch/cpp20-socks5demo.git)
 2. [omniedge](https://omniedge.io/)
+
+1. [softether](https://www.softether.org/)
+1. [组网工具比较](https://github.com/HarvsG/WireGuardMeshes.git)
+1. [飞鼠]()
+1. [EasyTier](https://easytier.rs/)
+1. [wg-easy.git](https://github.com/wg-easy/wg-easy.git)
+1. [星空组网](https://doc.starvpn.cn/#/openWrt)
+1. [NowTunnel](https://www.nowtunnel.com/)
+1. [青云SD-WAN](https://www.qingcloud.com/products/sdwan/)
+1. [tmate](https://github.com/tmate-io/tmate.git)
+1. [freesiwtch NAT-Traversal](https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Networking/NAT-Traversal_3375417/)
+1. [pingtunnel](https://github.com/esrrhs/pingtunnel.git)
+1. [screen sharing for developers ](https://github.com/screego/server?tab=readme-ov-file)
+
+有预算没技术：蒲公英组网
+SRv6 分段路由
+SD-WAN  https://www.baidu.com/s?ie=utf-8&wd=SD-WAN
+
+https://github.com/IrineSistiana/mosdns/blob/main/scripts/update_chn_ip_domain.py
+>>>>>>> origin/new_dev
 
 ## RFC 8445, RFC 5389, RFC 5766
 
