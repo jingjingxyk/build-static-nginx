@@ -27,9 +27,19 @@
 1. [【译】 NAT 穿透是如何工作的：技术原理及企业级实践](https://arthurchiao.art/blog/how-nat-traversal-works-zh/)
 1. [How NAT traversal works](https://tailscale.com/blog/how-nat-traversal-works)
 1. [softether](https://www.softether.org/)
+1. [组网工具比较](https://github.com/HarvsG/WireGuardMeshes.git)
+1. [飞鼠](飞鼠)
+1. [EasyTier](https://easytier.rs/)
+1. [wg-easy.git](https://github.com/wg-easy/wg-easy.git)
+1. [星空组网](https://doc.starvpn.cn/#/openWrt)
+1. [NowTunnel](https://www.nowtunnel.com/)
+1. [青云SD-WAN](https://www.qingcloud.com/products/sdwan/)
 
 有预算没技术：蒲公英组网
 SRv6 分段路由
+SD-WAN  https://www.baidu.com/s?ie=utf-8&wd=SD-WAN
+
+https://github.com/IrineSistiana/mosdns/blob/main/scripts/update_chn_ip_domain.py
 
 ## RFC 8445, RFC 5389, RFC 5766
 
