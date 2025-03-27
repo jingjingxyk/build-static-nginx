@@ -5,7 +5,7 @@ https://zhuanlan.zhihu.com/p/8601350507
 
 将 Unix Socket 转换为 TCP 连接
 
-socat TCP-LISTEN:端口号,fork UNIX-CONNECT:/usr/local/var/run/ovn/ovnnb_db.sock:
+socat TCP-LISTEN:65528,fork UNIX-CONNECT:/usr/local/var/run/ovn/ovnnb_db.sock:
 socat TCP-LISTEN:端口号,fork UNIX-CONNECT:/usr/local/var/run/ovn//usr/local/var/run/ovn/ovnsb_db.sock:
 
 
