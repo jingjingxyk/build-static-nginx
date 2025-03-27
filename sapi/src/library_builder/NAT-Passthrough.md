@@ -27,6 +27,13 @@
 1. [nebula](https://github.com/slackhq/nebula)
 1. [【译】 NAT 穿透是如何工作的：技术原理及企业级实践](https://arthurchiao.art/blog/how-nat-traversal-works-zh/)
 1. [How NAT traversal works](https://tailscale.com/blog/how-nat-traversal-works)
+1. [EasyTier](https://github.com/EasyTier/EasyTier.git)
+1. [softether](https://github.com/EasyTier/EasyTier.git)
+1. [natmap](https://github.com/heiher/natmap)
+1. [WireGuardMeshes](https://github.com/HarvsG/WireGuardMeshes)
+1. [星空组网](https://starvpn.cn/)
+2. [cpp20-socks5demo](https://github.com/cnbatch/cpp20-socks5demo.git)
+2. [omniedge](https://omniedge.io/)
 
 ## RFC 8445, RFC 5389, RFC 5766
 
