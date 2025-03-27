@@ -20,13 +20,16 @@
 1. [libp2p](https://github.com/libp2p)
 1. [libp2p](https://libp2p.io/)
 1. [openp2p](https://github.com/openp2p-cn/openp2p)
-1. [](https://github.com/libp2p)
 1. [stunner](https://github.com/firefart/stunner)
 1. [udp2raw](https://github.com/wangyu-/udp2raw.git)
 1. [n22](https://github.com/ntop/n2n.git)
 1. [nebula](https://github.com/slackhq/nebula)
 1. [【译】 NAT 穿透是如何工作的：技术原理及企业级实践](https://arthurchiao.art/blog/how-nat-traversal-works-zh/)
 1. [How NAT traversal works](https://tailscale.com/blog/how-nat-traversal-works)
+1. [softether](https://www.softether.org/)
+
+有预算没技术：蒲公英组网
+SRv6 分段路由
 
 ## RFC 8445, RFC 5389, RFC 5766
 
