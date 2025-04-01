@@ -142,6 +142,9 @@ prepare(){
   apt install -y bc init ncat
   # apt install -y isc-dhcp-server
   # apt install -y libdpdk-dev
+  # apt install -y ntp ntpdate
+  # ntpdate ntp.ntsc.ac.cn  # 使用国家授时中心服务器
+  # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 }
 
