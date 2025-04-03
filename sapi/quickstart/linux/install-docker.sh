@@ -10,6 +10,9 @@ __PROJECT__=$(
   pwd
 )
 cd ${__DIR__}
+if [ ! -f "${__PROJECT__}/prepare.php" ]; then
+  __PROJECT__=__DIR__
+fi
 
 mkdir -p ${__PROJECT__}/var
 
