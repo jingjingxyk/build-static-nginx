@@ -176,7 +176,7 @@ if test -d ovn; then
   cd ${__DIR__}/ovn/
   # git   pull --depth=1 --progress --rebase
 else
-  git clone -b v25.03.0 --depth=1 --progress https://github.com/ovn-org/ovn.git
+  git clone -b v24.09.2 --depth=1 --progress https://github.com/ovn-org/ovn.git
 fi
 
 cd ${__DIR__}
