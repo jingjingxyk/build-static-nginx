@@ -167,7 +167,7 @@ if test -d ovs; then
   cd ${__DIR__}/ovs/
   # git   pull --depth=1 --progress --rebase
 else
-  git clone -b v2.17.12 https://github.com/openvswitch/ovs.git --depth=1 --progress
+  git clone -b v3.4.2 https://github.com/openvswitch/ovs.git --depth=1 --progress
 fi
 
 cd ${__DIR__}
@@ -181,21 +181,21 @@ fi
 
 cd ${__DIR__}
 
-
-
 cd ${__DIR__}/ovs/
 ./boot.sh
 cd ${__DIR__}/ovs/
 
 ./configure --help
+
+sed -i '5i\touch $stamp ; exit 0 ;' ./build-aux/cksum-schema-check
+
 ./configure --enable-ssl
 make -j $CPU_NUMS
 sudo make install
 
 cd ${__DIR__}/ovn/
 
-#test -d build &&  rm -rf build
-#mkdir build
+
 ./boot.sh
 cd ${__DIR__}/ovn/
 

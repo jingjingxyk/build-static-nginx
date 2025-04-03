@@ -200,3 +200,26 @@ OVN实现了DHCPv4支持
 snapshot + cloudinit
 安装系统过程，是直接启动一个预配置镜像
 kvm libvirt qemu ovs
+
+## 判断linux 系统使用何种网络管理工具
+
+```
+systemctl status NetworkManager
+systemctl status networking
+systemctl status networkd
+
+cat /etc/network/interfaces
+ls -lh /etc/NetworkManager/system-connections/
+cat /etc/NetworkManager/NetworkManager.conf
+ls -lh /etc/netplan/*.yaml
+
+NetworkManager
+nmcli device status
+nmcli connection show --active
+nmcli -p connection show
+nmcli -t device show
+nmcli general status
+
+apt install network-manager
+systemctl enable --now NetworkManager
+```
