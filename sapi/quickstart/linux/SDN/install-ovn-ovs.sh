@@ -157,7 +157,7 @@ prepare() {
 
 # test $(dpkg-query -l graphviz | wc -l) -eq 0 && prepare
 
-test $(command -v init | wc -l) -eq 0 && prepare
+test $(command -v bc | wc -l) -eq 0 && prepare
 
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
