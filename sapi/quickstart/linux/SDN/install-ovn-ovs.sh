@@ -10,6 +10,11 @@ __DIR__=$(
 )
 cd ${__DIR__}
 
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
 MIRROR=''
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -152,7 +157,7 @@ prepare() {
 
 # test $(dpkg-query -l graphviz | wc -l) -eq 0 && prepare
 
-test $(command -v ncat | wc -l) -eq 0 && prepare
+test $(command -v init | wc -l) -eq 0 && prepare
 
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
@@ -176,10 +181,7 @@ fi
 
 cd ${__DIR__}
 
-export LANGUAGE="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LANG="en_US.UTF-8"
+
 
 cd ${__DIR__}/ovs/
 ./boot.sh
