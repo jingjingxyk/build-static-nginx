@@ -135,8 +135,8 @@ prepare() {
   apt install -y libssl-dev ca-certificates
 
   apt install -y \
-    git gcc clang make cmake autoconf automake openssl python3 python3-pip libtool \
-    openssl curl libssl-dev libcap-ng-dev uuid uuid-runtime
+    git gcc clang make cmake autoconf automake libssl3 openssl libssl-dev python3 python3-pip libtool \
+    openssl curl libcap-ng-dev uuid uuid-runtime
 
   apt install -y kmod iptables
   apt install -y netcat-openbsd
@@ -194,7 +194,6 @@ make -j $CPU_NUMS
 sudo make install
 
 cd ${__DIR__}/ovn/
-
 
 ./boot.sh
 cd ${__DIR__}/ovn/
