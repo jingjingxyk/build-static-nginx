@@ -4,47 +4,49 @@
 set -eux
 set -o pipefail
 
-
-__DIR__=$(cd "$(dirname "$0")";pwd)
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
 cd ${__DIR__}
 
 MIRROR=''
 while [ $# -gt 0 ]; do
- case "$1" in
- --mirror)
-   MIRROR="$2"
-   ;;
- --proxy)
-   export HTTP_PROXY="$2"
-   export HTTPS_PROXY="$2"
-   NO_PROXY="127.0.0.0/8,10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16"
-   NO_PROXY="${NO_PROXY},::1/128,fe80::/10,fd00::/8,ff00::/8"
-   NO_PROXY="${NO_PROXY},.aliyuncs.com,.aliyun.com,.tencent.com"
-   NO_PROXY="${NO_PROXY},.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com"
-   NO_PROXY="${NO_PROXY},ftpmirror.gnu.org"
-   NO_PROXY="${NO_PROXY},gitee.com,gitcode.com"
-   NO_PROXY="${NO_PROXY},.myqcloud.com,.swoole.com"
-   NO_PROXY="${NO_PROXY},dl-cdn.alpinelinux.org"
-   NO_PROXY="${NO_PROXY},deb.debian.org,security.debian.org"
-   NO_PROXY="${NO_PROXY},archive.ubuntu.com,security.ubuntu.com"
-   NO_PROXY="${NO_PROXY},pypi.python.org,bootstrap.pypa.io"
-   export NO_PROXY="${NO_PROXY},localhost"
-   ;;
- --*)
-   echo "Illegal option $1"
-   ;;
- esac
- shift $(($# > 0 ? 1 : 0))
+  case "$1" in
+  --mirror)
+    MIRROR="$2"
+    ;;
+  --proxy)
+    export HTTP_PROXY="$2"
+    export HTTPS_PROXY="$2"
+    NO_PROXY="127.0.0.0/8,10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16"
+    NO_PROXY="${NO_PROXY},::1/128,fe80::/10,fd00::/8,ff00::/8"
+    NO_PROXY="${NO_PROXY},.aliyuncs.com,.aliyun.com,.tencent.com"
+    NO_PROXY="${NO_PROXY},.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com"
+    NO_PROXY="${NO_PROXY},ftpmirror.gnu.org"
+    NO_PROXY="${NO_PROXY},gitee.com,gitcode.com"
+    NO_PROXY="${NO_PROXY},.myqcloud.com,.swoole.com"
+    NO_PROXY="${NO_PROXY},dl-cdn.alpinelinux.org"
+    NO_PROXY="${NO_PROXY},deb.debian.org,security.debian.org"
+    NO_PROXY="${NO_PROXY},archive.ubuntu.com,security.ubuntu.com"
+    NO_PROXY="${NO_PROXY},pypi.python.org,bootstrap.pypa.io"
+    export NO_PROXY="${NO_PROXY},localhost"
+    ;;
+  --*)
+    echo "Illegal option $1"
+    ;;
+  esac
+  shift $(($# > 0 ? 1 : 0))
 done
 
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
 VERSION_ID=$(cat /etc/os-release | grep '^VERSION_ID=' | awk -F '=' '{print $2}' | sed "s/\"//g")
 
-if [ ${OS_ID} = 'debian'  ] || [ ${OS_ID} = 'ubuntu' ] ; then
-    echo 'supported OS'
+if [ ${OS_ID} = 'debian' ] || [ ${OS_ID} = 'ubuntu' ]; then
+  echo 'supported OS'
 else
-    echo 'no supported OS'
-    exit 0
+  echo 'no supported OS'
+  exit 0
 fi
 
 if test -n "$MIRROR"; then
@@ -109,11 +111,11 @@ if test -n "$MIRROR"; then
   }
 fi
 
-prepare(){
+prepare() {
 
   apt update -y
   apt install -y locales
-  echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+  echo 'en_US.UTF-8 UTF-8' >>/etc/locale.gen
   locale-gen
   localedef -i en_US -f UTF-8 en_US.UTF-8
   locale -a | grep en_US.utf8
@@ -124,21 +126,21 @@ prepare(){
 
   # update-locale LANG=en_US.UTF-8
 
-  apt install -y git curl python3 python3-pip python3-dev wget   sudo file
+  apt install -y git curl python3 python3-pip python3-dev wget sudo file
   apt install -y libssl-dev ca-certificates
 
-  apt install -y  \
-  git gcc clang make cmake autoconf automake openssl python3 python3-pip  libtool  \
-  openssl  curl  libssl-dev  libcap-ng-dev uuid uuid-runtime
+  apt install -y \
+    git gcc clang make cmake autoconf automake openssl python3 python3-pip libtool \
+    openssl curl libssl-dev libcap-ng-dev uuid uuid-runtime
 
   apt install -y kmod iptables
   apt install -y netcat-openbsd
   apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
   apt install -y conntrack
   apt install -y bridge-utils
-  apt install -y libelf-dev  libbpf-dev # libxdp-dev
+  apt install -y libelf-dev libbpf-dev # libxdp-dev
   apt install -y graphviz
-  apt install -y libjemalloc2   libjemalloc-dev  libnuma-dev   libpcap-dev  libunbound-dev  libunwind-dev  llvm-dev
+  apt install -y libjemalloc2 libjemalloc-dev libnuma-dev libpcap-dev libunbound-dev libunwind-dev llvm-dev
   apt install -y bc init ncat
   # apt install -y isc-dhcp-server
   # apt install -y libdpdk-dev
@@ -152,28 +154,24 @@ prepare(){
 
 test $(command -v ncat | wc -l) -eq 0 && prepare
 
-
-
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
 
 cd ${__DIR__}
-if test -d ovs
-then
-    cd ${__DIR__}/ovs/
-    # git   pull --depth=1 --progress --rebase
+if test -d ovs; then
+  cd ${__DIR__}/ovs/
+  # git   pull --depth=1 --progress --rebase
 else
-    git clone -b v3.4.1 https://github.com/openvswitch/ovs.git --depth=1 --progress
+  git clone -b v3.4.1 https://github.com/openvswitch/ovs.git --depth=1 --progress
 fi
 
 cd ${__DIR__}
 
-if test -d ovn
-then
-    cd ${__DIR__}/ovn/
-    # git   pull --depth=1 --progress --rebase
+if test -d ovn; then
+  cd ${__DIR__}/ovn/
+  # git   pull --depth=1 --progress --rebase
 else
-    git clone -b v24.09.2 https://github.com/ovn-org/ovn.git  --depth=1 --progress
+  git clone -b v25.03.0 --depth=1 --progress https://github.com/ovn-org/ovn.git
 fi
 
 cd ${__DIR__}
@@ -181,7 +179,6 @@ cd ${__DIR__}
 cd ${__DIR__}/ovs/
 ./boot.sh
 cd ${__DIR__}/ovs/
-
 
 ./configure --help
 ./configure --enable-ssl
@@ -196,15 +193,13 @@ cd ${__DIR__}/ovn/
 cd ${__DIR__}/ovn/
 
 ./configure --help
-./configure  --enable-ssl \
---with-ovs-source=${__DIR__}/ovs/ \
---with-ovs-build=${__DIR__}/ovs/
+./configure --enable-ssl \
+  --with-ovs-source=${__DIR__}/ovs/ \
+  --with-ovs-build=${__DIR__}/ovs/
 
 make -j $CPU_NUMS
 sudo make install
 
-
 cd ${__DIR__}
 rm -rf ${__DIR__}/ovn
 rm -rf ${__DIR__}/ovs
-
