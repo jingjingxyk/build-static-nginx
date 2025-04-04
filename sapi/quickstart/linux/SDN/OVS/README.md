@@ -13,6 +13,7 @@ tcpdump -i any -nnn udp  port 6081
 ````
 
 ## OVS 设置MTU
+
 ```bash
 ovs-vsctl list-ports  br-int
 ovs-vsctl set int br-int mtu_request=1450
@@ -20,7 +21,6 @@ ovs-vsctl set int br-int mtu_request=1450
 # https://docs.openvswitch.org/en/latest/faq/issues/
 
 ```
-
 
 ```bash
 ip netns list
@@ -326,11 +326,9 @@ tail -f  /usr/local/var/log/openvswitch/ovsdb-server.log
 
     https://baijiahao.baidu.com/s?id=1690694392596006484
 
-
 Ethernet over UDP
 网络标识符（Virtual Network Identifier，VNI）
 通用网络虚拟化封装 Generic Network Virtualization Encapsulation，GENEVE
-
 
 ```bash
 # 参考 https://www.jianshu.com/p/c308ecc3b191
@@ -344,21 +342,21 @@ ovn-trace --summary ls01 'inport == "ls01_port04" && eth.src == 00:02:00:00:00:0
 ```
 
 OVS mtu
-    https://docs.openvswitch.org/en/latest/faq/issues/
+https://docs.openvswitch.org/en/latest/faq/issues/
 
 自建SNAT策略后网络不通
-    https://help.aliyun.com/zh/vpc/network-failure-after-self-built-snat-policy
+https://help.aliyun.com/zh/vpc/network-failure-after-self-built-snat-policy
 网络最大传输单元MTU 修改ECS网卡MTU
-    https://help.aliyun.com/zh/ecs/user-guide/mtus
+https://help.aliyun.com/zh/ecs/user-guide/mtus
 专有网络构成
-    https://help.aliyun.com/zh/ecs/user-guide/overview-9
+https://help.aliyun.com/zh/ecs/user-guide/overview-9
 什么是VPN网关
-    https://help.aliyun.com/zh/vpn/product-overview/what-is-vpn-gateway
+https://help.aliyun.com/zh/vpn/product-overview/what-is-vpn-gateway
 MTU配置说明
-    https://help.aliyun.com/zh/vpn/user-guide/set-mtu-values
-
+https://help.aliyun.com/zh/vpn/user-guide/set-mtu-values
 
 ## 网络管理配置工具
+
 1. netplan
 1. NetworkManager （nmcli)
 1. systemd-networkd (systemd的一部分 )
