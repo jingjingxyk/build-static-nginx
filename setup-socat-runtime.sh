@@ -93,8 +93,10 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-mkdir -p bin/runtime
+mkdir -p runtime
 mkdir -p var/runtime
+APP_WORK_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+mkdir -p ${APP_WORK_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -132,12 +134,12 @@ else
   test -f ${APP_RUNTIME}.tar || xz -d -k ${APP_RUNTIME}.tar.xz
   test -f socat || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x socat
-  cp -f ${__PROJECT__}/var/runtime/socat ${__PROJECT__}/bin/runtime/socat
+  cp -f ${__PROJECT__}/var/runtime/socat ${APP_WORK_DIR}
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_WORK_DIR}
 
 cd ${__PROJECT__}/
 
@@ -146,10 +148,11 @@ set +x
 echo " "
 echo " USE SOCAT RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/bin/runtime:\$PATH\" "
+echo " export PATH=\"${APP_WORK_DIR}:\$PATH\" "
 echo " "
 echo " socat [options] <address> <address> "
 echo " socat docs :  http://www.dest-unreach.org/socat/"
 echo " socat example :  https://www.redhat.com/sysadmin/getting-started-socat"
 echo " "
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${APP_WORK_DIR}:$PATH"
+socat -V | grep 'socat version'

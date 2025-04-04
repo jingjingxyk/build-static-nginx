@@ -54,6 +54,9 @@ VERSION='v1.0.0'
 
 mkdir -p runtime
 mkdir -p var/runtime
+SSHD_CONFIG=${__PROJECT__}/runtime/${APP_NAME}/etc/sshd_config
+APP_WORK_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+mkdir -p ${APP_WORK_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -144,9 +147,6 @@ ${__DIR__}/sbin/sshd -D -e -f   ${__DIR__}/etc/sshd_config
 
 EOF
 
-SSHD_CONFIG=${__PROJECT__}/runtime/${APP_NAME}/etc/sshd_config
-APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
-
 echo 'Port 65527' >>$SSHD_CONFIG
 echo 'AddressFamily any' >>$SSHD_CONFIG
 echo 'PasswordAuthentication no' >>$SSHD_CONFIG
@@ -158,23 +158,23 @@ echo "PidFile ${__PROJECT__}/runtime/openssh/var/run/sshd.pid" >>$SSHD_CONFIG
 sed -i '' "s@\/usr\/local\/swoole-cli@${__PROJECT__}\/runtime@" $SSHD_CONFIG
 sed -i '' "s@\.ssh\/authorized_keys@${__PROJECT__}\/runtime\/openssh\/\.ssh\/authorized_keys@" $SSHD_CONFIG
 
-mkdir -p ${APP_RUNTIME_DIR}/var/run/
-mkdir -p ${APP_RUNTIME_DIR}/.ssh/
-touch ${APP_RUNTIME_DIR}/.ssh/authorized_keys
+mkdir -p ${APP_WORK_DIR}/var/run/
+mkdir -p ${APP_WORK_DIR}/.ssh/
+touch ${APP_WORK_DIR}/.ssh/authorized_keys
 
 set +x
 
 echo " "
 echo " USE openssh RUNTIME :"
 echo " "
-echo " change config file ${APP_RUNTIME_DIR}/etc/sshd_config "
+echo " change config file ${APP_WORK_DIR}/etc/sshd_config "
 echo ' GENERATE SSH KEY :'
-echo " printf 'y\n' ｜ ${APP_RUNTIME_DIR}/bin/ssh-keygen -N \"\" -t ed25519 -C \"Example-SSH-Key\" -f example_ssh_key"
+echo " printf 'y\n' ｜ ${APP_WORK_DIR}/bin/ssh-keygen -N \"\" -t ed25519 -C \"Example-SSH-Key\" -f example_ssh_key"
 echo ' RUN SSHD :'
-echo " bash ${APP_RUNTIME_DIR}/opensshd-start.sh"
+echo " bash ${APP_WORK_DIR}/opensshd-start.sh"
 echo '  '
 echo " ssh client example:"
-echo " cat example_ssh_key.pub >> ${APP_RUNTIME_DIR}/.ssh/authorized_keys"
+echo " cat example_ssh_key.pub >> ${APP_WORK_DIR}/.ssh/authorized_keys"
 echo " ssh -o StrictHostKeyChecking=no -p 65527 -i example_ssh_key -v -CNT -D 0.0.0.0:2025 $(id -un)@127.0.0.1"
 
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${APP_WORK_DIR}/bin/:${APP_WORK_DIR}/sbin/:$PATH"
