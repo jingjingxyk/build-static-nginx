@@ -21,7 +21,7 @@ case $OS in
   ;;
 *)
   case $OS in
-  'MSYS_NT'* | 'CYGWIN_NT'* )
+  'MSYS_NT'* | 'CYGWIN_NT'*)
     OS="windows"
     ;;
   'MINGW64_NT'*)
@@ -39,7 +39,7 @@ case $ARCH in
 'x86_64')
   ARCH="x64"
   ;;
-'aarch64' | 'arm64' )
+'aarch64' | 'arm64')
   ARCH="arm64"
   ;;
 *)
@@ -79,6 +79,9 @@ while [ $# -gt 0 ]; do
     NO_PROXY="${NO_PROXY},.aliyuncs.com,.aliyun.com,.tencent.com"
     NO_PROXY="${NO_PROXY},.myqcloud.com,.swoole.com"
     export NO_PROXY="${NO_PROXY},.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com"
+    ;;
+  --version)
+    VERSION="$2"
     ;;
   --*)
     echo "Illegal option $1"
@@ -126,11 +129,9 @@ cd ${__PROJECT__}/var/runtime
 
 cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/runtime/cacert.pem
 
-
 cd ${__PROJECT__}/
 
-exit 0
-tee ${__PROJECT__}/bin/runtime/privoxy/privoxy-start.sh <<'EOF'
+tee ${__PROJECT__}/runtime/openssh/opensshd-start.sh <<'EOF'
 #!/usr/bin/env bash
 set -exu
 __DIR__=$(
@@ -139,50 +140,24 @@ __DIR__=$(
 )
 
 cd ${__DIR__}/
- ./sbin/privoxy --no-daemon etc/config
+${__DIR__}/sbin/sshd -D -f   ${__DIR__}/etc/sshd_config
+
 EOF
 
+echo 'PasswordAuthentication no' >>${__PROJECT__}/runtime/${APP_NAME}/etc/sshd_config
+echo 'PermitRootLogin yes' >>${__PROJECT__}/runtime/${APP_NAME}/etc/sshd_config
+echo 'PubkeyAuthentication yes' >>${__PROJECT__}/runtime/${APP_NAME}/etc/sshd_config
+
+sed -i '' "s@\/usr\/local\/swoole-cli@${__PROJECT__}\/runtime@" ${__PROJECT__}/runtime/${APP_NAME}/etc/sshd_config
 
 set +x
 
 echo " "
-echo " USE PRIVOXY RUNTIME :"
+echo " USE openssh RUNTIME :"
 echo " "
-echo " change file ./bin/runtime/privoxy/etc/config  "
+echo " change file ${__DIR__}/etc/sshd_config "
 echo ''
-echo ' listen-address  0.0.0.0:8118'
-echo ' #forward-socks5   /               user:pass@socks-gw.example.com:1080  .  '
-echo '  forward-socks5   /               127.0.0.1:2000  .  '
-cat <<'EOF'
-    # forward           [::1]             .
-    # forward           [fe80::/10]       .
-    # forward           [fd00::/8]        .
-    # forward           [fc00::/]         .
-    forward           192.168.*.*/     .
-    forward           10.*.*.*/        .
-    forward           127.*.*.*/       .
-    forward           .aliyuncs.com    .
-    forward           cdn.unrealengine.com   .
-    forward           .taobao.org       .
-    forward           .tsinghua.edu.cn  .
-    forward           .ustc.edu.cn      .
-    forward           cdn.unrealengine.com   .
-    forward           .aliyun.com    .
-    forward           .npmmirror.com .
-
-EOF
-echo " confdir ${__PROJECT__}/bin/runtime/privoxy/etc"
-echo " logdir ${__PROJECT__}/bin/runtime/privoxy/var/log/privoxy"
-echo '#        debug  1'
-echo '#        debug  512'
-echo '#        debug  1024'
-echo ''
-echo " cd ./bin/runtime/privoxy "
-echo " ./sbin/privoxy --no-daemon etc/config  "
-echo ''
-echo ' OR '
-echo ''
-echo ' bash bin/runtime/privoxy/privoxy-start.sh'
+echo " bash ${__PROJECT__}/runtime/openssh/opensshd-start.sh"
 echo " "
 
 export PATH="${__PROJECT__}/bin/runtime:$PATH"
