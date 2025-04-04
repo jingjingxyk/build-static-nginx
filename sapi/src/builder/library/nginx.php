@@ -112,7 +112,6 @@ EOF
             --with-http_v3_module \
             --with-http_flv_module \
             --with-http_sub_module \
-            --with-http_dav_module \
             --with-stream \
             --with-stream_ssl_preread_module \
             --with-stream_ssl_module \
@@ -121,6 +120,11 @@ EOF
             --with-cc-opt="{$ldflags}  -O2   \$CPPFLAGS " \
             --with-ld-opt="{$ldflags}  \$LDFLAGS " \
             --add-module={$builderDir}/ngx_http_proxy_connect_module/ \
+
+            # nginx 支持 webdav 不完整
+            # --with-http_dav_module \
+            # --add-module={$builderDir}/nginx-dav-ext-module 、
+            # https://github.com/arut/nginx-dav-ext-module.git
 
 
 

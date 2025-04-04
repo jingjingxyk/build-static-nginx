@@ -52,7 +52,7 @@ APP_VERSION='9.9p2'
 APP_NAME='openssh'
 VERSION='v1.0.0'
 
-mkdir -p bin/runtime
+mkdir -p runtime
 mkdir -p var/runtime
 
 cd ${__PROJECT__}/var/runtime
@@ -117,14 +117,14 @@ else
   mkdir -p ${APP_NAME}/
   tar -xvf ${APP_RUNTIME}.tar -C ${APP_NAME}/
 
-  mkdir -p ${__PROJECT__}/bin/runtime/${APP_NAME}
-  test -d ${__PROJECT__}/bin/runtime/${APP_NAME} && rm -rf ${__PROJECT__}/bin/runtime/${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${__PROJECT__}/bin/runtime/${APP_NAME}
+  mkdir -p ${__PROJECT__}/runtime/${APP_NAME}
+  test -d ${__PROJECT__}/runtime/${APP_NAME} && rm -rf ${__PROJECT__}/runtime/${APP_NAME}
+  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${__PROJECT__}/runtime/${APP_NAME}/
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/runtime/cacert.pem
 
 
 cd ${__PROJECT__}/
