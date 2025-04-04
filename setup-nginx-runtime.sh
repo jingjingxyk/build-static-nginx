@@ -118,7 +118,7 @@ else
   test -d nginx && rm -rf nginx
   test -d nginx || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x nginx/sbin/nginx
-  cp -rf ${__PROJECT__}/var/runtime/nginx ${APP_RUNTIME_DIR}
+  cp -rf ${__PROJECT__}/var/runtime/nginx/. ${APP_RUNTIME_DIR}
 fi
 
 cd ${__PROJECT__}/var/runtime

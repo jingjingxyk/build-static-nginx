@@ -52,8 +52,10 @@ APP_VERSION='3.0.34'
 APP_NAME='privoxy'
 VERSION='v1.0.0'
 
-mkdir -p bin/runtime
+mkdir -p runtime
 mkdir -p var/runtime
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -115,9 +117,8 @@ else
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
   tar -xvf ${APP_RUNTIME}.tar
   chmod a+x privoxy/sbin/privoxy
-  mkdir -p ${__PROJECT__}/bin/runtime/${APP_NAME}
-  test -d ${__PROJECT__}/bin/runtime/${APP_NAME} && rm -rf ${__PROJECT__}/bin/runtime/${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${__PROJECT__}/bin/runtime/${APP_NAME}
+  test -d ${APP_RUNTIME_DIR} && rm -rf ${APP_RUNTIME_DIR}
+  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}
 fi
 
 cd ${__PROJECT__}/var/runtime
@@ -128,7 +129,7 @@ cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pe
 cd ${__PROJECT__}/
 
 
-tee ${__PROJECT__}/bin/runtime/privoxy/privoxy-start.sh <<'EOF'
+tee ${APP_RUNTIME_DIR}/privoxy-start.sh <<'EOF'
 #!/usr/bin/env bash
 set -exu
 __DIR__=$(
@@ -146,7 +147,7 @@ set +x
 echo " "
 echo " USE PRIVOXY RUNTIME :"
 echo " "
-echo " change file ./bin/runtime/privoxy/etc/config  "
+echo " change file ${APP_RUNTIME_DIR}/etc/config  "
 echo ''
 echo ' listen-address  0.0.0.0:8118'
 echo ' #forward-socks5   /               user:pass@socks-gw.example.com:1080  .  '
@@ -169,18 +170,18 @@ cat <<'EOF'
     forward           .npmmirror.com .
 
 EOF
-echo " confdir ${__PROJECT__}/bin/runtime/privoxy/etc"
-echo " logdir ${__PROJECT__}/bin/runtime/privoxy/var/log/privoxy"
+echo " confdir ${APP_RUNTIME_DIR}/privoxy/etc"
+echo " logdir ${APP_RUNTIME_DIR}/var/log/privoxy"
 echo '#        debug  1'
 echo '#        debug  512'
 echo '#        debug  1024'
 echo ''
-echo " cd ./bin/runtime/privoxy "
+echo " cd ${APP_RUNTIME_DIR} "
 echo " ./sbin/privoxy --no-daemon etc/config  "
 echo ''
 echo ' OR '
 echo ''
-echo ' bash bin/runtime/privoxy/privoxy-start.sh'
+echo " bash ${APP_RUNTIME_DIR}/privoxy-start.sh"
 echo " "
 
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${APP_RUNTIME_DIR}:$PATH"

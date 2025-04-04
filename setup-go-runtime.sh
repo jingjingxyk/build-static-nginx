@@ -61,7 +61,7 @@ cd ${__PROJECT__}/var/runtime
 
 : <<'EOF'
 
-https://go.dev/dl/go1.22.5.windows-amd64.msi
+https://go.dev/dl/
 
 https://go.dev/dl/go1.22.5.darwin-arm64.pkg
 
