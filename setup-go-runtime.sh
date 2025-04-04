@@ -52,8 +52,10 @@ APP_VERSION='1.24.1'
 APP_NAME='go'
 VERSION='1.24.1'
 
-mkdir -p bin/runtime
+mkdir -p runtime
 mkdir -p var/runtime
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -120,8 +122,8 @@ else
   test -f ${APP_RUNTIME}.tar.gz || curl -LSo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
   tar -xvf ${APP_RUNTIME}.tar.gz
-  test -d ${__PROJECT__}/bin/runtime/go && rm -rf ${__PROJECT__}/bin/runtime/go
-  mv go ${__PROJECT__}/bin/runtime/go
+  test -d ${APP_RUNTIME_DIR} && rm -rf ${APP_RUNTIME_DIR}
+  mv go ${__PROJECT__}/runtime/
 fi
 
 cd ${__PROJECT__}/
@@ -131,7 +133,7 @@ set +x
 echo " "
 echo " USE PHP RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/bin/runtime/go/bin/:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
 echo " "
-export PATH="${__PROJECT__}/bin/runtime/go/bin/:$PATH"
+export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
 go version

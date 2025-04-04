@@ -39,7 +39,7 @@ case $ARCH in
 'x86_64')
   ARCH="x64"
   ;;
-'aarch64' | 'arm64' )
+'aarch64' | 'arm64')
   ARCH="arm64"
   ;;
 *)
@@ -54,6 +54,8 @@ VERSION='v1.2.0'
 
 mkdir -p runtime
 mkdir -p var/runtime
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -116,7 +118,7 @@ else
   test -d nginx && rm -rf nginx
   test -d nginx || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x nginx/sbin/nginx
-  cp -rf ${__PROJECT__}/var/runtime/nginx ${__PROJECT__}/runtime/nginx
+  cp -rf ${__PROJECT__}/var/runtime/nginx ${APP_RUNTIME_DIR}
 fi
 
 cd ${__PROJECT__}/var/runtime
@@ -132,7 +134,11 @@ echo " USE NGINX RUNTIME :"
 echo " "
 echo " export PATH=\"${__PROJECT__}/runtime:\$PATH\" "
 echo " "
-echo " ./runtime/nginx/sbin/nginx -p ./runtime/nginx/ "
+echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} "
+echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} -t "
+echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} -v "
+echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} -s reload "
+echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} -s stop "
 echo " "
 echo " nginx.conf example  :  https://gitee.com/jingjingxyk/quickstart-nginx/blob/main/nginx.example.conf"
 echo " "
