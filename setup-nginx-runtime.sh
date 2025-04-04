@@ -52,7 +52,7 @@ APP_VERSION='1.27.4'
 APP_NAME='nginx'
 VERSION='v1.2.0'
 
-mkdir -p bin/runtime
+mkdir -p runtime
 mkdir -p var/runtime
 
 cd ${__PROJECT__}/var/runtime
@@ -116,12 +116,12 @@ else
   test -d nginx && rm -rf nginx
   test -d nginx || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x nginx/sbin/nginx
-  cp -rf ${__PROJECT__}/var/runtime/nginx ${__PROJECT__}/bin/runtime/nginx
+  cp -rf ${__PROJECT__}/var/runtime/nginx ${__PROJECT__}/runtime/nginx
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/runtime/cacert.pem
 
 cd ${__PROJECT__}/
 
@@ -130,12 +130,12 @@ set +x
 echo " "
 echo " USE NGINX RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/bin/runtime:\$PATH\" "
+echo " export PATH=\"${__PROJECT__}/runtime:\$PATH\" "
 echo " "
-echo " ./bin/runtime/nginx/sbin/nginx -p ./bin/runtime/nginx/ "
+echo " ./runtime/nginx/sbin/nginx -p ./runtime/nginx/ "
 echo " "
-echo " nginx.conf example  :  https://gitee.com/jingjingxyk/quickstart-nginx-php-fpm/blob/main/nginx.example.conf"
+echo " nginx.conf example  :  https://gitee.com/jingjingxyk/quickstart-nginx/blob/main/nginx.example.conf"
 echo " "
 echo " nginx docs :  http://nginx.org/en/docs/configure.html"
 echo " "
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${__PROJECT__}/runtime:$PATH"
