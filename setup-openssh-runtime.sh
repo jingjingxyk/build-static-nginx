@@ -156,8 +156,8 @@ echo 'PubkeyAuthentication yes' >>$SSHD_CONFIG
 echo 'LogLevel DEBUG' >>$SSHD_CONFIG
 echo "PidFile ${__PROJECT__}/runtime/openssh/var/run/sshd.pid" >>$SSHD_CONFIG
 
-T__PROJECT__=$(echo ${__PROJECT__} | sed "s|/|\\/|g")
-T_APP_RUNTIME_DIR=$(echo ${APP_RUNTIME_DIR} | sed "s|/|\\/|g")
+T__PROJECT__=$(echo "${__PROJECT__}" | sed "s|/|\\/|g")
+T_APP_RUNTIME_DIR=$(echo "${APP_RUNTIME_DIR}" | sed "s|/|\\/|g")
 sed -i '' "s@\/usr\/local\/swoole-cli@${T__PROJECT__}\/runtime@" $SSHD_CONFIG
 sed -i '' "s@\.ssh\/authorized_keys@${T_APP_RUNTIME_DIR}\/\.ssh\/authorized_keys@" $SSHD_CONFIG
 
