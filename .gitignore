@@ -364,4 +364,6 @@ php-fpm-*
 /.venv
 /cmake-build-debug
 /CMakeFiles
-/runtime/
+/runtime
+!/runtime/.gitkeep
+
