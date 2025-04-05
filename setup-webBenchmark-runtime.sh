@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -39,7 +39,7 @@ case $ARCH in
 'x86_64')
   ARCH="x64"
   ;;
-'aarch64' | 'arm64' )
+'aarch64' | 'arm64')
   ARCH="arm64"
   ARCH="arm"
   ;;
@@ -53,8 +53,12 @@ APP_VERSION='0.9'
 APP_NAME='webBenchmark'
 VERSION='0.9'
 
-mkdir -p bin/runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
+mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -88,9 +92,6 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-
-
-
 APP_RUNTIME="${APP_NAME}_${OS}_${ARCH}"
 
 if [ $OS = 'windows' ]; then
@@ -102,7 +103,7 @@ else
   test -f ${APP_RUNTIME} || curl -LSo ${APP_RUNTIME} ${APP_DOWNLOAD_URL}
 
   chmod a+x ${APP_RUNTIME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_RUNTIME} ${__PROJECT__}/bin/runtime/${APP_RUNTIME}
+  cp -rf ${__PROJECT__}/var/runtime/${APP_RUNTIME} ${APP_RUNTIME_DIR}//
 fi
 
 cd ${__PROJECT__}/var/runtime
@@ -114,10 +115,10 @@ set +x
 echo " 测网速工具 "
 echo " USE webBenchmark RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/bin/runtime:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}/:\$PATH\" "
 echo " "
 echo " docs :  https://github.com/maintell/webBenchmark"
 echo " "
 echo " example  :  webBenchmark_linux_x64 -c 32 -s https://target.url"
 echo " "
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${APP_RUNTIME_DIR}/:$PATH"

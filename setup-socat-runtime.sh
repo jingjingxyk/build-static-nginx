@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -93,9 +93,11 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-mkdir -p runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
-APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
@@ -134,12 +136,12 @@ else
   test -f ${APP_RUNTIME}.tar || xz -d -k ${APP_RUNTIME}.tar.xz
   test -f socat || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x socat
-  cp -f ${__PROJECT__}/var/runtime/socat ${APP_RUNTIME_DIR}
+  cp -f ${__PROJECT__}/var/runtime/socat ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}/
 
 cd ${__PROJECT__}/
 

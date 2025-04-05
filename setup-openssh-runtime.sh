@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -135,7 +135,7 @@ cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/runtime/cacert.pem
 
 cd ${__PROJECT__}/
 
-tee ${__PROJECT__}/runtime/openssh/opensshd-start.sh <<'EOF'
+tee ${APP_RUNTIME_DIR}/opensshd-start.sh <<'EOF'
 #!/usr/bin/env bash
 set -exu
 __DIR__=$(
@@ -154,7 +154,7 @@ echo 'PasswordAuthentication no' >>$SSHD_CONFIG
 echo 'PermitRootLogin yes' >>$SSHD_CONFIG
 echo 'PubkeyAuthentication yes' >>$SSHD_CONFIG
 echo 'LogLevel DEBUG' >>$SSHD_CONFIG
-echo "PidFile ${__PROJECT__}/runtime/openssh/var/run/sshd.pid" >>$SSHD_CONFIG
+echo "PidFile ${APP_RUNTIME_DIR}/var/run/sshd.pid" >>$SSHD_CONFIG
 
 T__PROJECT__=$(echo "${__PROJECT__}" | sed "s|/|\\\/|g")
 T_APP_RUNTIME_DIR=$(echo "${APP_RUNTIME_DIR}" | sed "s|\/|\\\/|g")

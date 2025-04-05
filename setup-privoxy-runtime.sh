@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -21,7 +21,7 @@ case $OS in
   ;;
 *)
   case $OS in
-  'MSYS_NT'* | 'CYGWIN_NT'* )
+  'MSYS_NT'* | 'CYGWIN_NT'*)
     OS="windows"
     ;;
   'MINGW64_NT'*)
@@ -39,7 +39,7 @@ case $ARCH in
 'x86_64')
   ARCH="x64"
   ;;
-'aarch64' | 'arm64' )
+'aarch64' | 'arm64')
   ARCH="arm64"
   ;;
 *)
@@ -52,9 +52,11 @@ APP_VERSION='3.0.34'
 APP_NAME='privoxy'
 VERSION='v1.0.0'
 
-mkdir -p runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
-APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
@@ -118,16 +120,14 @@ else
   tar -xvf ${APP_RUNTIME}.tar
   chmod a+x privoxy/sbin/privoxy
   test -d ${APP_RUNTIME_DIR} && rm -rf ${APP_RUNTIME_DIR}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}
+  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
-
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}/cacert.pem
 
 cd ${__PROJECT__}/
-
 
 tee ${APP_RUNTIME_DIR}/privoxy-start.sh <<'EOF'
 #!/usr/bin/env bash
@@ -140,7 +140,6 @@ __DIR__=$(
 cd ${__DIR__}/
  ./sbin/privoxy --no-daemon etc/config
 EOF
-
 
 set +x
 

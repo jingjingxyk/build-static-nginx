@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -21,7 +21,7 @@ case $OS in
   ;;
 *)
   case $OS in
-  'MSYS_NT'* | 'CYGWIN_NT'* )
+  'MSYS_NT'* | 'CYGWIN_NT'*)
     OS="windows"
     ;;
   'MINGW64_NT'*)
@@ -39,7 +39,7 @@ case $ARCH in
 'x86_64')
   ARCH="x64"
   ;;
-'aarch64' | 'arm64' )
+'aarch64' | 'arm64')
   ARCH="arm64"
   ;;
 *)
@@ -52,8 +52,12 @@ APP_VERSION='4.6.2'
 APP_NAME='coturn'
 VERSION='v1.2.0'
 
-mkdir -p bin/runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
+mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -116,13 +120,12 @@ else
   tar -xvf ${APP_RUNTIME}.tar
   chmod a+x ${APP_NAME}/bin/turnserver
   mkdir -p ${__PROJECT__}/bin/runtime/${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/* ${__PROJECT__}/bin/runtime/${APP_NAME}
+  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
-
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}/cacert.pem
 
 cd ${__PROJECT__}/
 
@@ -131,10 +134,10 @@ set +x
 echo " "
 echo " USE COTURN RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/bin/runtime/coturn/bin/:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
 echo " "
-echo " ./bin/runtime/coturn/bin/turnserver -c ./bin/runtime/coturn/etc/turnserver.conf  "
+echo " ${APP_RUNTIME_DIR}/bin/turnserver -c ${APP_RUNTIME_DIR}/etc/turnserver.conf  "
 echo " "
 echo " coturn docs :  https://github.com/coturn/coturn "
 echo " "
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${APP_RUNTIME_DIR}:$PATH"

@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -52,8 +52,12 @@ APP_VERSION='v6.0.0-dev'
 APP_NAME='swoole-cli'
 VERSION='swoole-cli-v0.0.9'
 
-mkdir -p bin/runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
+mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
@@ -121,17 +125,17 @@ else
   test -f ${APP_RUNTIME}.tar || xz -d -k ${APP_RUNTIME}.tar.xz
   test -f swoole-cli || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x swoole-cli
-  cp -f ${__PROJECT__}/var/runtime/swoole-cli ${__PROJECT__}/bin/runtime/swoole-cli
+  cp -f ${__PROJECT__}/var/runtime/swoole-cli ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/composer.phar ${__PROJECT__}/bin/runtime/composer
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/bin/runtime/cacert.pem
+cp -f ${__PROJECT__}/var/runtime/composer.phar ${APP_RUNTIME_DIR}/composer
+cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}/cacert.pem
 
-cat >${__PROJECT__}/bin/runtime/php.ini <<EOF
-curl.cainfo="${__PROJECT__}/bin/runtime/cacert.pem"
-openssl.cafile="${__PROJECT__}/bin/runtime/cacert.pem"
+cat >${APP_RUNTIME_DIR}/php.ini <<EOF
+curl.cainfo="${APP_RUNTIME_DIR}/cacert.pem"
+openssl.cafile="${APP_RUNTIME_DIR}/cacert.pem"
 swoole.use_shortname=off
 display_errors = On
 error_reporting = E_ALL
@@ -149,7 +153,7 @@ expose_php=Off
 
 EOF
 
-cat >${__PROJECT__}/bin/runtime/php-fpm.conf <<'EOF'
+cat >${APP_RUNTIME_DIR}/php-fpm.conf <<'EOF'
 ; 更多配置参考
 ; https://github.com/php/php-src/blob/master/sapi/fpm/www.conf.in
 ; https://github.com/php/php-src/blob/master/sapi/fpm/php-fpm.conf.in
@@ -192,10 +196,10 @@ set +x
 echo " "
 echo " USE PHP RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/bin/runtime:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}/:\$PATH\" "
 echo " "
-echo " alias swoole-cli='swoole-cli -d curl.cainfo=${__PROJECT__}/bin/runtime/cacert.pem -d openssl.cafile=${__PROJECT__}/bin/runtime/cacert.pem' "
+echo " alias swoole-cli='swoole-cli -d curl.cainfo=${APP_RUNTIME_DIR}/cacert.pem -d openssl.cafile=${APP_RUNTIME_DIR}/cacert.pem' "
 echo " OR "
-echo " alias swoole-cli='swoole-cli -c ${__PROJECT__}/bin/runtime/php.ini' "
+echo " alias swoole-cli='swoole-cli -c ${APP_RUNTIME_DIR}/php.ini' "
 echo " "
-export PATH="${__PROJECT__}/bin/runtime:$PATH"
+export PATH="${APP_RUNTIME_DIR}/:$PATH"

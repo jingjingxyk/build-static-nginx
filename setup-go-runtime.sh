@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -52,9 +52,11 @@ APP_VERSION='1.24.1'
 APP_NAME='go'
 VERSION='1.24.1'
 
-mkdir -p runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
-APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime

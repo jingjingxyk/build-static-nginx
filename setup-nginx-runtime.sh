@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -52,9 +52,11 @@ APP_VERSION='1.27.4'
 APP_NAME='nginx'
 VERSION='v1.2.0'
 
-mkdir -p runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
-APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
@@ -109,7 +111,6 @@ if [ $OS = 'windows' ]; then
     test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
     test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
     unzip "${APP_RUNTIME}.zip"
-    echo
     exit 0
   }
 else
@@ -118,7 +119,7 @@ else
   test -d nginx && rm -rf nginx
   test -d nginx || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x nginx/sbin/nginx
-  cp -rf ${__PROJECT__}/var/runtime/nginx/. ${APP_RUNTIME_DIR}
+  cp -rf ${__PROJECT__}/var/runtime/nginx/. ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
@@ -132,7 +133,7 @@ set +x
 echo " "
 echo " USE NGINX RUNTIME :"
 echo " "
-echo " export PATH=\"${__PROJECT__}/runtime:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
 echo " "
 echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} "
 echo " ${APP_RUNTIME_DIR}/sbin/nginx -p ${APP_RUNTIME_DIR} -t "
@@ -144,4 +145,4 @@ echo " nginx.conf example  :  https://gitee.com/jingjingxyk/quickstart-nginx/blo
 echo " "
 echo " nginx docs :  http://nginx.org/en/docs/configure.html"
 echo " "
-export PATH="${__PROJECT__}/runtime:$PATH"
+export PATH="${APP_RUNTIME_DIR}:$PATH"

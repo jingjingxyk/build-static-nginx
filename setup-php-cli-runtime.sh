@@ -6,7 +6,7 @@ __DIR__=$(
   pwd
 )
 __PROJECT__=${__DIR__}
-
+shopt -s expand_aliases
 cd ${__PROJECT__}
 
 OS=$(uname -s)
@@ -52,10 +52,14 @@ APP_VERSION='v8.2.28'
 APP_NAME='php-cli'
 VERSION='v1.9.1'
 
-mkdir -p runtime
+cd ${__PROJECT__}
+mkdir -p bin/
+mkdir -p runtime/
 mkdir -p var/runtime
-APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
+APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
+
+cd ${__PROJECT__}/var/runtime
 
 MIRROR=''
 while [ $# -gt 0 ]; do
@@ -144,7 +148,6 @@ if [ $OS = 'windows' ]; then
     test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
     test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
     unzip "${APP_RUNTIME}.zip"
-    echo
     exit 0
   }
 else
@@ -152,7 +155,7 @@ else
   test -f ${APP_RUNTIME}.tar || xz -d -k ${APP_RUNTIME}.tar.xz
   test -f php || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x php
-  cp -f ${__PROJECT__}/var/runtime/php ${APP_RUNTIME_DIR}
+  cp -f ${__PROJECT__}/var/runtime/php ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
