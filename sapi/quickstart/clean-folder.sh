@@ -90,6 +90,7 @@ if [[ $ACTION = "delete" ]]; then
   test -d CMakeFiles && rm -rf  CMakeFiles
   test -d cmake-build-debug && rm -rf  cmake-build-debug
   test -d .venv && rm -rf .venv
+  test -d node_modules && rm -rf node_modules
   echo $?
 fi
 
