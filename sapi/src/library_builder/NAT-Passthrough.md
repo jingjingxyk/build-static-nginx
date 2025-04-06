@@ -48,6 +48,10 @@
 1. [freesiwtch NAT-Traversal](https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Networking/NAT-Traversal_3375417/)
 1. [pingtunnel](https://github.com/esrrhs/pingtunnel.git)
 1. [screen sharing for developers ](https://github.com/screego/server?tab=readme-ov-file)
+1. [How NAT traversal works](https://tailscale.com/blog/how-nat-traversal-works)
+1. [einat-ebpf，用 eBPF 从头写一个 Full Cone NAT ](https://eh5.me/zh-cn/blog/einat-introduction/)
+1. [理解 NAT 和 NAT 行为、类型](https://eh5.me/zh-cn/blog/nat-behavior-explained/)
+1. [Netfilter masquerade 的 NAT 行为到底是什么 ](https://eh5.me/zh-cn/blog/nat-behavior-of-netfilter/)
 
 有预算没技术：蒲公英组网
 SRv6 分段路由
