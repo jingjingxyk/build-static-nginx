@@ -197,6 +197,7 @@ return function (Preprocessor $p) {
     $depends = ['liboauth2'] ;
     $depends = ['depot_tools','libyuv'] ;
     $depends = ['libmongoc'] ;
+    $depends = ['emule'] ;
 
 
     $ext = (new Extension('common'))

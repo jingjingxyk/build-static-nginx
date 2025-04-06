@@ -342,6 +342,8 @@ define("V4L_UTILS_PREFIX", $p->getGlobalPrefix() . '/v4l_utils');
 define("LIBOAUTH2_PREFIX", $p->getGlobalPrefix() . '/liboauth2');
 define("CJOSE_PREFIX", $p->getGlobalPrefix() . '/cjose');
 
+define("EMULE_PREFIX", $p->getGlobalPrefix() . '/emule');
+
 define("EXAMPLE_PREFIX", $p->getGlobalPrefix() . '/example');
 
 
