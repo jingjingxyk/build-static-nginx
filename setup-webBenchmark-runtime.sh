@@ -101,9 +101,8 @@ if [ $OS = 'windows' ]; then
   }
 else
   test -f ${APP_RUNTIME} || curl -LSo ${APP_RUNTIME} ${APP_DOWNLOAD_URL}
-
   chmod a+x ${APP_RUNTIME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_RUNTIME} ${APP_RUNTIME_DIR}//
+  cp -rf ${__PROJECT__}/var/runtime/${APP_RUNTIME} ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime

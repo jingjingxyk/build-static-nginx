@@ -50,7 +50,7 @@ esac
 
 APP_VERSION='v8.2.28'
 APP_NAME='php-fpm'
-VERSION='php-fpm-v2.1.0'
+VERSION='php-fpm-v2.2.0'
 
 MIRROR=''
 while [ $# -gt 0 ]; do
@@ -155,6 +155,9 @@ else
   test -f php-fpm || tar -xvf ${APP_RUNTIME}.tar
   chmod a+x php-fpm
   cp -f ${__PROJECT__}/var/runtime/php-fpm ${APP_RUNTIME_DIR}/
+  mkdir -p ${APP_RUNTIME_DIR}/log
+  mkdir -p ${APP_RUNTIME_DIR}/run
+  mkdir -p ${APP_RUNTIME_DIR}/var
 fi
 
 cd ${__PROJECT__}/var/runtime
@@ -227,8 +230,8 @@ echo " USE PHP-FPM :"
 echo " "
 echo " export PATH=\"${APP_RUNTIME_DIR}/:\$PATH\" "
 echo " "
-echo " php-fpm.conf example  :  https://gitee.com/jingjingxyk/quickstart-nginx-php-fpm/blob/main/php-fpm.example.conf"
+echo " php-fpm.conf example  :  https://gitee.com/jingjingxyk/quickstart-nginx/blob/main/php-fpm.example.conf"
 echo " "
-echo " enable start php-fpm ${APP_VERSION}"
+echo " start php-fpm ${APP_VERSION}"
 echo " "
 echo " ${APP_RUNTIME_DIR}/php-fpm -c ${APP_RUNTIME_DIR}/php.ini --fpm-config ${APP_RUNTIME_DIR}/php-fpm.conf "
