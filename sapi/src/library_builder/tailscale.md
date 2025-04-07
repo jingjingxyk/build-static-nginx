@@ -1,15 +1,33 @@
 ```shell
+# https://github.com/tailscale/tailscale/blob/main/Dockerfile
+# https://github.com/tailscale/tailscale/blob/main/scripts/installer.sh
+# https://github.com/tailscale/tailscale.git
+# docker pull tailscale/tailscale:latest
+# docker run -d --name=tailscale --cap-add=NET_ADMIN --device=/dev/net/tun tailscale/tailscale /usr/bin/tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock
+
+# 在 Linux 上，可以使用 screen、tmux 或者直接使用 nohup 和 & 来让 tailscaled 在后台运行
 
 docker run -it --rm \
+  --name tailscale \
+  --hostname  \
   --cap-add=NET_ADMIN \
-  --cap-add=SYS_ADMIN \
-  --device=/dev/net/tun debian:12 /bin/bash
+  -v /dev/net/tun:/dev/net/tun \
+  --init \
+  debian:12 /bin/bash
 
-apt install -y curl iproute2 procps iputils-ping openssh-client
+# --cap-add=SYS_ADMIN  \
+# --cap-add=SYS_MODULE \
+
+
+apt update -y && apt install -y curl iproute2 procps iputils-ping openssh-client
 
 curl -fsSL https://tailscale.com/install.sh | bash
 
+# 守护进程
+tailscaled
+
 tailscale up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }}
+
 tailscale status
 
 ```
