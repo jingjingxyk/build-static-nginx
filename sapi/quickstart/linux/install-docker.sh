@@ -74,3 +74,10 @@ tuna)
   exit 0
   ;;
 esac
+
+: <<'EOF'
+
+# 以非 root 用户身份管理 Docker
+sudo usermod -aG docker username
+
+EOF
