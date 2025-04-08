@@ -25,7 +25,7 @@ return function (Preprocessor $p) {
                 cp -f {$install_dir}/bin/ttyd {$workdir}/bin/ttyd
                 strip {$workdir}/bin/ttyd
                 cd {$workdir}/bin/
-                APP_VERSION=\$({$workdir}/bin/ttyd -v | awk '{ print $3 }')
+                APP_VERSION=\$({$workdir}/bin/ttyd -v | awk '{ print $3 }' | awk -F "-" '{ print $1 }')
                 echo \${APP_VERSION} > {$workdir}/APP_VERSION
 
 EOF;
