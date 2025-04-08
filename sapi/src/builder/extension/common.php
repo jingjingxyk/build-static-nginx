@@ -198,6 +198,7 @@ return function (Preprocessor $p) {
     $depends = ['depot_tools','libyuv'] ;
     $depends = ['libmongoc'] ;
     $depends = ['emule'] ;
+    $depends = ['ttyd'] ;
 
 
     $ext = (new Extension('common'))

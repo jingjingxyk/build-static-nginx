@@ -142,10 +142,17 @@ EOF
         # -DGIF_INCLUDE_DIR=/usr/local/swoole-cli/libgif/include/ \
         # -DGIF_LIBRARY=/usr/local/swoole-cli/libgif/lib/libgif.a \
 
+        # -DCMAKE_BUILD_TYPE=RELEASE
+        # -DCMAKE_FIND_LIBRARY_SUFFIXES=".a" \
+        # -DCMAKE_EXE_LINKER_FLAGS="-static" \
+
         # -DCARES_INCLUDE_DIR={$cares_prefix}/include
         # -DCARES_LIBRARY={$cares_prefix}/lib
+
+        # -DOPENSSL_ROOT_DIR={$openssl_prefix}
         # -DCARES_DIR={$cares_prefix}/
         # -DCARES_ROOT={$cares_prefix}/
+
         # -DCMAKE_POLICY_DEFAULT_CMP0065=NEW \
         # -DCMAKE_POLICY_DEFAULT_CMP0074=NEW \
         # -DCMAKE_POLICY_DEFAULT_CMP0075=NEW \

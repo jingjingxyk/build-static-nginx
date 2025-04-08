@@ -344,6 +344,8 @@ define("CJOSE_PREFIX", $p->getGlobalPrefix() . '/cjose');
 
 define("EMULE_PREFIX", $p->getGlobalPrefix() . '/emule');
 
+define("TTYD_PREFIX", $p->getGlobalPrefix() . '/ttyd');
+define("LIBJSON_C_PREFIX", $p->getGlobalPrefix() . '/libjson_c');
 define("EXAMPLE_PREFIX", $p->getGlobalPrefix() . '/example');
 
 
