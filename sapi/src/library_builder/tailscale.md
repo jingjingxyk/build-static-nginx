@@ -2,12 +2,13 @@
 
 ```shell
 
-docker run -d  \
+docker run -d --rm \
   --name tailscale \
   --hostname tailscale \
   --cap-add=NET_ADMIN \
   -v /dev/net/tun:/dev/net/tun \
-  tailscale/tailscale:latest
+  tailscale/tailscale:latest \
+  tailscaled
 
 docker exec -it tailscale sh
 
