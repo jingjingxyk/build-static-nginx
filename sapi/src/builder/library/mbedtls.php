@@ -19,15 +19,6 @@ return function (Preprocessor $p) {
         ->withUrl('https://github.com/Mbed-TLS/mbedtls/archive/refs/tags/mbedtls-3.6.3.tar.gz')
         ->withFile('mbedtls-3.6.3.tar.gz')
         ->withPrefix($mbedtls_prefix)
-
-
-        //明确申明 不使用构建缓存 例子： thirdparty/openssl (每次都解压全新源代码到此目录）
-        ->withBuildCached(false)
-
-        //明确申明 不使用库缓存  例子： /usr/local/swoole-cli/zlib (每次构建都需要安装到此目录）
-         ->withInstallCached(false)
-
-        /* 使用 cmake 构建 start */
         ->withBuildScript(
             <<<EOF
          mkdir -p build
@@ -47,6 +38,9 @@ return function (Preprocessor $p) {
 
 EOF
         )
+        ->withPkgConfig('mbedcrypto')
+        ->withPkgConfig('mbedtls')
+        ->withPkgConfig('mbedx509')
     ;
 
     $p->addLibrary($lib);
