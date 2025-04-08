@@ -54,6 +54,7 @@
 1. [Netfilter masquerade 的 NAT 行为到底是什么 ](https://eh5.me/zh-cn/blog/nat-behavior-of-netfilter/)
 1. [Apache Guacamole](https://guacamole.apache.org)
 1. [tmate](https://tmate.io/)
+1. [websocat](https://github.com/vi/websocat)
 
 有预算没技术：蒲公英组网
 SRv6 分段路由
