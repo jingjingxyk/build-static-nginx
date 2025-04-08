@@ -199,6 +199,7 @@ return function (Preprocessor $p) {
     $depends = ['libmongoc'] ;
     $depends = ['emule'] ;
     $depends = ['ttyd'] ;
+    $depends = ['mbedtls'] ;
 
 
     $ext = (new Extension('common'))
