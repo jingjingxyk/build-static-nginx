@@ -179,7 +179,6 @@ function install_graphite2(Preprocessor $p)
             ->withFile('graphite-1.3.14.tar.gz')
             ->withLabel('library')
             ->withPrefix($graphite2_prefix)
-
             ->withConfigure(
                 "
             mkdir -p build
@@ -367,7 +366,6 @@ function install_bzip2_dev_latest(Preprocessor $p)
     $p->addLibrary(
         (new Library('bzip2', '/usr/bzip2'))
             ->withUrl('https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.tar.gz')
-
             ->withConfigure(
                 '
                     cmake .. -DCMAKE_BUILD_TYPE="Release" \
@@ -538,7 +536,6 @@ function install_quiche(Preprocessor $p)
             ->withManual('https://curl.se/docs/http3.html')
             ->withUrl('https://github.com/cloudflare/quiche/archive/refs/heads/master.zip')
             ->withFile('latest-quiche.zip')
-
             ->withUntarArchiveCommand('unzip')
             ->withPrefix('/usr/quiche')
             ->withBuildScript(
@@ -722,7 +719,6 @@ function install_dynasm(Preprocessor $p)
             ->withManual('https://luajit.org/download.html')
             ->withTutorial('https://corsix.github.io/dynasm-doc/tutorial.html')
             ->withPrefix($dynasm_prefix)
-
             ->withMakeOptions('PREFIX=' . $dynasm_prefix)
             ->withMakeInstallOptions('PREFIX=' . $dynasm_prefix) //DESTDIR=/tmp/buildroot
 
@@ -741,7 +737,6 @@ function install_valgrind(Preprocessor $p)
             ->withUrl('https://sourceware.org/pub/valgrind/valgrind-3.20.0.tar.bz2')
             ->withManual('https://valgrind.org/docs/man')
             ->withPrefix($valgrind_prefix)
-
             ->withConfigure(
                 <<<EOF
                 export PATH=\$SYSTEM_ORIGIN_PATH
@@ -779,7 +774,6 @@ function install_kerberos(Preprocessor $p)
             ->withManual('https://web.mit.edu/kerberos/krb5-1.20/README-1.20.1.txt')
             //源码包： doc/html/admin/install.html
             ->withPrefix('/usr/kerberos')
-
             ->withConfigure(
                 <<<EOF
 pwd
@@ -804,7 +798,6 @@ function install_fontconfig(Preprocessor $p)
             ->withFile('fontconfig-2.14.2.tar.gz')
             ->withManual('https://gitlab.freedesktop.org/fontconfig/fontconfig')
             ->withPrefix('/usr/fontconfig')
-
             ->withConfigure(
                 <<<EOF
 pwd
@@ -829,7 +822,6 @@ function install_p11_kit(Preprocessor $p)
             ->withUrl('https://github.com/p11-glue/p11-kit/archive/refs/tags/0.24.1.tar.gz')
             //构建选项参参考文档： https://mesonbuild.com/Builtin-options.html
             ->withFile('p11-kit-0.24.1.tar.gz')
-
             ->withPrefix('/usr/p11_kit/')
             ->withBuildScript(
                 '
@@ -875,11 +867,6 @@ function install_p11_kit(Preprocessor $p)
             )
             ->withPkgName('p11_kit')
     );
-}
-
-
-function install_pgsql_test(Preprocessor $p)
-{
 }
 
 
@@ -943,7 +930,6 @@ function install_libfastcommon($p)
             ->withUrl('https://github.com/happyfish100/libfastcommon/archive/refs/tags/V1.0.66.tar.gz')
             ->withFile('libfastcommon-V1.0.66.tar.gz')
             ->withPrefix('/usr/libfastcommon/')
-
             ->withConfigure(
                 '
              export DESTDIR=/usr/libfastcommon
@@ -996,11 +982,6 @@ EOF
 
 
 function install_zookeeper_client($p)
-{
-}
-
-
-function install_unixodbc(Preprocessor $p)
 {
 }
 
@@ -1067,7 +1048,6 @@ function install_libX11(Preprocessor $p)
         ->withUrl('https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.4.tar.gz')
         ->withFile('libX11-1.8.4.tar.gz')
         ->withPrefix($libX11_prefix)
-
         ->withConfigure(
             <<<EOF
         ./autogen.sh

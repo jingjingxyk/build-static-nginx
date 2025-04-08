@@ -4,28 +4,12 @@
 use SwooleCli\Library;
 use SwooleCli\Preprocessor;
 
-function install_rav1e(Preprocessor $p)
-{
-}
-
-function install_aom(Preprocessor $p)
-{
-}
-
-
-function install_av1(Preprocessor $p)
-{
-}
 
 function install_libvpx(Preprocessor $p)
 {
 }
 
 function install_libopus(Preprocessor $p)
-{
-}
-
-function install_libx264(Preprocessor $p)
 {
 }
 
@@ -37,20 +21,12 @@ function install_mp3lame(Preprocessor $p)
 {
 }
 
-function install_libx265(Preprocessor $p)
-{
-}
-
 
 function install_opencv_contrib(Preprocessor $p)
 {
 }
 
 function install_opencv(Preprocessor $p)
-{
-}
-
-function install_ffmpeg(Preprocessor $p)
 {
 }
 
@@ -78,7 +54,6 @@ function install_graphviz(Preprocessor $p)
 EOF
         )
         ->withPrefix($graphviz_prefix)
-
         ->withConfigure(
             <<<EOF
         ./autogen.sh
@@ -119,7 +94,6 @@ function install_TeX(Preprocessor $p)
         ->withManual('https://www.graphviz.org/documentation/')
         ->withUntarArchiveCommand('unzip')
         ->withPrefix($TeX_prefix)
-
         ->withBuildScript(
             <<<EOF
         cd install-tl-*

@@ -82,7 +82,6 @@ function install_musl(Preprocessor $p): void
             ->withUrl('https://musl.libc.org/releases/musl-1.2.3.tar.gz')
             ->withDownloadWithOriginURL()
             ->withPrefix($musl_libc_prefix)
-
             ->withBuildScript(
                 <<<EOF
              // sudo apt install git build-essential
@@ -97,6 +96,7 @@ EOF
             ->disablePkgName()
     );
 }
+
 function install_musl_cross_make(Preprocessor $p): void
 {
     $workDir = $p->getWorkDir();
@@ -116,7 +116,6 @@ EOF
             )
             ->withDownloadWithOriginURL()
             ->withPrefix($musl_cross_make_prefix)
-
             ->withBuildScript(
                 <<<EOF
              cp config.mak.dist config.mak
@@ -150,7 +149,6 @@ function install_rust(Preprocessor $p): void
             ->withFile('rustup.sh')
             ->withDownloadWithOriginURL()
             ->withUntarArchiveCommand('mv')
-
             ->withBuildScript(
                 <<<EOF
 
@@ -186,65 +184,6 @@ EOF
     );
 }
 
-function install_nodejs(Preprocessor $p): void
-{
-    $workDir = $p->getWorkDir();
-    $nodejs_prefix = NODEJS_PREFIX;
-    $p->addLibrary(
-        (new Library('nodejs_lang'))
-            ->withHomePage('https://nodejs.org/')
-            ->withLicense('https://github.com/rust-lang/rust/blob/master/LICENSE-APACHE', Library::LICENSE_SPEC)
-            ->withUrl('https://nodejs.org/dist/v20.9.0/node-v20.9.0-linux-x64.tar.xz')
-            ->withManual('https://nodejs.org/en/docs')
-            ->withDownloadWithOriginURL()
-            ->withUntarArchiveCommand('xz')
-            ->withBuildScript(
-                <<<EOF
-
-            ls -lh
-            xz -d node-v20.9.0-linux-x64.tar.xz
-            tar -xvf node-v20.9.0-linux-x64.tar
-            mv node-v18.15.0-linux-x64 $nodejs_prefix
-
-EOF
-            )
-            ->withBinPath($nodejs_prefix . '/bin/')
-            ->disableDefaultPkgConfig()
-            ->disableDefaultLdflags()
-            ->disablePkgName()
-    );
-}
-
-function install_golang(Preprocessor $p): void
-{
-    $golang_prefix = GOLANG_PREFIX;
-    $workDir = $p->getWorkDir();
-    $p->addLibrary(
-        (new Library('golang'))
-            ->withHomePage('https://golang.org')
-            ->withLicense('https://github.com/golang/go/blob/master/LICENSE', Library::LICENSE_BSD)
-            ->withUrl('https://golang.google.cn/dl/go1.20.2.linux-amd64.tar.gz')
-            ->withManual('https://golang.google.cn/doc/')
-            ->withFile('go1.20.2.linux-amd64.tar.gz')
-            ->withDownloadWithOriginURL()
-
-            ->withBuildScript(
-                <<<EOF
-
-            ls -lh
-            mkdir -p {$golang_prefix}
-            cp -rf . {$golang_prefix}
-            chmod a+x {$golang_prefix}/bin
-
-EOF
-            )
-            ->withBinPath($golang_prefix . '/bin/')
-            ->disableDefaultPkgConfig()
-            ->disableDefaultLdflags()
-            ->disablePkgName()
-    );
-}
-
 function install_depot_tools(Preprocessor $p): void
 {
 }
@@ -268,7 +207,6 @@ function install_gn_test(Preprocessor $p): void
             ->withFile('gn-latest.zip')
             ->withManual('https://gn.googlesource.com/gn/')
             ->withUntarArchiveCommand('unzip')
-
             ->withBuildScript(
                 "
                chmod a+x gn
@@ -312,7 +250,6 @@ function install_bazel(Preprocessor $p)
             ->withManual('https://bazel.build/install')
             ->withManual('https://bazel.build/install/compile-source')
             ->withPrefix($bazel_prefix)
-
             ->withBuildScript(
                 '
                 # apk add openjdk13-jdk bash zip
@@ -350,8 +287,7 @@ function install_bazel(Preprocessor $p)
 
 function install_apache_ant(Preprocessor $p): void
 {
-    $example_prefix = EXAMPLE_PREFIX;
-    ;
+    $example_prefix = EXAMPLE_PREFIX;;
     $p->addLibrary(
         (new Library('apache_ant'))
             ->withHomePage('http://ant.apache.org/')
@@ -371,8 +307,7 @@ EOF
 
 function install_apache_maven(Preprocessor $p): void
 {
-    $example_prefix = EXAMPLE_PREFIX;
-    ;
+    $example_prefix = EXAMPLE_PREFIX;;
     $p->addLibrary(
         (new Library('maven'))
             ->withHomePage('https://maven.apache.org/')

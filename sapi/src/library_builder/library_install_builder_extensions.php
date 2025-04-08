@@ -21,19 +21,6 @@ function install_php_parser($p)
     );
 }
 
-function install_php_internal_extensions($p)
-{
-}
-
-function install_php_extension_micro(Preprocessor $p)
-{
-}
-
-
-function install_php_extension_swow(Preprocessor $p)
-{
-}
-
 function install_php_extension_wasm(Preprocessor $p)
 {
     $workDir = $p->getWorkDir();

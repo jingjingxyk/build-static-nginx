@@ -200,6 +200,8 @@ return function (Preprocessor $p) {
     $depends = ['emule'] ;
     $depends = ['ttyd'] ;
     $depends = ['mbedtls'] ;
+    $depends = ['mbedtls'] ;
+    $depends = ['mimalloc'] ;
 
 
     $ext = (new Extension('common'))

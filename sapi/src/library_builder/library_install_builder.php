@@ -16,33 +16,6 @@ use SwooleCli\Preprocessor;
  * target_link_libraries(program OpenSSL::Crypto)
  */
 
-function install_openssl(Preprocessor $p)
-{
-    //install_openssl_v1($p);
-    install_openssl_v3_quic($p);
-}
-
-function install_openssl_v1(Preprocessor $p)
-{
-}
-
-function install_openssl_v3(Preprocessor $p)
-{
-}
-
-function install_openssl_v3_quic(Preprocessor $p)
-{
-}
-
-function install_libiconv(Preprocessor $p): void
-{
-}
-
-
-// Dependent libiconv
-function install_libxml2(Preprocessor $p)
-{
-}
 
 // Dependent libxml2
 function install_libxslt(Preprocessor $p)
@@ -96,15 +69,6 @@ function install_brotli(Preprocessor $p)
   */
 }
 
-function install_cares(Preprocessor $p)
-{
-}
-
-
-function install_gmp(Preprocessor $p)
-{
-}
-
 
 /*
 // CFLAGS="-static -O2 -Wall" \
@@ -115,29 +79,6 @@ function install_ncurses(Preprocessor $p)
 {
 }
 
-
-function install_readline(Preprocessor $p)
-{
-}
-
-
-function install_libyaml(Preprocessor $p): void
-{
-}
-
-function install_libsodium(Preprocessor $p)
-{
-}
-
-function install_bzip2(Preprocessor $p)
-{
-}
-
-function install_zlib(Preprocessor $p)
-{
-}
-
-
 function install_liblz4(Preprocessor $p)
 {
 
@@ -145,11 +86,6 @@ function install_liblz4(Preprocessor $p)
     //不使用CMAKE，需要自己修改安装目录
     //->withMakeOptions('INSTALL_PROGRAM=/usr/liblz4/')
     //->withMakeInstallOptions("DESTDIR=/usr/liblz4/")
-}
-
-
-function install_liblzma(Preprocessor $p)
-{
 }
 
 
@@ -189,17 +125,6 @@ function install_libzstd(Preprocessor $p)
 }
 
 
-// MUST be in the /usr directory
-function install_libzip(Preprocessor $p)
-{
-}
-
-
-function install_sqlite3(Preprocessor $p)
-{
-}
-
-
 function install_icu(Preprocessor $p)
 {
     /*
@@ -214,34 +139,8 @@ function install_icu(Preprocessor $p)
     //https://github.com/unicode-org/icu/
 }
 
-function install_oniguruma(Preprocessor $p)
-{
-}
-
-function install_mimalloc(Preprocessor $p)
-{
-    $mimalloc_prefix = MIMALLOC_PREFIX;
-    $p->addLibrary(
-        (new Library('mimalloc'))
-            ->withUrl('https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.7.tar.gz')
-            ->withFile('mimalloc-2.0.7.tar.gz')
-            ->withPrefix($mimalloc_prefix)
-            ->withConfigure(
-                'cmake . -DMI_BUILD_SHARED=OFF -DCMAKE_INSTALL_PREFIX=' . $mimalloc_prefix . ' -DMI_INSTALL_TOPLEVEL=ON -DMI_PADDING=OFF -DMI_SKIP_COLLECT_ON_EXIT=ON -DMI_BUILD_TESTS=OFF'
-            )
-            ->withPkgName('libmimalloc')
-            ->withLicense('https://github.com/microsoft/mimalloc/blob/master/LICENSE', Library::LICENSE_MIT)
-            ->withHomePage('https://microsoft.github.io/mimalloc/')
-            ->withLdflags('-L' . $mimalloc_prefix . '/lib -lmimalloc')
-            ->disablePkgName()
-    );
-}
 
 function install_libidn2(Preprocessor $p)
-{
-}
-
-function install_libssh2(Preprocessor $p)
 {
 }
 
@@ -402,10 +301,6 @@ EOF
 }
 
 
-function install_pgsql(Preprocessor $p): void
-{
-}
-
 function install_re2c(Preprocessor $p)
 {
     $p->addLibrary(
@@ -415,7 +310,6 @@ function install_re2c(Preprocessor $p)
             ->withLicense('https://github.com/skvadrik/re2c/blob/master/LICENSE', Library::LICENSE_GPL)
             ->withManual('https://re2c.org/build/build.html')
             ->withLabel('build_env_bin')
-
             ->withConfigure(
                 "
               autoreconf -i -W all
@@ -604,9 +498,4 @@ EOF
             ->withPkgName('libxlsxio_readw')
             ->withPkgName('libxlsxio_write')
     );
-}
-
-
-function install_libevent($p)
-{
 }

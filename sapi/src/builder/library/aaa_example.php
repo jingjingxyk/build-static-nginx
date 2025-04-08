@@ -108,6 +108,7 @@ EOF
             <<<EOF
          mkdir -p build
          cd build
+         cmake -LH ..
 
          cmake .. \
         -DCMAKE_INSTALL_PREFIX={$example_prefix} \

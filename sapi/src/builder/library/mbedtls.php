@@ -5,13 +5,6 @@ use SwooleCli\Preprocessor;
 
 return function (Preprocessor $p) {
     $mbedtls_prefix = MBEDTLS_PREFIX;
-    $openssl_prefix = OPENSSL_PREFIX;
-
-    $gettext_prefix = GETTEXT_PREFIX;
-    $cares_prefix = CARES_PREFIX;
-
-
-    //文件名称 和 库名称一致
     $lib = new Library('mbedtls');
     $lib->withHomePage('https://github.com/Mbed-TLS/mbedtls')
         ->withLicense('https://github.com/Mbed-TLS/mbedtls?tab=License-1-ov-file#readme', Library::LICENSE_APACHE2)
