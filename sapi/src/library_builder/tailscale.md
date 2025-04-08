@@ -1,3 +1,24 @@
+## 快速启动 tailscale
+
+```shell
+
+docker run -d  \
+  --name tailscale \
+  --hostname tailscale \
+  --cap-add=NET_ADMIN \
+  -v /dev/net/tun:/dev/net/tun \
+  tailscale/tailscale:latest
+
+docker exec -it tailscale sh
+
+tailscale up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }}
+
+tailscale status
+
+```
+
+# 脚本 启动 tailscale
+
 ```shell
 # https://github.com/tailscale/tailscale/blob/main/Dockerfile
 # https://github.com/tailscale/tailscale/blob/main/scripts/installer.sh
@@ -9,7 +30,7 @@
 
 docker run -it --rm \
   --name tailscale \
-  --hostname  \
+  --hostname cloud-soft-tailscale \
   --cap-add=NET_ADMIN \
   -v /dev/net/tun:/dev/net/tun \
   --init \
