@@ -136,6 +136,8 @@ EOF
         # 显示构建详情
         # -DCMAKE_VERBOSE_MAKEFILE=ON
         # CMakeLists.txt 设置 set(CMAKE_VERBOSE_MAKEFILEON ON)
+        # 设置 cmake 最低版本
+        # -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 
         # -DCMAKE_CXX_FLAGS=" -Wall -std=c++11 -fopenmp=libomp "
         # -DCMAKE_C_FLAGS=" -Wall -std=11 -fopenmp=libomp "
