@@ -12,8 +12,6 @@ return function (Preprocessor $p) {
             ->withUrl('https://github.com/microsoft/mimalloc/archive/refs/tags/v3.0.3.tar.gz')
             ->withFile('mimalloc-v3.0.3.tar.gz')
             ->withPrefix($mimalloc_prefix)
-            ->withInstallCached(false)
-            ->withBuildCached(false)
             ->withBuildScript(<<<EOF
              mkdir -p build
              cd build
@@ -34,7 +32,8 @@ return function (Preprocessor $p) {
 
             cmake --build . --config Release --target install
 EOF
-            )->withPkgName('mimalloc')
 
+            )
+            ->withPkgName('mimalloc')
     );
 };
