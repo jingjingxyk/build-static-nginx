@@ -15,8 +15,7 @@ return function (Preprocessor $p) {
     $cmake_options = "";
     if ($p->isLinux()) {
         $cmake_options .= '-DCMAKE_C_FLAGS=" -fPIE "';
-        $cmake_options .= '-DCMAKE_C_LINKER_FLAGS=" -static "';
-        $cmake_options .= '-DCMAKE_EXE_LINKER_FLAGS=" -static-pie "';
+        $cmake_options .= '-DCMAKE_C_LINKER_FLAGS=" -static -static-pie "';
     }
     $lib = new Library('ttyd');
     $lib->withHomePage('https://tsl0922.github.io/ttyd')

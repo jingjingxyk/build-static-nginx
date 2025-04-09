@@ -156,7 +156,11 @@ EOF
         # -DCMAKE_C_LINKER_FLAGS="-Wl,--no-undefined"
         # -DCMAKE_CXX_LINKER_FLAGS=" -Wl,--no-undefined"
         # -DCMAKE_C_LINKER_FLAGS=" -Wl,--no-undefined"
-        # -DCMAKE_EXE_LINKER_FLAGS="-static" \
+        # -DCMAKE_EXE_LINKER_FLAGS="-static"
+
+        # -DCMAKE_C_FLAGS=" -fPIE "
+        # -DCMAKE_C_LINKER_FLAGS=" -static -static-pie" # 应用范围 可执行文件、动态库、静态库
+        # -DCMAKE_EXE_LINKER_FLAGS="  " # 应用范围可执行文件
 
         # -DCARES_INCLUDE_DIR={$cares_prefix}/include
         # -DCARES_LIBRARY={$cares_prefix}/lib
