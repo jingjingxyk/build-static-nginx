@@ -30,6 +30,7 @@ return function (Preprocessor $p) {
 EOF
         )
         ->withPrefix($ttypd_prefix)
+        ->withInstallCached(false)
         ->withBuildCached(false)
         ->withBuildScript(
             <<<EOF
