@@ -10,7 +10,8 @@ return function (Preprocessor $p) {
     $ext = (new Extension('ttyd'))
         ->withHomePage('https://tsl0922.github.io/ttyd')
         ->withLicense('https://github.com/tsl0922/ttyd#MIT-1-ov-file', Extension::LICENSE_MIT)
-        ->withManual('https://github.com/tsl0922/ttyd/wiki');
+        ->withManual('https://github.com/tsl0922/ttyd/wiki')
+        ->withDependentLibraries(...$depends);
     $p->addExtension($ext);
 
     $p->withReleaseArchive('ttyd', function (Preprocessor $p) {
