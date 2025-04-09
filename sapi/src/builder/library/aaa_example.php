@@ -146,14 +146,16 @@ EOF
         # CMAKE_MODULE_PATH：指定要搜索的CMake模块的目录
         # CMAKE_POSITION_INDEPENDENT_CODE：将其设置为ON，则生成的代码将是位置独立的
 
-        # -DCMAKE_CXX_FLAGS=" -Wall -std=c++11 -fopenmp=libomp "
-        # -DCMAKE_C_FLAGS=" -Wall -std=11 -fopenmp=libomp -Werror -Wunused-but-set-variable -Wint-conversion"
-
         # -DGIF_INCLUDE_DIR=/usr/local/swoole-cli/libgif/include/ \
         # -DGIF_LIBRARY=/usr/local/swoole-cli/libgif/lib/libgif.a \
 
         # -DCMAKE_BUILD_TYPE=RELEASE
         # -DCMAKE_FIND_LIBRARY_SUFFIXES=".a" \
+        # -DCMAKE_CXX_FLAGS=" -Wall -std=c++11 -fopenmp=libomp "
+        # -DCMAKE_C_FLAGS=" -Wall -std=11 -fopenmp=libomp -Werror -Wunused-but-set-variable -Wint-conversion"
+        # -DCMAKE_C_LINKER_FLAGS="-Wl,--no-undefined"
+        # -DCMAKE_CXX_LINKER_FLAGS=" -Wl,--no-undefined"
+        # -DCMAKE_C_LINKER_FLAGS=" -Wl,--no-undefined"
         # -DCMAKE_EXE_LINKER_FLAGS="-static" \
 
         # -DCARES_INCLUDE_DIR={$cares_prefix}/include
