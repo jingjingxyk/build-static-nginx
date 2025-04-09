@@ -17,27 +17,21 @@ return function (Preprocessor $p) {
     $libcpp = $p->getOsType() == 'macos' ? '-lc++' : ' -lstdc++ ';
 
     $snappy_prefix = SNAPPY_PREFIX;
-
+    $tag = 'master';
+    $tag = '4.6.3';
     $p->addLibrary(
         (new Library('coturn'))
             ->withHomePage('https://github.com/coturn/coturn/')
             ->withManual('https://github.com/coturn/coturn/tree/master/docs')
             ->withDocumentation('https://quay.io/repository/coturn/coturn')
             ->withLicense('https://github.com/coturn/coturn/blob/master/LICENSE', Library::LICENSE_SPEC)
-            //->withUrl('https://github.com/coturn/coturn/archive/refs/tags/docker/4.6.2-r1.tar.gz')
-            //->withFile('coturn-v4.6.2.tar.gz')
-            ->withFile('coturn-latest.tar.gz')
+            ->withFile('coturn-' . $tag . '.tar.gz')
             ->withDownloadScript(
                 'coturn',
                 <<<EOF
-                # git clone -b 4.6.2 --depth=1 https://github.com/coturn/coturn.git
-                git clone -b master --depth=1 https://github.com/coturn/coturn.git
-                # git clone -b test --depth=1 https://github.com/jingjingxyk/coturn.git
-                # git clone -b fix_openssl_no_threads --depth=1 https://github.com/jingjingxyk/coturn.git
-                # git clone -b dev --depth=1 https://github.com/jingjingxyk/coturn.git
+                git clone -b {$tag} --depth=1 https://github.com/coturn/coturn.git
 
                 # 代码变更 https://github.com/coturn/coturn/pull/1282/files
-
 EOF
             )
             ->withAutoUpdateFile()
@@ -65,7 +59,7 @@ EOF
                        cmake .. \
                        -DCMAKE_INSTALL_PREFIX={$coturn_prefix} \
                        -DCMAKE_C_STANDARD=C11 \
-                       -DCMAKE_C_FLAGS="-D_OPENSSL_THREADS=1" \
+                       -DCMAKE_C_FLAGS="-DOPENSSL_THREADS=1" \
                        -DCMAKE_POLICY_DEFAULT_CMP0074=NEW \
                        -DCMAKE_POLICY_DEFAULT_CMP0077=NEW \
                        -DCMAKE_BUILD_TYPE=Release \
@@ -177,11 +171,11 @@ EOF
                 'sqlite3',
                 'pgsql',
                 'hiredis',
-                //'libsctp',
-                //'libmongoc',
-                // 'prometheus_client_c'
-                //'libsctp',
-                //'liboauth2'
+            //'libsctp',
+            //'libmongoc',
+            // 'prometheus_client_c'
+            //'libsctp',
+            //'liboauth2'
             )
     );
 };
