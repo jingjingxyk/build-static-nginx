@@ -19,6 +19,7 @@ return function (Preprocessor $p) {
 EOF
         )
         ->withPrefix($libwebsockets_prefix)
+        ->withBuildCached(false)
         ->withBuildScript(
             <<<EOF
              sed -i.bak 's/ websockets_shared//g' cmake/libwebsockets-config.cmake.in
