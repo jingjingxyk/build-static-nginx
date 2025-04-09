@@ -121,6 +121,7 @@ test -f push-to-gitee.yml && rm -rf push-to-gitee.yml
 test -f windows-native-vs2025.yml && rm -rf windows-native-vs2025.yml
 test -f windows-native-2022.yml && rm -rf windows-native-2022.yml
 test -f zerotier2.yml && rm -rf zerotier2.yml
+test -f tailscale.yml && rm -rf tailscale.yml
 
 cd ${__PROJECT__}/sapi/quickstart
 test -d swoole-install && rm -rf swoole-install
