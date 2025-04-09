@@ -33,7 +33,7 @@ EOF
             -DCMAKE_BUILD_TYPE=Release  \
             -DBUILD_SHARED_LIBS=OFF  \
             -DBUILD_STATIC_LIBS=ON \
-            -DCMAKE_C_FLAGS="-fpic" \
+            -DCMAKE_C_FLAGS="-fpic -Wunused-but-set-variable" \
             -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$libuv_prefix}" \
             -DOPENSSL_INCLUDE_DIR={$openssl_prefix}/include \
             -DOPENSSL_LIBRARY={$openssl_prefix}/lib \
