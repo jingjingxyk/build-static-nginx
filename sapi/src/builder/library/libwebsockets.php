@@ -7,15 +7,17 @@ return function (Preprocessor $p) {
     $libwebsockets_prefix = LIBWEBSOCKETS_PREFIX;
     $openssl_prefix = OPENSSL_PREFIX;
     $libuv_prefix = LIBUV_PREFIX;
+    $tag = "v4.3.5";
+    $tag = "main";
     $lib = new Library('libwebsockets');
     $lib->withHomePage('https://libwebsockets.org/')
         ->withLicense('https://github.com/warmcat/libwebsockets/blob/main/LICENSE', Library::LICENSE_SPEC)
         ->withManual('https://github.com/opencv/opencv.git')
-        ->withFile('libwebsockets-v4.3.5.tar.gz')
+        ->withFile('libwebsockets-' . $tag . '.tar.gz')
         ->withDownloadScript(
             'libwebsockets',
             <<<EOF
-             git clone -b v4.3.5 --depth=1 https://github.com/warmcat/libwebsockets.git
+             git clone -b {$tag} --depth=1 https://github.com/warmcat/libwebsockets.git
 EOF
         )
         ->withPrefix($libwebsockets_prefix)
