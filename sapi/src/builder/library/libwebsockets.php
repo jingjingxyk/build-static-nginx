@@ -42,7 +42,8 @@ EOF
             -DLWS_WITH_HTTP2=ON \
             -DLWS_UNIX_SOCK=ON \
             -DLWS_IPV6=ON \
-            -DLWS_WITH_LIBUV=ON
+            -DLWS_WITH_LIBUV=ON \
+            -DCMAKE_VERBOSE_MAKEFILE=ON
 
             cmake --build . --config Release
 

@@ -134,11 +134,17 @@ EOF
 
         # 查找PKGCONFIG配置目录多个使用分号隔开
         # -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$openssl_prefix}" \
-        # 显示构建详情
+        # 显示构建详情 会在编译过程中打印所有命令
         # -DCMAKE_VERBOSE_MAKEFILE=ON
         # CMakeLists.txt 设置 set(CMAKE_VERBOSE_MAKEFILEON ON)
         # 设置 cmake 最低版本
         # -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+
+        # CMAKE_C_FLAGS和CMAKE_CXX_FLAGS：指定编译C和C++代码时使用的编译器选项。
+        # CMAKE_EXE_LINKER_FLAGS：指定链接可执行文件时使用的链接器选项。
+        # CMAKE_C_COMPILER和CMAKE_CXX_COMPILER：指定用于编译C和C++代码的编译器。
+        # CMAKE_MODULE_PATH：指定要搜索的CMake模块的目录
+        # CMAKE_POSITION_INDEPENDENT_CODE：将其设置为ON，则生成的代码将是位置独立的
 
         # -DCMAKE_CXX_FLAGS=" -Wall -std=c++11 -fopenmp=libomp "
         # -DCMAKE_C_FLAGS=" -Wall -std=11 -fopenmp=libomp "
@@ -165,7 +171,6 @@ EOF
         # cmake_policy(SET CMP0075 NEW) #3.12.0 `check_include_file()`` and friends use ``CMAKE_REQUIRED_LIBRARIES``.
         # -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake \
         # -DVCPKG_TARGET_TRIPLET=x64-linux \
-
 
 
         # ccmake  ..  # 对cmake的cache进行修改，重新生成makefile文件
