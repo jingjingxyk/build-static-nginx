@@ -47,14 +47,14 @@ EOF;
             $cmd .= <<<EOF
                 xattr -cr {$workdir}/bin/ffmpeg/bin/ffmpeg
                 otool -L {$workdir}/bin/ffmpeg/bin/ffmpeg
-                tar -cJvf {$workdir}/ffmpeg-\${FFMPEG_VERSION}-macos-{$system_arch}.tar.xz ffmpeg
+                tar -cJvf {$workdir}/ffmpeg-\${FFMPEG_VERSION}-macos-{$system_arch}.tar.xz ffmpeg LICENSE
 EOF;
         } else {
             $cmd .= <<<EOF
                 file {$workdir}/bin/ffmpeg/bin/ffmpeg
                 readelf -h {$workdir}/bin/ffmpeg/bin/ffmpeg
                 test $(ldd {$workdir}/bin/ffmpeg/bin/ffmpeg | wc -l) -gt 0 && ldd {$workdir}/bin/ffmpeg/bin/ffmpeg
-                tar -cJvf {$workdir}/ffmpeg-\${FFMPEG_VERSION}-linux-{$system_arch}.tar.xz ffmpeg
+                tar -cJvf {$workdir}/ffmpeg-\${FFMPEG_VERSION}-linux-{$system_arch}.tar.xz ffmpeg LICENSE
 EOF;
         }
         return $cmd;

@@ -34,14 +34,14 @@ EOF;
             $cmd .= <<<EOF
             xattr -cr {$workdir}/bin/ttyd
             otool -L {$workdir}/bin/ttyd
-            tar -cJvf {$workdir}/ttyd-\${APP_VERSION}-macos-{$system_arch}.tar.xz ttyd
+            tar -cJvf {$workdir}/ttyd-\${APP_VERSION}-macos-{$system_arch}.tar.xz ttyd LICENSE
 
 EOF;
         } else {
             $cmd .= <<<EOF
               file {$workdir}/bin/ttyd
               readelf -h {$workdir}/bin/ttyd
-              tar -cJvf {$workdir}/ttyd-\${APP_VERSION}-linux-{$system_arch}.tar.xz ttyd
+              tar -cJvf {$workdir}/ttyd-\${APP_VERSION}-linux-{$system_arch}.tar.xz ttyd LICENSE
 
 EOF;
         }

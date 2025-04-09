@@ -35,14 +35,14 @@ EOF;
             $cmd .= <<<EOF
             xattr -cr {$workdir}/bin/iperf3
             otool -L {$workdir}/bin/iperf3
-            tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-macos-{$system_arch}.tar.xz iperf3
+            tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-macos-{$system_arch}.tar.xz iperf3 LICENSE
 
 EOF;
         } else {
             $cmd .= <<<EOF
               file {$workdir}/bin/iperf3
               readelf -h {$workdir}/bin/iperf3
-              tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-linux-{$system_arch}.tar.xz iperf3
+              tar -cJvf {$workdir}/iperf3-\${APP_VERSION}-linux-{$system_arch}.tar.xz iperf3 LICENSE
 
 EOF;
         }

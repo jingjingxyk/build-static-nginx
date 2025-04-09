@@ -30,13 +30,13 @@ EOF;
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
                 otool -L {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx
+                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         } else {
             $cmd .= <<<EOF
                 file {$workdir}/bin/nginx/sbin/nginx
                 readelf -h {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx
+                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         }
         return $cmd;

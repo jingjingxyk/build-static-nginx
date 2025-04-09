@@ -32,14 +32,14 @@ EOF;
             $cmd .= <<<EOF
             xattr -cr {$workdir}/bin/aria2c
             otool -L {$workdir}/bin/aria2c
-            tar -cJvf {$workdir}/aria2c-\${APP_VERSION}-macos-{$system_arch}.tar.xz aria2c
+            tar -cJvf {$workdir}/aria2c-\${APP_VERSION}-macos-{$system_arch}.tar.xz aria2c LICENSE
 
 EOF;
         } else {
             $cmd .= <<<EOF
               file {$workdir}/bin/aria2c
               readelf -h {$workdir}/bin/aria2c
-              tar -cJvf {$workdir}/aria2c-\${APP_VERSION}-linux-{$system_arch}.tar.xz aria2c
+              tar -cJvf {$workdir}/aria2c-\${APP_VERSION}-linux-{$system_arch}.tar.xz aria2c LICENSE
 
 EOF;
         }
