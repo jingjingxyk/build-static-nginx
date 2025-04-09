@@ -147,7 +147,7 @@ EOF
         # CMAKE_POSITION_INDEPENDENT_CODE：将其设置为ON，则生成的代码将是位置独立的
 
         # -DCMAKE_CXX_FLAGS=" -Wall -std=c++11 -fopenmp=libomp "
-        # -DCMAKE_C_FLAGS=" -Wall -std=11 -fopenmp=libomp "
+        # -DCMAKE_C_FLAGS=" -Wall -std=11 -fopenmp=libomp -Werror -Wunused-but-set-variable -Wint-conversion"
 
         # -DGIF_INCLUDE_DIR=/usr/local/swoole-cli/libgif/include/ \
         # -DGIF_LIBRARY=/usr/local/swoole-cli/libgif/lib/libgif.a \

@@ -33,7 +33,6 @@ EOF
             -DCMAKE_BUILD_TYPE=Release  \
             -DBUILD_SHARED_LIBS=OFF  \
             -DBUILD_STATIC_LIBS=ON \
-            -DCMAKE_C_FLAGS="-fpic -Wunused-but-set-variable" \
             -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$libuv_prefix}" \
             -DOPENSSL_INCLUDE_DIR={$openssl_prefix}/include \
             -DOPENSSL_LIBRARY={$openssl_prefix}/lib \
@@ -46,8 +45,10 @@ EOF
             -DLWS_UNIX_SOCK=ON \
             -DLWS_IPV6=ON \
             -DLWS_WITH_LIBUV=ON \
-            -DCMAKE_VERBOSE_MAKEFILE=ON
-            # -Werror -Wunused-but-set-variable -Wint-conversion
+            -DCMAKE_VERBOSE_MAKEFILE=ON \
+            -DLWS_CTEST_INTERNET_AVAILABLE=OFF \
+            -DLWS_WITH_MINIMAL_EXAMPLES=OFF
+
             cmake --build . --config Release
 
             cmake --build . --config Release --target install
