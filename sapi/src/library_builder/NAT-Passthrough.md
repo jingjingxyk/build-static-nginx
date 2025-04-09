@@ -55,6 +55,7 @@
 1. [Apache Guacamole](https://guacamole.apache.org)
 1. [tmate](https://tmate.io/)
 1. [websocat](https://github.com/vi/websocat)
+1. [noVNC](https://github.com/novnc/noVNC)
 
 有预算没技术：蒲公英组网
 SRv6 分段路由
