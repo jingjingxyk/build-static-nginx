@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  BUILD_PHP_VERSION: 8.2.27
+  BUILD_PHP_VERSION: 8.2.28
 
 jobs:
   windows-cygwin:
@@ -14,10 +14,10 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.2.27"
-          - "8.1.31"
-          - "8.3.15"
-          - "8.4.2"
+          - "8.2.28"
+          - "8.1.32"
+          - "8.3.19"
+          - "8.4.5"
     steps:
       - name: Show Environment Info
         shell: cmd
@@ -87,6 +87,7 @@ jobs:
           bash ./sapi/scripts/cygwin/install-cygwin.sh
 
       - name: Install Cygwin Packages with powershell
+        # 备注：github action 在 windows 上执行命令默认的 shell 是 powershell，如果要使用其它shell , 需要手动指定，例如此也可以使用 bash 来安装 cygwin packages
         if: 1
         run: |
           Copy-Item -Path "C:\setup.exe" -Destination "${{ github.workspace }}\setup-x86_64.exe"
