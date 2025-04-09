@@ -50,7 +50,7 @@ esac
 
 APP_VERSION='1.7.7'
 APP_NAME='ttyd'
-VERSION='v1.0.0'
+VERSION='v1.2.0'
 
 mkdir -p runtime
 mkdir -p var/runtime
@@ -135,7 +135,7 @@ cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/runtime/cacert.pem
 
 cd ${__PROJECT__}/
 
-tee ${APP_RUNTIME_DIR}/ttyd-start.sh <<'EOF'
+tee ${APP_RUNTIME_DIR}/start.sh <<'EOF'
 #!/usr/bin/env bash
 set -exu
 __DIR__=$(
@@ -152,8 +152,13 @@ EOF
 set +x
 
 echo " "
-echo " USE ttyd RUNTIME :"
+echo " USE ttyd :"
 echo " "
 echo " ./runtime/ttyd/ttyd --writable -t enableSixel=true -t enableZmodem=true -t enableTrzsz=true -t rendererType=canvas  -p 8080 bash "
-
+echo " "
+echo " startup ttyd "
+echo " "
+echo " bash ./runtime/ttyd/start.sh"
+echo " "
 export PATH="${APP_RUNTIME_DIR}/bin/:${APP_RUNTIME_DIR}/sbin/:$PATH"
+./runtime/ttyd/ttyd -v
