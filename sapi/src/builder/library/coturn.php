@@ -11,8 +11,8 @@ return function (Preprocessor $p) {
     $sqlite3_prefix = SQLITE3_PREFIX;
     $hiredis_prefix = HIREDIS_PREFIX;
 
-    $cflags = $p->getOsType() == 'macos' ? ' ' : ' -static ';
-    $ldflags = $p->getOsType() == 'macos' ? ' ' : ' --static ';
+    $cflags = $p->getOsType() == 'macos' ? ' ' : ' -static -fPIE';
+    $ldflags = $p->getOsType() == 'macos' ? ' ' : ' --static -static-pie';
     $libsctp = $p->getOsType() == 'macos' ? ' ' : ' libsctp ';
     $libcpp = $p->getOsType() == 'macos' ? '-lc++' : ' -lstdc++ ';
 
