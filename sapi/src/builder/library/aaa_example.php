@@ -129,6 +129,7 @@ EOF
         # -DCMAKE_CXX_COMPILER=clang++ \
         # -DCMAKE_DISABLE_FIND_PACKAGE_libsharpyuv=ON \
         # -DCMAKE_C_FLAGS="-D_POSIX_C_SOURCE=200809L" \
+        # -DCMAKE_CXX_FLAGS="-Wall -Wextra" \
         # -DOpenSSL_ROOT={$openssl_prefix} \
 
         # 查找PKGCONFIG配置目录多个使用分号隔开
