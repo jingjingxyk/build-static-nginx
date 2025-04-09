@@ -30,6 +30,7 @@ return function (Preprocessor $p) {
 EOF
         )
         ->withPrefix($ttypd_prefix)
+        ->withBuildCached(false)
         ->withBuildScript(
             <<<EOF
          mkdir -p build
