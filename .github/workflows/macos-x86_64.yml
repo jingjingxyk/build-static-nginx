@@ -153,8 +153,8 @@ jobs:
           bash ./make.sh all-library
 
           bash ./make.sh config
-          # bash ./make.sh build
-          # bash ./make.sh archive
+          bash ./make.sh build
+          bash ./make.sh archive
 
       - name: Show Build Result
         run: |
@@ -162,8 +162,6 @@ jobs:
           file ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
           otool -L ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
           # greadelf -h ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
-          APP_VERSION=$(./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php  -v | head -n 1 | awk '{print $2}')
-          echo "APP_VERSION=${APP_VERSION}" >> $GITHUB_ENV
           ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php -r "echo PHP_VERSION;"
 
           ./thirdparty/php-src/sapi/cli/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
