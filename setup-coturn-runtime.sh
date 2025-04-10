@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='4.6.2'
+APP_VERSION='4.6.3'
 APP_NAME='coturn'
-VERSION='v1.2.0'
+VERSION='v2.1.0'
 
 cd ${__PROJECT__}
 mkdir -p bin/
