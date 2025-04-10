@@ -130,10 +130,10 @@ EOF
         # -DCMAKE_DISABLE_FIND_PACKAGE_libsharpyuv=ON \
         # -DCMAKE_C_FLAGS="-D_POSIX_C_SOURCE=200809L" \
         # -DCMAKE_CXX_FLAGS="-Wall -Wextra" \
-        # -DOpenSSL_ROOT={$openssl_prefix} \
-
         # 查找PKGCONFIG配置目录多个使用分号隔开
         # -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$openssl_prefix}" \
+        # -DOpenSSL_ROOT={$openssl_prefix} \
+
         # 显示构建详情 会在编译过程中打印所有命令
         # -DCMAKE_VERBOSE_MAKEFILE=ON
         # CMakeLists.txt 设置 set(CMAKE_VERBOSE_MAKEFILEON ON)
@@ -157,6 +157,7 @@ EOF
         # -DCMAKE_CXX_LINKER_FLAGS=" -Wl,--no-undefined"
         # -DCMAKE_C_LINKER_FLAGS=" -Wl,--no-undefined"
         # -DCMAKE_EXE_LINKER_FLAGS="-static"
+        # -DCMAKE_STATIC_LINKER_FLAGS
 
         # -DCMAKE_C_FLAGS=" -fPIE "
         # -DCMAKE_C_LINKER_FLAGS=" -static -static-pie" # 应用范围 可执行文件、动态库、静态库
@@ -183,9 +184,10 @@ EOF
 
 
         cmake --build . --config Release
-
         cmake --build . --config Release --target install
 
+        # 上面两行合并为一行
+        # cmake --build . --config Release --target install
 
 EOF
         )

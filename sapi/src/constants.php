@@ -257,8 +257,6 @@ define("FDK_AAC_PREFIX", $p->getGlobalPrefix() . '/fdk_aac');
 
 define("PROMETHEUS_CLIENT_C_PREFIX", $p->getGlobalPrefix() . '/prometheus_client_c');
 
-define("LIBBSON_PREFIX", $p->getGlobalPrefix() . '/libbson');
-define("LIBMONGOCRYPT_PREFIX", $p->getGlobalPrefix() . '/libmongocrypt');
 define("LIBMONGOC_PREFIX", $p->getGlobalPrefix() . '/libmongoc');
 define("LIBRIME_PREFIX", $p->getGlobalPrefix() . '/librime');
 define("GLOG_PREFIX", $p->getGlobalPrefix() . '/glog');

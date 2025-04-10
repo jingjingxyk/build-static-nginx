@@ -6,16 +6,17 @@ use SwooleCli\Preprocessor;
 return function (Preprocessor $p) {
     $openldap_prefix = OPENLDAP_PREFIX;
     $iconv_prefix = ICONV_PREFIX;
-
+    $tag = '2.6.9';
+    $x_tag = str_replace('.', '_', $tag);
     $lib = new Library('openldap');
     $lib->withHomePage('https://www.openldap.org/')
         ->withLicense('https://www.openldap.org/software/release/license.html', Library::LICENSE_SPEC)
         ->withManual('https://git.openldap.org/openldap/openldap.git')
-        ->withFile('openldap-v2.6.6.tar.gz')
+        ->withFile('openldap-v' . $tag . '.tar.gz')
         ->withDownloadScript(
             'openldap',
             <<<EOF
-        git clone -b OPENLDAP_REL_ENG_2_6_6  --depth=1 https://git.openldap.org/openldap/openldap.git
+        git clone -b OPENLDAP_REL_ENG_{$x_tag}  --depth=1 https://git.openldap.org/openldap/openldap.git
 EOF
         )
         ->withPreInstallCommand(
@@ -53,8 +54,9 @@ EOF
         --with-tls=openssl \
         --with-mp=gmp \
         --with-odbc=unixodbc \
-        --with-argon2=libargon2
-
+        --with-argon2=libargon2  \
+        --disable-slapd \
+        --disable-shared
 EOF
         )
 

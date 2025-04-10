@@ -202,6 +202,7 @@ return function (Preprocessor $p) {
     $depends = ['mbedtls'] ;
     $depends = ['mbedtls'] ;
     $depends = ['mimalloc'] ;
+    $depends = ['libmongoc'] ;
 
 
     $ext = (new Extension('common'))

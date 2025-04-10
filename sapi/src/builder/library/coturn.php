@@ -10,11 +10,20 @@ return function (Preprocessor $p) {
     $pgsql_prefix = PGSQL_PREFIX;
     $sqlite3_prefix = SQLITE3_PREFIX;
     $hiredis_prefix = HIREDIS_PREFIX;
+    $libmongoc_prefix = LIBMONGOC_PREFIX;
+    $libmicrohttpd_prefix = LIBMICROHTTPD_PREFIX;
 
     $cflags = $p->getOsType() == 'macos' ? ' ' : ' -static -fPIE -DOPENSSL_THREADS';
     $ldflags = $p->getOsType() == 'macos' ? ' ' : ' --static -static-pie';
     $libsctp = $p->getOsType() == 'macos' ? ' ' : ' libsctp ';
     $libcpp = $p->getOsType() == 'macos' ? '-lc++' : ' -lstdc++ ';
+
+    $cmake_options = "";
+    if ($p->isLinux()) {
+        $cmake_options .= '-DCMAKE_C_FLAGS=" -fPIE "';
+        $cmake_options .= '-DCMAKE_C_LINKER_FLAGS=" -static -static-pie"';
+        $cmake_options .= '-DCMAKE_STATIC_LINKER_FLAGS="-static"';
+    }
 
     $snappy_prefix = SNAPPY_PREFIX;
     $tag = 'master';
@@ -30,78 +39,42 @@ return function (Preprocessor $p) {
                 'coturn',
                 <<<EOF
                 git clone -b {$tag} --depth=1 https://github.com/coturn/coturn.git
-
-                # 代码变更 https://github.com/coturn/coturn/pull/1282/files
 EOF
             )
-            ->withAutoUpdateFile()
             ->withPrefix($coturn_prefix)
-            ->withAutoUpdateFile()
             ->withBuildCached(false)
             ->withInstallCached(false)
-            /*
-                        ->withConfigure(
-                            <<<EOF
+            ->withBuildScript(
+                <<<EOF
+           mkdir -p build
+           cd build
+           # cmake -LH ..
+           cmake .. \
+           -DCMAKE_INSTALL_PREFIX={$coturn_prefix} \
+           -DCMAKE_BUILD_TYPE=Release \
+           -DCMAKE_C_STANDARD=11 \
+           -DCMAKE_C_FLAGS="-DOPENSSL_THREADS=1 -DTURN_NO_PROMETHEUS -DTURN_NO_SYSTEMD -DTURN_NO_MYSQL -DTURN_NO_SCTP -DTURN_NO_PostgreSQL" \
+           -DCMAKE_FIND_LIBRARY_SUFFIXES=".a" \
+           -DCMAKE_VERBOSE_MAKEFILE=ON \
+           -DBUILD_SHARED_LIBS=OFF \
+           -DBUILD_STATIC_LIBS=ON \
+           -DOPENSSL_USE_STATIC_LIBS=ON \
+           -DFUZZER=OFF \
+           -DWITH_MYSQL=OFF \
+           -Dhiredis_DIR={$hiredis_prefix} \
+           -Dmongo_DIR={$libmongoc_prefix} \
+           -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$libevent_prefix};{$sqlite3_prefix};" \
+           -DCMAKE_DISABLE_FIND_PACKAGE_libsystemd=ON \
+           -DCMAKE_DISABLE_FIND_PACKAGE_Prometheus=ON \
+           {$cmake_options}
 
-                       mkdir -p build
-                       cd build
+            cmake --build . --config Release
+            cmake --build . --config Release --target install
 
-                       export TURN_NO_PROMETHEUS=ON
-                       export TURN_NO_SYSTEMD=ON
-                       export TURN_NO_MYSQL=ON
-                       export TURN_NO_MONGO=ON
-                       # export TURN_NO_SQLITE=OFF
-                       # export TURN_NO_PQ=OFF
-                       # export TURN_NO_HIREDIS=ON
-                       export TURN_NO_SCTP=OFF
-
-
-                       cmake .. \
-                       -DCMAKE_INSTALL_PREFIX={$coturn_prefix} \
-                       -DCMAKE_C_STANDARD=C11 \
-                       -DCMAKE_C_FLAGS="-DOPENSSL_THREADS=1" \
-                       -DCMAKE_POLICY_DEFAULT_CMP0074=NEW \
-                       -DCMAKE_POLICY_DEFAULT_CMP0077=NEW \
-                       -DCMAKE_BUILD_TYPE=Release \
-                       -DBUILD_SHARED_LIBS=OFF \
-                       -DBUILD_STATIC_LIBS=ON \
-                       -DCMAKE_DISABLE_FIND_PACKAGE_mongo=ON \
-                       -DCMAKE_DISABLE_FIND_PACKAGE_libsystemd=ON \
-                       -DCMAKE_DISABLE_FIND_PACKAGE_Prometheus=ON \
-                       -DCMAKE_DISABLE_FIND_PACKAGE_MySQL=ON \
-                       -DCMAKE_DISABLE_FIND_PACKAGE_hiredis=ON \
-                       -DOPENSSL_USE_STATIC_LIBS=ON \
-                       -DBUILD_TEST=OFF \
-                       -DFUZZER=OFF \
-                       -DOpenSSL_ROOT={$openssl_prefix} \
-                       -DLibevent_ROOT={$libevent_prefix} \
-                       -DSQLite_DIR={$sqlite3_prefix} \
-                       -DPostgreSQL_DIR={$pgsql_prefix}
-
-                       # -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$libevent_prefix};{$sqlite3_prefix};{$pgsql_prefix}" \
-
-                       # -DCMAKE_STATIC_LINKER_FLAGS="-lpgcommon -lpgport " \
-
-
-                       # -Dhiredis_ROOT={$hiredis_prefix} \
-                       # -DCMAKE_C_FLAGS="-Werror -pedantic" \
-
-
-                       # -DCMAKE_STATIC_LINKER_FLAGS="" \
-                       # -DCMAKE_EXE_LINKER_FLAGS="-static " \
-
-                       #  hiredis
-                       # TURN_NO_SCTP
-                       # TURN_NO_THREAD_BARRIERS
-                       # TURN_NO_GCM
-
-                       make -j {$p->getMaxJob()}
-                       # make install
-
-
-            EOF
-                        )
-            */
+            #            -DCMAKE_C_LINKER_FLAGS=" -lpq -lpgport -lpgcommon " \
+            # {$pgsql_prefix};
+EOF
+            )
             ->withConfigure(
                 <<<EOF
             set -x
@@ -109,13 +82,12 @@ EOF
             export TURN_NO_GCM=ON
             export TURN_NO_SYSTEMD=ON
             export TURN_NO_MYSQL=ON
+            export TURN_NO_PostgreSQL=ON
 
             # export TURN_NO_MONGO=OFF
-
             # export TURN_NO_SQLITE=OFF
             # export TURN_NO_PQ=OFF
             # export TURN_NO_HIREDIS=OFF
-
             # export TURN_NO_SCTP=OFF
             # TURN_SCTP_INCLUDE
 
@@ -126,25 +98,26 @@ EOF
             # PACKAGES="\$PACKAGES libpq"
             PACKAGES="\$PACKAGES hiredis"
             # PACKAGES="\$PACKAGES libsctp"
-            # PACKAGES="\$PACKAGES libbson-static-1.0 libmongoc-ssl-1.0 libmongoc-static-1.0 "
+            PACKAGES="\$PACKAGES  libbson-static-1.0 libmongoc-static-1.0 "
 
             export SSL_CFLAGS="$(pkg-config  --cflags-only-I  --static openssl ) "
             export SSL_LIBS="$(pkg-config    --libs           --static openssl ) "
 
-
             export CPPFLAGS="$(pkg-config  --cflags-only-I --static  \$PACKAGES)  -I{$snappy_prefix}/include"
-            export LDFLAGS="$(pkg-config   --libs-only-L   --static  \$PACKAGES)  -L{$snappy_prefix}/lib/ {$ldflags} "
-            export LIBS="$(pkg-config      --libs-only-l   --static    \$PACKAGES)  {$libcpp} -lm -lsnappy -pthread -lsocket -lrt "
-            export CFLAGS="  -g  -std=gnu11 -Wall {$cflags}  " # -DOPENSSL_THREADS
+            export LDFLAGS="$(pkg-config   --libs-only-L   --static  \$PACKAGES)  -L{$snappy_prefix}/lib/ {$ldflags} " # -Wl,--whole-archive libpgcommon.a libpgport.a libpq.a -Wl,--no-whole-archive
+            export LIBS="$(pkg-config      --libs-only-l   --static    \$PACKAGES)  {$libcpp} " # -lm -lsnappy -pthread -lsocket -lrt
+            export CFLAGS="  -g  -std=gnu11 -Wall {$cflags}  "
 
-            export DBCFLAGS="$(pkg-config  --cflags --static libpq sqlite3 hiredis     )" # libbson-static-1.0 libmongoc-ssl-1.0 libmongoc-static-1.0
-            export DBLIBS="$(pkg-config     --libs  --static libpq sqlite3 hiredis     )"
+            export DBCFLAGS="$(pkg-config  --cflags --static sqlite3 hiredis libbson-static-1.0 libmongoc-static-1.0  )"
+            export DBLIBS="$(pkg-config     --libs  --static sqlite3 hiredis libbson-static-1.0 libmongoc-static-1.0  )"
 
-            export OSLIBS="$(pkg-config    --libs          --static \$PACKAGES)  {$libcpp} -lm -lsnappy -pthread -lsocket -lrt"
+            export OSLIBS=\$LIBS
             export OSCFLAGS=\$CPPFLAGS
+            export PTHREAD_LIBS='-pthread'
+            export SSL_CFLAGS=$(pkg-config    --cflags        --static openssl)
+            export SSL_LIBS=$(pkg-config      --libs   --static openssl)
 
-            # sed -i.backup  "s/libmongoc-1.0/libmongoc-static-1.0/" ./configure
-
+            ./configure --help
             ./configure  \
             --prefix=$coturn_prefix
 
@@ -169,11 +142,10 @@ EOF
                 'libevent',
                 'openssl',
                 'sqlite3',
-                'pgsql',
                 'hiredis',
-            //'libsctp',
-            //'libmongoc',
-            // 'prometheus_client_c'
+                //'pgsql',
+                //'libsctp',
+                'libmongoc',
             //'libsctp',
             //'liboauth2'
             )
