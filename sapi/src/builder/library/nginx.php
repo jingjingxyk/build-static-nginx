@@ -14,7 +14,7 @@ return function (Preprocessor $p) {
     $pcre2 = $p->getLibrary('pcre2');
 
     $ldflags = $p->getOsType() == 'macos' ? '' : ' -static  ';
-
+    $tag = '1.27.4';
     $p->addLibrary(
         (new Library('nginx'))
             ->withHomePage('https://nginx.org/')
@@ -22,36 +22,22 @@ return function (Preprocessor $p) {
             ->withManual('https://github.com/nginx/nginx')
             ->withManual('http://nginx.org/en/docs/configure.html')
             ->withDocumentation('https://nginx.org/en/docs/')
-            //->withUrl('http://nginx.org/download/nginx-1.25.2.tar.gz')
-            //->withAutoUpdateFile()
-            ->withBuildCached(false)
-            ->withInstallCached(false)
-            ->withFile('nginx-release-1.27.4.tar.gz')
+            ->withFile('nginx-release-' . $tag . '.tar.gz')
             ->withDownloadScript(
                 'nginx',
                 <<<EOF
                 # hg clone  http://hg.nginx.org/nginx
                 # hg update -C release-1.25.2
-                git clone -b release-1.27.4 --depth 1 --progress  https://github.com/nginx/nginx.git
 
                 # hg  clone -r release-1.25.5 --rev=1  http://hg.nginx.org/nginx
                 # hg  clone -r default --rev=1  http://hg.nginx.org/nginx
 
-EOF
-            )
-            ->withPreInstallCommand(
-                "alpine",
-                <<<EOF
-            apk add  mercurial
-EOF
-            )
-            ->withPreInstallCommand(
-                "macos",
-                <<<EOF
-            brew install  mercurial
+                git clone -b release-{$tag} --depth 1 --progress  https://github.com/nginx/nginx.git
+
 EOF
             )
             ->withPrefix($nginx_prefix)
+            ->withBuildCached(false)
             ->withConfigure(
                 <<<EOF
 
@@ -65,15 +51,16 @@ EOF
 
             ./configure --help
 
-            # 使用 zlib openssl pcre2 新的源码目录
+            # 使用 zlib openssl pcre2 源码目录 进行构建
+
             mkdir -p {$builderDir}/nginx/openssl
             mkdir -p {$builderDir}/nginx/zlib
             mkdir -p {$builderDir}/nginx/pcre2
             tar --strip-components=1 -C {$builderDir}/nginx/openssl -xf  {$workDir}/pool/lib/openssl-3.0.8-quic1.tar.gz
             tar --strip-components=1 -C {$builderDir}/nginx/zlib    -xf  {$workDir}/pool/lib/zlib-1.2.11.tar.gz
             tar --strip-components=1 -C {$builderDir}/nginx/pcre2   -xf  {$workDir}/pool/lib/pcre2-10.42.tar.gz
-            PACKAGES=" libxml-2.0 libexslt libxslt openssl zlib"
-            PACKAGES="\$PACKAGES libpcre2-16  libpcre2-32  libpcre2-8   libpcre2-posix"
+            PACKAGES=" libxml-2.0 libexslt"
+            PACKAGES="\$PACKAGES "
             CPPFLAGS="$(pkg-config  --cflags-only-I  --static \$PACKAGES)"
             LDFLAGS="$(pkg-config   --libs-only-L    --static \$PACKAGES)"
             LIBS="$(pkg-config      --libs-only-l    --static \$PACKAGES)"
@@ -126,8 +113,6 @@ EOF
             # --add-module={$builderDir}/nginx-dav-ext-module 、
             # https://github.com/arut/nginx-dav-ext-module.git
 
-
-
             # --conf-path=/etc/nginx/nginx.conf
 
             # 动态加载到 nginx 中，请使用该 --add-dynamic-module=/path/to/module
@@ -140,7 +125,7 @@ EOF
             # --with-cc-opt=parameters — sets additional parameters that will be added to the CFLAGS variable.
 EOF
             )
-            ->withBinPath($nginx_prefix . '/bin/')
+            ->withBinPath($nginx_prefix . '/sbin/')
             ->withDependentLibraries(
                 'libxml2',
                 'libxslt',

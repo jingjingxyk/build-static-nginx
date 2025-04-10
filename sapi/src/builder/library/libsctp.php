@@ -7,17 +7,18 @@ return function (Preprocessor $p) {
     $libsctp_prefix = LIBSCTP_PREFIX;
 
     // SCTP（Stream Control Transmission Protocol，流控制传输协议
-
+    $tag = 'master';
+    $tag = 'v1.0.21';
     $lib = new Library('libsctp');
     $lib->withHomePage('https://github.com/sctp/lksctp-tools')
         ->withLicense('https://github.com/sctp/lksctp-tools/blob/master/COPYING.lib', Library::LICENSE_LGPL)
         ->withManual('https://github.com/sctp/lksctp-tools.git')
         ->withManual('https://github.com/sctp/lksctp-tools/blob/master/INSTALL')
-        ->withFile('lksctp-tools-latest.tar.gz')
+        ->withFile('lksctp-tools-' . $tag . '.tar.gz')
         ->withDownloadScript(
             'lksctp-tools',
             <<<EOF
-                git clone -b master  --depth=1 https://github.com/sctp/lksctp-tools.git
+                git clone -b {$tag}  --depth=1 https://github.com/sctp/lksctp-tools.git
 EOF
         )
         ->withPrefix($libsctp_prefix)

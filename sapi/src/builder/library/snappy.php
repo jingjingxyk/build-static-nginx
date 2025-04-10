@@ -15,14 +15,9 @@ return function (Preprocessor $p) {
             ->withPrefix($snappy_prefix)
             ->withConfigure(
                 <<<EOF
-
-                # 需要修复这个问题  Fix -Wsign-compare warning
-                # 修复方法： https://github.com/google/snappy/commit/27f34a580be4a3becf5f8c0cba13433f53c21337
-
                 mkdir -p build
                 cd build
                 cmake .. \
-                -Wsign-compare \
                 -DCMAKE_INSTALL_PREFIX={$snappy_prefix} \
                 -DCMAKE_INSTALL_LIBDIR={$snappy_prefix}/lib \
                 -DCMAKE_INSTALL_INCLUDEDIR={$snappy_prefix}/include \

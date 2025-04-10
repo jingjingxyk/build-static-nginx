@@ -12,16 +12,16 @@ return function (Preprocessor $p) {
     $zlib_prefix = ZLIB_PREFIX;
     $bzip2_prefix = BZIP2_PREFIX;
     $icu_prefix = ICU_PREFIX;
-    $snappy_prefix  = SNAPPY_PREFIX ;
-    $tag='master';
-    $tag='1.30.3';
+    $snappy_prefix = SNAPPY_PREFIX;
+    $tag = 'master';
+    $tag = '1.30.3';
     $p->addLibrary(
         (new Library('libmongoc'))
             ->withHomePage('https://www.mongodb.com/docs/drivers/c/')
             ->withLicense('https://github.com/mongodb/mongo-c-driver/blob/master/COPYING', Library::LICENSE_APACHE2)
             ->withManual('https://mongoc.org/libmongoc/current/tutorial.html')
             ->withManual('https://mongoc.org/libmongoc/current/installing.html')
-            ->withFile('mongo-c-driver-'.$tag.'.tar.gz')
+            ->withFile('mongo-c-driver-' . $tag . '.tar.gz')
             ->withDownloadScript(
                 'mongo-c-driver',
                 <<<EOF
@@ -50,7 +50,7 @@ EOF
             -DENABLE_TESTS=OFF \
             -DENABLE_EXAMPLES=OFF \
             -DENABLE_SRV=ON \
-            -DENABLE_SNAPPY=ON \
+            -DENABLE_SNAPPY=OFF \
             -DENABLE_ZLIB=SYSTEM \
             -DZLIB_ROOT={$zlib_prefix} \
             -DENABLE_ZSTD=ON \
@@ -73,7 +73,7 @@ EOF
 
 EOF
             )
-            ->withPkgName('libmongoc-static-1.0')
+            ->withPkgName('libbson-static-1.0')
             ->withPkgName('libmongoc-static-1.0')
             ->withDependentLibraries(
                 'openssl',
@@ -81,8 +81,8 @@ EOF
                 'zlib',
                 'libzstd',
                 'icu',
-                // 'libsasl',
-                'snappy'
+            // 'libsasl',
+            //'snappy'
             )
     );
 };

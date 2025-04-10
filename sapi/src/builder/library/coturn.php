@@ -12,11 +12,7 @@ return function (Preprocessor $p) {
     $hiredis_prefix = HIREDIS_PREFIX;
     $libmongoc_prefix = LIBMONGOC_PREFIX;
     $libmicrohttpd_prefix = LIBMICROHTTPD_PREFIX;
-
-    $cflags = $p->getOsType() == 'macos' ? ' ' : ' -static -fPIE -DOPENSSL_THREADS';
-    $ldflags = $p->getOsType() == 'macos' ? ' ' : ' --static -static-pie';
-    $libsctp = $p->getOsType() == 'macos' ? ' ' : ' libsctp ';
-    $libcpp = $p->getOsType() == 'macos' ? '-lc++' : ' -lstdc++ ';
+    $snappy_prefix = SNAPPY_PREFIX;
 
     $cmake_options = "";
     if ($p->isLinux()) {
@@ -25,7 +21,27 @@ return function (Preprocessor $p) {
         $cmake_options .= '-DCMAKE_STATIC_LINKER_FLAGS="-static"';
     }
 
-    $snappy_prefix = SNAPPY_PREFIX;
+
+    $cflags = $p->getOsType() == 'macos' ? ' ' : ' -static -fPIE -DOPENSSL_THREADS';
+    $ldflags = $p->getOsType() == 'macos' ? ' ' : ' --static -static-pie';
+    $libcpp = $p->getOsType() == 'macos' ? '-lc++' : ' -lstdc++ ';
+
+
+    $dependentLibraries = [
+        'libevent',
+        'openssl',
+        'sqlite3',
+        'hiredis',
+        'pgsql',
+        'libmongoc',
+       // 'liboauth2'
+    ];
+    $pkg_options = '';
+    if ($p->isLinux()) {
+        $pkg_options .= 'libsctp';
+        $dependentLibraries[] = 'libsctp';
+    }
+
     $tag = 'master';
     $tag = '4.6.3';
     $p->addLibrary(
@@ -44,6 +60,7 @@ EOF
             ->withPrefix($coturn_prefix)
             ->withBuildCached(false)
             ->withInstallCached(false)
+            /*
             ->withBuildScript(
                 <<<EOF
            mkdir -p build
@@ -71,10 +88,11 @@ EOF
             cmake --build . --config Release
             cmake --build . --config Release --target install
 
-            #            -DCMAKE_C_LINKER_FLAGS=" -lpq -lpgport -lpgcommon " \
+            # -DCMAKE_C_LINKER_FLAGS=" -lpq -lpgport -lpgcommon " \
             # {$pgsql_prefix};
 EOF
             )
+            */
             ->withConfigure(
                 <<<EOF
             set -x
@@ -82,7 +100,6 @@ EOF
             export TURN_NO_GCM=ON
             export TURN_NO_SYSTEMD=ON
             export TURN_NO_MYSQL=ON
-            export TURN_NO_PostgreSQL=ON
 
             # export TURN_NO_MONGO=OFF
             # export TURN_NO_SQLITE=OFF
@@ -95,27 +112,29 @@ EOF
 
             PACKAGES='sqlite3'
             PACKAGES="\$PACKAGES libevent  libevent_core libevent_extra  libevent_openssl  libevent_pthreads"
-            # PACKAGES="\$PACKAGES libpq"
+            PACKAGES="\$PACKAGES libpq"
             PACKAGES="\$PACKAGES hiredis"
-            # PACKAGES="\$PACKAGES libsctp"
+            PACKAGES="\$PACKAGES {$pkg_options}"
             PACKAGES="\$PACKAGES  libbson-static-1.0 libmongoc-static-1.0 "
+            # PACKAGES="\$PACKAGES  liboauth2 "
 
-            export SSL_CFLAGS="$(pkg-config  --cflags-only-I  --static openssl ) "
-            export SSL_LIBS="$(pkg-config    --libs           --static openssl ) "
+            export SSL_CFLAGS=$(pkg-config    --cflags --static openssl)
+            export SSL_LIBS=$(pkg-config      --libs   --static openssl)
 
-            export CPPFLAGS="$(pkg-config  --cflags-only-I --static  \$PACKAGES)  -I{$snappy_prefix}/include"
-            export LDFLAGS="$(pkg-config   --libs-only-L   --static  \$PACKAGES)  -L{$snappy_prefix}/lib/ {$ldflags} " # -Wl,--whole-archive libpgcommon.a libpgport.a libpq.a -Wl,--no-whole-archive
-            export LIBS="$(pkg-config      --libs-only-l   --static    \$PACKAGES)  {$libcpp} " # -lm -lsnappy -pthread -lsocket -lrt
-            export CFLAGS="  -g  -std=gnu11 -Wall {$cflags}  "
+            export CPPFLAGS="$(pkg-config  --cflags-only-I --static  \$PACKAGES)  "
+            export LDFLAGS="$(pkg-config   --libs-only-L   --static  \$PACKAGES)  {$ldflags} " # -Wl,--whole-archive -l:pgcommon.a -l:pgport.a -l:pq.a -Wl,--no-whole-archive
+            export LIBS="$(pkg-config      --libs-only-l   --static  \$PACKAGES)  {$libcpp} "
+            export CFLAGS="  -g  -std=gnu11   {$cflags}  "
 
-            export DBCFLAGS="$(pkg-config  --cflags --static sqlite3 hiredis libbson-static-1.0 libmongoc-static-1.0  )"
-            export DBLIBS="$(pkg-config     --libs  --static sqlite3 hiredis libbson-static-1.0 libmongoc-static-1.0  )"
+            export DBCFLAGS="$(pkg-config  --cflags --static libpq sqlite3 hiredis libbson-static-1.0 libmongoc-static-1.0  )"
+            export DBLIBS="$(pkg-config     --libs  --static libpq sqlite3 hiredis libbson-static-1.0 libmongoc-static-1.0  ) {$libcpp}"
 
             export OSLIBS=\$LIBS
             export OSCFLAGS=\$CPPFLAGS
             export PTHREAD_LIBS='-pthread'
-            export SSL_CFLAGS=$(pkg-config    --cflags        --static openssl)
-            export SSL_LIBS=$(pkg-config      --libs   --static openssl)
+
+
+            sed -i.'backup' 's/libmongoc-1.0/libmongoc-static-1.0/' ./configure
 
             ./configure --help
             ./configure  \
@@ -123,31 +142,9 @@ EOF
 
 EOF
             )
-            ->withScriptBeforeInstall(
-                <<<EOF
-            unset CPPFLAGS
-            unset LDFLAGS
-            unset LIBS
-            unset CFLAGS
-
-            unset DBCFLAGS
-            unset DBLIBS
-
-            unset OSLIBS
-            unset OSCFLAGS
-EOF
-            )
             ->withBinPath($coturn_prefix . '/bin/')
             ->withDependentLibraries(
-                'libevent',
-                'openssl',
-                'sqlite3',
-                'hiredis',
-                //'pgsql',
-                //'libsctp',
-                'libmongoc',
-            //'libsctp',
-            //'liboauth2'
+                ...$dependentLibraries
             )
     );
 };
