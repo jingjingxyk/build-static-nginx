@@ -13,7 +13,6 @@ return function (Preprocessor $p) {
             ->withUrl('https://github.com/redis/hiredis/archive/refs/tags/v1.2.0.tar.gz')
             ->withFile('hiredis-v1.2.0.tar.gz')
             ->withPrefix($hiredis_prefix)
-            //->withBuildCached(false)
             ->withConfigure(
                 <<<EOF
 
