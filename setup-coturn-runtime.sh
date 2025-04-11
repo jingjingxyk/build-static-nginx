@@ -50,7 +50,7 @@ esac
 
 APP_VERSION='4.6.3'
 APP_NAME='coturn'
-VERSION='v2.1.0'
+VERSION='v2.2.0'
 
 cd ${__PROJECT__}
 mkdir -p bin/
