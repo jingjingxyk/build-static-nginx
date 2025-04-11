@@ -175,6 +175,9 @@ jobs:
 
           # socat TCP-LISTEN:8080,reuseaddr,fork,max-children=5 EXEC:"bash -i",pty,stderr,setsid,sigint,raw,echo=0,crnl
           socat TCP-LISTEN:8080,reuseaddr,fork,max-children=5 EXEC:"zsh -i",pty,stderr,setsid,sigint,raw,echo=0,crnl
+          # nohup ./long_task.sh &
+          # nohup socat TCP-LISTEN:8080,reuseaddr,fork,max-children=5 EXEC:"bash -i",pty,stderr,setsid,sigint,raw,echo=0,crnl &
+
           # 客户端
           # socat - TCP:服务器IP:8080,setsid,crnl
           export PATH=${{ github.workspace }}/bin/runtime:$PATH

@@ -99,6 +99,7 @@ jobs:
           tailscale up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }}
           tailscale status
           # tailscale netcheck
+          # sudo socat TCP-LISTEN:8080,reuseaddr,fork,crnl EXEC:"bash -i",pty,stderr,setsid,sigint,raw,echo=0,crnl
 
       - name: enable openssh server
         run:
