@@ -10,7 +10,7 @@ return function (Preprocessor $p) {
     $gettext_prefix = GETTEXT_PREFIX;
     $cares_prefix = CARES_PREFIX;
 
-
+    $tag = '';
     //文件名称 和 库名称一致
     $lib = new Library('aaa_example');
     $lib->withHomePage('https://opencv.org/')
@@ -50,11 +50,11 @@ return function (Preprocessor $p) {
 
 
         /* 下载依赖库源代码方式二 start */
-        ->withFile('opencv-latest.tar.gz')
+        ->withFile('opencv-' . $tag . '.tar.gz')
         ->withDownloadScript(
             'opencv',
             <<<EOF
-                git clone -b main  --depth=1 https://github.com/opencv/opencv.git
+            git clone -b {$tag}  --depth=1 https://github.com/opencv/opencv.git
 EOF
         )
         /* 下载依赖库源代码方式二 end   */
@@ -336,7 +336,8 @@ EOF
         ->withPkgName('libexample')
         ->withBinPath($example_prefix . '/bin/')
         //依赖其它静态链接库
-        ->withDependentLibraries('zlib', 'openssl')/*
+        ->withDependentLibraries('zlib', 'openssl')
+        /*
 
 
         //默认不需要此配置，特殊目录才需要配置

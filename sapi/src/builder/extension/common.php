@@ -203,6 +203,7 @@ return function (Preprocessor $p) {
     $depends = ['mbedtls'] ;
     $depends = ['mimalloc'] ;
     $depends = ['libmongoc'] ;
+    $depends = ['tcpdump'] ;
 
 
     $ext = (new Extension('common'))
