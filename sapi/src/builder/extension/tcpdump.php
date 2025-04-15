@@ -10,7 +10,7 @@ return function (Preprocessor $p) {
     $ext = (new Extension('tcpdump'))
         ->withHomePage('https://www.tcpdump.org')
         ->withLicense('https://github.com/the-tcpdump-group/tcpdump?tab=License-1-ov-file#readme', Extension::LICENSE_BSD)
-        ->withManual('https://github.com/the-tcpdump-group/tcpdump/blob/master/INSTALL.md')
+        ->withManual('https://github.com/the-tcpdump-group/tcpdump/blob/master/INSTALL.md');
     call_user_func_array([$ext, 'withDependentLibraries'], $depends);
     $p->addExtension($ext);
     $p->withReleaseArchive('tcpdump', function (Preprocessor $p) {
