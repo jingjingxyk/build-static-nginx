@@ -53,7 +53,6 @@ APP_NAME='php-cli'
 VERSION='v1.2.0'
 
 cd ${__PROJECT__}
-mkdir -p bin/
 mkdir -p runtime/
 mkdir -p var/runtime
 APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}

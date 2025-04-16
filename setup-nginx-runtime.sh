@@ -53,7 +53,6 @@ APP_NAME='nginx'
 VERSION='v1.2.0'
 
 cd ${__PROJECT__}
-mkdir -p bin/
 mkdir -p runtime/
 mkdir -p var/runtime
 APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
@@ -127,6 +126,56 @@ cd ${__PROJECT__}/var/runtime
 cp -f ${__PROJECT__}/var/runtime/cacert.pem ${__PROJECT__}/runtime/cacert.pem
 
 cd ${__PROJECT__}/
+
+tee ${APP_RUNTIME_DIR}/start.sh <<'EOF'
+#!/usr/bin/env bash
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd ${__DIR__}
+
+mkdir -p ${__DIR__}/var/log/
+mkdir -p ${__DIR__}/var/run/
+
+mkdir -p ${__DIR__}/conf/conf.d/
+mkdir -p ${__DIR__}/conf/conf.d/http/
+mkdir -p ${__DIR__}/conf/conf.d/stream/
+
+${__DIR__}/sbin/nginx -p ${__DIR__}/ -t
+${__DIR__}/sbin/nginx -p ${__DIR__}/
+
+EOF
+
+tee ${APP_RUNTIME_DIR}/reload.sh <<'EOF'
+#!/usr/bin/env bash
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd ${__DIR__}
+
+
+${__DIR__}/sbin/nginx -p ${__DIR__}/ -t
+${__DIR__}/sbin/nginx -p ${__DIR__}/ -s reload
+
+EOF
+
+tee ${APP_RUNTIME_DIR}/stop.sh <<'EOF'
+#!/usr/bin/env bash
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd ${__DIR__}
+
+${__DIR__}/sbin/nginx -p ${__DIR__}/ -t
+${__DIR__}/sbin/nginx -p ${__DIR__}/ -s stop
+
+EOF
 
 set +x
 

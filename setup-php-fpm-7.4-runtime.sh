@@ -53,7 +53,6 @@ APP_NAME='php-fpm'
 VERSION='php-fpm-7.4-v1.2.1'
 
 cd ${__PROJECT__}
-mkdir -p bin/
 mkdir -p runtime/
 mkdir -p var/runtime
 APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}

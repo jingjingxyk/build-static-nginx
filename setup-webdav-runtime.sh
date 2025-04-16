@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='1.24.1'
-APP_NAME='go'
-VERSION='1.24.1'
+APP_VERSION='v5.7.4'
+APP_NAME='webdav'
+VERSION='v5.7.4'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
@@ -62,23 +62,21 @@ cd ${__PROJECT__}/var/runtime
 
 : <<'EOF'
 
-https://go.dev/dl/
+https://github.com/hacdias/webdav/releases
 
-https://go.dev/dl/go1.22.5.darwin-arm64.pkg
-
-https://go.dev/dl/go1.22.5.darwin-amd64.pkg
-https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
-https://go.dev/dl/go1.21.12.linux-arm64.tar.gz
-https://go.dev/dl/go1.21.12.windows-amd64.zip
-https://go.dev/dl/go1.21.12.darwin-arm64.tar.gz
-https://go.dev/dl/go1.21.12.darwin-amd64.tar.gz
+https://github.com/hacdias/webdav/releases/download/v5.7.4/windows-amd64-webdav.zip
+https://github.com/hacdias/webdav/releases/download/v5.7.4/windows-arm64-webdav.zip
+https://github.com/hacdias/webdav/releases/download/v5.7.4/linux-arm64-webdav.tar.gz
+https://github.com/hacdias/webdav/releases/download/v5.7.4/linux-amd64-webdav.tar.gz
+https://github.com/hacdias/webdav/releases/download/v5.7.4/darwin-amd64-webdav.tar.gz
+https://github.com/hacdias/webdav/releases/download/v5.7.4/darwin-arm64-webdav.tar.gz
 
 EOF
 
-APP_DOWNLOAD_URL="https://go.dev/dl/${APP_NAME}${APP_VERSION}.${OS}-${ARCH}.tar.gz"
+APP_DOWNLOAD_URL="https://github.com/hacdias/webdav/releases/download/${VERSION}/${OS}-${ARCH}-${APP_NAME}.tar.gz"
 
 if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://go.dev/dl/${APP_NAME}${APP_VERSION}.${OS}-${ARCH}.zip"
+  APP_DOWNLOAD_URL="https://github.com/hacdias/webdav/releases/download/${VERSION}/${OS}-${ARCH}-${APP_NAME}.zip"
 fi
 
 MIRROR=''
@@ -106,14 +104,14 @@ done
 
 case "$MIRROR" in
 china)
-  APP_DOWNLOAD_URL="https://golang.google.cn/dl/${APP_NAME}${APP_VERSION}.${OS}-${ARCH}.tar.gz"
+  APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}/${OS}-${ARCH}-${APP_NAME}.tar.gz"
   if [ $OS = 'windows' ]; then
-    APP_DOWNLOAD_URL="https://golang.google.cn/dl/${APP_NAME}${APP_VERSION}.${OS}-${ARCH}.zip"
+    APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}/${OS}-${ARCH}-${APP_NAME}.zip"
   fi
   ;;
 esac
 
-APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
+APP_RUNTIME="${OS}-${ARCH}-${APP_NAME}"
 if [ $OS = 'windows' ]; then
   test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
@@ -123,8 +121,7 @@ else
   test -f ${APP_RUNTIME}.tar.gz || curl -LSo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
   tar -xvf ${APP_RUNTIME}.tar.gz
-  test -d ${APP_RUNTIME_DIR} && rm -rf ${APP_RUNTIME_DIR}
-  mv go ${__PROJECT__}/runtime/
+  mv webdav ${__PROJECT__}/runtime/${APP_NAME}/
 fi
 
 cd ${__PROJECT__}/
@@ -132,9 +129,9 @@ cd ${__PROJECT__}/
 set +x
 
 echo " "
-echo " USE PHP RUNTIME :"
+echo " USE webdav RUNTIME :"
+echo " docs: https://github.com/hacdias/webdav.git"
+echo " export PATH=\"${APP_RUNTIME_DIR}/:\$PATH\" "
 echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
-echo " "
-export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
-go version
+export PATH="${APP_RUNTIME_DIR}/:$PATH"
+

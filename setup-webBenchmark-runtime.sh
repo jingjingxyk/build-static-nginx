@@ -54,7 +54,6 @@ APP_NAME='webBenchmark'
 VERSION='0.9'
 
 cd ${__PROJECT__}
-mkdir -p bin/
 mkdir -p runtime/
 mkdir -p var/runtime
 APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
