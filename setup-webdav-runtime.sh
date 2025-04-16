@@ -134,4 +134,5 @@ echo " docs: https://github.com/hacdias/webdav.git"
 echo " export PATH=\"${APP_RUNTIME_DIR}/:\$PATH\" "
 echo " "
 export PATH="${APP_RUNTIME_DIR}/:$PATH"
+webdav --help
 
