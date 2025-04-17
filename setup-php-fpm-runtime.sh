@@ -105,7 +105,6 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-
 cd ${__PROJECT__}
 mkdir -p runtime/
 mkdir -p var/runtime
@@ -221,6 +220,61 @@ pm.max_spare_servers = 3
 EOF
 
 cd ${__PROJECT__}/
+
+tee ${APP_RUNTIME_DIR}/start.sh <<'EOF'
+#!/usr/bin/env bash
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd ${__DIR__}
+mkdir -p log
+mkdir -p run
+mkdir -p var
+
+
+OS=$(uname -s)
+if [ "$OS" = 'Darwin' ]; then
+  # 非 root 设置此项无效
+  USER=$(whoami)
+  GROUP=$(groups $(whoami) | cut -d' ' -f1)
+  # chown -R $(whoami):staff
+  sed -i.bak "s/user = nobody/user = ${USER}/" php-fpm.conf
+  sed -i.bak "s/group = nogroup/group = ${GROUP}/" php-fpm.conf
+  test -f php-fpm.conf.bak && rm -f php-fpm.conf.bak
+fi
+
+${__DIR__}/php-fpm -c ${__DIR__}/php.ini --fpm-config ${__DIR__}/php-fpm.conf -p ${__DIR__}/var
+
+EOF
+
+tee ${APP_RUNTIME_DIR}/reload.sh <<'EOF'
+#!/usr/bin/env bash
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd ${__DIR__}
+
+kill -USR2 $(cat ${__DIR__}/var/run/php-fpm.pid)
+
+EOF
+
+tee ${APP_RUNTIME_DIR}/stop.sh <<'EOF'
+#!/usr/bin/env bash
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd ${__DIR__}
+
+kill -QUIT $(cat ${__DIR__}/var/run/php-fpm.pid)
+
+
+EOF
 
 set +x
 
