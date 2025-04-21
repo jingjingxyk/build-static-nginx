@@ -63,8 +63,21 @@ SD-WAN  https://www.baidu.com/s?ie=utf-8&wd=SD-WAN
 
 https://github.com/IrineSistiana/mosdns/blob/main/scripts/update_chn_ip_domain.py
 
+
 ## RFC 8445, RFC 5389, RFC 5766
 
     RFC 8445 是 IETF 定义的 Interactive Connectivity Establishment（ICE）‌ 协议标准，旨在解决基于 UDP 通信的 NAT 穿透问题，为端到端（P2P）连接提供统一的网络适配框架
     RFC 5389 通过标准化 STUN 协议的功能与流程，为 NAT 穿透提供了轻量级、高兼容性的工具，成为实时通信和 P2P 连接的核心技术之一‌
     RFC 5766 通过中继服务器为 NAT 穿透提供了兜底方案，弥补了 STUN 在对称型 NAT 等场景下的不足‌
+
+
+
+## 穿越NAT
+
+    先判断本地的默认网关上是否启用了 UPnP IGD, NAT-PMP and PCP
+    多 NAT 真正有影响的其实只是最后一层设备
+    IPv4 地址不够的问题再嵌套一层 NAT
+    ICE (Interactive Connectivity Establishment) 算法
+
+    [译] NAT 穿透是如何工作的：技术原理及企业级实践（Tailscale, 2020）
+    https://github.com/ArthurChiao/arthurchiao.github.io/blob/master/_posts/2021-10-21-how-nat-traversal-works-zh.md

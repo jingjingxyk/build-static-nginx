@@ -96,11 +96,13 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/l
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --proxy http://127.0.0.1:8016
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/install-docker.sh | bash -s -- --mirror china
-[ovn-controller](OVS/ovn-controller)
+
 
 docker run --rm --name demo  -ti --init debian:12
 
 ```
+
+[ovn-controller](OVS/ovn-controller)
 
 ## IGMP 组播协议
 

@@ -1,6 +1,7 @@
 # setup runtime
 
 ```bash
+
 curl -fSLo cacert.pem https://curl.se/ca/cacert.pem
 
 # coturn
@@ -75,5 +76,17 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/l
 ## http-proxy
 curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/sapi/quickstart/unix/http-proxy.sh?raw=ture | bash
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/unix/http-proxy.sh?raw=ture | bash
+
+# ovs ovn
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh?raw=true | bash
+
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/debian-init-minimal.sh | bash -s -- --mirror china
+
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --proxy http://127.0.0.1:8016
+
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/install-docker.sh | bash -s -- --mirror china
+
+
+
 
 ```
