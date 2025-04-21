@@ -77,7 +77,7 @@ while [ $# -gt 0 ]; do
     NO_PROXY="${NO_PROXY},pypi.python.org,bootstrap.pypa.io"
     export NO_PROXY="${NO_PROXY},localhost"
     ;;
-  --instal-deps)
+  --install-deps)
     FORCE_INSTALL_DEPS=1
     ;;
   --*)
