@@ -167,7 +167,11 @@ if test -d ovs; then
   cd ${__DIR__}/ovs/
   # git   pull --depth=1 --progress --rebase
 else
-  git clone -b v3.4.2 https://github.com/openvswitch/ovs.git --depth=1 --progress
+  if [[ "$MIRROR" == "china" ]]; then
+    git clone -b v3.4.2 https://gitee.com/jingjingxyk/ovs.git --depth=1 --progress
+  else
+    git clone -b v3.4.2 https://github.com/openvswitch/ovs.git --depth=1 --progress
+  fi
 fi
 
 cd ${__DIR__}
@@ -176,7 +180,12 @@ if test -d ovn; then
   cd ${__DIR__}/ovn/
   # git   pull --depth=1 --progress --rebase
 else
-  git clone -b v24.09.2 --depth=1 --progress https://github.com/ovn-org/ovn.git
+  if [[ "$MIRROR" == "china" ]]; then
+    git clone -b v24.09.2 https://gitee.com/jingjingxyk/ovn.git --depth=1 --progress
+  else
+    git clone -b v24.09.2 --depth=1 --progress https://github.com/ovn-org/ovn.git
+  fi
+
 fi
 
 cd ${__DIR__}
