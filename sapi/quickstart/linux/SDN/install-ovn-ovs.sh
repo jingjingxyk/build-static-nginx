@@ -15,7 +15,47 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
+install_deps() {
+
+  apt update -y
+  apt install -y locales
+  echo 'en_US.UTF-8 UTF-8' >>/etc/locale.gen
+  locale-gen
+  localedef -i en_US -f UTF-8 en_US.UTF-8
+  locale -a | grep en_US.utf8
+  export LANGUAGE="en_US.UTF-8"
+  export LC_ALL="en_US.UTF-8"
+  export LC_CTYPE="en_US.UTF-8"
+  export LANG="en_US.UTF-8"
+
+  # update-locale LANG=en_US.UTF-8
+
+  apt install -y git curl python3 python3-pip python3-dev wget sudo file
+  apt install -y libssl-dev ca-certificates
+
+  apt install -y \
+    git gcc clang make cmake autoconf automake libssl3 openssl libssl-dev python3 python3-pip libtool \
+    openssl curl libcap-ng-dev uuid uuid-runtime
+
+  apt install -y kmod iptables
+  apt install -y netcat-openbsd
+  apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
+  apt install -y conntrack
+  apt install -y bridge-utils
+  apt install -y libelf-dev libbpf-dev # libxdp-dev
+  apt install -y graphviz
+  apt install -y libjemalloc2 libjemalloc-dev libnuma-dev libpcap-dev libunbound-dev libunwind-dev llvm-dev
+  apt install -y bc init ncat
+  # apt install -y isc-dhcp-server
+  # apt install -y libdpdk-dev
+  # apt install -y ntp ntpdate
+  # ntpdate ntp.ntsc.ac.cn  # 使用国家授时中心服务器
+  # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+}
+
 MIRROR=''
+FORCE_INSTALL_DEPS=0
 while [ $# -gt 0 ]; do
   case "$1" in
   --mirror)
@@ -36,6 +76,9 @@ while [ $# -gt 0 ]; do
     NO_PROXY="${NO_PROXY},archive.ubuntu.com,security.ubuntu.com"
     NO_PROXY="${NO_PROXY},pypi.python.org,bootstrap.pypa.io"
     export NO_PROXY="${NO_PROXY},localhost"
+    ;;
+  --instal-deps)
+    FORCE_INSTALL_DEPS=1
     ;;
   --*)
     echo "Illegal option $1"
@@ -116,48 +159,12 @@ if test -n "$MIRROR"; then
   }
 fi
 
-prepare() {
-
-  apt update -y
-  apt install -y locales
-  echo 'en_US.UTF-8 UTF-8' >>/etc/locale.gen
-  locale-gen
-  localedef -i en_US -f UTF-8 en_US.UTF-8
-  locale -a | grep en_US.utf8
-  export LANGUAGE="en_US.UTF-8"
-  export LC_ALL="en_US.UTF-8"
-  export LC_CTYPE="en_US.UTF-8"
-  export LANG="en_US.UTF-8"
-
-  # update-locale LANG=en_US.UTF-8
-
-  apt install -y git curl python3 python3-pip python3-dev wget sudo file
-  apt install -y libssl-dev ca-certificates
-
-  apt install -y \
-    git gcc clang make cmake autoconf automake libssl3 openssl libssl-dev python3 python3-pip libtool \
-    openssl curl libcap-ng-dev uuid uuid-runtime
-
-  apt install -y kmod iptables
-  apt install -y netcat-openbsd
-  apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
-  apt install -y conntrack
-  apt install -y bridge-utils
-  apt install -y libelf-dev libbpf-dev # libxdp-dev
-  apt install -y graphviz
-  apt install -y libjemalloc2 libjemalloc-dev libnuma-dev libpcap-dev libunbound-dev libunwind-dev llvm-dev
-  apt install -y bc init ncat
-  # apt install -y isc-dhcp-server
-  # apt install -y libdpdk-dev
-  # apt install -y ntp ntpdate
-  # ntpdate ntp.ntsc.ac.cn  # 使用国家授时中心服务器
-  # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-}
-
-# test $(dpkg-query -l graphviz | wc -l) -eq 0 && prepare
-
-test $(command -v bc | wc -l) -eq 0 && prepare
+if [[ "$FORCE_INSTALL_DEPS" -eq 0 ]]; then
+  install_deps
+else
+  # test $(dpkg-query -l graphviz | wc -l) -eq 0 && install_deps
+  test $(command -v bc | wc -l) -eq 0 && install_deps
+fi
 
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
