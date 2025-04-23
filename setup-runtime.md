@@ -78,13 +78,16 @@ curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/sapi/quickstart
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/unix/http-proxy.sh?raw=ture | bash
 
 # ovs ovn
+sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --mirror china --install-deps
+
 curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh?raw=true | bash
+
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/debian-init-minimal.sh
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/debian-init-minimal.sh | bash -s -- --mirror china
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/debian-init.sh | bash -s -- --mirror china
-
-curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --mirror china --install-deps
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --proxy http://127.0.0.1:8016
 
