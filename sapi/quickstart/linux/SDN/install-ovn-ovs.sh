@@ -46,6 +46,7 @@ install_deps() {
   apt install -y graphviz
   apt install -y libjemalloc2 libjemalloc-dev libnuma-dev libpcap-dev libunbound-dev libunwind-dev llvm-dev
   apt install -y bc init ncat
+  apt install -y lshw
   # apt install -y isc-dhcp-server
   # apt install -y libdpdk-dev
   # apt install -y ntp ntpdate

@@ -8,6 +8,11 @@ __DIR__=$(
 )
 cd ${__DIR__}
 
+lspci | grep -i "network controller\|ethernet controller"
+ls -l /sys/class/net/ | grep -v virtual | grep device | awk '{print $9}'
+lshw -class network | grep "description: Ethernet interface" -A 5
+
+
 ovs-vsctl --if-exists del-br br-eth1
 ovs-vsctl add-br br-eth1 # 添加网桥
 ip link set br-eth1 up # 激活网桥
