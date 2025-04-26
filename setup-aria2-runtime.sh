@@ -50,7 +50,7 @@ esac
 
 APP_VERSION='1.37.0'
 APP_NAME='aria2c'
-VERSION='v0.0.1'
+VERSION='v1.1.0'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
