@@ -18,24 +18,25 @@ return function (Preprocessor $p) {
         $workdir = $p->getWorkDir();
         $builddir = $p->getBuildDir();
         $nginx_prefix = NGINX_PREFIX;
-        $system_arch=$p->getSystemArch();
+        $system_arch = $p->getSystemArch();
         $cmd = <<<EOF
                 mkdir -p {$workdir}/bin/
                 cp -rf {$nginx_prefix} {$workdir}/bin/
                 cd {$workdir}/bin/
                 NGINX_VERSION=$(echo $({$workdir}/bin/nginx/sbin/nginx -v 2>&1) | awk -F '/' '{print $2}')
+                echo \${NGINX_VERSION} > {$workdir}/APP_VERSION
 
 EOF;
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
                 otool -L {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx
+                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         } else {
             $cmd .= <<<EOF
                 file {$workdir}/bin/nginx/sbin/nginx
                 readelf -h {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx
+                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         }
         return $cmd;
