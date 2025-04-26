@@ -57,7 +57,7 @@ jobs:
         run: |
           launchctl list | grep ssh
           set -x
-          IP=$(curl -fSL https://detect-ip.xiaoshuogeng.com/ip/json | jq '.ip')
+          IP=$(curl -fSL https://detect-ip.jingjingxyk.com/ip/json | jq '.ip')
           echo ${IP}
           CURRENT_USER=$(whoami)
           echo ${CURRENT_USER}
