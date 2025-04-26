@@ -106,6 +106,7 @@ test -d redis && rm -rf redis
 test -d gitea && rm -rf gitea
 test -d postgresql && rm -rf postgresql
 test -d zerotier && rm -rf zerotier
+test -d coturn && rm -rf coturn
 
 cd ${__PROJECT__}/.github/workflows
 test -f ceph.yml && rm -rf ceph.yml
