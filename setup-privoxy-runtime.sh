@@ -137,7 +137,9 @@ __DIR__=$(
 )
 
 cd ${__DIR__}/
- ./sbin/privoxy --no-daemon etc/config
+
+./sbin/privoxy --no-daemon etc/config
+
 EOF
 
 set +x
@@ -151,10 +153,10 @@ echo ' listen-address  0.0.0.0:8118'
 echo ' #forward-socks5   /               user:pass@socks-gw.example.com:1080  .  '
 echo '  forward-socks5   /               127.0.0.1:2000  .  '
 cat <<'EOF'
-    # forward           [::1]             .
-    # forward           [fe80::/10]       .
-    # forward           [fd00::/8]        .
-    # forward           [fc00::/]         .
+    forward           [::1]             .
+    forward           [fe80::/10]       .
+    forward           [fd00::/8]        .
+    forward           [fc00::/]         .
     forward           192.168.*.*/     .
     forward           10.*.*.*/        .
     forward           127.*.*.*/       .
@@ -168,7 +170,7 @@ cat <<'EOF'
     forward           .npmmirror.com .
 
 EOF
-echo " confdir ${APP_RUNTIME_DIR}/privoxy/etc"
+echo " confdir ${APP_RUNTIME_DIR}/etc"
 echo " logdir ${APP_RUNTIME_DIR}/var/log/privoxy"
 echo '#        debug  1'
 echo '#        debug  512'

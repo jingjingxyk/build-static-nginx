@@ -63,11 +63,17 @@ https://download.java.net/java/GA/jdk24.0.1/24a58e0e276943138bf3e963e6291ac2/9/G
 
 https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_macos-aarch64_bin.tar.gz
 https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_osx-x64_bin.tar.gz
+
+https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_osx-x64_bin.tar.gz
+
+https://services.gradle.org/distributions/gradle-8.12.1-bin.zip
+
 EOF
 
-APP_VERSION='9.0.4'
+APP_VERSION='24.0.1'
 APP_NAME='openjdk'
-VERSION='jdk21.0.2'
+VERSION='jdk24.0.1'
+GRADLE_VERSION='8.12.1'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
@@ -77,10 +83,10 @@ mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
-APP_DOWNLOAD_URL="https://download.java.net/java/GA/jdk9/9.0.4/binaries//${APP_NAME}-${APP_VERSION}_${OS}-${ARCH}_bin.tar.gz"
+APP_DOWNLOAD_URL="https://download.java.net/java/GA/jdk11/13/GPL/${APP_NAME}-${APP_VERSION}_${OS}-${ARCH}_bin.tar.gz"
 
 if [ $OS = 'win' ]; then
-  APP_DOWNLOAD_URL="https://download.java.net/java/GA/jdk9/9.0.4/binaries//${APP_NAME}-${APP_VERSION}_${OS}-${ARCH}_bin.zip"
+  APP_DOWNLOAD_URL="https://download.java.net/java/GA/jdk11/13/GPL/${APP_NAME}-${APP_VERSION}_${OS}-${ARCH}_bin.zip"
 fi
 
 MIRROR=''
@@ -112,15 +118,21 @@ if [ $OS = 'win' ]; then
 else
   test -f ${APP_RUNTIME}.tar.gz || curl -fSLo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
-  # mkdir -p ${APP_RUNTIME}
-  # tar --strip-components=1 -C ${APP_RUNTIME} -xf ${APP_RUNTIME}.tar.gz
-  tar -xvf ${APP_RUNTIME}.tar.gz
+  mkdir -p ${APP_RUNTIME}
+  tar --strip-components=2 -C ${APP_RUNTIME} -xf ${APP_RUNTIME}.tar.gz
+  # tar -xvf ${APP_RUNTIME}.tar.gz
 
   test -d ${APP_RUNTIME_DIR} && rm -rf ${APP_RUNTIME_DIR}
-  # mv jdk-24.0.1.jdk ${APP_RUNTIME_DIR}
-  # mv jdk-21.0.2.jdk ${APP_RUNTIME_DIR}
-  mv jdk-9.0.4.jdk ${APP_RUNTIME_DIR}
+  mv ${APP_RUNTIME} ${APP_RUNTIME_DIR}
 fi
+
+GRADLE_APP="gradle-${GRADLE_VERSION}-bin"
+test -f ${GRADLE_APP}.zip || curl -fSLo ${GRADLE_APP}.zip https://services.gradle.org/distributions/${GRADLE_APP}.zip
+unzip -o ${GRADLE_APP}.zip
+
+test -d ${__PROJECT__}/runtime/gradle && rm -rf ${__PROJECT__}/runtime/gradle
+mkdir -p ${__PROJECT__}/runtime/gradle
+cp -rf gradle-${GRADLE_VERSION}/. ${__PROJECT__}/runtime/gradle
 
 cd ${__PROJECT__}/
 
@@ -134,14 +146,17 @@ echo " "
 
 cd ${__PROJECT__}
 if [ $OS=='macos' ]; then
-  export PATH="${APP_RUNTIME_DIR}/Contents/Home/bin/:$PATH"
-  export JAVA_HOME="${APP_RUNTIME_DIR}/"
+  export PATH="${__PROJECT__}/runtime/openjdk/Contents/Home/bin/:${__PROJECT__}/runtime/gradle/bin/:$PATH"
+  export JAVA_HOME="${__PROJECT__}/runtime/openjdk/Contents/Home/"
 else
-  export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
-  export JAVA_HOME="${APP_RUNTIME_DIR}/"
+  export PATH="${__PROJECT__}/runtime/openjdk/bin/${__PROJECT__}/runtime/gradle/bin/:$PATH"
+  export JAVA_HOME="${__PROJECT__}/runtime/openjdk/"
 fi
 
+which java
+which gradle
 java -version
+gradle --version
 
 # shellcheck disable=SC2217
 : <<'EOF'
@@ -152,5 +167,13 @@ https://openjdk.org/install/
 
 # old version
 https://jdk.java.net/archive/
+
+ls ~/.gradle/
+rm -rf ~/.gradle/
+
+# show gradle release archive
+# https://services.gradle.org/distributions/
+
+Downloading https://services.gradle.org/distributions/gradle-8.12.1-bin.zip
 
 EOF

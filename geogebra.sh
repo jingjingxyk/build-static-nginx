@@ -9,7 +9,6 @@ __PROJECT__=${__DIR__}
 shopt -s expand_aliases
 cd ${__PROJECT__}
 
-
 OS=$(uname -s)
 ARCH=$(uname -m)
 
@@ -62,23 +61,44 @@ cd ${__PROJECT__}/var/
 cd geogebra
 
 if [ $OS=='macos' ]; then
-  export PATH="${__PROJECT__}/runtime/openjdk/Contents/Home/bin/:$PATH"
-  # export JAVA_HOME="${__PROJECT__}/runtime/openjdk/Contents/Home/bin/"
+  export PATH="${__PROJECT__}/runtime/openjdk/Contents/Home/bin/:${__PROJECT__}/runtime/gradle/bin/:$PATH"
+  export JAVA_HOME="${__PROJECT__}/runtime/openjdk/Contents/Home/"
 else
-  export PATH="${__PROJECT__}/runtime/openjdk/bin/:$PATH"
-  # export JAVA_HOME="${__PROJECT__}/runtime/openjdk/bin"
+  export PATH="${__PROJECT__}/runtime/openjdk/bin/${__PROJECT__}/runtime/gradle/bin/:$PATH"
+  export JAVA_HOME="${__PROJECT__}/runtime/openjdk/"
 fi
-cat >gradle.properties <<EOF
-# systemProp.http.proxyHost=127.0.0.1
-# systemProp.http.proxyPort=8016
-# systemProp.http.nonProxyHosts="*.tsinghua.edu.cn | *.ustc.edu.cn"
-systemProp.socksProxyHost=127.0.0.1
-systemProp.socksProxyPort=2000
+
+: <<'COMMENT'
+
+cat >>gradle.properties <<EOF
+systemProp.http.proxyHost=127.0.0.1
+systemProp.http.proxyPort=8118
+systemProp.http.nonProxyHosts="*.tsinghua.edu.cn | *.ustc.edu.cn"
+systemProp.https.proxyHost=127.0.0.1
+systemProp.https.proxyPort=8118
+systemProp.https.nonProxyHosts="*.tsinghua.edu.cn | *.ustc.edu.cn"
+# systemProp.socksProxyHost=127.0.0.1
+# systemProp.socksProxyPort=2000
 EOF
 
-./gradlew :web:run --debug
+COMMENT
+
+which java
+which gradle
+java -version
+gradle --version
+
+# ./gradlew :web:run --debug
+./gradlew :web:run
 
 exit 0
-
+: <<'EOF'
 # https://geogebra.github.io/docs/reference/en/GeoGebra_Installation/
 # https://geogebra.github.io/integration/example-graphing.html
+
+https://git.geogebra.org/ggb/geogebra.git
+
+./gradlew :desktop:run
+
+
+EOF
