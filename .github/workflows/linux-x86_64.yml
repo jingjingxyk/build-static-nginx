@@ -233,9 +233,10 @@ jobs:
       - name: get app version
         run: |
           APP_VERSION=$(cat ./APP_VERSION)
+          APP_NAME=$(cat ./APP_NAME)
           echo $APP_VERSION
           echo "APP_VERSION=${APP_VERSION}" >> $GITHUB_ENV
-          echo "APP_NAME=ne_dev" >> $GITHUB_ENV
+          echo "APP_NAME=${APP_NAME}" >> $GITHUB_ENV
 
       - name: production artifacts debug
         uses: actions/upload-artifact@v4
