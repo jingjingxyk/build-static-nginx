@@ -9,7 +9,7 @@ return function (Preprocessor $p) {
     $tag = 'master';
 
     $cppflags = '';
-    $cflags = $p->getOsType() == 'macos' ? "" : '-static ';
+    $cflags = $p->getOsType() == 'macos' ? "" : '-fPIE -static ';
     $ldflags = $p->getOsType() == 'macos' ? "" : '-static  -static-pie';
     $libs = $p->isMacos() ? '-lc++' : ' -lstdc++ ';
 
