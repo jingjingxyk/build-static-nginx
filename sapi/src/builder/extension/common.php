@@ -204,6 +204,7 @@ return function (Preprocessor $p) {
     $depends = ['mimalloc'] ;
     $depends = ['libmongoc'] ;
     $depends = ['tcpdump'] ;
+    $depends = ['masscan'] ;
 
 
     $ext = (new Extension('common'))

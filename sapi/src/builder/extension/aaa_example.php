@@ -135,6 +135,9 @@ EOF
 
                 {$workdir}/bin/ffmpeg/bin/ffmpeg -h
                 APP_VERSION=\$({$workdir}/bin/ffmpeg/bin/ffmpeg -version | head -n 1 | awk '{ print $3 }')
+                APP_NAME='ffmpeg'
+                echo \${APP_VERSION} > {$workdir}/APP_VERSION
+                echo \${APP_NAME} > {$workdir}/APP_NAME
                 cd {$workdir}/bin/
 
 EOF;

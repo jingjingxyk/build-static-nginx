@@ -347,6 +347,7 @@ define("LIBJSON_C_PREFIX", $p->getGlobalPrefix() . '/libjson_c');
 define("MBEDTLS_PREFIX", $p->getGlobalPrefix() . '/mbedtls');
 define("LIBZOOKEEPER_PREFIX", $p->getGlobalPrefix() . '/libzookeeper');
 define("TCPDUMP_PREFIX", $p->getGlobalPrefix() . '/tcpdump');
+define("MASSCAN_PREFIX", $p->getGlobalPrefix() . '/masscan');
 define("EXAMPLE_PREFIX", $p->getGlobalPrefix() . '/example');
 
 
