@@ -34,6 +34,8 @@ EOF
         /* 使用 cmake 构建 start */
         ->withBuildScript(
             <<<EOF
+         sed -i.bak 's/(WITH_GNUTLS)/(X_WITH_GNUTLS)/g' CMakeLists.txt
+         sed -i.bak 's/GNUTLS_FOUND/X_GNUTLS_FOUND/g' CMakeLists.txt
          mkdir -p build
          cd build
          cmake -LH ..
@@ -44,7 +46,7 @@ EOF
         -DBUILD_SHARED_LIBS=OFF  \
         -DBUILD_STATIC_LIBS=ON \
         -DCMAKE_PREFIX_PATH="{$openssl_prefix};{$jansson_prefix};{$curl_prefix};{$nghttp3_prefix};{$ngtcp2_prefix};{$libssh2_prefix}" \
-        -DWITH_GNUTLS=ON \
+        -DWITH_GNUTLS=OFF \
         -DWITH_LIBCURL=ON \
         -DWITH_TESTS=OFF \
         -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=ON \
@@ -61,8 +63,7 @@ EOF
             rm -rf {$libjwt_prefix}/lib/*.dylib
 EOF
         )
-        ->withPkgName('libexample')
-        ->withBinPath($libjwt_prefix . '/bin/')
+        ->withPkgName('libjwt')
         ->withDependentLibraries('jansson', 'openssl','curl')
     ;
 
