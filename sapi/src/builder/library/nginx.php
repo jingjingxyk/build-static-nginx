@@ -13,8 +13,13 @@ return function (Preprocessor $p) {
     $zlib = $p->getLibrary('zlib');
     $pcre2 = $p->getLibrary('pcre2');
 
-    $ldflags = $p->getOsType() == 'macos' ? '' : ' -static  ';
-    $tag = '1.27.4';
+    $cflags = '';
+    $ldflags = '';
+    if ($p->isLinux()) {
+        $cflags .= ' -static -fPIE ';
+        $ldflags .= ' -static -static-pie ';
+    }
+    $tag = '1.28.0';
     $p->addLibrary(
         (new Library('nginx'))
             ->withHomePage('https://nginx.org/')
@@ -40,15 +45,12 @@ EOF
             ->withBuildCached(false)
             ->withConfigure(
                 <<<EOF
-
-:<<'===EOF==='
-             set -x
-
             # nginx use PCRE2 library  on  nginx 1.21.5
             # now nginx is built with the PCRE2 library by default.
 
             # sed -i "50i echo 'stop preprocessor'; exit 3 " ./configure
 
+:<<'===EOF==='
             ./configure --help
 
             # 使用 zlib openssl pcre2 源码目录 进行构建
@@ -70,7 +72,6 @@ EOF
             --with-pcre={$builderDir}/nginx/pcre2 \
             --with-zlib={$builderDir}/nginx/zlib \
 
-
 ===EOF===
 
 
@@ -80,8 +81,12 @@ EOF
             cp -f auto/configure configure
 
             ./configure --help
+
             PACKAGES=" libxml-2.0 libexslt libxslt openssl zlib"
+
+            # pcre-1.0
             # PACKAGES="\$PACKAGES libpcre  libpcre16  libpcre32  libpcrecpp  libpcreposix"
+            # pcre-2.0
             PACKAGES="\$PACKAGES libpcre2-16  libpcre2-32  libpcre2-8   libpcre2-posix"
 
             CPPFLAGS="$(pkg-config  --cflags-only-I  --static \$PACKAGES)"
@@ -99,13 +104,14 @@ EOF
             --with-http_v3_module \
             --with-http_flv_module \
             --with-http_sub_module \
+            --with-http_auth_jwt_module \
             --with-stream \
             --with-stream_ssl_preread_module \
             --with-stream_ssl_module \
             --with-stream_realip_module \
             --with-threads \
-            --with-cc-opt="{$ldflags}  -O2   \$CPPFLAGS " \
-            --with-ld-opt="{$ldflags}  \$LDFLAGS " \
+            --with-cc-opt="{$cflags}  \$CPPFLAGS " \
+            --with-ld-opt="{$ldflags} \$LDFLAGS \$LIBS " \
             --add-module={$builderDir}/ngx_http_proxy_connect_module/ \
 
             # nginx 支持 webdav 不完整
