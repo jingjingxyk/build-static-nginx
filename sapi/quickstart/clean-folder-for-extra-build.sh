@@ -45,6 +45,11 @@ test -f setup-iperf3-runtime.sh && rm -rf setup-iperf3-runtime.sh
 test -f setup-openssh-runtime.sh && rm -rf setup-openssh-runtime.sh
 test -f setup-ttyd-runtime.sh && rm -rf setup-ttyd-runtime.sh
 test -f setup-webdav-runtime.sh && rm -rf setup-webdav-runtime.sh
+test -f drawdb.sh && rm -rf drawdb.sh
+test -f drawio.sh && rm -rf drawio.sh
+test -f geogebra.sh && rm -rf geogebra.sh
+test -f setup-openjdk-runtime.sh && rm -rf setup-openjdk-runtime.sh
+test -f three.js-editor.sh && rm -rf three.js-editor.sh
 
 cd ${__PROJECT__}/
 test -f .clang-format && rm -f .clang-format
