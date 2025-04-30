@@ -105,7 +105,6 @@ EOF
             --with-http_v3_module \
             --with-http_flv_module \
             --with-http_sub_module \
-            --with-http_auth_jwt_module \
             --with-stream \
             --with-stream_ssl_preread_module \
             --with-stream_ssl_module \
