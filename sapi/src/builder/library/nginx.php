@@ -17,7 +17,7 @@ return function (Preprocessor $p) {
     $ldflags = '';
     if ($p->isLinux()) {
         $cflags .= ' -static -fPIE ';
-        $ldflags .= ' -static -static-pie ';
+        $ldflags .= ' -static  '; //-static-pie
     }
     $tag = '1.28.0';
     $p->addLibrary(
