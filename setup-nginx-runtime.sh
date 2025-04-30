@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='1.27.4'
+APP_VERSION='1.28.0'
 APP_NAME='nginx'
-VERSION='v1.2.0'
+VERSION='v1.3.0'
 
 cd ${__PROJECT__}
 mkdir -p runtime/

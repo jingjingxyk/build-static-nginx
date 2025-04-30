@@ -50,7 +50,7 @@ esac
 
 APP_VERSION='v1.8.0.1'
 APP_NAME='socat'
-VERSION='v2.2.1'
+VERSION='v2.4.0'
 
 MIRROR=''
 while [ $# -gt 0 ]; do
