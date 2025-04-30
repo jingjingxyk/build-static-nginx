@@ -17,6 +17,7 @@ tcpdump -i any -nnn udp  port 6081
 ```bash
 ovs-vsctl list-ports  br-int
 ovs-vsctl set int br-int mtu_request=1450
+ovs-vsctl set int br-int mtu_request=1412
 
 # https://docs.openvswitch.org/en/latest/faq/issues/
 
