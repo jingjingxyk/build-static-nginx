@@ -43,6 +43,7 @@ EOF
             )
             ->withPrefix($nginx_prefix)
             ->withBuildCached(false)
+            ->withInstallCached(false)
             ->withConfigure(
                 <<<EOF
             # nginx use PCRE2 library  on  nginx 1.21.5

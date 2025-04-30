@@ -25,20 +25,20 @@ return function (Preprocessor $p) {
                 cd {$workdir}/bin/
                 APP_VERSION=$(echo $({$workdir}/bin/nginx/sbin/nginx -v 2>&1) | awk -F '/' '{print $2}')
                 APP_NAME='nginx'
-                echo \${NGINX_VERSION} > {$workdir}/APP_VERSION
-                echo \${NGINX_NAME} > {$workdir}/APP_NAME
+                echo \${APP_VERSION} > {$workdir}/APP_VERSION
+                echo \${APP_NAME} > {$workdir}/APP_NAME
 
 EOF;
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
                 otool -L {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/\${NGINX_NAME}-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx LICENSE
+                tar -cJvf {$workdir}/\${APP_NAME}-\${APP_VERSION}-macos-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         } else {
             $cmd .= <<<EOF
                 file {$workdir}/bin/nginx/sbin/nginx
                 readelf -h {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/\${NGINX_NAME}-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx LICENSE
+                tar -cJvf {$workdir}/\${APP_NAME}-\${APP_VERSION}-linux-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         }
         return $cmd;
