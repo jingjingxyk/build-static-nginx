@@ -23,20 +23,22 @@ return function (Preprocessor $p) {
                 mkdir -p {$workdir}/bin/
                 cp -rf {$nginx_prefix} {$workdir}/bin/
                 cd {$workdir}/bin/
-                NGINX_VERSION=$(echo $({$workdir}/bin/nginx/sbin/nginx -v 2>&1) | awk -F '/' '{print $2}')
+                APP_VERSION=$(echo $({$workdir}/bin/nginx/sbin/nginx -v 2>&1) | awk -F '/' '{print $2}')
+                APP_NAME='nginx'
                 echo \${NGINX_VERSION} > {$workdir}/APP_VERSION
+                echo \${NGINX_NAME} > {$workdir}/APP_NAME
 
 EOF;
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
                 otool -L {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx LICENSE
+                tar -cJvf {$workdir}/\${NGINX_NAME}-\${NGINX_VERSION}-macos-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         } else {
             $cmd .= <<<EOF
                 file {$workdir}/bin/nginx/sbin/nginx
                 readelf -h {$workdir}/bin/nginx/sbin/nginx
-                tar -cJvf {$workdir}/nginx-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx LICENSE
+                tar -cJvf {$workdir}/\${NGINX_NAME}-\${NGINX_VERSION}-linux-{$system_arch}.tar.xz nginx LICENSE
 EOF;
         }
         return $cmd;
