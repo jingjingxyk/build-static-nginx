@@ -4,7 +4,7 @@ on: [ push, pull_request ]
 
 jobs:
   windows-tailscale:
-    if: 0
+    if: 1
     runs-on: windows-2022
     steps:
       - name: Show Environment Info
@@ -104,6 +104,9 @@ jobs:
       - name: enable openssh server
         run:
           irm https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/windows/openssh/enable-openssh.ps1 | iex
+      - name: terminal
+        run:
+          Start-Sleep -s 3600
 
       - name: Install Cygwin
         uses: cygwin/cygwin-install-action@v2
