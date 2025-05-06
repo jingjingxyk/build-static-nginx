@@ -36,9 +36,6 @@ EOF
 EOF
         )
         ->withDependentLibraries('openssl')
-        ->disableDefaultLdflags()
-        ->disablePkgName()
-        ->disableDefaultPkgConfig();
 
     $p->addLibrary($lib);
 };
