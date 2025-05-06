@@ -50,6 +50,7 @@ test -f drawio.sh && rm -rf drawio.sh
 test -f geogebra.sh && rm -rf geogebra.sh
 test -f setup-openjdk-runtime.sh && rm -rf setup-openjdk-runtime.sh
 test -f three.js-editor.sh && rm -rf three.js-editor.sh
+test -f swoole-docs.sh && rm -rf swoole-docs.sh
 
 cd ${__PROJECT__}/
 test -f .clang-format && rm -f .clang-format
