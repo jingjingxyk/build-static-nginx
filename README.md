@@ -119,13 +119,13 @@ bash sapi/quickstart/macos/macos-init.sh --mirror china
 
 ```bash
 
-cp build-release-example.sh build-release.sh
+cp build-release-example.sh build-release-app.sh
 
 # 按你的需求修改配置  OPTIONS="${OPTIONS} --with-libavif=1 "
-vi build-release.sh
+vi build-release-app.sh
 
 # 执行构建流程
-bash build-release.sh
+bash build-release-app.sh
 
 
 ```
