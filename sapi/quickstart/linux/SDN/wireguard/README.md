@@ -1,5 +1,7 @@
 ## install wiregaurd
 
+    https://www.wireguard.com/install/
+
 ```bash
 
 # debian
