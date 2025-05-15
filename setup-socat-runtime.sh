@@ -48,7 +48,7 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='v1.8.0.1'
+APP_VERSION='1.8.0.3'
 APP_NAME='socat'
 VERSION='v2.4.0'
 
