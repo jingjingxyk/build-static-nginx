@@ -161,6 +161,8 @@ UNIX_DOWNLOAD() {
 }
 
 DOWNLOAD() {
+  CACERT_DOWNLOAD_URL="https://curl.se/ca/cacert.pem"
+  test -f cacert.pem || curl -LSo cacert.pem ${CACERT_DOWNLOAD_URL}
   UNIX_DOWNLOAD "${APP_VERSION}"
   WINDOWS_DOWNLOAD_SWOOLE_CLIE_RUNTIME "${APP_VERSION}"
 }
