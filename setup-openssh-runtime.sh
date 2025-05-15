@@ -172,7 +172,7 @@ echo " USE openssh RUNTIME :"
 echo " "
 echo " change config file ${APP_RUNTIME_DIR}/etc/sshd_config "
 echo ' GENERATE SSH KEY :'
-echo " printf 'y\n' ｜ ${APP_RUNTIME_DIR}/bin/ssh-keygen -N \"\" -t ed25519 -C \"Example-SSH-Key\" -f example_ssh_key"
+echo " ${APP_RUNTIME_DIR}/bin/ssh-keygen -N \"\" -t ed25519 -C \"Example-SSH-Key\" -f example_ssh_key"
 echo ' RUN SSHD :'
 echo " bash ${APP_RUNTIME_DIR}/opensshd-start.sh"
 echo '  '
