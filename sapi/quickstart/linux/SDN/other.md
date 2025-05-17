@@ -17,3 +17,12 @@
 
 
 ## MPTCP协议 ‌多路径并行传输
+
+
+
+```shell
+netstat -ntulp |grep 4500
+netstat -ntulp |grep 500
+netstat -ntulp |grep 51821
+netstat -ntulp |grep 6081
+```
