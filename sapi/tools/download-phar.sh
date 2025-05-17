@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -exu
+shopt -s expand_aliases
 __DIR__=$(
   cd "$(dirname "$0")"
   pwd
@@ -8,10 +9,9 @@ __DIR__=$(
 cd ${__DIR__}/
 
 __PROJECT__=$(
-    cd ${__DIR__}/../../ ;
-    pwd
+  cd ${__DIR__}/../../
+  pwd
 )
-
 
 mkdir -p ${__PROJECT__}/var/
 cd ${__PROJECT__}/var/
@@ -60,15 +60,16 @@ chmod +x composer.phar
 test -f pie.phar || curl -Lo pie.phar https://github.com/php/pie/releases/latest/download/pie.phar
 chmod +x pie.phar
 
-test -f captainhook.phar || curl -Lo  https://github.com/captainhookphp/captainhook/releases/download/5.23.5/captainhook.phar
+test -f captainhook.phar || curl -Lo https://github.com/captainhookphp/captainhook/releases/download/5.23.5/captainhook.phar
 chmod +x captainhook.phar
-export PATH="${__PROJECT__}/runtime:$PATH"
+
+export PATH="${__PROJECT__}/runtime/php-cli/:$PATH"
+
 # shellcheck disable=SC2139
 #alias php="'php -d curl.cainfo=${__PROJECT__}/runtime/cacert.pem -d openssl.cafile=${__PROJECT__}/runtime/cacert.pem'"
-alias php="'php -c ${__PROJECT__}/runtime/php.ini'"
+alias php="'php -c ${__PROJECT__}/runtime/php-cli/php.ini'"
 which php
 php -v
-
 
 ./box.phar help
 ./box.phar list
