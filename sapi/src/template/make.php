@@ -583,14 +583,9 @@ make_build_old() {
     xattr -cr <?= $this->phpSrcDir  ?>/sapi/cli/php
     otool -L <?= $this->phpSrcDir  ?>/sapi/cli/php
 <?php else : ?>
-<<<<<<< HEAD
+    ldd <?= $this->phpSrcDir  ?>/sapi/cli/php
     file <?= $this->phpSrcDir  ?>/sapi/cli/php
     readelf -h <?= $this->phpSrcDir  ?>/sapi/cli/php
-=======
-    ldd  <?= $this->getWorkDir() ?>/bin/swoole-cli
-    file <?= $this->getWorkDir() ?>/bin/swoole-cli
-    readelf -h <?= $this->getWorkDir() ?>/bin/swoole-cli
->>>>>>> experiment-feature
 <?php endif; ?>
 
     # make install
