@@ -13,12 +13,18 @@ ipsec reload
 
 ```shell
 
+ipsec status
+
 ipsec listall
 ipsec statusall
 ipsec listcerts
 ipsec listpubkeys
 tcpdump port 500 or port 4500
 
+ip addr show
+
+
+ipsec stroke loglevel cfg 2
 ```
 
 参考文档： https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ikev2-vpn-server-with-strongswan-on-ubuntu-18-04-2
