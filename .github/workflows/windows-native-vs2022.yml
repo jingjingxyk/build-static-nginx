@@ -72,6 +72,8 @@ jobs:
         if: 1
         run: |
           $CURRENT_DIR = Get-Location
+          $env:Path +=  "${CURRENT_DIR}\var\windows-build-deps\php-sdk-binary-tools\bin;${CURRENT_DIR}\var\windows-build-deps\php-sdk-binary-tools\msys2\usr\bin;${CURRENT_DIR}\bin\runtime\nasm\;"
+
           where perl
           php -v
           perl -v
