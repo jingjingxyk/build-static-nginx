@@ -44,7 +44,9 @@ jobs:
       - name: prepare deps soft
         shell: cmd
         run: |
-          sapi\quickstart\windows\native-build\windows-init.bat
+          sapi\quickstart\windows\native-build\windows-init-download.bat
+          sapi\quickstart\windows\native-build\windows-init-install.bat
+          sapi\quickstart\windows\native-build\windows-init-show-install-result.bat
 
       - name: Set  Github ENV variables
         run: |
