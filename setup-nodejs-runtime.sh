@@ -53,9 +53,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='v22.14.0'
+APP_VERSION='v22.16.0'
 APP_NAME='node'
-VERSION='v22.14.0'
+VERSION='v22.16.0'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
@@ -67,13 +67,14 @@ cd ${__PROJECT__}/var/runtime
 
 : <<'EOF'
 https://nodejs.org/
-https://nodejs.org/dist/v20.15.1/node-v20.15.1-darwin-x64.tar.gz
-https://nodejs.org/dist/v20.15.1/node-v20.15.1-darwin-arm64.tar.gz
-https://nodejs.org/dist/v20.15.1/node-v20.15.1-linux-arm64.tar.xz
-https://nodejs.org/dist/v20.15.1/node-v20.15.1-linux-arm64.tar.xz
-https://nodejs.org/dist/v20.15.1/node-v20.15.1-win-arm64.zip
-https://nodejs.org/dist/v20.15.1/node-v20.15.1-win-x64.zip
-https://registry.npmmirror.com/-/binary/node/v20.15.1/node-v20.15.1-win-x64.zip
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-x64.tar.gz
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-x64.tar.gz
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-arm64.tar.gz
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-linux-arm64.tar.xz
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-linux-arm64.tar.xz
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-win-arm64.zip
+https://nodejs.org/dist/v22.16.0/node-v22.16.0-win-x64.zip
+https://registry.npmmirror.com/-/binary/node/v22.16.0/node-v22.16.0-win-x64.zip
 EOF
 
 APP_DOWNLOAD_URL="https://nodejs.org/dist/${VERSION}/${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}.tar.xz"
@@ -169,19 +170,11 @@ npm doctor
 
 # 指定 NPM 仓库下载源
 
-npm install -g yarn pnpm --registry=https://registry.npmmirror.com
+npm install -g pnpm --registry=https://registry.npmmirror.com
 
-npm install  yarn pnpm --registry=https://registry.npmmirror.com
-
-yarn install --registry=https://registry.npmmirror.com
-
-npx yarn install --registry=https://registry.npmmirror.com
-
+npm install  pnpm --registry=https://registry.npmmirror.com
 
 npm config  set registry https://registry.npmmirror.com
-
-yarn config set registry https://registry.npmmirror.com
-
 
 # electron 反编译
 npm install asar  --registry=https://registry.npmmirror.com
