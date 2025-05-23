@@ -10,7 +10,6 @@ __PROJECT__=$(
   pwd
 )
 
-__PROJECT__=${__DIR__}
 shopt -s expand_aliases
 cd ${__PROJECT__}
 
