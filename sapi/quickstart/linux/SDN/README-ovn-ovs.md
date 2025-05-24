@@ -95,6 +95,8 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/l
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --proxy http://127.0.0.1:8016
 
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --mirror china
+
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/install-docker.sh | bash -s -- --mirror china
 
 
@@ -224,4 +226,28 @@ nmcli general status
 
 apt install network-manager
 systemctl enable --now NetworkManager
+```
+
+
+```text
+# 查看接口 mtu
+netstat -i
+
+Get bridge MTU: ovs-vsctl get Bridge <bridge_name> MTU
+List bridge ports: ovs-vsctl list-ports <bridge_name>
+Set port MTU: ovs-vsctl set Port <port_name> MTU=<value>
+
+mtu 1442
+
+MTU配置说明
+
+https://help.aliyun.com/zh/vpn/sub-product-ipsec-vpn/user-guide/set-mtu-values
+
+用户MTU
+公网接口MTU
+路径MTU  通常以太网的路径MTU默认为1500字节
+
+用户MTU的最大值=min{公网接口MTU,路径MTU}-101    # 101是IPsec协议为数据包加密后占用的最大字节数。
+
+
 ```

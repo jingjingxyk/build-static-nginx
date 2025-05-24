@@ -32,3 +32,6 @@ ipsec stroke loglevel cfg 2
 https://www.gingerdoc.com/tutorials/how-to-set-up-an-ikev2-vpn-server-with-strongswan-on-ubuntu-20-04
 
 https://zhuanlan.zhihu.com/p/632824301
+
+strongSwan配置示例
+https://help.aliyun.com/zh/vpn/sub-product-ipsec-vpn/user-guide/configure-strongswan
