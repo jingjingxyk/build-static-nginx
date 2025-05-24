@@ -237,6 +237,15 @@ Get bridge MTU: ovs-vsctl get Bridge <bridge_name> MTU
 List bridge ports: ovs-vsctl list-ports <bridge_name>
 Set port MTU: ovs-vsctl set Port <port_name> MTU=<value>
 
+ovs-vsctl set port br-int mtu=1442
+ovs-vsctl set Interface br-int mtu_request=1442
+
+ip link set dev vm1 mtu 1442
+ip netns exec vm1 ip link set dev vm1 mtu 1442
+
+# set interface eth0 mtu_request=1450
+# ovn-nbctl set Logical_Switch_Port <port_name> options:mtu=1500
+
 mtu 1442
 
 MTU配置说明

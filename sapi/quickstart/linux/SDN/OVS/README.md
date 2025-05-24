@@ -38,7 +38,34 @@ ip netns exec vm1 ip neighbor
 ip netns exec vm1 ip n
 
 
+ip -s link show genev_sys_6081
 
+ss -s
+tc qdisc show dev eth0
+tc qdisc show dev genev_sys_6081
+
+journalctl -f
+
+ethtool -S eth0 | grep -E "error|drop|fifo"
+
+# 内核级别查看丢包
+dropwatch -l kas
+
+
+
+ovn-sbctl list Logical_Flow | grep "10.1.20.8"
+
+# 查看虚机网卡MTU
+ovs-vsctl get interface br-int mtu
+
+# 查看QoS策略
+ovn-nbctl list QoS
+
+# 查看端口丢包统计
+ovs-vsctl get interface br-int statistics | grep dropped
+
+# 连接跟踪（Conntrack）
+ovs-appctl dpctl/dump-conntrack
 ```
 
 ## 查看网卡 MTU
