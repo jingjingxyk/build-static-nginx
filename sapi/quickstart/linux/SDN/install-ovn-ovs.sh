@@ -167,6 +167,9 @@ else
   test $(command -v bc | wc -l) -eq 0 && install_deps
 fi
 
+OVS_TAG='v3.4.2'
+OVN_TAG='v24.09.2'
+
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
 
@@ -176,9 +179,9 @@ if test -d ovs; then
   # git   pull --depth=1 --progress --rebase
 else
   if [[ "$MIRROR" == "china" ]]; then
-    git clone -b v3.4.2 https://gitee.com/jingjingxyk/ovs.git --depth=1 --progress
+    git clone -b ${OVS_TAG} https://gitee.com/jingjingxyk/ovs.git --depth=1 --progress
   else
-    git clone -b v3.4.2 https://github.com/openvswitch/ovs.git --depth=1 --progress
+    git clone -b ${OVS_TAG} https://github.com/openvswitch/ovs.git --depth=1 --progress
   fi
 fi
 
@@ -189,9 +192,9 @@ if test -d ovn; then
   # git   pull --depth=1 --progress --rebase
 else
   if [[ "$MIRROR" == "china" ]]; then
-    git clone -b v24.09.2 https://gitee.com/jingjingxyk/ovn.git --depth=1 --progress
+    git clone -b ${OVN_TAG} https://gitee.com/jingjingxyk/ovn.git --depth=1 --progress
   else
-    git clone -b v24.09.2 --depth=1 --progress https://github.com/ovn-org/ovn.git
+    git clone -b ${OVN_TAG} --depth=1 --progress https://github.com/ovn-org/ovn.git
   fi
 
 fi
