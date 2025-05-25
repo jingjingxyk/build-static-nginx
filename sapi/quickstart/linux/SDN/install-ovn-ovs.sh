@@ -169,6 +169,7 @@ fi
 
 OVS_TAG='v3.4.2'
 OVN_TAG='v24.09.2'
+OVN_TAG='v25.03.0'
 
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
@@ -194,7 +195,7 @@ else
   if [[ "$MIRROR" == "china" ]]; then
     git clone -b ${OVN_TAG} https://gitee.com/jingjingxyk/ovn.git --depth=1 --progress
   else
-    git clone -b ${OVN_TAG} --depth=1 --progress https://github.com/ovn-org/ovn.git
+    git clone -b ${OVN_TAG}  https://github.com/ovn-org/ovn.git --depth=1 --progress
   fi
 
 fi
