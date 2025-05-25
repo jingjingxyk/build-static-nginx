@@ -258,5 +258,6 @@ https://help.aliyun.com/zh/vpn/sub-product-ipsec-vpn/user-guide/set-mtu-values
 
 用户MTU的最大值=min{公网接口MTU,路径MTU}-101    # 101是IPsec协议为数据包加密后占用的最大字节数。
 
-
+ Overlay 子网下 Pod 网卡 MTU 为主机网卡 MTU - 100，Underlay 子网下，Pod 网卡和主机网卡有相同 MTU。
+ mtu=1333
 ```
