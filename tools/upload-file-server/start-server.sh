@@ -13,5 +13,5 @@ __PROJECT__=$(
 cd ${__PROJECT__}
 
 
-${__PROJECT__}/bin/runtime/php  -c ${__DIR__}/php.ini  -S 0.0.0.0:8000 -t ${__DIR__}
+${__PROJECT__}/runtime/swoole-cli/php  -c ${__DIR__}/php.ini  -S 0.0.0.0:8000 -t ${__DIR__}
 
