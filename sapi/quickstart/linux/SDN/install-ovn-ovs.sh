@@ -169,7 +169,7 @@ fi
 
 OVS_TAG='v3.4.2'
 OVN_TAG='v24.09.2'
-OVN_TAG='v25.03.0'
+# OVN_TAG='v25.03.0'
 
 CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
