@@ -20,6 +20,10 @@ https://download.developer.apple.com/Developer_Tools/Xcode_14.0.1_Release_Candid
 
 https://xcodereleases.com/
 
+
+https://developer.apple.com/services-account/download?path=/Developer_Tools/Xcode_14.2/Xcode_14.2.xip
+https://download.developer.apple.com/Developer_Tools/Xcode_14.2/Xcode_14.2.xip
+
 ```
 
 ```shell
