@@ -233,3 +233,18 @@ rm -rf ${__DIR__}/ovs
 
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@archive.debian.org@g" /etc/apt/sources.list
+
+:<<'COMMENT'
+test -f /etc/apt/apt.conf.d/proxy.conf && rm -f /etc/apt/apt.conf.d/proxy.conf
+
+
+
+cat > /etc/apt/apt.conf.d/proxy.conf <<EOF
+Acquire::http::Proxy  "http://127.0.0.1:8016";
+Acquire::https::Proxy "http://127.0.0.1:8016";
+Acquire::NoProxy "127.0.0.0/8,10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16,::1/128,fe80::/10,fd00::/8,ff00::/8,.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com,localhost";
+EOF
+
+
+
+COMMENT
