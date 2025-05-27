@@ -18,7 +18,7 @@ https://download.developer.apple.com/Developer_Tools/Xcode_14.0.1/Xcode_14.0.1.x
 https://download.developer.apple.com/Developer_Tools/Xcode_14.0.1_Release_Candidate/Xcode_14.0.1_Release_Candidate.xip
 
 
-
+https://xcodereleases.com/
 
 ```
 
