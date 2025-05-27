@@ -195,7 +195,7 @@ else
   if [[ "$MIRROR" == "china" ]]; then
     git clone -b ${OVN_TAG} https://gitee.com/jingjingxyk/ovn.git --depth=1 --progress
   else
-    git clone -b ${OVN_TAG}  https://github.com/ovn-org/ovn.git --depth=1 --progress
+    git clone -b ${OVN_TAG} https://github.com/ovn-org/ovn.git --depth=1 --progress
   fi
 
 fi
@@ -230,3 +230,6 @@ sudo make install
 cd ${__DIR__}
 rm -rf ${__DIR__}/ovn
 rm -rf ${__DIR__}/ovs
+
+# sed -i "s@mirrors.tuna.tsinghua.edu.cn@mirrors.ustc.edu.cn@g" /etc/apt/sources.list
+# sed -i "s@mirrors.tuna.tsinghua.edu.cn@archive.debian.org@g" /etc/apt/sources.list
