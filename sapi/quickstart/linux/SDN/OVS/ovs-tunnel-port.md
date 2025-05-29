@@ -12,3 +12,17 @@
 
     # 此是指 还没有实现
     ovs-vsctl set open . external_ids:ovn-encap-port=6081
+
+##
+    https://blog.faizahmed.in/tuntap-devices-using-open-vswitch#heading-create-bridge
+
+    ovs-vsctl add-br br0
+    ovs-vsctl add-port br0 vSwitch0
+    ovs-vsctl set Interface vSwitch0 type=internal
+    ovs-vsctl add-port br0 eno1
+
+    ip tuntap add mode tap vport0
+    ovs-vsctl add-port br0 vport0
+
+    ip addr add 172.168.1.1/24 dev vSwitch0
+
