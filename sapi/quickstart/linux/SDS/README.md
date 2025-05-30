@@ -4,3 +4,8 @@
     分布式块存储，
     Local-Disk
     传统NAS
+
+## SFTP|SMB|WebDAV|NFS
+
+    scp>rsync>sftp>sshfs
+    rsync+ssh
