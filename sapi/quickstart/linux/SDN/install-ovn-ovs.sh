@@ -74,6 +74,7 @@ install_deps() {
 
 MIRROR=''
 FORCE_INSTALL_DEPS=0
+FORCE_INSTALL=0
 while [ $# -gt 0 ]; do
   case "$1" in
   --mirror)
@@ -97,6 +98,9 @@ while [ $# -gt 0 ]; do
     ;;
   --install-deps)
     FORCE_INSTALL_DEPS=1
+    ;;
+  --force)
+    FORCE_INSTALL=1
     ;;
   --*)
     echo "Illegal option $1"
@@ -192,6 +196,11 @@ CPU_NUMS=$(nproc)
 CPU_NUMS=$(grep "processor" /proc/cpuinfo | sort -u | wc -l)
 
 cd ${__DIR__}
+if [[ "$FORCE_INSTALL" -eq 1 ]]; then
+  test -d ${__DIR__}/ovs/ && rm -rf ${__DIR__}/ovs/
+  test -d ${__DIR__}/ovn/ && rm -rf ${__DIR__}/ovn/
+fi
+
 if test -d ovs; then
   cd ${__DIR__}/ovs/
   # git   pull --depth=1 --progress --rebase
