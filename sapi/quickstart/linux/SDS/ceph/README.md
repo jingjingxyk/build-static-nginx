@@ -1,3 +1,7 @@
+## visit dashboard
+
+    https://192.168.1.24:8443/
+
 ## squashNFS-Ganesha 导出示例
 
 > https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/config_samples/export.txt
