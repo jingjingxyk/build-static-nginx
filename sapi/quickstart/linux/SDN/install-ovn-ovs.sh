@@ -49,9 +49,22 @@ install_deps() {
   apt install -y lshw
   # apt install -y isc-dhcp-server
   # apt install -y libdpdk-dev
+
   # apt install -y ntp ntpdate
+  # ‌手动强制同步‌
   # ntpdate ntp.ntsc.ac.cn  # 使用国家授时中心服务器
   # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+  # apt install ntp systemd-timesyncd -y
+  # timedatectl set-ntp true
+  # systemctl disable systemd-timesyncd
+  # timedatectl status
+  # timedatectl set-timezone Asia/Shanghai
+  # timedatectl set-timezone UTC
+  # timedatectl set-local-rtc 0  # 将硬件时钟设为UTC
+
+  # apt install ntp ntpsec -y
+  # ntpq -pn
 
 }
 
@@ -234,7 +247,7 @@ rm -rf ${__DIR__}/ovs
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@archive.debian.org@g" /etc/apt/sources.list
 
-:<<'COMMENT'
+: <<'COMMENT'
 test -f /etc/apt/apt.conf.d/proxy.conf && rm -f /etc/apt/apt.conf.d/proxy.conf
 
 

@@ -30,4 +30,4 @@ exit 0
 
 
 ## 单集群
-https://www.redhat.com/sysadmin/ceph-cluster-single-machine
+# https://www.redhat.com/sysadmin/ceph-cluster-single-machine
