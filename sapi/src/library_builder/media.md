@@ -18,10 +18,14 @@
     # visit jeffyfin url
     http://YOUR_SERVER_IP:8096/web/
 
-
-
-
     # diff <( curl -s https://repo.jellyfin.org/install-debuntu.sh -o install-debuntu.sh; sha256sum install-debuntu.sh ) <( curl -s https://repo.jellyfin.org/install-debuntu.sh.sha256sum )
+
+## kodi jeffyfin 插件
+
+    https://kodi.jellyfin.org/
+
+
+
 
 
 
