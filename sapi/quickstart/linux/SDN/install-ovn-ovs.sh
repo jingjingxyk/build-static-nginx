@@ -37,6 +37,8 @@ install_deps() {
     git gcc clang make cmake autoconf automake libssl3 openssl libssl-dev python3 python3-pip libtool \
     openssl curl libcap-ng-dev uuid uuid-runtime
 
+  apt install -y ntp ntpsec
+
   apt install -y kmod iptables
   apt install -y netcat-openbsd
   apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
@@ -65,6 +67,9 @@ install_deps() {
 
   # apt install ntp ntpsec -y
   # ntpq -pn
+
+  # debian.map.fastlydns.net
+
 
 }
 
