@@ -15,63 +15,6 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-install_deps() {
-
-  apt update -y
-  apt install -y locales
-  echo 'en_US.UTF-8 UTF-8' >>/etc/locale.gen
-  locale-gen
-  localedef -i en_US -f UTF-8 en_US.UTF-8
-  locale -a | grep en_US.utf8
-  export LANGUAGE="en_US.UTF-8"
-  export LC_ALL="en_US.UTF-8"
-  export LC_CTYPE="en_US.UTF-8"
-  export LANG="en_US.UTF-8"
-
-  # update-locale LANG=en_US.UTF-8
-
-  apt install -y git curl python3 python3-pip python3-dev wget sudo file
-  apt install -y libssl-dev ca-certificates
-
-  apt install -y \
-    git gcc clang make cmake autoconf automake libssl3 openssl libssl-dev python3 python3-pip libtool \
-    openssl curl libcap-ng-dev uuid uuid-runtime
-
-  apt install -y ntp ntpsec
-
-  apt install -y kmod iptables
-  apt install -y netcat-openbsd
-  apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
-  apt install -y conntrack
-  apt install -y bridge-utils
-  apt install -y libelf-dev libbpf-dev # libxdp-dev
-  apt install -y graphviz
-  apt install -y libjemalloc2 libjemalloc-dev libnuma-dev libpcap-dev libunbound-dev libunwind-dev llvm-dev
-  apt install -y bc init ncat
-  apt install -y lshw
-  # apt install -y isc-dhcp-server
-  # apt install -y libdpdk-dev
-
-  # apt install -y ntp ntpdate
-  # ‌手动强制同步‌
-  # ntpdate ntp.ntsc.ac.cn  # 使用国家授时中心服务器
-  # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-  # apt install ntp systemd-timesyncd -y
-  # timedatectl set-ntp true
-  # systemctl disable systemd-timesyncd
-  # timedatectl status
-  # timedatectl set-timezone Asia/Shanghai
-  # timedatectl set-timezone UTC
-  # timedatectl set-local-rtc 0  # 将硬件时钟设为UTC
-
-  # apt install ntp ntpsec -y
-  ntpq -pn
-
-  # debian.map.fastlydns.net
-
-}
-
 MIRROR=''
 FORCE_INSTALL_DEPS=0
 FORCE_INSTALL=0
@@ -109,10 +52,81 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
+debian_install_deps() {
+
+  apt update -y
+  apt install -y locales
+  echo 'en_US.UTF-8 UTF-8' >>/etc/locale.gen
+  locale-gen
+  localedef -i en_US -f UTF-8 en_US.UTF-8
+  locale -a | grep en_US.utf8
+  export LANGUAGE="en_US.UTF-8"
+  export LC_ALL="en_US.UTF-8"
+  export LC_CTYPE="en_US.UTF-8"
+  export LANG="en_US.UTF-8"
+
+  # update-locale LANG=en_US.UTF-8
+
+  apt install -y git curl python3 python3-pip python3-dev wget sudo file
+  apt install -y libssl-dev ca-certificates
+
+  apt install -y \
+    git gcc clang make cmake autoconf automake libssl3 openssl libssl-dev python3 python3-pip libtool \
+    openssl curl libcap-ng-dev uuid uuid-runtime
+
+  apt install -y ntp ntpsec
+
+  apt install -y kmod iptables
+  apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
+  apt install -y conntrack
+  apt install -y bridge-utils
+  apt install -y libelf-dev libbpf-dev # libxdp-dev
+  apt install -y graphviz
+  apt install -y libjemalloc2 libjemalloc-dev libnuma-dev libpcap-dev libunbound-dev libunwind-dev llvm-dev
+  apt install -y bc init ncat
+  apt install -y lshw
+  # apt install -y isc-dhcp-server
+  # apt install -y libdpdk-dev
+
+  # apt install -y ntp ntpdate
+  # ‌手动强制同步‌
+  # ntpdate ntp.ntsc.ac.cn  # 使用国家授时中心服务器
+  # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+  # apt install ntp systemd-timesyncd -y
+  # timedatectl set-ntp true
+  # systemctl disable systemd-timesyncd
+  # timedatectl status
+  # timedatectl set-timezone Asia/Shanghai
+  # timedatectl set-timezone UTC
+  # timedatectl set-local-rtc 0  # 将硬件时钟设为UTC
+
+  # apt install ntp ntpsec -y
+  ntpq -pn
+
+  # debian.map.fastlydns.net
+
+}
+alpine_install_deps() {
+  apk add autoconf automake clang-dev clang libtool cmake bison re2c coreutils gcc g++
+  apk add bash zip unzip flex pkgconf ca-certificates
+  apk add tar gzip zip unzip bzip2
+  apk add 7zip
+  apk add gettext gettext-dev
+  apk add wget git curl
+  apk add yasm nasm
+  apk add ninja python3 py3-pip
+  apk add diffutils
+  apk add socat
+  apk add python3-dev
+  apk add pigz parallel
+  apk add gnupg
+}
+
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
 VERSION_ID=$(cat /etc/os-release | grep '^VERSION_ID=' | awk -F '=' '{print $2}' | sed "s/\"//g")
 
-if [ ${OS_ID} = 'debian' ] || [ ${OS_ID} = 'ubuntu' ]; then
+if [ ${OS_ID} = 'debian' ] || [ ${OS_ID} = 'ubuntu' ] || [${OS_ID} = 'alpine']; then
   echo 'supported OS'
 else
   echo 'no supported OS'
@@ -121,8 +135,6 @@ fi
 
 if test -n "$MIRROR"; then
   {
-    OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
-    VERSION_ID=$(cat /etc/os-release | grep '^VERSION_ID=' | awk -F '=' '{print $2}' | sed "s/\"//g")
     case $OS_ID in
     debian)
       case $VERSION_ID in
@@ -173,6 +185,12 @@ if test -n "$MIRROR"; then
         ;;
       esac
       ;;
+    alpine)
+      test -f /etc/apk/repositories.save || cp /etc/apk/repositories /etc/apk/repositories.save
+      test "$MIRROR" = "china" && sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+      test "$MIRROR" = "tuna" && sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+      test "$MIRROR" = "ustc" && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+      ;;
     *)
       echo 'NO SUPPORT LINUX OS'
       exit 0
@@ -180,6 +198,18 @@ if test -n "$MIRROR"; then
     esac
   }
 fi
+
+install_deps() {
+  case $OS_ID in
+  'debian' | 'ubuntu')
+    debian_install_deps
+    ;;
+  'alpine')
+    alpine_install_deps
+    ;;
+  *) ;;
+  esac
+}
 
 if [[ "$FORCE_INSTALL_DEPS" -eq 1 ]]; then
   install_deps
