@@ -66,10 +66,9 @@ install_deps() {
   # timedatectl set-local-rtc 0  # 将硬件时钟设为UTC
 
   # apt install ntp ntpsec -y
-  # ntpq -pn
+  ntpq -pn
 
   # debian.map.fastlydns.net
-
 
 }
 
@@ -178,7 +177,7 @@ if test -n "$MIRROR"; then
   }
 fi
 
-if [[ "$FORCE_INSTALL_DEPS" -eq 0 ]]; then
+if [[ "$FORCE_INSTALL_DEPS" -eq 1 ]]; then
   install_deps
 else
   # test $(dpkg-query -l graphviz | wc -l) -eq 0 && install_deps
