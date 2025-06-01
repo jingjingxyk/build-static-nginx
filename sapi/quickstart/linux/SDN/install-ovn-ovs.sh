@@ -122,7 +122,7 @@ alpine_install_deps() {
   apk add gnupg
   apk add openssl-dev
   apk add libbpf-dev
-  apk add libcap-ng
+  apk add libcap-ng-dev
 }
 
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
