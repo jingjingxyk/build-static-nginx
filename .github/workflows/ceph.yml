@@ -3,28 +3,13 @@ name: ceph
 on:
   push:
   pull_request:
-  workflow_dispatch:
-    inputs:
-      build_type:
-        required: true
-        description: "定制构建选项: 指定构建类型"
-        default: '--with-build-type=release'
-        type: choice
-        options:
-          - '--with-build-type=release'
-          - '--with-build-type=dev'
-      build_options:
-        required: false
-        description: "定制构建选项: 请查看 docs/options.md"
-        default: ' '
-        type: string
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   linux-x86_64:
-    if: 0
+    if: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -86,9 +71,6 @@ jobs:
           sudo sed -i "s@archive.ubuntu.com@azure.archive.ubuntu.com@g" /etc/apt/sources.list
 
           sudo bash sapi/quickstart/linux/ceph/debian-init.sh
-
-          sudo curl -lo /usr/local/bin/cephadm https://php-cli.jingjingxyk.com/cephadm
-          sudo chmod a+x /usr/local/bin/cephadm
 
           # sudo apt install -y cephadm
           # https://docs.ceph.com/en/latest/dev/cephadm/developing-cephadm/#compiling-cephadm
