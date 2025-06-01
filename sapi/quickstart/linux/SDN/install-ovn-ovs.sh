@@ -114,7 +114,7 @@ alpine_install_deps() {
   apk add 7zip
   apk add gettext gettext-dev
   apk add wget git curl
-  apk add yasm nasm
+  apk add nasm
   apk add ninja python3 py3-pip
   apk add diffutils
   apk add socat
