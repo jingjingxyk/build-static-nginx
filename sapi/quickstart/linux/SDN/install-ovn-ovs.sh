@@ -123,6 +123,7 @@ alpine_install_deps() {
   apk add openssl-dev
   apk add libbpf-dev
   apk add libcap-ng-dev
+  apk add bind-tools
   apk add tcpdump nmap traceroute net-tools iproute2 procps iputils-ping
   apk add ndisc6
 }
