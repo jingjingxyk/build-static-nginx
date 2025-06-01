@@ -125,7 +125,7 @@ alpine_install_deps() {
   apk add libcap-ng-dev
   apk add bind-tools
   apk add jemalloc jemalloc-dev numactl-dev libpcap-dev unbound-dev libunwind-dev
-  apk add tcpdump nmap traceroute net-tools iproute2 procps iputils-ping
+  apk add tcpdump nmap net-tools iproute2 procps iputils-ping
   apk add ndisc6
 
   # 完整的 DNS 服务器软件
