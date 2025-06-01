@@ -108,7 +108,7 @@ debian_install_deps() {
 
 }
 alpine_install_deps() {
-  apk add linux-headers autoconf automake clang-dev clang libtool cmake bison re2c coreutils gcc g++
+  apk add linux-headers autoconf automake make clang-dev clang libtool cmake bison re2c coreutils gcc g++
   apk add bash zip unzip flex pkgconf ca-certificates
   apk add tar gzip zip unzip bzip2
   apk add 7zip
@@ -122,6 +122,7 @@ alpine_install_deps() {
   apk add gnupg
   apk add openssl-dev
   apk add libbpf-dev
+  apk add libcap-ng
 }
 
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
