@@ -123,6 +123,7 @@ alpine_install_deps() {
   apk add openssl-dev
   apk add libbpf-dev
   apk add libcap-ng-dev
+  apk add bind-dev
   apk add bind-tools
   apk add jemalloc jemalloc-dev numactl-dev libpcap-dev unbound-dev libunwind-dev
   apk add tcpdump nmap net-tools iproute2 procps iputils-ping
