@@ -19,15 +19,16 @@ ip link set br-eth1 up # 激活网桥
 
 {
 
-    ip addr add  172.16.124.60/20 dev br-eth1
+    ip addr add  192.168.1.4/24 dev br-eth1
 
     # 自定义私网地址
     ip addr add  10.1.30.2/24 dev br-eth1
 
     # ip route add <DESTINATION> via <GATEWAY> <dev> INTERFACE
     # ip route add 10.1.0.0/24 via 10.4.20.1 dev br-eth1
+
     # ip route change  default via   192.168.1.1 dev br-eth1
-    ip route add default via 192.168.1.1 dev br-eth1
+    # ip route add default via 192.168.1.1 dev br-eth1
 
 
 } ||

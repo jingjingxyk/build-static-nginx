@@ -59,3 +59,21 @@ ovs-vsctl set open . external_ids:ovn-encap-port=6081
  ovn-sbctl set encap $CHASSIS options:dst_port=6083
 
 ```
+
+## Geneve 隧道 MTU 计算逻辑
+
+    Geneve 隧道会在原始数据包外增加 58 字节‌的封装头，包括：
+
+    内层以太网头（14 字节）
+    Geneve 头（16 字节）
+    UDP 头（8 字节）
+    IP 头（20 字节）3
+    因此，实际 MTU 需满足：物理网卡 MTU ≥ 应用层数据 + 58 字节
+
+    若物理网卡 MTU 为 1500，则 Geneve 隧道的有效 MTU 上限为：
+    1500 - 58 = 1442 字节
+
+     应用层数据 + 58 ≤ 物理网卡 MTU
+
+     查看是否分包
+     tcpdump -i eth0 -nn -v
