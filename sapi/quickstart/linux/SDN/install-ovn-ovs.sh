@@ -77,7 +77,7 @@ debian_install_deps() {
   apt install -y ntp ntpsec
 
   apt install -y kmod iptables
-  apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping iputils-arping
+  apt install -y tcpdump nmap traceroute net-tools dnsutils iproute2 procps iputils-ping
   apt install -y conntrack
   apt install -y bridge-utils
   apt install -y libelf-dev libbpf-dev # libxdp-dev
@@ -123,6 +123,8 @@ alpine_install_deps() {
   apk add openssl-dev
   apk add libbpf-dev
   apk add libcap-ng-dev
+  apk add tcpdump nmap traceroute net-tools iproute2 procps iputils-ping
+  apk add ndisc6
 }
 
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
