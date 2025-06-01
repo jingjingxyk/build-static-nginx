@@ -20,7 +20,7 @@ sh reset.sh
 ipv6=$(ip -6 address show | grep inet6 | awk '{print $2}' | cut -d'/' -f1 | sed -n '2p')
 ipv4=$(ip -4 address show | grep inet | grep -v 127.0.0 | awk '{print $2}' | cut -d'/' -f1 | sed -n '1p')
 
-domain="ovn-centra.example.com"
+domain="ovn-central.example.com"
 # IP=$(nslookup "$domain" 223.5.5.5 | awk '/^Address: / {print $2}')
 IP=$(dig +short @223.5.5.5 "$domain")
 # IP=$(host -t A "$domain" | awk '/ has address / {print $4}')

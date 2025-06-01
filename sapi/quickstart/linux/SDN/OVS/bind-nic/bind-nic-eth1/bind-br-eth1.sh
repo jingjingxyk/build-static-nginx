@@ -10,7 +10,7 @@ cd ${__DIR__}
 
 lspci | grep -i "network controller\|ethernet controller"
 ls -l /sys/class/net/ | grep -v virtual | grep device | awk '{print $9}'
-lshw -class network | grep "description: Ethernet interface" -A 5
+# lshw -class network | grep "description: Ethernet interface" -A 5
 
 
 ovs-vsctl --if-exists del-br br-eth1
@@ -25,7 +25,9 @@ ip link set br-eth1 up # 激活网桥
     ip addr add  10.1.30.2/24 dev br-eth1
 
     # ip route add <DESTINATION> via <GATEWAY> <dev> INTERFACE
-    ip route add 10.1.0.0/24 via 10.4.20.1 dev br-eth1
+    # ip route add 10.1.0.0/24 via 10.4.20.1 dev br-eth1
+    # ip route change  default via   192.168.1.1 dev br-eth1
+    ip route add default via 192.168.1.1 dev br-eth1
 
 
 } ||
@@ -43,4 +45,4 @@ ip addr flush dev eth1
 
 ip a
 
-exit 0
+

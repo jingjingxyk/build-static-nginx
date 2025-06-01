@@ -128,6 +128,8 @@ alpine_install_deps() {
   apk add jemalloc jemalloc-dev numactl-dev libpcap-dev unbound-dev libunwind-dev
   apk add tcpdump nmap net-tools iproute2 procps iputils-ping
   apk add ndisc6
+  apk add pciutils
+  apk add iptables
 
   # 完整的 DNS 服务器软件
   # dnsmasq unbound bind
