@@ -108,7 +108,7 @@ debian_install_deps() {
 
 }
 alpine_install_deps() {
-  apk add linux-headers autoconf automake make clang-dev clang libtool cmake bison re2c coreutils gcc g++
+  apk add bash linux-headers autoconf automake make libtool cmake bison re2c coreutils gcc g++
   apk add bash zip unzip flex pkgconf ca-certificates
   apk add tar gzip zip unzip bzip2
   apk add 7zip
@@ -270,7 +270,7 @@ sed -i '5i\touch $stamp ; exit 0 ;' ./build-aux/cksum-schema-check
 
 ./configure --enable-ssl
 make -j $CPU_NUMS
-sudo make install
+make install
 
 cd ${__DIR__}/ovn/
 
@@ -283,7 +283,7 @@ sed -i '5i\touch $stamp ; exit 0 ;' ./build-aux/cksum-schema-check
   --with-ovs-build=${__DIR__}/ovs/
 
 make -j $CPU_NUMS
-sudo make install
+make install
 
 cd ${__DIR__}
 rm -rf ${__DIR__}/ovn
