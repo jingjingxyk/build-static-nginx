@@ -126,7 +126,7 @@ alpine_install_deps() {
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
 VERSION_ID=$(cat /etc/os-release | grep '^VERSION_ID=' | awk -F '=' '{print $2}' | sed "s/\"//g")
 
-if [ ${OS_ID} = 'debian' ] || [ ${OS_ID} = 'ubuntu' ] || [${OS_ID} = 'alpine']; then
+if [ "${OS_ID}" = 'debian' ] || [ "${OS_ID}" = 'ubuntu' ] || [ "${OS_ID}" = 'alpine']; then
   echo 'supported OS'
 else
   echo 'no supported OS'
