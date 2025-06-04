@@ -100,6 +100,7 @@ china)
   if [ $OS = 'windows' ]; then
     APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}-${APP_VERSION}-msys2-${ARCH}.zip"
   fi
+  CACERT_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/cacert.pem"
   ;;
 
 esac
