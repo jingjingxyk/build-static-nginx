@@ -28,7 +28,8 @@ ip link set br-eth1 up # 激活网桥
     # ip route add 10.1.0.0/24 via 10.4.20.1 dev br-eth1
 
     # ip route change  default via   192.168.1.1 dev br-eth1
-    # ip route add default via 192.168.1.1 dev br-eth1
+    ip route add default via 192.168.1.1 dev br-eth1
+    ip route add 10.1.20.0/24 via 10.1.30.1 dev br-eth1
 
 
 } ||
