@@ -131,7 +131,10 @@ set +x
 echo " "
 echo " USE webdav RUNTIME :"
 echo " docs: https://github.com/hacdias/webdav.git"
+echo " "
 echo " export PATH=\"${APP_RUNTIME_DIR}/:\$PATH\" "
+echo " "
+echo " ./runtime/webdav --config ./runtime/webdav/webdav.yml"
 echo " "
 export PATH="${APP_RUNTIME_DIR}/:$PATH"
 webdav --help

@@ -118,7 +118,7 @@ else
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
   tar -xvf ${APP_RUNTIME}.tar
   chmod a+x ${APP_NAME}/bin/turnserver
-  mkdir -p ${__PROJECT__}/bin/runtime/${APP_NAME}
+  mkdir -p ${__PROJECT__}/runtime/${APP_NAME}
   cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
 
