@@ -55,7 +55,7 @@ VERSION='v1.0.0'
 mkdir -p runtime
 mkdir -p var/runtime
 APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}/
-SSHD_CONFIG=${APP_RUNTIME_DIR}/etc/sshd_config
+SSHD_CONFIG="${APP_RUNTIME_DIR}/etc/sshd_config"
 
 mkdir -p ${APP_RUNTIME_DIR}
 
@@ -156,6 +156,12 @@ ${__DIR__}/sbin/sshd -D -e -f   ${__DIR__}/etc/sshd_config
 
 EOF
 
+
+T__PROJECT__=$(echo "${__PROJECT__}" | sed "s|/|\\\/|g")
+T_APP_RUNTIME_DIR=$(echo "${APP_RUNTIME_DIR}" | sed "s|\/|\\\/|g")
+sed -i.bak "s@\/usr\/local\/swoole-cli@${T__PROJECT__}\/runtime@" $SSHD_CONFIG
+sed -i.bak "s@\.ssh\/authorized_keys@${T_APP_RUNTIME_DIR}\/\.ssh\/authorized_keys@" $SSHD_CONFIG
+
 echo 'Port 65527' >>$SSHD_CONFIG
 echo 'AddressFamily any' >>$SSHD_CONFIG
 echo 'PasswordAuthentication no' >>$SSHD_CONFIG
@@ -166,11 +172,6 @@ echo "PidFile ${APP_RUNTIME_DIR}/var/run/sshd.pid" >>$SSHD_CONFIG
 echo "AllowTcpForwarding yes" >>$SSHD_CONFIG
 echo "GatewayPorts yes" >>$SSHD_CONFIG
 echo "PermitOpen any" >>$SSHD_CONFIG
-
-T__PROJECT__=$(echo "${__PROJECT__}" | sed "s|/|\\\/|g")
-T_APP_RUNTIME_DIR=$(echo "${APP_RUNTIME_DIR}" | sed "s|\/|\\\/|g")
-sed -i' ' "s@\/usr\/local\/swoole-cli@${T__PROJECT__}\/runtime@" $SSHD_CONFIG
-sed -i' ' "s@\.ssh\/authorized_keys@${T_APP_RUNTIME_DIR}\/\.ssh\/authorized_keys@" $SSHD_CONFIG
 
 mkdir -p ${APP_RUNTIME_DIR}/var/run/
 mkdir -p ${APP_RUNTIME_DIR}/.ssh/
