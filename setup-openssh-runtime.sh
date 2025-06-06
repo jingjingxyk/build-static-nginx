@@ -69,6 +69,7 @@ if [ $OS = 'windows' ]; then
 fi
 
 MIRROR=''
+FUNC=''
 while [ $# -gt 0 ]; do
   case "$1" in
   --mirror)
@@ -87,6 +88,9 @@ while [ $# -gt 0 ]; do
   --version)
     VERSION="$2"
     ;;
+  --func:)
+    FUNC="$2"
+    ;;
   --*)
     echo "Illegal option $1"
     ;;
@@ -100,6 +104,7 @@ china)
   if [ $OS = 'windows' ]; then
     APP_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/${APP_NAME}-${APP_VERSION}-msys2-${ARCH}.zip"
   fi
+  CACERT_DOWNLOAD_URL="https://php-cli.jingjingxyk.com/cacert.pem"
   ;;
 
 esac
@@ -144,6 +149,9 @@ __DIR__=$(
 )
 
 cd ${__DIR__}/
+# test config file
+${__DIR__}/sbin/sshd -t -f   ${__DIR__}/etc/sshd_config
+
 ${__DIR__}/sbin/sshd -D -e -f   ${__DIR__}/etc/sshd_config
 
 EOF
@@ -155,6 +163,9 @@ echo 'PermitRootLogin yes' >>$SSHD_CONFIG
 echo 'PubkeyAuthentication yes' >>$SSHD_CONFIG
 echo 'LogLevel DEBUG' >>$SSHD_CONFIG
 echo "PidFile ${APP_RUNTIME_DIR}/var/run/sshd.pid" >>$SSHD_CONFIG
+echo "AllowTcpForwarding yes" >>$SSHD_CONFIG
+echo "GatewayPorts yes" >>$SSHD_CONFIG
+echo "PermitOpen any" >>$SSHD_CONFIG
 
 T__PROJECT__=$(echo "${__PROJECT__}" | sed "s|/|\\\/|g")
 T_APP_RUNTIME_DIR=$(echo "${APP_RUNTIME_DIR}" | sed "s|\/|\\\/|g")
