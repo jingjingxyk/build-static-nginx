@@ -45,6 +45,7 @@ test -f setup-iperf3-runtime.sh && rm -rf setup-iperf3-runtime.sh
 test -f setup-openssh-runtime.sh && rm -rf setup-openssh-runtime.sh
 test -f setup-ttyd-runtime.sh && rm -rf setup-ttyd-runtime.sh
 test -f setup-webdav-runtime.sh && rm -rf setup-webdav-runtime.sh
+test -f setup-filebrowser-runtime.sh && rm -rf setup-filebrowser-runtime.sh
 test -f drawdb.sh && rm -rf drawdb.sh
 test -f drawio.sh && rm -rf drawio.sh
 test -f geogebra.sh && rm -rf geogebra.sh
@@ -65,6 +66,13 @@ test -f tools/ssh-j.sh && rm -rf tools/ssh-j.sh
 test -f tools/ssh-l.sh && rm -rf tools/ssh-l.sh
 test -f tools/ssh-r.sh && rm -rf tools/ssh-r.sh
 test -f tools/socat-r.sh && rm -rf tools/socat-r.sh
+test -f tools/download-coturn-artifacts.sh && rm -rf tools/download-coturn-artifacts.sh
+test -f tools/download-nginx-artifacts.sh && rm -rf tools/download-nginx-artifacts.sh
+test -f tools/download-openssh-artifacts.sh && rm -rf tools/download-openssh-artifacts.sh
+test -f tools/download-privoxy-artifacts.sh && rm -rf tools/download-privoxy-artifacts.sh
+test -f tools/download-socat-artifacts.sh && rm -rf tools/download-socat-artifacts.sh
+test -f tools/download-ttyd-artifacts.sh && rm -rf tools/download-ttyd-artifacts.sh
+
 test -f tools/upload-file-server/index.html && rm -rf tools/upload-file-server/index.html
 test -f tools/upload-file-server/php.ini && rm -rf tools/upload-file-server/php.ini
 test -f tools/upload-file-server/upload.php && rm -rf tools/upload-file-server/upload.php
@@ -112,6 +120,9 @@ test -d gitea && rm -rf gitea
 test -d postgresql && rm -rf postgresql
 test -d zerotier && rm -rf zerotier
 test -d coturn && rm -rf coturn
+test -d code-server && rm -rf code-server
+test -d prometeus && rm -rf prometeus
+test -d theia-ide && rm -rf theia-ide
 
 cd ${__PROJECT__}/.github/workflows
 test -f ceph.yml && rm -rf ceph.yml
