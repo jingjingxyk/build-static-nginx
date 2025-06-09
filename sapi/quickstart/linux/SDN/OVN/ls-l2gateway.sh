@@ -23,6 +23,9 @@ ovn-nbctl lsp-list sw_01
 # iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o br-eth0 -j MASQUERADE
 
 # tcpdump -i genev_sys_6081 -vvnn
+# Geneve封装增加头部（约50字节），需调整MTU 建议物理网卡MTU≥1550，隧道接口MTU≤1450
+ip link set dev genev_sys_6081  mtu 1442
+
 
 # ip route add default via 192.168.20.100
 
@@ -36,4 +39,4 @@ ovn-nbctl lsp-list sw_01
 # sysctl -p /etc/sysctl.conf
 
 # ip netns exec vm1 ip link set dev vm1  mtu 1400
-# ip netns exec vm1 curl  https://detect-ip.xiaoshuogeng.com/ip/json | jq
+# ip netns exec vm1 curl  https://detect-ip.jingjingxyk.com/ip/json | jq

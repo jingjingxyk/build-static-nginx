@@ -97,6 +97,8 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/l
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s -- --mirror china --install-deps
 
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/SDN/install-ovn-ovs.sh | bash -s --  --install-deps
+
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/install-docker.sh | bash -s -- --mirror china
 
 
@@ -227,7 +229,6 @@ nmcli general status
 apt install network-manager
 systemctl enable --now NetworkManager
 ```
-
 
 ```text
 # 查看接口 mtu

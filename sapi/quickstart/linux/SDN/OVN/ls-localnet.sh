@@ -62,7 +62,7 @@ ovn-nbctl list logical_switch_port
 # cat  /proc/sys/net/ipv4/ip_forward
 
 # ip netns exec vm1 ip link set dev vm1  mtu 1400
-# ip netns exec vm1 curl  https://detect-ip.xiaoshuogeng.com/ip/json | jq
+# ip netns exec vm1 curl  https://detect-ip.jingjingxyk.com/ip/json | jq
 
 
 # port 6081
