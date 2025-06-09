@@ -46,6 +46,7 @@ test -f setup-openssh-runtime.sh && rm -rf setup-openssh-runtime.sh
 test -f setup-ttyd-runtime.sh && rm -rf setup-ttyd-runtime.sh
 test -f setup-webdav-runtime.sh && rm -rf setup-webdav-runtime.sh
 test -f setup-filebrowser-runtime.sh && rm -rf setup-filebrowser-runtime.sh
+test -f setup-seaweedfs-runtime.sh && rm -rf setup-seaweedfs-runtime.sh
 test -f drawdb.sh && rm -rf drawdb.sh
 test -f drawio.sh && rm -rf drawio.sh
 test -f geogebra.sh && rm -rf geogebra.sh
