@@ -103,6 +103,8 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/l
 
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/linux/install-docker.sh | bash -s -- --mirror china
 
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/sapi/quickstart/linux/install-docker.sh?raw=true | bash
+
 
 docker run --rm --name demo  -ti --init debian:12
 

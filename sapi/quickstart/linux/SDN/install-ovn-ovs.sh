@@ -300,6 +300,8 @@ cd ${__DIR__}
 rm -rf ${__DIR__}/ovn
 rm -rf ${__DIR__}/ovs
 
+# https://wiki.debian.org/SourcesList
+
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@archive.debian.org@g" /etc/apt/sources.list
 # sed -i "s@mirrors.aliyun.com@archive.debian.org@g" /etc/apt/sources.list
