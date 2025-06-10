@@ -53,7 +53,9 @@ ovs-vsctl set Open_vSwitch . \
   external_ids:ovn-set-local-ip="${LOCAL_IP}" \
   external_ids:ovn-encap-type="${ENCAP_TYPE}" \
   external_ids:ovn-remote="tcp:${OVN_CENTRAL_IP}:6642"
-  mtu_request=1442
+
+# mtu_request=1442
+# ovs-vsctl set Open_vSwitch . mtu_request=1442
 
 # external_ids:ovn-nb="tcp:$CENTRAL_IP:6641"
 
@@ -65,9 +67,12 @@ ovn-ctl start_controller
 ovs-vsctl --columns external_ids list open_vswitch
 
 ovs-vsctl get open . external-ids
+
+# ovs-vsctl get Open_vSwitch mtu_request
+
 sleep 5
 ovs-vsctl list-ports br-int
-# ovs-vsctl set int br-int mtu_request=1442
+# ovs-vsctl set br-int mtu_request=1442
 
 # ovs-vsctl set open . external-ids:system-id={新的chassis ID}
 # ovs-vsctl set open . external-ids:hostname={新的主机名}
