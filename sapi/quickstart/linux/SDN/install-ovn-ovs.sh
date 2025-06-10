@@ -301,18 +301,26 @@ rm -rf ${__DIR__}/ovs
 
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 # sed -i "s@mirrors.tuna.tsinghua.edu.cn@archive.debian.org@g" /etc/apt/sources.list
+# sed -i "s@mirrors.aliyun.com@archive.debian.org@g" /etc/apt/sources.list
+
+# sed -i "s@mirrors.aliyun.com@deb.debian.org@g" /etc/apt/sources.list
+
+# 在 LTS 结束后，对应发行版的软件源会被从 Debian 主源中删除，移动到 archive.debian.org
+# https://mirrors.tuna.tsinghua.edu.cn/help/debian-elts/
+# sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
+# sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list
+
+# 升级 debian 10 升级 debian 11
+# sed -i 's/buster/bullseye/g' /etc/apt/sources.list
+# apt full-upgrade -y
 
 : <<'COMMENT'
 test -f /etc/apt/apt.conf.d/proxy.conf && rm -f /etc/apt/apt.conf.d/proxy.conf
-
-
 
 cat > /etc/apt/apt.conf.d/proxy.conf <<EOF
 Acquire::http::Proxy  "http://127.0.0.1:8016";
 Acquire::https::Proxy "http://127.0.0.1:8016";
 Acquire::NoProxy "127.0.0.0/8,10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16,::1/128,fe80::/10,fd00::/8,ff00::/8,.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com,localhost";
 EOF
-
-
 
 COMMENT
