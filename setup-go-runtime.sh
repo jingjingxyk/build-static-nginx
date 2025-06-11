@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='1.24.1'
+APP_VERSION='1.24.4'
 APP_NAME='go'
-VERSION='1.24.1'
+VERSION='1.24.4'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
@@ -137,4 +137,10 @@ echo " "
 echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
 echo " "
 export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
+export GO111MODULE=on
+export GOPATH=~/go
+export GOSUMDB=sum.golang.org
+export GOROOT=${__PROJECT__}/runtime/go/
+export GOBIN=${__PROJECT__}/runtime/go/bin/
+
 go version
