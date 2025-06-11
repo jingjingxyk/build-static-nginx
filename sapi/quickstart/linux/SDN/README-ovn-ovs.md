@@ -266,3 +266,8 @@ https://help.aliyun.com/zh/vpn/sub-product-ipsec-vpn/user-guide/set-mtu-values
  Overlay 子网下 Pod 网卡 MTU 为主机网卡 MTU - 100，Underlay 子网下，Pod 网卡和主机网卡有相同 MTU。
  mtu=1333
 ```
+
+## 连接 openwrt (通过lan 主机 多网口)
+
+    socat -T5 TCP-LISTEN:80,fork,reuseaddr TCP:192.168.20.1:80
+    socat -T5 TCP-LISTEN:8022,fork,reuseaddr TCP:192.168.20.1:22

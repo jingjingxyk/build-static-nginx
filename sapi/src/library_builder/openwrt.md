@@ -119,7 +119,7 @@ https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm
     默认端口： 51820
     udp2raw
     phantun
-        官方建议将 MTU 的值设为 1428
+    官方建议将 MTU 的值设为 1428
 
 ## 透明网关的使用 例子
 

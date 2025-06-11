@@ -135,11 +135,17 @@ alpine_install_deps() {
   # 完整的 DNS 服务器软件
   # dnsmasq unbound bind
 }
+openwrt_install_deps() {
+  opkg update
+  opkg install libustream-openssl ca-bundle ca-certificates
+  opkg install curl bash git xz unzip
+  opkg install wireguard-tools
+}
 
 OS_ID=$(cat /etc/os-release | grep '^ID=' | awk -F '=' '{print $2}')
 VERSION_ID=$(cat /etc/os-release | grep '^VERSION_ID=' | awk -F '=' '{print $2}' | sed "s/\"//g")
 
-if [ "${OS_ID}" = 'debian' ] || [ "${OS_ID}" = 'ubuntu' ] || [ "${OS_ID}" = 'alpine' ]; then
+if [ "${OS_ID}" = 'debian' ] || [ "${OS_ID}" = 'ubuntu' ] || [ "${OS_ID}" = 'alpine' ] || [ "${OS_ID}" = "openwrt" ]; then
   echo 'supported OS'
 else
   echo 'no supported OS'
@@ -204,6 +210,14 @@ if test -n "$MIRROR"; then
       test "$MIRROR" = "tuna" && sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
       test "$MIRROR" = "ustc" && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
       ;;
+    "openwrt")
+      test -f /etc/opkg/distfeeds.conf.save || cp /etc/opkg/distfeeds.conf /etc/opkg/distfeeds.conf.save
+
+      test "$MIRROR" = "china" && sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/apk/repositories
+      test "$MIRROR" = "tuna" && sed -i.bak 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
+      test "$MIRROR" = "ustc" && sed -i.bak 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
+
+      ;;
     *)
       echo 'NO SUPPORT LINUX OS'
       exit 0
@@ -219,6 +233,9 @@ install_deps() {
     ;;
   'alpine')
     alpine_install_deps
+    ;;
+  'openwrt')
+    openwrt_install_deps
     ;;
   *) ;;
   esac
