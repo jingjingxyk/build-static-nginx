@@ -48,9 +48,9 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='v2.32.1'
+APP_VERSION='v2.32.3'
 APP_NAME='filebrowser'
-VERSION='v2.32.1'
+VERSION='v2.32.3'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
