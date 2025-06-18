@@ -1,6 +1,7 @@
 ## MTU 探测
 
     https://jt26wzz.com/posts/0009-implement-quic-in-rust/
+    IPV6 协议的传输链路 MTU 最小值是 1280 字节
 
 ## 测试 UDP 端口是否开放
 
