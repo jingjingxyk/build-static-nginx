@@ -181,7 +181,7 @@ opcache.jit_buffer_size=480M
 expose_php=Off
 apc.enable_cli=1
 
-disable_functions=exec,shell_exec,system,passthru,popen,proc_open,assert,eval
+disable_functions="exec,shell_exec,system,passthru,popen,proc_open,assert,eval,show_source,parse_ini_file"
 allow_url_fopen=Off
 allow_url_include=Off
 register_globals=Off
