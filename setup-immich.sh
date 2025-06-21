@@ -48,9 +48,11 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='v2.33.2'
-APP_NAME='filebrowser'
-VERSION='v2.33.2'
+
+
+APP_VERSION='v1.135.3'
+APP_NAME='immich'
+VERSION='v1.135.3'
 
 cd ${__PROJECT__}
 mkdir -p runtime/
@@ -58,13 +60,12 @@ mkdir -p var/runtime
 APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
-cd ${__PROJECT__}/var/runtime
+mkdir -p ${__PROJECT__}/var/runtime/${APP_NAME}
+cd ${__PROJECT__}/var/runtime/${APP_NAME}
 
-APP_DOWNLOAD_URL="https://github.com/filebrowser/filebrowser/releases/download/${VERSION}/${OS}-${ARCH}-${APP_NAME}.tar.gz"
+DOCKER_COMPOSE_DOWNLOAD_URL="https://github.com/immich-app/immich/releases/download/${VERSION}/docker-compose.yml"
+DOCKER_COMPOSE_ENV_DOWNLOAD_URL="https://github.com/immich-app/immich/releases/download/${VERSION}/example.env"
 
-if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://github.com/filebrowser/filebrowser/releases/download/${VERSION}/windows-amd64-filebrowser.zip"
-fi
 
 MIRROR=''
 while [ $# -gt 0 ]; do
@@ -86,40 +87,32 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
+DOCKER_COMPOSE="docker-compose.yml"
+DOCKER_COMPOSE_ENV=".env"
 
-if [ $OS = 'windows' ]; then
-  {
-    APP_RUNTIME="${APP_NAME}-${APP_VERSION}-windows-${ARCH}"
-    test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
-    test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
-    unzip "${APP_RUNTIME}.zip"
-    exit 0
-  }
-else
-  test -f ${APP_RUNTIME}.tar.gz || curl -LSo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
-  test -d ${APP_NAME} && rm -rf ${APP_NAME}
-  mkdir -p ${APP_NAME}
-  cd ${APP_NAME}
-  tar -xvf ${__PROJECT__}/var/runtime/${APP_RUNTIME}.tar.gz
-  chmod a+x ${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/ ${APP_RUNTIME_DIR}/
-fi
+
+  test -f ${DOCKER_COMPOSE} || curl -LSo ${DOCKER_COMPOSE} ${DOCKER_COMPOSE_DOWNLOAD_URL}
+  test -f ${DOCKER_COMPOSE_ENV} || curl -LSo ${DOCKER_COMPOSE_ENV} ${DOCKER_COMPOSE_ENV_DOWNLOAD_URL}
+  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
+
 
 cd ${__PROJECT__}/
 
 set +x
 
 echo " "
-echo " USE filebrowser :"
+echo " use immich :"
 echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
+echo " immich wiki :  https://immich.app/docs/overview/welcome "
 echo " "
-echo " filebrowser docs :  https://github.com/filebrowser/filebrowser "
+echo " immich install script : https://github.com/immich-app/immich/blob/main/install.sh"
 echo " "
-echo " dowload script https://github.com/filebrowser/get "
+echo " cd ${__PROJECT__}/runtime/${APP_NAME}/"
+echo " start: docker compose -f docker-compose.yml up -d "
+echo " stop:  docker compose -f docker-compose.yml download --remove-orphans "
 echo " "
-echo " filebrowser -r /path/to/your/files"
-echo " "
-export PATH="${APP_RUNTIME_DIR}:$PATH"
-filebrowser --help
+
+if [ "$OS" != 'linux' ] ; then
+  echo 'start immich only support linux !'
+  exit 0
+fi
