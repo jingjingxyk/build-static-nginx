@@ -181,6 +181,12 @@ opcache.jit_buffer_size=480M
 expose_php=Off
 apc.enable_cli=1
 
+disable_functions=exec,shell_exec,system,passthru,popen,proc_open,assert,eval
+allow_url_fopen=Off
+allow_url_include=Off
+register_globals=Off
+open_basedir=/data/
+
 EOF
 
 cd ${__PROJECT__}/
