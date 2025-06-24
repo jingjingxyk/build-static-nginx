@@ -32,7 +32,6 @@ jobs:
           git config --global core.eol lf
           git config --global core.ignorecase false
           git config --global --add safe.directory ${{ github.workspace }}
-          ipconfig
 
       - uses: actions/checkout@v4
       - name: Cache msys2 packages
@@ -62,31 +61,49 @@ jobs:
         run: |
           bash sapi/quickstart/windows/msys2-build/install-msys2.sh
 
+      - name: install deps lib with source code
+        shell: msys2 {0}
+        run: |
+          bash sapi/scripts/msys2/install-deps-lib.sh
+
       - name: Prepare
         shell: msys2 {0}
         run: |
-          bash ./sapi/scripts/msys2/config-ext.sh
+          bash sapi/scripts/msys2/config-ext.sh
 
       - name: Configure
         shell: msys2 {0}
         run: |
-          bash ./sapi/scripts/msys2/config.sh
+          bash sapi/scripts/msys2/config.sh
 
       - name: Build
         shell: msys2 {0}
         run: |
           bash ./sapi/scripts/msys2/build.sh
+
+      - name: Archive
+        shell: msys2 {0}
+        run: |
           bash ./sapi/scripts/msys2/archive.sh
+
+      - name: Show Build Result
+        shell: msys2 {0}
+        run: |
+          ./bin/swoole-cli.exe -v
+          ./bin/swoole-cli.exe -m
+          ./bin/swoole-cli.exe --ri swoole
+          ./bin/swoole-cli.exe -r "echo PHP_VERSION;"
+          ldd ./bin/swoole-cli.exe
 
       - name: get app version with bash
         shell: msys2 {0}
         run: |
-          ls -lha /usr/local/swoole-cli/privoxy/
-          ls -lha /usr/local/swoole-cli/privoxy/sbin/
           APP_VERSION=$(cat ./APP_VERSION)
+          APP_NAME=$(cat ./APP_NAME)
           echo $APP_VERSION
+          echo $APP_NAME
           echo "APP_VERSION=${APP_VERSION}" >> $GITHUB_ENV
-          echo "APP_NAME=privoxy" >> $GITHUB_ENV
+          echo "APP_NAME=${APP_NAME}" >> $GITHUB_ENV
 
       - name: production artifacts
         uses: actions/upload-artifact@v4

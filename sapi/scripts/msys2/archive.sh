@@ -12,6 +12,7 @@ __PROJECT__=$(
 cd ${__PROJECT__}
 
 cd ${__PROJECT__}/
+
 ldd ${__PROJECT__}/bin/php.exe
 
 cd ${__PROJECT__}
@@ -30,14 +31,22 @@ ldd ${__PROJECT__}/bin/php.exe | grep -v '/c/Windows/' | awk '{print $3}' | xarg
 ls -lh /tmp/${NAME}/
 
 cp -f ${__PROJECT__}/bin/php.exe /tmp/${NAME}/bin/
+
 # cp -f ${__PROJECT__}/bin/LICENSE /tmp/${NAME}/
 # cp -f ${__PROJECT__}/bin/credits.html /tmp/${NAME}/
 
 cp -rL /etc/pki/ /tmp/${NAME}/etc/
 
+cd /tmp/${NAME}/etc/
+test -f cacert.pem || curl -LSo cacert.pem https://curl.se/ca/cacert.pem
+
 cd /tmp/${NAME}/
 
 test -f ${__PROJECT__}/${NAME}.zip && rm -f ${__PROJECT__}/${NAME}.zip
 zip -r ${__PROJECT__}/${NAME}.zip .
+
+cd ${__PROJECT__}
+
+ls -lha ${__PROJECT__}/${NAME}.zip
 
 cd ${__PROJECT__}
