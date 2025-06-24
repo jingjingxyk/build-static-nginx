@@ -11,6 +11,7 @@ jobs:
   windows-native:
     if: 0
     runs-on: windows-2025
+    # runs-on: windows-11-arm
     strategy:
       matrix:
         php-version:
