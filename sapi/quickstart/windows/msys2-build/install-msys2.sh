@@ -74,8 +74,15 @@ pacman -S --needed --noconfirm flex
 
 : <<'COMMENT'
 # 不存在的包
-pacman -S --noconfirm ImageMagick libpng-devel libjpeg-devel libfreetype-devel libwebp-devel
-pacman -S --noconfirm libMagick-devel
+
+pacman -S --noconfirm ImageMagick libpng-devel libjpeg-devel libfreetype-devel libwebp-devel libsqlite3-devel
+pacman -S --noconfirm libzip-devel  libonig-devel libsodium-devel
+pacman -S --noconfirm libMagick-devel  libbrotli-devel libintl-devel
+pacman -S --noconfirm libpq-devel
+
+
+# msys 环境下 可以安装 re2c
+# 不需要执行 bash sapi/scripts/cygwin/install-re2c.sh
 
 COMMENT
 
