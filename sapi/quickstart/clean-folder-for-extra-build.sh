@@ -54,6 +54,9 @@ test -f geogebra.sh && rm -rf geogebra.sh
 test -f setup-openjdk-runtime.sh && rm -rf setup-openjdk-runtime.sh
 test -f three.js-editor.sh && rm -rf three.js-editor.sh
 test -f swoole-docs.sh && rm -rf swoole-docs.sh
+test -f setup-yt-dlp-ffmpeg-runtime.sh && rm -rf setup-yt-dlp-ffmpeg-runtime.sh
+test -f setup-go-gost-runtime.sh && rm -rf setup-go-gost-runtime.sh
+test -f setup-websocat-runtime.sh && rm -rf setup-websocat-runtime.sh
 
 cd ${__PROJECT__}/
 test -f .clang-format && rm -f .clang-format
