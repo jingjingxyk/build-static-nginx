@@ -63,7 +63,7 @@ cd /d %__PROJECT__%\var\windows-build-deps\
 
 7z.exe x -onasm nasm-2.16.03-win64.zip
 7z.exe x -ophp-nts-Win32-x64 php-nts-Win32-x64.zip
-7z.exe x -olibarchive libarchive-v3.7.4-amd64.zip
+7z.exe x -olibarchive libarchive-3.8.1.zip
 
 move nasm\nasm-2.16.03 %__PROJECT__%\bin\runtime\nasm
 move libarchive\libarchive %__PROJECT__%\bin\runtime\libarchive

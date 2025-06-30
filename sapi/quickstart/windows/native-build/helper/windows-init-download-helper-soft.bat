@@ -12,7 +12,7 @@ md %__PROJECT__%\var\windows-build-deps\
 
 cd /d %__PROJECT__%\var\windows-build-deps\
 
-if not exist "Git-2.47.1-64-bit.exe" curl.exe -fSLo Git-2.47.1-64-bit.exe https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-64-bit.exe
+if not exist "Git-2.50.0-64-bit.exe" curl.exe -fSLo Git-2.50.0-64-bit.exe https://github.com/git-for-windows/git/releases/download/v2.50.0.windows.1/Git-2.50.0-64-bit.exe
 if not exist "npp.8.6.7.Installer.x64.exe" curl.exe -fSLo npp.8.6.7.Installer.x64.exe https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe
 if not exist "socat-v1.8.0.1-cygwin-x64.zip" curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip https://github.com/jingjingxyk/build-static-socat/releases/download/v2.2.1/socat-v1.8.0.1-cygwin-x64.zip
 if not exist "Microsoft.WindowsTerminal_1.21.3231.0_8wekyb3d8bbwe.msixbundle" curl.exe -fSLo Microsoft.WindowsTerminal_1.21.3231.0_8wekyb3d8bbwe.msixbundle https://github.com/microsoft/terminal/releases/download/v1.21.3231.0/Microsoft.WindowsTerminal_1.21.3231.0_8wekyb3d8bbwe.msixbundle
