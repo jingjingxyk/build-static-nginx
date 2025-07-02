@@ -17,7 +17,6 @@ APP_NAME='phpx'
 VERSION='v1.0.0'
 
 cd ${__PROJECT__}
-mkdir -p var
 APP_RUNTIME_DIR=${__PROJECT__}/var/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
@@ -48,13 +47,20 @@ if [ -d phpx ] ;then
 else
   git clone https://github.com/swoole/phpx.git
 fi
+
 cd ${APP_RUNTIME_DIR}/
+
+export PATH="${__PROJECT__}/runtime/php/:$PATH"
+alias php="php -c ${__PROJECT__}/runtime/php/php.ini"
+
 cd phpx
-# bash ./build.sh
+pwd
+bash ./build.sh
 
+chmod a+x ${APP_RUNTIME_DIR}/phpx/bin/phpx
+cp -f ${APP_RUNTIME_DIR}/phpx/bin/phpx ${__PROJECT__}/runtime/php/
 
-
-
+exit 0
 mkdir -p build
 cd build
 
