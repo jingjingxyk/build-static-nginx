@@ -1,4 +1,4 @@
-name: build-linux-mips64le
+name: build-php-cli-linux-loongarch
 
 on: [ push, pull_request ]
 
@@ -6,7 +6,7 @@ env:
   BUILD_PHP_VERSION: 8.2.13
 
 jobs:
-  linux-mips64le:
+  linux-loongarch:
     if: 0
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +45,7 @@ jobs:
         id: php-vendor-cache
         with:
           path: ${{ github.workspace }}/vendor
-          key: ${{ runner.os }}-mips64le-php-vendor
+          key: ${{ runner.os }}-loongarch-php-vendor
 
       - name: Cache Dependency Source Code Tarball
         uses: actions/cache@v4
@@ -59,14 +59,14 @@ jobs:
         id: all-library-cache
         with:
           path: /usr/local/swoole-cli
-          key: ${{ github.head_ref || github.ref_name }}-${{ runner.os }}-mips64le-all-library
+          key: ${{ github.head_ref || github.ref_name }}-${{ runner.os }}-loongarch-all-library
 
       - name: Cache swoole-cli-builder-image
         uses: actions/cache@v4
-        id: swoole-cli-builder-image-mips64le-cache
+        id: swoole-cli-builder-image-loongarch-cache
         with:
           path: ${{ github.workspace }}/var/build-github-action-container/swoole-cli-builder-image.tar
-          key: ${{ runner.os }}-mips64le-swoole-cli-builder-image
+          key: ${{ runner.os }}-loongarch-swoole-cli-builder-image
 
       - name: Prepare Libraries and Extensions
         run: |
@@ -85,17 +85,27 @@ jobs:
           ls -A pool/lib/
           ls -A /usr/local/swoole-cli/
 
-      - name: Prepare QEMU
+      - name: Build
+        uses: addnab/docker-run-action@v3
+        with:
+          image: cr.loongnix.cn/library/debian
+          options: -v ${{ github.workspace }}:/work/
+          run: |
+            --install loong64
+
+      - name: Run LoongArch command
         run: |
-          set -x
-          sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          uname -a
+          uname -s
+          uname -m
+
 
       - name: Prepare swoole-cli-builder-image
         run: |
           if [ -f ${{ github.workspace }}/var/build-github-action-container/swoole-cli-builder-image.tar ] ; then
               docker load -i  ${{ github.workspace }}/var/build-github-action-container/swoole-cli-builder-image.tar
           else
-              bash .github/workflows/build-debian-builder-container.sh --platform "linux/mips64le"
+              bash .github/workflows/build-debian-builder-container.sh --platform "linux/loongarch64"
           fi
 
       - name: prepare pre-built library
@@ -113,6 +123,7 @@ jobs:
             uname -s
             uname -m
             apt install -y php-dev php-cli
+
 
       - name: Build
         if: 1
@@ -192,4 +203,3 @@ jobs:
           files: |
             php-cli-v${{ env.APP_VERSION }}-linux-mips64le.tar.xz
             php-cli-v${{ env.APP_VERSION }}-linux-mips64le-debug.tar.xz
-
