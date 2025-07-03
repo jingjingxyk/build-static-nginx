@@ -52,7 +52,7 @@ nodejs
 
 ```
 
-## 桌面应用程序开发框架比较：Electron、Flutter、Tauri、React Native 和 Qt
+## 桌面应用程序开发框架比较：Electron、Flutter、Tauri、React Native 和 Qt 、CEF 框架、Tauri
 
 ## Flatpak vs. Snap vs. AppImage vs. 玲珑
 
