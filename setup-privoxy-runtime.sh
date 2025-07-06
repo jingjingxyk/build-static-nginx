@@ -100,8 +100,6 @@ china)
 
 esac
 
-test -f cacert.pem || curl -LSo cacert.pem ${CACERT_DOWNLOAD_URL}
-
 APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
 
 if [ $OS = 'windows' ]; then
@@ -116,15 +114,13 @@ else
   test -f ${APP_RUNTIME}.tar.xz || curl -LSo ${APP_RUNTIME}.tar.xz ${APP_DOWNLOAD_URL}
   test -f ${APP_RUNTIME}.tar || xz -d -k ${APP_RUNTIME}.tar.xz
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
-  tar -xvf ${APP_RUNTIME}.tar
-  chmod a+x privoxy/sbin/privoxy
-  test -d ${APP_RUNTIME_DIR} && rm -rf ${APP_RUNTIME_DIR}
+  mkdir -p ${APP_NAME}
+  tar  -C ${APP_NAME} -xf ${APP_RUNTIME}.tar
+  chmod a+x ${APP_RUNTIME}/sbin/privoxy
   cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/var/runtime
-
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}/cacert.pem
 
 cd ${__PROJECT__}/
 
