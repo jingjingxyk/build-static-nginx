@@ -93,50 +93,42 @@ if [[ ! -f ${__PROJECT__}/runtime/go/bin/go ]]; then
     bash setup-go-runtime.sh
   fi
 fi
+if [[ ! -f ${__PROJECT__}/runtime/goreleaser/ ]]; then
+  bash setup-goreleaser-runtime.sh
+fi
 
-export PATH="${__PROJECT__}/runtime/go/bin/:${__PROJECT__}/runtime/node/bin/:$PATH"
+export PATH="${__PROJECT__}/runtime/go/bin/:${__PROJECT__}/runtime/node/bin/:${__PROJECT__}/runtime/goreleaser/:$PATH"
 export GO111MODULE=on
 export GOPATH=~/go
 export GOSUMDB=sum.golang.org
 export GOROOT=${__PROJECT__}/runtime/go/
 export GOBIN=${__PROJECT__}/runtime/go/bin/
+unset GOPROXY
+unset GOSUMDB
 
 go version
 echo $GOPATH
 echo $GOBIN
 
-cd ${__PROJECT__}/var/runtime
+mkdir -p ${__PROJECT__}/var/runtime/${APP_NAME}-code/
+cd ${__PROJECT__}/var/runtime/${APP_NAME}-code/
 APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
-
-go clean -modcache
-
-go install github.com/goreleaser/goreleaser/v2@latest
 
 if [ -d Cloudreve ]; then
   cd Cloudreve
   git submodule update --init --recursive --progress
 else
-  git clone -b 3.8.3 --recurse-submodules https://github.com/cloudreve/Cloudreve.git
+  git clone -b 4.2.0 --recurse-submodules https://github.com/cloudreve/Cloudreve.git
   cd Cloudreve
 fi
+cd ${__PROJECT__}/var/runtime/${APP_NAME}-code/Cloudreve
+
+go clean -modcache && rm go.sum && go mod tidy
+
+# go install github.com/goreleaser/goreleaser/v2@latest
+# go get github.com/goreleaser/goreleaser/v2@latest
+# go install github.com/goreleaser/goreleaser/v2@latest
 
 go install
 
 goreleaser build --clean --single-target --snapshot
-
-exit 0
-
-if [ $OS = 'windows' ]; then
-  {
-    APP_RUNTIME="${APP_NAME}-${APP_VERSION}-windows-${ARCH}"
-    test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
-    unzip "${APP_RUNTIME}.zip"
-    exit 0
-  }
-else
-  mkdir -p ${APP_NAME}
-  cd ${APP_NAME}
-  tar -xvf ${__PROJECT__}/var/runtime/${APP_RUNTIME}.tar.gz
-  chmod a+x ${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/ ${APP_RUNTIME_DIR}/
-fi
