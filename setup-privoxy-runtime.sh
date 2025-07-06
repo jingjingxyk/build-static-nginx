@@ -116,7 +116,7 @@ else
   test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
   mkdir -p ${APP_NAME}
   tar  -C ${APP_NAME} -xf ${APP_RUNTIME}.tar
-  chmod a+x ${APP_RUNTIME}/sbin/privoxy
+  chmod a+x ${APP_NAME}/sbin/privoxy
   cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
 
