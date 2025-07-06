@@ -36,3 +36,5 @@ $env:PATH += ";C:\Program Files\Git\bin;"
 
 
 
+# download git for windows
+# https://git-scm.com/downloads/win

@@ -32,13 +32,31 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-export PATH=${__PROJECT__}/runtime/node/bin/:$PATH
+export PATH=${__PROJECT__}/runtime/node/bin/:${__PROJECT__}/var/node_modules/.bin/:$PATH
 
 mkdir -p ${__PROJECT__}/var/
 cd ${__PROJECT__}/var/
-test -d drawdb && rm -rf drawdb
-git clone https://github.com/drawdb-io/drawdb
-cd drawdb
-npm install
+
+if command -v pnpm >/dev/null 2>&1; then
+  echo "pnpm已安装"
+  # npx pnpm
+  which pnpm
+  # 升级pnpm
+  # pnpm add pnpm --registry=https://registry.npmmirror.com
+else
+  echo "pnpm未安装" >&2
+  npm install pnpm --registry=https://registry.npmmirror.com
+
+fi
+
+# electron doc
+# https://www.electronjs.org/zh/docs/latest/tutorial/installation
+
+ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/"
+
+pnpm install --verbose electron electron-builder @electron/asar --registry=https://registry.npmmirror.com
+
 # npm install --registry=https://registry.npmmirror.com
-npm run build
+# npx electron .
+
+# pnpm approve-builds

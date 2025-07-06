@@ -9,10 +9,6 @@ __PROJECT__=${__DIR__}
 shopt -s expand_aliases
 cd ${__PROJECT__}
 
-if [ ! -f "${__PROJECT__}/runtime/node/bin/node" ]; then
-  curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-nodejs-runtime.sh?raw=ture | bash -s -- --mirror china
-fi
-
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)
@@ -32,13 +28,21 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-export PATH=${__PROJECT__}/runtime/node/bin/:$PATH
-
 mkdir -p ${__PROJECT__}/var/
 cd ${__PROJECT__}/var/
-test -d drawdb && rm -rf drawdb
-git clone https://github.com/drawdb-io/drawdb
-cd drawdb
-npm install
-# npm install --registry=https://registry.npmmirror.com
-npm run build
+
+if [ ! -d cef ]; then
+  git clone -b master --depth=1 --progress https://bitbucket.org/chromiumembedded/cef.git
+fi
+
+# wiki
+# https://bitbucket.org/chromiumembedded/cef/src/master/
+# https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial
+# download cef
+# https://cef-builds.spotifycdn.com/index.html
+
+# https://bitbucket.org/chromiumembedded/cef/wiki/MasterBuildQuickStart
+# https://bitbucket.org/chromiumembedded/cef/wiki/BranchesAndBuilding
+
+# c++ styleguide
+# https://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md
