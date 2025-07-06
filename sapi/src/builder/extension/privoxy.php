@@ -26,7 +26,9 @@ return function (Preprocessor $p) {
 
                 strip {$privoxy_prefix}/sbin/privoxy
                 APP_VERSION=$({$privoxy_prefix}/sbin/privoxy --help | grep 'Privoxy version' | awk '{print $3}')
+                APP_NAME='privoxy'
                 echo \${APP_VERSION} > {$workdir}/APP_VERSION
+                echo \${APP_NAME} > {$workdir}/APP_NAME
 
                 cd {$privoxy_prefix}/
 
@@ -34,13 +36,13 @@ EOF;
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
             otool -L {$privoxy_prefix}/sbin/privoxy
-            tar -cJvf {$workdir}/privoxy-\${APP_VERSION}-macos-{$system_arch}.tar.xz .
+            tar -cJvf {$workdir}/\${APP_NAME}-\${APP_VERSION}-macos-{$system_arch}.tar.xz .
 EOF;
         } else {
             $cmd .= <<<EOF
               file {$privoxy_prefix}/sbin/privoxy
               readelf -h {$privoxy_prefix}//sbin/privoxy
-              tar -cJvf {$workdir}/privoxy-\${APP_VERSION}-linux-{$system_arch}.tar.xz .
+              tar -cJvf {$workdir}/\${APP_NAME}-\${APP_VERSION}-linux-{$system_arch}.tar.xz .
 EOF;
         }
         return $cmd;

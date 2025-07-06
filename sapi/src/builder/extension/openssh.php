@@ -25,8 +25,10 @@ return function (Preprocessor $p) {
         $cmd = <<<EOF
         cd {$openssh_prefix}/
 
-        VERSION=$({$openssh_prefix}/sbin/sshd -V 2>&1 | awk -F ',' '{ print $1 }' | awk -F '_' '{ print $2 }')
-        echo \${VERSION} > {$workdir}/APP_VERSION
+        APP_VERSION=$({$openssh_prefix}/sbin/sshd -V 2>&1 | awk -F ',' '{ print $1 }' | awk -F '_' '{ print $2 }')
+        APP_NAME='openssh'
+        echo \${APP_VERSION} > {$workdir}/APP_VERSION
+        echo \${APP_NAME} > {$workdir}/APP_NAME
 
         cd {$openssh_prefix}/
 
@@ -35,13 +37,13 @@ EOF;
         if ($p->getOsType() == 'macos') {
             $cmd .= <<<EOF
             otool -L {$openssh_prefix}/sbin/sshd
-            tar -cJvf {$workdir}/openssh-\${VERSION}-macos-{$system_arch}.tar.xz .
+            tar -cJvf {$workdir}/\${APP_NAME}-\${APP_VERSION}-macos-{$system_arch}.tar.xz .
 EOF;
         } else {
             $cmd .= <<<EOF
               file {$openssh_prefix}/sbin/sshd
               readelf -h {$openssh_prefix}/sbin/sshd
-              tar -cJvf {$workdir}/openssh-\${VERSION}-linux-{$system_arch}.tar.xz .
+              tar -cJvf {$workdir}/\${APP_NAME}-\${APP_VERSION}-linux-{$system_arch}.tar.xz .
 EOF;
         }
         return $cmd;
