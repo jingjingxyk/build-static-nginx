@@ -132,7 +132,8 @@ pwd
 npm install -g yarn craco pnpm --registry=https://registry.npmmirror.com
 
 yarn install --yes --registry https://registry.npmmirror.com
-npx update-browserslist-db@latest --yes
+
+
 yarn build
 # yarn start
 
