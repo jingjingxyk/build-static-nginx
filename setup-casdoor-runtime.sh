@@ -119,31 +119,27 @@ else
   git clone https://github.com/casdoor/casdoor.git
 fi
 
-cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
-
-go build
-./casdoor --help
-
 cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/web/
 ls -lh ~/.npm/
 ls -lh ~/.npm/_logs/
 pwd
 
 npm install -g yarn craco pnpm --registry=https://registry.npmmirror.com
-
 yarn install --yes --registry https://registry.npmmirror.com
-
 
 yarn build
 # yarn start
 
+cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
+go build
+./casdoor --help
+
 # doc
 # https://casdoor.org/zh/docs/basic/server-installation/
 
-cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
-
-# run  casdooor
 # edit casdoor config
 # conf/app.conf
 
+cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
+# run  casdooor
 # ./casdoor
