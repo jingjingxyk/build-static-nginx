@@ -131,8 +131,8 @@ pwd
 npm install -g yarn --registry=https://registry.npmmirror.com
 
 yarn install --yes --registry https://registry.npmmirror.com
-# yarn build
-yarn start
+yarn build
+# yarn start
 
 # doc
 # https://casdoor.org/zh/docs/basic/server-installation/
