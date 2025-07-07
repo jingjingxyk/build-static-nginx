@@ -118,17 +118,21 @@ else
   git clone https://github.com/casdoor/casdoor.git
 fi
 
+cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
+
+go build
+./casdoor --help
+
 cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/web/
 ls -lh ~/.npm/
 ls -lh ~/.npm/_logs/
 pwd
 
-export ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/"
 npm install -g yarn --registry=https://registry.npmmirror.com
 
 yarn install --yes --registry https://registry.npmmirror.com
-yarn build
+# yarn build
+yarn start
 
-cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
-
-go build
+# doc
+# https://casdoor.org/zh/docs/basic/server-installation/
