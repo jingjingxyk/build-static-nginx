@@ -58,7 +58,7 @@ while [ $# -gt 0 ]; do
     NO_PROXY="${NO_PROXY},::1/128,fe80::/10,fd00::/8,ff00::/8"
     NO_PROXY="${NO_PROXY},localhost"
     NO_PROXY="${NO_PROXY},.aliyuncs.com,.aliyun.com,.tencent.com"
-    NO_PROXY="${NO_PROXY},.myqcloud.com,.swoole.com"
+    NO_PROXY="${NO_PROXY},.myqcloud.com,.swoole.com,goproxy.cn"
     export NO_PROXY="${NO_PROXY},.tsinghua.edu.cn,.ustc.edu.cn,.npmmirror.com"
     ;;
   --*)
@@ -100,8 +100,9 @@ export GOPATH=~/go
 export GOSUMDB=sum.golang.org
 export GOROOT=${__PROJECT__}/runtime/go/
 export GOBIN=${__PROJECT__}/runtime/go/bin/
-unset GOPROXY
-unset GOSUMDB
+# unset GOPROXY
+# unset GOSUMDB
+export GOPROXY="https://goproxy.cn,direct"
 
 go version
 echo $GOPATH
@@ -128,7 +129,7 @@ ls -lh ~/.npm/
 ls -lh ~/.npm/_logs/
 pwd
 
-npm install -g yarn --registry=https://registry.npmmirror.com
+npm install -g yarn craco pnpm --registry=https://registry.npmmirror.com
 
 yarn install --yes --registry https://registry.npmmirror.com
 yarn build
@@ -136,3 +137,11 @@ yarn build
 
 # doc
 # https://casdoor.org/zh/docs/basic/server-installation/
+
+cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
+
+# run  casdooor
+# edit casdoor config
+# conf/app.conf
+
+# ./casdoor
