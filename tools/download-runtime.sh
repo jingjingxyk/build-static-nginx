@@ -50,7 +50,7 @@ case $ARCH in
   ;;
 esac
 
-VERSION='1.0.0'
+VERSION='1.1.0'
 MIRROR=''
 FORCE=0
 while [ $# -gt 0 ]; do
