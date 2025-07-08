@@ -48,7 +48,6 @@ case $ARCH in
   ;;
 esac
 
-MIRROR=''
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)
@@ -140,6 +139,43 @@ go build
 # edit casdoor config
 # conf/app.conf
 
+# deploy
 cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
 # run  casdooor
 # ./casdoor
+
+test -d ${APP_RUNTIME_DIR}/swagger/ && rm -rf ${APP_RUNTIME_DIR}/swagger/
+test -d ${APP_RUNTIME_DIR}/web/build/ && rm -rf && rm -rf ${APP_RUNTIME_DIR}/web/
+
+mkdir -p ${APP_RUNTIME_DIR}/swagger/
+mkdir -p ${APP_RUNTIME_DIR}/conf/
+mkdir -p ${APP_RUNTIME_DIR}/web/build/
+
+chmod a+x ./casdoor
+cp -f ./casdoor ${APP_RUNTIME_DIR}/
+cp -rf ./swagger/. ${APP_RUNTIME_DIR}/swagger/
+test -f ${APP_RUNTIME_DIR}/conf/app.conf || cp -f ./conf/app.conf ${APP_RUNTIME_DIR}/conf/app.conf
+cp -rf ./web/build/. ${APP_RUNTIME_DIR}/web/build/
+
+ls -lh ${APP_RUNTIME_DIR}/
+cd ${APP_RUNTIME_DIR}/
+# run  casdooor
+# ./casdoor
+
+${APP_RUNTIME_DIR}/casdoor -h
+
+cat >${APP_RUNTIME_DIR}/start.sh <<'EOF'
+#!/usr/bin/env bash
+
+set -exu
+__DIR__=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+__PROJECT__=${__DIR__}
+shopt -s expand_aliases
+cd ${__PROJECT__}
+
+./casdoor
+
+EOF
