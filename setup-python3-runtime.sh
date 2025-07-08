@@ -106,6 +106,10 @@ else
   test -f ${APP_RUNTIME}.tar || xz -d -k ${APP_RUNTIME}.tar.xz
   mkdir -p ${__PROJECT__}/var/runtime/${APP_NAME}/
   tar -C ${__PROJECT__}/var/runtime/${APP_NAME} -xf ${APP_RUNTIME}.tar
+  rm -rf ${__PROJECT__}/var/runtime/${APP_NAME}/.completed
+  sed -i "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/pip3
+  sed -i "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/python3-config
+  sed -i "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/lib/python3.pc
   cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
 
@@ -122,3 +126,23 @@ echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
 echo " "
 export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
 python3 -V
+
+: <<'EOF'
+
+ls -lh ~/.local/
+~/.local/bin/uv
+uv python dir
+uv tool dir
+
+# 查看默认包安装目录
+./runtime/python3/bin/python3 -m site --user-site
+
+# pip3 install --target=/custom/path 指定目录‌
+./runtime/python3/bin/pip3 install  uv -i https://pypi.tuna.tsinghua.edu.cn/simple -vv
+
+# pip3 install -v 包名 > install.log 2>&1
+
+# uv docs
+# https://docs.astral.sh/uv/getting-started/installation/#pypi
+
+EOF
