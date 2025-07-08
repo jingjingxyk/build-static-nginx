@@ -9,7 +9,7 @@ __PROJECT__=${__DIR__}
 shopt -s expand_aliases
 cd ${__PROJECT__}
 
-if [ ! -f "${__PROJECT__}/runtime/node/bin/node "]; then
+if [ ! -f "${__PROJECT__}/runtime/node/bin/node" ]; then
   curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-nodejs-runtime.sh?raw=ture | bash -s -- --mirror china
 fi
 
