@@ -131,13 +131,6 @@ yarn build
 
 cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
 go build
-./casdoor --help
-
-# doc
-# https://casdoor.org/zh/docs/basic/server-installation/
-
-# edit casdoor config
-# conf/app.conf
 
 # deploy
 cd ${__PROJECT__}/var/runtime/${APP_NAME}/casdoor/
@@ -179,3 +172,12 @@ cd ${__PROJECT__}
 ./casdoor
 
 EOF
+
+# doc
+# https://casdoor.org/zh/docs/basic/server-installation/
+
+# edit conf/app.conf
+
+# driverName = sqlite
+# dataSourceName = file:casdoor.db?cache=shared
+# dbName = casdoor
