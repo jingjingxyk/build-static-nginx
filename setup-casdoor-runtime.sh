@@ -80,16 +80,16 @@ mkdir -p ${APP_RUNTIME_DIR}
 cd ${__PROJECT__}
 if [[ ! -f ${__PROJECT__}/runtime/node/bin/node ]]; then
   if [[ "$MIRROR" == "china" ]]; then
-    bash setup-nodejs-runtime.sh --mirror china
+    curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-nodejs-runtime.sh?raw=ture | bash -s -- --mirror china
   else
-    bash setup-nodejs-runtime.sh
+    curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-nodejs-runtime.sh?raw=ture | bash
   fi
 fi
 if [[ ! -f ${__PROJECT__}/runtime/go/bin/go ]]; then
   if [[ "$MIRROR" == "china" ]]; then
-    bash setup-go-runtime.sh --mirror china
+    curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-go-runtime.sh?raw=ture | bash -s -- --mirror china
   else
-    bash setup-go-runtime.sh
+    curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-go-runtime.sh?raw=ture | bash
   fi
 fi
 
