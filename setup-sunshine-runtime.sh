@@ -11,21 +11,28 @@ cd ${__PROJECT__}
 
 OS=$(uname -s)
 ARCH=$(uname -m)
+APP_FILE_NAME=""
 
 case $OS in
 'Linux')
   OS="linux"
+  APP_FILE_NAME="sunshine.AppImage"
   ;;
 'Darwin')
   OS="darwin"
+  APP_FILE_NAME="sunshine.rb"
+  echo 'no support'
+  exit 0
   ;;
 *)
   case $OS in
   'MSYS_NT'* | 'CYGWIN_NT'*)
     OS="windows"
+    APP_FILE_NAME="sunshine-windows-portable.zip"
     ;;
   'MINGW64_NT'*)
     OS="windows"
+    APP_FILE_NAME="sunshine-windows-portable.zip"
     ;;
   *)
     echo '暂未配置的 OS '
@@ -48,7 +55,6 @@ case $ARCH in
   ;;
 esac
 
-
 APP_VERSION='v2025.628.4510'
 APP_NAME='sunshine'
 VERSION="${APP_VERSION}"
@@ -61,17 +67,15 @@ mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
-exit 0
+# https://flatpak.org/setup/
+
+# https://github.com/LizardByte/Sunshine/releases/download/v2025.628.4510/flathub.tar.gz
 # https://github.com/LizardByte/Sunshine/releases/download/v2025.628.4510/sunshine_x86_64.flatpak
 # https://github.com/LizardByte/Sunshine/releases/download/v2025.628.4510/sunshine-windows-portable.zip
 # https://github.com/LizardByte/Sunshine/releases/download/v2025.628.4510/sunshine.AppImage
-APP_DOWNLOAD_URL="https://github.com/LizardByte/Sunshine/releases/download//${VERSION}/${OS}-${ARCH}-${APP_NAME}.tar.gz"
+# https://github.com/LizardByte/Sunshine/releases/download/v2025.628.4510/sunshine.rb
+APP_DOWNLOAD_URL="https://github.com/LizardByte/Sunshine/releases/download/${VERSION}/${APP_FILE_NAME}"
 
-if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://github.com/LizardByte/Sunshine/releases/download//${VERSION}/windows-amd64-filebrowser.zip"
-fi
-
-MIRROR=''
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)
@@ -91,40 +95,18 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
-
 if [ $OS = 'windows' ]; then
   {
-    APP_RUNTIME="${APP_NAME}-${APP_VERSION}-windows-${ARCH}"
+    APP_RUNTIME="sunshine-windows-portable"
     test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
     test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
     unzip "${APP_RUNTIME}.zip"
     exit 0
   }
 else
-  test -f ${APP_RUNTIME}.tar.gz || curl -LSo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
-  test -d ${APP_NAME} && rm -rf ${APP_NAME}
-  mkdir -p ${APP_NAME}
-  cd ${APP_NAME}
-  tar -xvf ${__PROJECT__}/var/runtime/${APP_RUNTIME}.tar.gz
-  chmod a+x ${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/ ${APP_RUNTIME_DIR}/
+  test -f sunshine.AppImage || curl -LSo sunshine.AppImage ${APP_DOWNLOAD_URL}
+  chmod a+x sunshine.AppImage
+  cp -f sunshine.AppImage ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/
-
-set +x
-
-echo " "
-echo " USE filebrowser :"
-echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
-echo " "
-echo " filebrowser docs :  https://github.com/filebrowser/filebrowser "
-echo " "
-echo " dowload script https://github.com/filebrowser/get "
-echo " "
-echo " filebrowser -r /path/to/your/files"
-echo " "
-export PATH="${APP_RUNTIME_DIR}:$PATH"
-filebrowser --help
