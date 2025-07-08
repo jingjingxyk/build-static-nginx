@@ -87,6 +87,15 @@ curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-python3-r
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-python3-runtime.sh?raw=ture | bash
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-python3-runtime.sh?raw=ture | bash -s -- --mirror china
 
+## sunshine
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-sunshine-runtime.sh?raw=ture | bash
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-sunshine-runtime.sh?raw=ture | bash
+
+## moonlight
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-moonlight-runtime.sh?raw=ture | bash
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-moonlight-runtime.sh?raw=ture | bash
+
+
 # ovs ovn
 sed -i.bak 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
 sed -i.bak 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources

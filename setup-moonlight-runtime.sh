@@ -9,23 +9,28 @@ __PROJECT__=${__DIR__}
 shopt -s expand_aliases
 cd ${__PROJECT__}
 
+APP_VERSION='v6.1.0'
+APP_NAME='moonlight'
+VERSION="${APP_VERSION}"
+APP_FILE_NAME=""
+
 OS=$(uname -s)
 ARCH=$(uname -m)
 
 case $OS in
 'Linux')
   OS="linux"
+  APP_FILE_NAME="Moonlight-6.1.0-x86_64.AppImage"
   ;;
 'Darwin')
   OS="darwin"
+  APP_FILE_NAME="Moonlight-6.1.0.dmg"
   ;;
 *)
   case $OS in
-  'MSYS_NT'* | 'CYGWIN_NT'*)
+  'MSYS_NT'* | 'CYGWIN_NT'* | 'MINGW64_NT'*)
     OS="windows"
-    ;;
-  'MINGW64_NT'*)
-    OS="windows"
+    APP_FILE_NAME="Moonlight-6.1.0.dmg"
     ;;
   *)
     echo '暂未配置的 OS '
@@ -48,10 +53,6 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='v6.1.0'
-APP_NAME='moonlight'
-VERSION="${APP_VERSION}"
-
 cd ${__PROJECT__}
 mkdir -p runtime/
 mkdir -p var/runtime
@@ -59,7 +60,10 @@ APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
-exit 0
+
+# https://github.com/LizardByte/Sunshine
+# https://app.lizardbyte.dev/Sunshine/?lng=zh-CN
+# https://github.com/moonlight-stream/moonlight-qt
 
 # https://github.com/moonlight-stream/moonlight-qt/releases/latest
 # https://github.com/moonlight-stream/moonlight-qt/releases
@@ -71,13 +75,8 @@ exit 0
 # https://github.com/moonlight-stream/moonlight-qt/releases/download/v6.1.0/Moonlight-6.1.0-x86_64.AppImage
 # https://flathub.org/apps/details/com.moonlight_stream.Moonlight
 
-APP_DOWNLOAD_URL="https://github.com/moonlight-stream/moonlight-qt/releases/download/${VERSION}/${OS}-${ARCH}-${APP_NAME}.tar.gz"
+APP_DOWNLOAD_URL="https://github.com/moonlight-stream/moonlight-qt/releases/download/${APP_FILE_NAME}"
 
-if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://github.com/moonlight-stream/moonlight-qt/releases/download/${VERSION}/windows-amd64-filebrowser.zip"
-fi
-
-MIRROR=''
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)
@@ -97,40 +96,19 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
-
 if [ $OS = 'windows' ]; then
   {
-    APP_RUNTIME="${APP_NAME}-${APP_VERSION}-windows-${ARCH}"
+    APP_RUNTIME="${APP_NAME}"
     test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
     test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
     unzip "${APP_RUNTIME}.zip"
     exit 0
   }
 else
-  test -f ${APP_RUNTIME}.tar.gz || curl -LSo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
-  test -d ${APP_NAME} && rm -rf ${APP_NAME}
-  mkdir -p ${APP_NAME}
-  cd ${APP_NAME}
-  tar -xvf ${__PROJECT__}/var/runtime/${APP_RUNTIME}.tar.gz
-  chmod a+x ${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/ ${APP_RUNTIME_DIR}/
+  test -f ${APP_FILE_NAME} || curl -LSo ${APP_FILE_NAME} ${APP_DOWNLOAD_URL}
+  cp -rf ${APP_FILE_NAME} ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/
 
-set +x
-
-echo " "
-echo " USE filebrowser :"
-echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
-echo " "
-echo " filebrowser docs :  https://github.com/filebrowser/filebrowser "
-echo " "
-echo " dowload script https://github.com/filebrowser/get "
-echo " "
-echo " filebrowser -r /path/to/your/files"
-echo " "
-export PATH="${APP_RUNTIME_DIR}:$PATH"
-filebrowser --help
+ls -lha ${APP_RUNTIME_DIR}

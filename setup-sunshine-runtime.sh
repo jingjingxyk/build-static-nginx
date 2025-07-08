@@ -67,6 +67,9 @@ mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
 
+# https://github.com/LizardByte/Sunshine
+# https://app.lizardbyte.dev/Sunshine/?lng=zh-CN
+# https://github.com/moonlight-stream/moonlight-qt
 # https://flatpak.org/setup/
 
 # https://github.com/LizardByte/Sunshine/releases/download/v2025.628.4510/flathub.tar.gz
