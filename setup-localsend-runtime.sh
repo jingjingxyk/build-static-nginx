@@ -59,7 +59,7 @@ APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
-
+exit 0
 # https://localsend.org/zh-CN
 # https://localsend.org/zh-CN/download
 # https://d.localsend.org/LocalSend-1.17.0-linux-x86-64.AppImage
