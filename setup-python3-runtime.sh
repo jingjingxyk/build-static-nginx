@@ -107,8 +107,11 @@ else
   mkdir -p ${__PROJECT__}/var/runtime/${APP_NAME}/
   tar -C ${__PROJECT__}/var/runtime/${APP_NAME} -xf ${APP_RUNTIME}.tar
   rm -rf ${__PROJECT__}/var/runtime/${APP_NAME}/.completed
+  sed -i.bak "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/2to3
+  sed -i.bak "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/idle3
   sed -i.bak "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/pip3
   sed -i.bak "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/python3-config
+  sed -i.bak "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/bin/pydoc3
   sed -i.bak "s@/usr/local/swoole-cli/python3@${__PROJECT__}/runtime/python@" ${__PROJECT__}/var/runtime/${APP_NAME}/lib/pkgconfig/python3.pc
   cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/. ${APP_RUNTIME_DIR}/
 fi
