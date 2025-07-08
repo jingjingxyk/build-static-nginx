@@ -61,6 +61,8 @@
 1. [localsend](https://localsend.org/zh-CN/download?os=macos)
 1. [localsend](https://github.com/localsend/localsend)
 
+mDNS（Multicast DNS）是一种用于局域网内设备自动发现和名称解析的协议，其核心作用是通过组播方式实现零配置网络服务发现。
+
 有预算没技术：蒲公英组网
 SRv6 分段路由
 SD-WAN  https://www.baidu.com/s?ie=utf-8&wd=SD-WAN

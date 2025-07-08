@@ -95,6 +95,10 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-sunshine-ru
 curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-moonlight-runtime.sh?raw=ture | bash
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-moonlight-runtime.sh?raw=ture | bash
 
+## 如意玲珑
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-linyaps-runtime.sh?raw=ture | bash
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-linyaps-runtime.sh?raw=ture | bash
+
 
 # ovs ovn
 sed -i.bak 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
