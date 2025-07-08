@@ -45,6 +45,7 @@
 1. [星空组网](https://doc.starvpn.cn/#/openWrt)
 1. [NowTunnel](https://www.nowtunnel.com/)
 1. [青云SD-WAN](https://www.qingcloud.com/products/sdwan/)
+1. [MoleSDN](https://www.molesdn.com/)
 1. [tmate](https://github.com/tmate-io/tmate.git)
 1. [freesiwtch NAT-Traversal](https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Networking/NAT-Traversal_3375417/)
 1. [pingtunnel](https://github.com/esrrhs/pingtunnel.git)
@@ -57,6 +58,8 @@
 1. [tmate](https://tmate.io/)
 1. [websocat](https://github.com/vi/websocat)
 1. [noVNC](https://github.com/novnc/noVNC)
+1. [localsend](https://localsend.org/zh-CN/download?os=macos)
+1. [localsend](https://github.com/localsend/localsend)
 
 有预算没技术：蒲公英组网
 SRv6 分段路由
