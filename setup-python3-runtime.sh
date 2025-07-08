@@ -118,7 +118,7 @@ set +x
 echo " "
 echo " USE python3 RUNTIME :"
 echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
 echo " "
-export PATH="${APP_RUNTIME_DIR}:$PATH"
+export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
 python3 -V
