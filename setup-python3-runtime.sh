@@ -50,7 +50,7 @@ esac
 
 APP_VERSION='3.12.2'
 APP_NAME='python'
-VERSION='v0.0.1'
+VERSION='v0.0.2'
 
 cd ${__PROJECT__}
 mkdir -p runtime/

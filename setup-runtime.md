@@ -82,6 +82,10 @@ curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-nodejs-ru
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-nodejs-runtime.sh?raw=ture | bash
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-nodejs-runtime.sh?raw=ture | bash -s -- --mirror china
 
+## python3
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-python3-runtime.sh?raw=ture | bash
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-python3-runtime.sh?raw=ture | bash
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-python3-runtime.sh?raw=ture | bash -s -- --mirror china
 
 # ovs ovn
 sed -i.bak 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
