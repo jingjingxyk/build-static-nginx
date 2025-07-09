@@ -107,7 +107,7 @@ DOWNLOAD() {
   # RUNTIME_SCRIPTS=$(ls setup-*)
   # ls setup-* | xargs  -I {} echo {}
   RUNTIME_SCRIPTS=$(
-cat <<EOF
+    cat <<EOF
 setup-aria2-runtime.sh
 setup-casdoor-runtime.sh
 setup-cloudreve-bin-runtime.sh
@@ -161,11 +161,14 @@ setup-websocat-runtime.sh
 setup-wstunnel-runtime.sh
 setup-yt-dlp-ffmpeg-runtime.sh
 EOF
-)
+  )
   cd $CURRENT_DIR || exit 0
 
   for NAME in $RUNTIME_SCRIPTS; do
     echo "NAME: $NAME "
+    echo "curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-linyaps-runtime.sh?raw=ture | bash"
+    echo "curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-linyaps-runtime.sh?raw=ture | bash -s -- --mirror china "
+    echo " "
     DOWNLOAD_RUNTIME_SCRIPT $NAME
   done
 }
