@@ -9,23 +9,32 @@ __PROJECT__=${__DIR__}
 shopt -s expand_aliases
 cd ${__PROJECT__}
 
+APP_VERSION='1.17.0'
+APP_NAME='localsend'
+VERSION="v1.17.0"
+APP_FILE_NAME=""
+
 OS=$(uname -s)
 ARCH=$(uname -m)
 
 case $OS in
 'Linux')
   OS="linux"
+  APP_FILE_NAME="LocalSend-${APP_VERSION}-linux-x86-64.AppImage"
   ;;
 'Darwin')
   OS="darwin"
+  APP_FILE_NAME="LocalSend-${APP_VERSION}.dmg"
   ;;
 *)
   case $OS in
   'MSYS_NT'* | 'CYGWIN_NT'*)
     OS="windows"
+    APP_FILE_NAME="LocalSend-${APP_VERSION}-windows-x86-64.exe"
     ;;
   'MINGW64_NT'*)
     OS="windows"
+    APP_FILE_NAME="LocalSend-${APP_VERSION}-windows-x86-64.exe"
     ;;
   *)
     echo '暂未配置的 OS '
@@ -48,10 +57,6 @@ case $ARCH in
   ;;
 esac
 
-APP_VERSION='v2.36.0'
-APP_NAME='localsend'
-VERSION="${APP_VERSION}"
-
 cd ${__PROJECT__}
 mkdir -p runtime/
 mkdir -p var/runtime
@@ -59,21 +64,20 @@ APP_RUNTIME_DIR=${__PROJECT__}/runtime/${APP_NAME}
 mkdir -p ${APP_RUNTIME_DIR}
 
 cd ${__PROJECT__}/var/runtime
-exit 0
+
 # https://localsend.org/zh-CN
 # https://localsend.org/zh-CN/download
 # https://d.localsend.org/LocalSend-1.17.0-linux-x86-64.AppImage
+# https://d.localsend.org/LocalSend-1.17.0.dmg
 # https://github.com/localsend/localsend/releases
 # https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0-linux-x86-64.AppImage
 # https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0-windows-x86-64.exe
+# https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0.dmg
 
-APP_DOWNLOAD_URL="https://github.com/localsend/localsend/releases/download/${VERSION}/${OS}-${ARCH}-${APP_NAME}.tar.gz"
+# shellcheck disable=SC2317
+APP_DOWNLOAD_URL="https://github.com/localsend/localsend/releases/download/${VERSION}/${APP_FILE_NAME}"
 
-if [ $OS = 'windows' ]; then
-  APP_DOWNLOAD_URL="https://github.com/localsend/localsend/releases/download/${VERSION}/windows-amd64-filebrowser.zip"
-fi
-
-MIRROR=''
+# shellcheck disable=SC2317
 while [ $# -gt 0 ]; do
   case "$1" in
   --proxy)
@@ -93,40 +97,16 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
-
 if [ $OS = 'windows' ]; then
   {
-    APP_RUNTIME="${APP_NAME}-${APP_VERSION}-windows-${ARCH}"
-    test -f ${APP_RUNTIME}.zip || curl -LSo ${APP_RUNTIME}.zip ${APP_DOWNLOAD_URL}
-    test -d ${APP_RUNTIME} && rm -rf ${APP_RUNTIME}
-    unzip "${APP_RUNTIME}.zip"
+    test -f ${APP_FILE_NAME} || curl.exe -LSo ${APP_FILE_NAME} ${APP_DOWNLOAD_URL}
     exit 0
   }
 else
-  test -f ${APP_RUNTIME}.tar.gz || curl -LSo ${APP_RUNTIME}.tar.gz ${APP_DOWNLOAD_URL}
-  test -d ${APP_NAME} && rm -rf ${APP_NAME}
-  mkdir -p ${APP_NAME}
-  cd ${APP_NAME}
-  tar -xvf ${__PROJECT__}/var/runtime/${APP_RUNTIME}.tar.gz
-  chmod a+x ${APP_NAME}
-  cp -rf ${__PROJECT__}/var/runtime/${APP_NAME}/ ${APP_RUNTIME_DIR}/
+  test -f ${APP_FILE_NAME} || curl -LSo ${APP_FILE_NAME} ${APP_DOWNLOAD_URL}
+  cp -f ${APP_FILE_NAME} ${APP_RUNTIME_DIR}/
 fi
 
 cd ${__PROJECT__}/
 
 set +x
-
-echo " "
-echo " USE filebrowser :"
-echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
-echo " "
-echo " filebrowser docs :  https://github.com/filebrowser/filebrowser "
-echo " "
-echo " dowload script https://github.com/filebrowser/get "
-echo " "
-echo " filebrowser -r /path/to/your/files"
-echo " "
-export PATH="${APP_RUNTIME_DIR}:$PATH"
-filebrowser --help
