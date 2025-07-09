@@ -61,7 +61,6 @@ mkdir -p ${APP_RUNTIME_DIR}
 cd ${__PROJECT__}/var/runtime
 
 APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-ffmpeg/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}.tar.xz"
-CACERT_DOWNLOAD_URL="https://curl.se/ca/cacert.pem"
 
 if [ $OS = 'windows' ]; then
   APP_DOWNLOAD_URL="https://github.com/jingjingxyk/build-static-ffmpeg/releases/download/${VERSION}/${APP_NAME}-${APP_VERSION}-vs2022-${ARCH}.zip"
@@ -100,8 +99,6 @@ china)
 
 esac
 
-test -f cacert.pem || curl -LSo cacert.pem ${CACERT_DOWNLOAD_URL}
-
 APP_RUNTIME="${APP_NAME}-${APP_VERSION}-${OS}-${ARCH}"
 
 if [ $OS = 'windows' ]; then
@@ -123,8 +120,6 @@ fi
 
 cd ${__PROJECT__}/var/runtime
 
-cp -f ${__PROJECT__}/var/runtime/cacert.pem ${APP_RUNTIME_DIR}/cacert.pem
-
 cd ${__PROJECT__}/
 
 set +x
@@ -132,10 +127,10 @@ set +x
 echo " "
 echo " USE FFMPEG RUNTIME :"
 echo " "
-echo " export PATH=\"${APP_RUNTIME_DIR}:\$PATH\" "
+echo " export PATH=\"${APP_RUNTIME_DIR}/bin/:\$PATH\" "
 echo " "
 echo " ./bin/runtime/ffmpeg/bin/ffmpeg -h "
 echo " "
 echo " ffmpeg docs : https://ffmpeg.org/documentation.html "
 echo " "
-export PATH="${APP_RUNTIME_DIR}:$PATH"
+export PATH="${APP_RUNTIME_DIR}/bin/:$PATH"
