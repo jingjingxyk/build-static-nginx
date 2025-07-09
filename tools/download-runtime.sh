@@ -104,7 +104,64 @@ DOWNLOAD() {
 
   cd ${__PROJECT__} || exit 0
   local DOWNLOAD_COMMANDS=''
-  RUNTIME_SCRIPTS=$(ls setup-*)
+  # RUNTIME_SCRIPTS=$(ls setup-*)
+  # ls setup-* | xargs  -I {} echo {}
+  RUNTIME_SCRIPTS=$(
+cat <<EOF
+setup-aria2-runtime.sh
+setup-casdoor-runtime.sh
+setup-cloudreve-bin-runtime.sh
+setup-cloudreve-runtime.sh
+setup-coturn-runtime.sh
+setup-depot_tools.sh
+setup-drawdb.sh
+setup-drawio.sh
+setup-electron.sh
+setup-ffmpeg-runtime.sh
+setup-filebrowser-runtime.sh
+setup-geogebra.sh
+setup-go-gost-runtime.sh
+setup-go-runtime.sh
+setup-goreleaser-runtime.sh
+setup-immich.sh
+setup-iperf3-runtime.sh
+setup-libcef.sh
+setup-linyaps-runtime.sh
+setup-localsend-runtime.sh
+setup-moonlight-runtime.sh
+setup-nginx-runtime.sh
+setup-ninja-runtime.sh
+setup-nodejs-runtime.sh
+setup-openjdk-runtime.sh
+setup-openssh-runtime.sh
+setup-php-cli-7.3-runtime.sh
+setup-php-cli-7.4-runtime.sh
+setup-php-cli-runtime.sh
+setup-php-fpm-7.4-runtime.sh
+setup-php-fpm-runtime.sh
+setup-php-runtime.sh
+setup-privoxy-runtime.sh
+setup-python3-runtime.sh
+setup-runtime.md
+setup-seaweedfs-runtime.sh
+setup-socat-runtime.sh
+setup-sunshine-runtime.sh
+setup-supervisord.sh
+setup-swoole-cli-pre-runtime.sh
+setup-swoole-cli-runtime.bat
+setup-swoole-cli-runtime.ps1
+setup-swoole-cli-runtime.sh
+setup-swoole-docs.sh
+setup-swow-cli-runtime.sh
+setup-threejs-editor.sh
+setup-ttyd-runtime.sh
+setup-webBenchmark-runtime.sh
+setup-webdav-runtime.sh
+setup-websocat-runtime.sh
+setup-wstunnel-runtime.sh
+setup-yt-dlp-ffmpeg-runtime.sh
+EOF
+)
   cd $CURRENT_DIR || exit 0
 
   for NAME in $RUNTIME_SCRIPTS; do
