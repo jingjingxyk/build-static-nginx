@@ -10,8 +10,8 @@ cd $__DIR__
 pwd
 
 
-$url = "https://php-cli.jingjingxyk.com/Git-2.47.1-64-bit.exe"
-$git_install_package = 'Git-2.47.1-64-bit.exe'
+$url = "https://download.jingjingxyk.com/Git-2.50.0-64-bit.exe"
+$git_install_package = 'Git-2.50.0-64-bit.exe'
 # 已经下载跳过
 if (-not (Test-Path -Path $git_install_package))
 {
