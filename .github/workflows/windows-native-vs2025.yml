@@ -31,7 +31,9 @@ jobs:
           uname -a
           pwd
           ipconfig /all
-          SET PATH=C:\Windows\System32\wbem;%PATH%
+          # SET PATH=C:\Windows\System32\wbem;%PATH%
+          $env:PATH="C:\Windows\System32\wbem;$env:PATH"
+          # $env:PATH +=";C:\Windows\System32\wbem;"
           # 显示逻辑cpu 个数
           wmic cpu get NumberOfLogicalProcessors /value
           # echo %NUMBER_OF_PROCESSORS%

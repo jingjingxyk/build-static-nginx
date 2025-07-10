@@ -2,6 +2,12 @@
 
 ### winget
 
+    Install-Script -Name winget-install
+
+    irm asheroto.com/winget | iex
+
+    irm https://www.powershellgallery.com/packages/winget-install/5.2.0/Content/winget-install.ps1 | iex
+
     winget source remove winget
     winget source add winget https://mirrors.ustc.edu.cn/winget-source --trust-level trusted
 
