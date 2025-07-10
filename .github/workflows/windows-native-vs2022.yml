@@ -38,11 +38,19 @@ jobs:
           systeminfo
           echo "BUILD_PHP_VERSION=${{ matrix.php-version }}" >> $Env:GITHUB_ENV
 
-      - name: prepare deps soft
+      - name: download deps soft
         shell: cmd
         run: |
           sapi\quickstart\windows\native-build\windows-init-download.bat
+
+      - name: install  deps soft
+        shell: cmd
+        run: |
           sapi\quickstart\windows\native-build\windows-init-install.bat
+
+      - name: show deps soft
+        shell: cmd
+        run: |
           sapi\quickstart\windows\native-build\windows-init-show-install-result.bat
 
       - name: Set  Github ENV variables
