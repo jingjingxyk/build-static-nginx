@@ -1,8 +1,15 @@
 ## windows 终端下载器
 
-### winget
+## powershellgallery
+
+    search package : https://www.powershellgallery.com/packages/
 
     Install-Script -Name winget-install
+
+### winget
+
+    search package : https://winget.run/search
+    winget search --query ""
 
     irm asheroto.com/winget | iex
 
