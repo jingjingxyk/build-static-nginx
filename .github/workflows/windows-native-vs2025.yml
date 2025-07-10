@@ -21,10 +21,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
-          vsversion:
       - name: show environment info
         run: |
           git config --global core.autocrlf false
