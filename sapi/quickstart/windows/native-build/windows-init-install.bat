@@ -70,8 +70,8 @@ rem choco install archive
 :: set CMAKE_BUILD_TYPE=Release
 :: vcpkg install libarchive
 :: vcpkg install libarchive:x64-linux-release
-irm asheroto.com/winget | iex
-winget install libarchive
+powershell -command irm asheroto.com/winget | iex
+powershell -command winget install libarchive
 
 
 move nasm\nasm-2.16.03 %__PROJECT__%\bin\runtime\nasm
