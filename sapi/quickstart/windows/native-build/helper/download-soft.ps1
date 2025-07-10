@@ -119,5 +119,12 @@ git clone https://github.com/microsoft/vcpkg.git
 # nmake /f Makefile.vc mode=dll VC=17 MACHINE=x86 DEBUG=yes
 
 
+https://community.chocolatey.org/install.ps1
+https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1
 
+powershell -ep B "irm asheroto.com/winget | iex"
 
+PowerShell Gallery
+Install-Script winget-install -Force
+
+https://github.com/asheroto/winget-install/blob/master/winget-install.ps1
