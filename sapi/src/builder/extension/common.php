@@ -206,6 +206,7 @@ return function (Preprocessor $p) {
     $depends = ['tcpdump'] ;
     $depends = ['masscan'] ;
     $depends = ['libjwt'] ;
+    $depends = ['openh264'] ;
 
 
     $ext = (new Extension('common'))
