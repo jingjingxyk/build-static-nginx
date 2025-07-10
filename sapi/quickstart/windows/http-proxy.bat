@@ -12,25 +12,25 @@ set "__PROJECT__=%cd%"
 md %__PROJECT__%\var\
 cd %__PROJECT__%\var\
 
-if not exist "%__PROJECT__%\var\socat-v1.8.0.1-cygwin-x64.zip" (
-	powershell  -NoProfile -NoLogo -command "Invoke-WebRequest -Uri https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip -OutFile socat-v1.8.0.1-cygwin-x64.zip"
-	:: powershell  -NoProfile -NoLogo -command "irm https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip -outfile socat-v1.8.0.1-cygwin-x64.zip"
+if not exist "%__PROJECT__%\var\socat-v1.8.0.3-cygwin-x64.zip" (
+	powershell  -NoProfile -NoLogo -command "Invoke-WebRequest -Uri https://php-cli.jingjingxyk.com/socat-v1.8.0.3-cygwin-x64.zip -OutFile socat-v1.8.0.3-cygwin-x64.zip"
+	:: powershell  -NoProfile -NoLogo -command "irm https://php-cli.jingjingxyk.com/socat-v1.8.0.3-cygwin-x64.zip -outfile socat-v1.8.0.3-cygwin-x64.zip"
 	powershell  -NoProfile -NoLogo -command "irm https://curl.se/ca/cacert.pem -outfile cacert.pem"
 )
-if not exist "%__PROJECT__%\var\socat-v1.8.0.1-cygwin-x64" (
-	powershell -command "Expand-Archive -Path .\socat-v1.8.0.1-cygwin-x64.zip -DestinationPath .\socat-v1.8.0.1-cygwin-x64"
-	copy cacert.pem %__PROJECT__%\var\socat-v1.8.0.1-cygwin-x64\socat-v1.8.0.1-cygwin-x64\
+if not exist "%__PROJECT__%\var\socat-v1.8.0.3-cygwin-x64" (
+	powershell -command "Expand-Archive -Path .\socat-v1.8.0.3-cygwin-x64.zip -DestinationPath .\socat-v1.8.0.3-cygwin-x64"
+	copy cacert.pem %__PROJECT__%\var\socat-v1.8.0.3-cygwin-x64\socat-v1.8.0.3-cygwin-x64\
 )
 
-:: curl.exe -fSLo socat-v1.8.0.1-cygwin-x64.zip https://php-cli.jingjingxyk.com/socat-v1.8.0.1-cygwin-x64.zip
+:: curl.exe -fSLo socat-v1.8.0.3-cygwin-x64.zip https://php-cli.jingjingxyk.com/socat-v1.8.0.3-cygwin-x64.zip
 :: curl.exe -fSLo cacert.pem https://curl.se/ca/cacert.pem
-:: 7z.exe x -osocat-v1.8.0.1-cygwin-x64 socat-v1.8.0.1-cygwin-x64.zip
+:: 7z.exe x -osocat-v1.8.0.3-cygwin-x64 socat-v1.8.0.3-cygwin-x64.zip
 
 
-cd %__PROJECT__%\var\socat-v1.8.0.1-cygwin-x64\socat-v1.8.0.1-cygwin-x64\
+cd %__PROJECT__%\var\socat-v1.8.0.3-cygwin-x64\socat-v1.8.0.3-cygwin-x64\
 
-set "DOMAIN=http-proxy.xiaoshuogeng.com:8015"
-set "SNI=http-proxy.xiaoshuogeng.com"
+set "DOMAIN=http-proxy.example.com:8015"
+set "SNI=http-proxy.example.com"
 
 .\socat -d -d  TCP4-LISTEN:8016,reuseaddr,fork ssl:%DOMAIN%,snihost=%SNI%,commonname=%SNI%,openssl-min-proto-version=TLS1.3,openssl-max-proto-version=TLS1.3,verify=1,cafile=cacert.pem
 
