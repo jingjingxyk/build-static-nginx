@@ -99,6 +99,9 @@ curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-moonlight-r
 curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/setup-linyaps-runtime.sh?raw=ture | bash
 curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-linyaps-runtime.sh?raw=ture | bash
 
+## http proxy
+curl -fSL https://github.com/jingjingxyk/swoole-cli/blob/new_dev/sapi/quickstart/unix/http-proxy.sh | bash -s -- --domain http-proxy.example.com
+curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/sapi/quickstart/unix/http-proxy.sh | bash -s -- --domain http-proxy.example.com
 
 # ovs ovn
 sed -i.bak 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources

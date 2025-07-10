@@ -20,7 +20,7 @@ while [ $# -gt 0 ]; do
   shift $(($# > 0 ? 1 : 0))
 done
 
-if [ -f ./runtime/socat/socat ]; then
+if [ ! -f ./runtime/socat/socat ]; then
   curl -fSL https://gitee.com/jingjingxyk/swoole-cli/raw/new_dev/setup-socat-runtime.sh | bash -s -- --mirror china
 fi
 
