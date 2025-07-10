@@ -71,7 +71,7 @@ rem choco install archive
 :: vcpkg install libarchive
 :: vcpkg install libarchive:x64-linux-release
 :: powershell -command "irm asheroto.com/winget | iex "
-powershell -command "winget install libarchive"
+powershell -command "winget install libarchive -a"
 
 
 move nasm\nasm-2.16.03 %__PROJECT__%\bin\runtime\nasm
