@@ -23,7 +23,7 @@ rem http://www.libarchive.org/
 :: if not exist "vcpkg" git clone https://github.com/Microsoft/vcpkg.git
 :: .\vcpkg\bootstrap-vcpkg.bat
 :: .\vcpkg\vcpkg.exe install libarchive
-winget install libarchive
+rem winget install libarchive
 
 
 :: vs2019
