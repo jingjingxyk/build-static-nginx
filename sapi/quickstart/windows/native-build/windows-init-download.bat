@@ -17,7 +17,12 @@ if not exist "strawberry-perl-5.38.2.2-64bit.msi" curl.exe -fSLo strawberry-perl
 if not exist "nasm-2.16.03-win64.zip" curl.exe -fSLo nasm-2.16.03-win64.zip https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip
 if not exist "7z2409-x64.exe" curl.exe -fSLo 7z2409-x64.exe https://www.7-zip.org/a/7z2409-x64.exe
 :: if not exist "libarchive-v3.7.4-amd64.zip" curl.exe -fSLo libarchive-3.8.1.tar.gz https://github.com/libarchive/libarchive/releases/download/v3.8.1/libarchive-3.8.1.tar.gz
+:: if not exist "vcpkg" git clone https://github.com/Microsoft/vcpkg.git
+:: .\vcpkg\bootstrap-vcpkg.bat
+:: .\vcpkg\vcpkg.exe install libarchive
 winget install libarchive
+
+
 :: vs2019
 :: curl -Lo VisualStudioSetup.exe 'https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2019'
 :: curl -Lo VisualStudioSetup.exe 'https://aka.ms/vs/16/release/vs_community.exe'
