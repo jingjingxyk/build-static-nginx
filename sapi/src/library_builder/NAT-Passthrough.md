@@ -60,6 +60,8 @@
 1. [noVNC](https://github.com/novnc/noVNC)
 1. [localsend](https://localsend.org/zh-CN/download?os=macos)
 1. [localsend](https://github.com/localsend/localsend)
+1. [网易uu远程](https://uuyc.163.com/)
+1. [连连控](https://www.asklink.com/)
 
 mDNS（Multicast DNS）是一种用于局域网内设备自动发现和名称解析的协议，其核心作用是通过组播方式实现零配置网络服务发现。
 
