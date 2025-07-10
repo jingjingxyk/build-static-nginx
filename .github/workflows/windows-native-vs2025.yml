@@ -57,6 +57,12 @@ jobs:
         run: |
           sapi\quickstart\windows\native-build\windows-init-show-install-result.bat
 
+      - name: show php SDK
+        run: |
+          $CURRENT_DIR = Get-Location
+          cmd /c ${CURRENT_DIR}\var\windows-build-deps\php-sdk-binary-tools\phpsdk-starter.bat -h
+          cmd /c ${CURRENT_DIR}\var\windows-build-deps\php-sdk-binary-tools\phpsdk-vs17-x64.bat
+
       - name: Set  Github ENV variables
         run: |
           $CURRENT_DIR = Get-Location
