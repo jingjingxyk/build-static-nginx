@@ -70,7 +70,7 @@ rem choco install archive
 :: set CMAKE_BUILD_TYPE=Release
 :: vcpkg install libarchive
 :: vcpkg install libarchive:x64-linux-release
-powershell -command "irm asheroto.com/winget | iex "
+:: powershell -command "irm asheroto.com/winget | iex "
 powershell -command "winget install libarchive"
 
 
