@@ -65,6 +65,7 @@ cd /d %__PROJECT__%\var\windows-build-deps\
 7z.exe x -ophp-nts-Win32-x64 php-nts-Win32-x64.zip
 rem 7z.exe x -olibarchive libarchive-3.8.1.tar.gz
 rem choco install archive
+set CMAKE_BUILD_TYPE=Release
 vcpkg install libarchive
 
 move nasm\nasm-2.16.03 %__PROJECT__%\bin\runtime\nasm
