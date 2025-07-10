@@ -67,7 +67,7 @@ jobs:
 
       - name: run php SDK
         run: |
-          cmd /c ${CURRENT_DIR}\var\windows-build-deps\php-sdk-binary-tools\phpsdk-vs17-x64.bat
+          cmd /c .\var\windows-build-deps\php-sdk-binary-tools\phpsdk-vs17-x64.bat
 
       - name: Set  Github ENV variables
         run: |
