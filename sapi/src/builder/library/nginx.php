@@ -113,6 +113,7 @@ EOF
             --with-cc-opt="{$cflags}  \$CPPFLAGS " \
             --with-ld-opt="{$ldflags} \$LDFLAGS \$LIBS " \
             --add-module={$builderDir}/ngx_http_proxy_connect_module/ \
+            --add-module={$builderDir}/ngx_sticky_module/
 
             # nginx 支持 webdav 不完整
             # --with-http_dav_module \
@@ -138,7 +139,8 @@ EOF
                 'openssl',
                 'zlib',
                 'pcre2',
-                'ngx_http_proxy_connect_module'
+                'ngx_http_proxy_connect_module',
+                'ngx_sticky_module'
             ) //'pcre',
     );
 };
