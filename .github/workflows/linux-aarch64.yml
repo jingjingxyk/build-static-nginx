@@ -153,7 +153,7 @@ jobs:
       - name: production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.APP_NAME }}-${{ env.NGINX_VERSION }}-linux-arm64
+          name: ${{ env.APP_NAME }}-${{ env.APP_VERSION }}-linux-arm64
           retention-days: 90
           path: ./bin/nginx
 
