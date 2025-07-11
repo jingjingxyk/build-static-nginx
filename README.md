@@ -115,13 +115,9 @@ bash sapi/quickstart/macos/macos-init.sh --mirror china
 
 cp build-release-example.sh build-release-app.sh
 
-<<<<<<< HEAD
 # 按你的需求修改配置  OPTIONS=" +nginx --with-c-compiler=gcc"
-vi build-release.sh
-=======
-# 按你的需求修改配置  OPTIONS="${OPTIONS} --with-libavif=1 "
 vi build-release-app.sh
->>>>>>> new_dev
+
 
 # 执行构建流程
 bash build-release-app.sh
