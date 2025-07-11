@@ -5,6 +5,7 @@ use SwooleCli\Preprocessor;
 
 return function (Preprocessor $p) {
     $tag = '1.2.6';
+    $tag = 'master';
     $lib = new Library('ngx_sticky_module');
     $lib->withHomePage('https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng.git')
         ->withLicense(
