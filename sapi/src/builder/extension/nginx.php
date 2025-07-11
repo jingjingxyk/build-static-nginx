@@ -4,9 +4,16 @@ use SwooleCli\Preprocessor;
 use SwooleCli\Extension;
 
 return function (Preprocessor $p) {
-    $depends = [
-        'nginx'
-    ];
+    if ($p->getInputOption('with-nginx-dev')) {
+        $depends = [
+            'nginx_dev'
+        ];
+    } else {
+        $depends = [
+            'nginx'
+        ];
+    }
+
     $ext = (new Extension('nginx'))
         ->withHomePage('https://nginx.org/')
         ->withManual('http://nginx.org/en/docs/configure.html') //如何选开源许可证？
