@@ -36,7 +36,7 @@ curl -fSL https://gitee.com/jingjingxyk/quickstart-nginx-php-fpm/raw/main/setup-
 
 ```shell
 
-git clone --recursive -b  https://github.com/jingjingxyk/build-static-nginx.git
+git clone  https://github.com/jingjingxyk/build-static-nginx.git
 
 # or
 
